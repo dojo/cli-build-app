@@ -2,7 +2,9 @@ import { Command, Helper, OptionsHelper } from '@dojo/interfaces/cli';
 import * as webpack from 'webpack';
 
 import devConfigFactory from './dev.config';
+import testConfigFactory from './test.config';
 import distConfigFactory from './dist.config';
+import logger from './logger';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 
@@ -11,12 +13,6 @@ const command: Command<any> = {
 	name: 'app',
 	description: 'create a build of your application',
 	register(options: OptionsHelper) {
-		options('watch', {
-			describe: 'watch',
-			alias: 'w',
-			default: false,
-			type: 'boolean'
-		});
 		options('mode', {
 			describe: 'the output mode',
 			alias: 'm',
@@ -25,9 +21,12 @@ const command: Command<any> = {
 		});
 	},
 	run(helper: Helper, args: any) {
+		console.log = () => {};
 		let config: webpack.Configuration;
 		if (args.mode === 'dev') {
 			config = devConfigFactory({});
+		} else if (args.mode === 'test') {
+			config = testConfigFactory({});
 		} else {
 			config = distConfigFactory({});
 		}
@@ -35,10 +34,11 @@ const command: Command<any> = {
 		fixMultipleWatchTrigger(compiler);
 		return new Promise((resolve, reject) => {
 			compiler.run((err, stats) => {
-				console.log(stats);
 				if (err) {
-					console.log(err);
 					reject(err);
+				}
+				if (stats) {
+					logger(stats.toJson(), config);
 				}
 				resolve();
 			});
