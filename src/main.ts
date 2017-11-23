@@ -22,13 +22,14 @@ const command: Command<any> = {
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
+		const rc = helper.configuration.get() || {};
 		let config: webpack.Configuration;
 		if (args.mode === 'dev') {
-			config = devConfigFactory({});
+			config = devConfigFactory(rc);
 		} else if (args.mode === 'test') {
-			config = testConfigFactory({});
+			config = testConfigFactory(rc);
 		} else {
-			config = distConfigFactory({});
+			config = distConfigFactory(rc);
 		}
 		const compiler = webpack(config);
 		fixMultipleWatchTrigger(compiler);
