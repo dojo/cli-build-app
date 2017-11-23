@@ -1,7 +1,10 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 import { existsSync } from 'fs';
+import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 
+const IgnorePlugin = require('webpack/lib/IgnorePlugin');
+const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const basePath = process.cwd();
@@ -46,6 +49,13 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 
 const removeEmpty = (items: any[]) => items.filter(item => item);
 
+const banner = `
+[Dojo](https://dojo.io/)
+Copyright [JS Foundation](https://js.foundation/) & contributors
+[New BSD license](https://github.com/dojo/meta/blob/master/LICENSE)
+All rights reserved
+`;
+
 export default function webpackConfigFactory(args: any) {
 	const config: webpack.Configuration = {
 		entry: {
@@ -65,6 +75,13 @@ export default function webpackConfigFactory(args: any) {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions: ['.ts', '.tsx', '.js']
 		},
+		plugins: [
+			new CssModulePlugin(basePath),
+			new AutoRequireWebpackPlugin(mainEntry),
+			new webpack.BannerPlugin(banner),
+			new IgnorePlugin(/request\/providers\/node/),
+			new ExtractTextPlugin({ filename: 'src/main.css', allChunks: true, disable: true })
+		],
 		module: {
 			rules: removeEmpty([
 				tsLint && {
