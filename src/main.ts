@@ -1,7 +1,7 @@
 import { Command, Helper, OptionsHelper } from '@dojo/interfaces/cli';
 import * as webpack from 'webpack';
 
-import baseConfigFactory from './base.config';
+import devConfigFactory from './dev.config';
 import distConfigFactory from './dist.config';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
@@ -26,11 +26,11 @@ const command: Command<any> = {
 	},
 	run(helper: Helper, args: any) {
 		let config: webpack.Configuration;
-		if (args.mode === 'dist') {
-			config = distConfigFactory({});
+		if (args.mode === 'dev') {
+			config = devConfigFactory({});
 		}
 		else {
-			config = baseConfigFactory({});
+			config = distConfigFactory({});
 		}
 		const compiler = webpack(config);
 		fixMultipleWatchTrigger(compiler);
