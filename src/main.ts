@@ -28,8 +28,7 @@ const command: Command<any> = {
 		let config: webpack.Configuration;
 		if (args.mode === 'dev') {
 			config = devConfigFactory({});
-		}
-		else {
+		} else {
 			config = distConfigFactory({});
 		}
 		const compiler = webpack(config);

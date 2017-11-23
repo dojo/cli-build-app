@@ -5,11 +5,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function webpackConfig(args: any) {
 	const config: webpack.Configuration = baseConfigFactory(args);
-	const { plugins = [], output = { } } = config;
+	const { plugins = [], output = {} } = config;
 
 	config.plugins = [
 		...plugins,
-		new HtmlWebpackPlugin({ inject: true, chunks: [ 'src/main' ], template: 'src/index.html' })
+		new HtmlWebpackPlugin({ inject: true, chunks: ['src/main'], template: 'src/index.html' })
 	];
 
 	config.output = {

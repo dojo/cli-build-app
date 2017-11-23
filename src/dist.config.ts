@@ -10,7 +10,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 function webpackConfig(args: any) {
 	const config: webpack.Configuration = baseConfigFactory(args);
-	const { plugins = [], output = { } } = config;
+	const { plugins = [], output = {} } = config;
 
 	config.plugins = [
 		...plugins,
@@ -23,7 +23,7 @@ function webpackConfig(args: any) {
 			reportFilename: '../info/report.html',
 			statsFilename: '../info/stats.json'
 		}),
-		new HtmlWebpackPlugin({ inject: true, chunks: [ 'src/main' ], template: 'src/index.html' }),
+		new HtmlWebpackPlugin({ inject: true, chunks: ['src/main'], template: 'src/index.html' }),
 		new UglifyJsPlugin({ sourceMap: true, cache: true })
 	];
 
