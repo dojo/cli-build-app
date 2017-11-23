@@ -1,0 +1,37 @@
+{
+	"version": "2.2.0",
+	"compilerOptions": {
+		"declaration": false,
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictNullChecks": true,
+		"outDir": "_build/",
+		"removeComments": false,
+		"sourceMap": true,
+		"target": "es6",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"downlevelIteration": true,
+		"typeRoots": [
+			"./node_modules/@types",
+			"./node_modules/intern/types"
+		],
+		"types": [ "intern" ],
+		"lib": [
+			"dom",
+			"es5",
+			"es2015.core",
+			"es2015.promise",
+			"es2015.collection",
+			"es2015.iterable",
+			"es2015.promise",
+			"es2015.symbol",
+			"es2015.symbol.wellknown"
+		]
+	},
+	"include": [
+		"./src/**/*.ts",
+		"./tests/**/*.ts"
+	]
+}

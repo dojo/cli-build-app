@@ -1,0 +1,15 @@
+/_build
+/bower_components
+/dist
+/html-report
+/node_modules
+/typings
+.baseDir.ts
+.tscache
+coverage/
+coverage-unmapped.json
+coverage-final.json
+coverage-final.lcov
+npm-debug.log
+package-lock.json
+yarn.lock
