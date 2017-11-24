@@ -16,14 +16,14 @@ function getMockConfiguration(config?: any) {
 	return {
 		configuration: {
 			get() {
-				{}
+				{
+				}
 			}
 		}
 	};
 }
 
 describe('command', () => {
-
 	beforeEach(() => {
 		isError = false;
 		stats = {
@@ -63,12 +63,14 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		const optionsStub = sinon.stub();
 		main.register(optionsStub);
-		assert.isTrue(optionsStub.calledWith('mode', {
-			describe: 'the output mode',
-			alias: 'm',
-			default: 'dist',
-			choices: ['dist', 'dev', 'test']
-		}));
+		assert.isTrue(
+			optionsStub.calledWith('mode', {
+				describe: 'the output mode',
+				alias: 'm',
+				default: 'dist',
+				choices: ['dist', 'dev', 'test']
+			})
+		);
 	});
 
 	it('can run dev mode', () => {
@@ -95,7 +97,7 @@ describe('command', () => {
 		});
 	});
 
-	it('logger not called if stats aren\'t returned', () => {
+	it("logger not called if stats aren't returned", () => {
 		stats = null;
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'test' }).then(() => {
@@ -113,7 +115,8 @@ describe('command', () => {
 			},
 			(e: Error) => {
 				assert.isTrue(e);
-		});
+			}
+		);
 	});
 
 	it('console.log is silenced during run', () => {
@@ -122,5 +125,4 @@ describe('command', () => {
 		console.log('called');
 		assert.isTrue(consoleStub.notCalled);
 	});
-
 });

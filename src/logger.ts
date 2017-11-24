@@ -29,7 +29,7 @@ export default function logger(stats: any, config: any) {
 	let warnings = '';
 
 	if (stats.errors.length) {
-		errors =  `
+		errors = `
 ${chalk.yellow('errors:')}
 ${chalk.red(stats.errors.map((error: string) => stripAnsi(error)))}
 `;
