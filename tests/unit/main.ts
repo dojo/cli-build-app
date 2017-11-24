@@ -97,7 +97,7 @@ describe('command', () => {
 		});
 	});
 
-	it("logger not called if stats aren't returned", () => {
+	it('logger not called if stats are not returned', () => {
 		stats = null;
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'test' }).then(() => {
@@ -121,8 +121,9 @@ describe('command', () => {
 
 	it('console.log is silenced during run', () => {
 		const main = mockModule.getModuleUnderTest().default;
-		main.run(getMockConfiguration(), {});
-		console.log('called');
-		assert.isTrue(consoleStub.notCalled);
+		return main.run(getMockConfiguration(), {}).then(() => {
+			console.log('called');
+			assert.isTrue(consoleStub.notCalled);
+		});
 	});
 });
