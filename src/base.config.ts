@@ -2,10 +2,10 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');

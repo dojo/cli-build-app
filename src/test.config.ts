@@ -1,7 +1,7 @@
 import baseConfigFactory from './base.config';
 import * as path from 'path';
 import * as webpack from 'webpack';
-const globby = require('globby');
+import * as globby from 'globby';
 
 const basePath = process.cwd();
 

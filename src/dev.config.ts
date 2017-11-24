@@ -1,7 +1,7 @@
 import baseConfigFactory from './base.config';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function webpackConfig(args: any) {
 	const config: webpack.Configuration = baseConfigFactory(args);

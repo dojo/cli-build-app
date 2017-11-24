@@ -1,14 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as logUpdate from 'log-update';
+import * as logSymbols from 'log-symbols';
+import * as gzipSize from 'gzip-size';
+import * as typescript from 'typescript';
+import chalk from 'chalk';
 
 const pkgDir = require('pkg-dir');
-const logUpdate = require('log-update');
 const columns = require('cli-columns');
-const chalk = require('chalk');
-const logSymbols = require('log-symbols');
-const gzipSize = require('gzip-size');
 const stripAnsi = require('strip-ansi');
-const typescript = require('typescript');
 const version = require(path.join(pkgDir.sync(), 'package.json')).version;
 
 export default function logger(stats: any, config: any) {
