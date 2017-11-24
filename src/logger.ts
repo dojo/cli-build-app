@@ -4,12 +4,13 @@ import * as logUpdate from 'log-update';
 import * as logSymbols from 'log-symbols';
 import * as gzipSize from 'gzip-size';
 import * as typescript from 'typescript';
+import * as jsonFile from 'jsonfile';
 import chalk from 'chalk';
 
 const pkgDir = require('pkg-dir');
 const columns = require('cli-columns');
 const stripAnsi = require('strip-ansi');
-const version = require(path.join(pkgDir.sync(), 'package.json')).version;
+const version = jsonFile.readFileSync(path.join(pkgDir.sync(), 'package.json')).version;
 
 export default function logger(stats: any, config: any) {
 	const assets = stats.assets
