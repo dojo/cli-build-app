@@ -1,5 +1,7 @@
 import * as fs from 'fs';
+import * as path from 'path';
 
+const pkgDir = require('pkg-dir');
 const logUpdate = require('log-update');
 const columns = require('cli-columns');
 const chalk = require('chalk');
@@ -7,7 +9,7 @@ const logSymbols = require('log-symbols');
 const gzipSize = require('gzip-size');
 const stripAnsi = require('strip-ansi');
 const typescript = require('typescript');
-const version = require('./package.json').version;
+const version = require(path.join(pkgDir.sync(), 'package.json')).version;
 
 export default function logger(stats: any, config: any) {
 	const assets = stats.assets
@@ -23,19 +25,22 @@ export default function logger(stats: any, config: any) {
 		return `${chunk.names[0]}`;
 	});
 
-	const errors = stats.errors.length
-		? `
+	let errors = '';
+	let warnings = '';
+
+	if (stats.errors.length) {
+		errors =  `
 ${chalk.yellow('errors:')}
 ${chalk.red(stats.errors.map((error: string) => stripAnsi(error)))}
-`
-		: '';
+`;
+	}
 
-	const warnings = stats.warnings.length
-		? `
+	if (stats.warnings.length) {
+		warnings = `
 ${chalk.yellow('warnings:')}
 ${chalk.gray(stats.warnings.map((warning: string) => stripAnsi(warning)))}
-`
-		: '';
+`;
+	}
 
 	logUpdate(`
 ${logSymbols.info} cli-build-app: ${version}

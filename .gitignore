@@ -11,5 +11,4 @@ coverage-unmapped.json
 coverage-final.json
 coverage-final.lcov
 npm-debug.log
-package-lock.json
 yarn.lock
