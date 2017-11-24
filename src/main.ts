@@ -8,7 +8,7 @@ import logger from './logger';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 
-const command: Command<any> = {
+const command: Command = {
 	group: 'build',
 	name: 'app',
 	description: 'create a build of your application',
