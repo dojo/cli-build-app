@@ -3,7 +3,7 @@
   "warnings": [],
   "version": "3.8.1",
   "hash": "a78577d65a5a1e3b0801",
-  "time": 3321,
+  "time": 3199,
   "publicPath": "",
   "assetsByChunkName": {
     "src/Foo": [
