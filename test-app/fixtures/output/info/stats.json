@@ -3,7 +3,7 @@
   "warnings": [],
   "version": "3.8.1",
   "hash": "95a6cc5b4337ecd03635",
-  "time": 2996,
+  "time": 2910,
   "publicPath": "",
   "assetsByChunkName": {
     "src/Foo": [
@@ -59,7 +59,7 @@
     },
     {
       "name": "b1a5f9ae0835dac68755.bundle.js.map",
-      "size": 388,
+      "size": 387,
       "chunks": [
         0
       ],
@@ -70,7 +70,7 @@
     },
     {
       "name": "9b51196bed0bd1ade3d0.bundle.js.map",
-      "size": 24944,
+      "size": 24940,
       "chunks": [
         1
       ],
