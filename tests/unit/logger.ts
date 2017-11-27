@@ -12,14 +12,9 @@ const columns = require('cli-columns');
 let mockModule: MockModule;
 
 describe('logger', () => {
-
 	beforeEach(() => {
 		mockModule = new MockModule('../../src/logger', require);
-		mockModule.dependencies([
-			'typescript',
-			'jsonfile',
-			'log-update'
-		]);
+		mockModule.dependencies(['typescript', 'jsonfile', 'log-update']);
 		mockModule.getMock('jsonfile').readFileSync = sinon.stub().returns({ version: '9.9.9' });
 		mockModule.getMock('typescript').version = '1.1.1';
 	});
@@ -45,7 +40,7 @@ describe('logger', () => {
 				],
 				chunks: [
 					{
-						names: [ 'chunkOne' ]
+						names: ['chunkOne']
 					}
 				],
 				errors: [],
@@ -66,12 +61,12 @@ ${logSymbols.error} errors: 0
 ${logSymbols.warning} warnings: 0
 ${''}${''}
 ${chalk.yellow('chunks:')}
-${columns([ 'chunkOne' ])}
+${columns(['chunkOne'])}
 ${chalk.yellow('assets:')}
 ${columns([
-	`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
-	`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
-])}
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
+		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, './../fixtures')}`))}`)}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
@@ -79,8 +74,8 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__d
 	});
 
 	it('logging output with errors', () => {
-		const errors: any = [ 'error' ];
-		const warnings: any = [ 'warning' ];
+		const errors: any = ['error'];
+		const warnings: any = ['warning'];
 		const logger = mockModule.getModuleUnderTest().default;
 		logger(
 			{
@@ -97,7 +92,7 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__d
 				],
 				chunks: [
 					{
-						names: [ 'chunkOne' ]
+						names: ['chunkOne']
 					}
 				],
 				errors,
@@ -128,16 +123,15 @@ ${logSymbols.error} errors: 1
 ${logSymbols.warning} warnings: 1
 ${expectedErrors}${expectedWarnings}
 ${chalk.yellow('chunks:')}
-${columns([ 'chunkOne' ])}
+${columns(['chunkOne'])}
 ${chalk.yellow('assets:')}
 ${columns([
-	`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
-	`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
-])}
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
+		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, './../fixtures')}`))}`)}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 	});
-
 });
