@@ -9,8 +9,13 @@ module.exports = function(grunt) {
 				dest: '<%= devDirectory %>/src/'
 			}
 		},
-        intern: {
-		    version: 4
-        }
+		intern: {
+			version: 4
+		},
+		clean: {
+			testOutput: {
+				src: [ 'tests/test-app/outlet' ]
+			}
+		}
 	});
 };
