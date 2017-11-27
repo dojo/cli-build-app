@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-fixtures": "rm -rf src/app.m.css.d.ts && rm -rf fixtures/output && rm -rf output && dojo build && dojo build --mode dev && dojo build --mode test && cp -r output fixtures/",
+    "generate-fixtures": "rm -rf src/app.m.css.d.ts && rm -rf fixtures/output && rm -rf output && dojo build && rm -rf src/app.m.css.d.ts && dojo build --mode dev && rm -rf src/app.m.css.d.ts && dojo build --mode test && cp -r output fixtures/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

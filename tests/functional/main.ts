@@ -58,10 +58,15 @@ describe('functional build tests', () => {
 		});
 	});
 
-	// it('correctly builds with test configuration', () => {
-	// 	return command.run(getMockConfiguration() as any, { mode: 'test' }).then(() => {
-	// 		console.warn('runs');
-	// 	});
-	// });
+	it('correctly builds with test configuration', () => {
+		execa.shellSync('./node_modules/.bin/dojo build --mode test', { cwd: path.join(projectRootDir, 'test-app') });
+		const paths = getPathsToAssert('test');
+		paths.forEach((value) => {
+			assert.strictEqual(
+				fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8'),
+				fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')
+			);
+		});
+	});
 
 });
