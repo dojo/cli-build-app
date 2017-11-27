@@ -1,2 +1,2 @@
-import './setup';
+// import './setup';
 import './main';

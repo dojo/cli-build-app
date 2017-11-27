@@ -75,6 +75,7 @@ export default function webpackConfigFactory(args: any) {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions: ['.ts', '.tsx', '.js']
 		},
+		devtool: 'source-map',
 		plugins: [
 			new CssModulePlugin(basePath),
 			new AutoRequireWebpackPlugin(mainEntry),

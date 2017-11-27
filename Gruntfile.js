@@ -11,11 +11,6 @@ module.exports = function(grunt) {
 		},
 		intern: {
 			version: 4
-		},
-		clean: {
-			typings: {
-				src: [ 'tests/test-app/output' ]
-			}
 		}
 	});
 };
