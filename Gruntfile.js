@@ -13,8 +13,8 @@ module.exports = function(grunt) {
 			version: 4
 		},
 		clean: {
-			testOutput: {
-				src: [ 'tests/test-app/outlet' ]
+			typings: {
+				src: [ 'tests/test-app/output' ]
 			}
 		}
 	});
