@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate-fixtures": "rm -rf src/app.m.css.d.ts && rm -rf fixtures/output && rm -rf output && dojo build && dojo build --mode dev && dojo build --mode test && cp -r output fixtures/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli-build-app": "file:../../dist/dojo-cli-build-app.tgz",
+    "@dojo/cli-build-app": "file:../dist/dojo-cli-build-app.tgz",
     "@dojo/cli": "0.2.0",
     "tslib": "^1.8.0"
   }

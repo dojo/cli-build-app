@@ -1,2 +1,1 @@
-// import './setup';
 import './main';
