@@ -18,7 +18,8 @@
   },
   "scripts": {
     "test": "npm run build-test-artifact && cd tests/test-app && npm i && grunt test",
-    "build-test-artifact": "grunt dist && grunt release-publish-flat --dry-run && mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz"
+    "build-test-artifact": "grunt dist && grunt release-publish-flat --dry-run && mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz",
+    "prettier": "./node_modules/.bin/prettier --single-quote --use-tabs --print-width 120 --parser typescript --write src/**/*.ts tests/**/*.ts"
   },
   "devDependencies": {
     "@dojo/interfaces": "0.1.0",
