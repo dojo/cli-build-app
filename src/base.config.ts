@@ -11,7 +11,7 @@ const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
 const allPaths = [srcPath, testPath];
-const mainEntry = 'src/main';
+const mainEntry = 'main';
 const packageJsonPath = path.join(basePath, 'package.json');
 const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
 const packageName = packageJson.name || '';
@@ -33,7 +33,7 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 		options: {
 			imports(module: string, context: string) {
 				const filePath = path.relative(basePath, path.join(context, module));
-				let chunkName = filePath;
+				let chunkName = path.basename(filePath);
 				Object.keys(bundles).some(name => {
 					if (bundles[name].indexOf(filePath) > -1) {
 						chunkName = name;
@@ -112,7 +112,10 @@ export default function webpackConfigFactory(args: any) {
 				{
 					include: allPaths,
 					test: /.*\.ts(x)?$/,
-					use: [getUMDCompatLoader({ bundles: args.bundles }), { loader: 'ts-loader', options: { instance: 'dojo' } }]
+					use: [
+						getUMDCompatLoader({ bundles: args.bundles }),
+						{ loader: 'ts-loader', options: { onlyCompileBundledFiles: true, instance: 'dojo' } }
+					]
 				},
 				{ test: /\.js?$/, loader: 'umd-compat-loader' },
 				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },

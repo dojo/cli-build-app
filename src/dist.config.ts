@@ -23,14 +23,14 @@ function webpackConfig(args: any) {
 			reportFilename: '../info/report.html',
 			statsFilename: '../info/stats.json'
 		}),
-		new HtmlWebpackPlugin({ inject: true, chunks: ['src/main'], template: 'src/index.html' }),
+		new HtmlWebpackPlugin({ inject: true, chunks: ['main'], template: 'src/index.html' }),
 		new UglifyJsPlugin({ sourceMap: true, cache: true })
 	];
 
 	config.plugins = config.plugins.map((plugin: any) => {
 		if (plugin instanceof ExtractTextPlugin) {
 			return new ExtractTextPlugin({
-				filename: '[contenthash].bundle.css',
+				filename: '[name].[contenthash].bundle.css',
 				allChunks: true
 			});
 		}
@@ -40,8 +40,8 @@ function webpackConfig(args: any) {
 	config.output = {
 		...output,
 		path: path.join(output.path!, 'dist'),
-		chunkFilename: '[chunkhash].bundle.js',
-		filename: '[chunkhash].bundle.js'
+		chunkFilename: '[name].[chunkhash].bundle.js',
+		filename: '[name].[chunkhash].bundle.js'
 	};
 
 	return config;
