@@ -1,9 +1,11 @@
 const { describe, it } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
-import foo from '../../src/Foo';
+import App from '../../src/App';
 
-describe('unit test', () => {
-	it('my unit test', () => {
-		assert.strictEqual(foo(), 'foo');
+describe('functional test', () => {
+	it('my functional test', () => {
+		return App().then((foo) => {
+			assert.strictEqual(foo(), 'foo');
+		});
 	});
 });

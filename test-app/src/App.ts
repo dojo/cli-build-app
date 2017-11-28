@@ -5,7 +5,7 @@ const App = async function() {
 	return Foo.default;
 };
 
-App().then(result => {
-	console.log(result());
+export default function() {
 	console.log(css);
-});
+	return App();
+}
