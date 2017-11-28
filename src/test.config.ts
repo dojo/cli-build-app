@@ -7,7 +7,7 @@ const basePath = process.cwd();
 
 function webpackConfig(args: any) {
 	const config: webpack.Configuration = baseConfigFactory(args);
-	const { output = {} } = config;
+	const { output = {}, module } = config as any;
 	config.entry = () => {
 		const unit = globby
 			.sync([`${basePath}/tests/unit/**/*.ts`])
@@ -30,6 +30,22 @@ function webpackConfig(args: any) {
 		return tests;
 	};
 	const externals: any[] = (config.externals as any[]) || [];
+
+	module.rules = module.rules.map((rule: any) => {
+		if (Array.isArray(rule.use)) {
+			rule.use = rule.use.map((loader: any) => {
+				if (loader.loader === 'umd-compat-loader') {
+					return {
+						loader: loader.loader,
+						options: {}
+					};
+				}
+				return loader;
+			});
+		}
+		return rule;
+	});
+
 	externals.push(/^intern/);
 	config.externals = externals;
 	config.devtool = 'inline-source-map';
