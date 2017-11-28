@@ -7,10 +7,7 @@ function webpackConfig(args: any) {
 	const config: webpack.Configuration = baseConfigFactory(args);
 	const { plugins = [], output = {} } = config;
 
-	config.plugins = [
-		...plugins,
-		new HtmlWebpackPlugin({ inject: true, chunks: ['src/main'], template: 'src/index.html' })
-	];
+	config.plugins = [...plugins, new HtmlWebpackPlugin({ inject: true, chunks: ['main'], template: 'src/index.html' })];
 
 	config.output = {
 		...output,
