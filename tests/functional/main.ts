@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as rimraf from 'rimraf';
 import * as execa from 'execa';
 import * as globby from 'globby';
+const normalise = require('normalize-newline');
 
 const projectRootDir = path.join(__dirname, '..', '..', '..');
 
@@ -40,8 +41,8 @@ describe('functional build tests', () => {
 		const paths = getPathsToAssert('dist');
 		paths.forEach(value => {
 			assert.strictEqual(
-				fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8'),
-				fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8'))
 			);
 		});
 	});
@@ -51,8 +52,8 @@ describe('functional build tests', () => {
 		const paths = getPathsToAssert('dev');
 		paths.forEach(value => {
 			assert.strictEqual(
-				fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8'),
-				fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8'))
 			);
 		});
 	});
@@ -62,8 +63,8 @@ describe('functional build tests', () => {
 		const paths = getPathsToAssert('test');
 		paths.forEach(value => {
 			assert.strictEqual(
-				fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8'),
-				fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8'))
 			);
 		});
 	});
