@@ -17,7 +17,7 @@
     "url": "https://github.com/dojo/cli-build-app.git"
   },
   "scripts": {
-    "test": "npm run build-test-artifact && cd test-app && npm i && grunt test",
+    "test": "npm run build-test-artifact && cd test-app && rm -rf node_modules && npm i && grunt test",
     "build-test-artifact": "grunt dist && grunt release-publish-flat --dry-run && mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz",
     "prettier": "./node_modules/.bin/prettier --single-quote --use-tabs --print-width 120 --parser typescript --write src/**/*.ts tests/**/*.ts"
   },
@@ -49,6 +49,7 @@
     "grunt-tslint": "^5.0.1",
     "intern": "~4.1.0",
     "mockery": "^2.1.0",
+    "normalize-newline": "^3.0.0",
     "prettier": "^1.8.2",
     "rimraf": "^2.6.2",
     "sinon": "^4.1.2",
@@ -71,7 +72,6 @@
     "jsonfile": "^4.0.0",
     "log-symbols": "2.1.0",
     "log-update": "2.3.0",
-    "normalize-newline": "^3.0.0",
     "optimize-css-assets-webpack-plugin": "3.2.0",
     "pkg-dir": "2.0.0",
     "postcss-cssnext": "3.0.2",
