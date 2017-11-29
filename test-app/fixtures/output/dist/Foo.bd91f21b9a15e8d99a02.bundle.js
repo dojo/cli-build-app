@@ -7,4 +7,4 @@
  * 
  */
 dojoWebpackJsonptest_app([0],{7:function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(){return"foo"}}});
-//# sourceMappingURL=Foo.6bf1d49cff41619f4e23.bundle.js.map
+//# sourceMappingURL=Foo.bd91f21b9a15e8d99a02.bundle.js.map
