@@ -17,7 +17,7 @@ function getPathsToAssert(mode: string) {
 		...globby.sync(`${projectRootDir}/test-app/fixtures/output/${mode}/**/*`)
 	].forEach(filePath => {
 		const fileName = filePath.match(/\/output\/(.*)/)![0];
-		if (filePaths.indexOf(fileName) === -1) {
+		if (filePaths.indexOf(fileName) === -1 && fileName.indexOf('runtime.js') === -1) {
 			filePaths.push(fileName);
 		}
 	});
@@ -42,7 +42,8 @@ describe('functional build tests', () => {
 		paths.forEach(value => {
 			assert.strictEqual(
 				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8'))
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')),
+				value
 			);
 		});
 	});
@@ -53,7 +54,8 @@ describe('functional build tests', () => {
 		paths.forEach(value => {
 			assert.strictEqual(
 				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8'))
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')),
+				value
 			);
 		});
 	});
@@ -64,7 +66,8 @@ describe('functional build tests', () => {
 		paths.forEach(value => {
 			assert.strictEqual(
 				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8'))
+				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')),
+				value
 			);
 		});
 	});
