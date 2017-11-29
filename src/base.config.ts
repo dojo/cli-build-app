@@ -71,6 +71,7 @@ export default function webpackConfigFactory(args: any) {
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
+		context: process.cwd(),
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions: ['.ts', '.tsx', '.js']
