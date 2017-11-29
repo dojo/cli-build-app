@@ -28,22 +28,21 @@ describe('functional build tests', () => {
 		const outputFileIdentifiers = Object.keys(outputManifest);
 		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
 		fixtureFileIdentifiers.forEach(id => {
-			if (id !== 'runtime.js') {
+			if (id.indexOf('runtime.js') === -1) {
 				const fixtureContents = fs
 					.readFileSync(
 						path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', fixtureManifest[id]),
 						'utf8'
 					)
-					.replace(fixtureManifest[id], 'filename');
+					.replace(fixtureManifest[id].replace('.map', ''), 'filename');
 				const outputContents = fs
 					.readFileSync(path.join(projectRootDir, 'test-app', 'output', 'dist', outputManifest[id]), 'utf8')
-					.replace(outputManifest[id], 'filename');
+					.replace(outputManifest[id].replace('.map', ''), 'filename');
 
 				const fixtureContentSections = fixtureContents.split('//# sourceMappingURL');
 				const outputContentSections = outputContents.split('//# sourceMappingURL');
 
 				assert.strictEqual(normalise(fixtureContentSections[0]), normalise(outputContentSections[0]), id);
-				// assert.strictEqual(normalise(fixtureContents), normalise(outputContents), id);
 			}
 		});
 	});
@@ -70,7 +69,6 @@ describe('functional build tests', () => {
 				const outputContentSections = outputContents.split('//# sourceMappingURL');
 
 				assert.strictEqual(normalise(fixtureContentSections[0]), normalise(outputContentSections[0]), id);
-				// assert.strictEqual(normalise(fixtureContents), normalise(outputContents), id);
 			}
 		});
 	});
@@ -97,7 +95,6 @@ describe('functional build tests', () => {
 				const outputContentSections = outputContents.split('//# sourceMappingURL');
 
 				assert.strictEqual(normalise(fixtureContentSections[0]), normalise(outputContentSections[0]), id);
-				// assert.strictEqual(normalise(fixtureContents), normalise(outputContents), id);
 			}
 		});
 	});
