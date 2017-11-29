@@ -2,27 +2,31 @@
   "errors": [],
   "warnings": [],
   "version": "3.8.1",
-  "hash": "b6a36b69093f8ba0f698",
-  "time": 4282,
+  "hash": "45fe89dce68bfd318498",
+  "time": 3145,
   "publicPath": "",
   "assetsByChunkName": {
     "Foo": [
-      "Foo.bd91f21b9a15e8d99a02.bundle.js",
-      "Foo.bd91f21b9a15e8d99a02.bundle.js.map"
+      "Foo.caf18224320d63af205a.bundle.js",
+      "Foo.caf18224320d63af205a.bundle.js.map"
     ],
     "main": [
-      "main.2963a8857075427bec7f.bundle.js",
+      "main.80d07090c464a94f9f23.bundle.js",
       "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-      "main.2963a8857075427bec7f.bundle.js.map",
+      "main.80d07090c464a94f9f23.bundle.js.map",
       "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
+    ],
+    "runtime": [
+      "runtime.a691aab77d1da20b020f.bundle.js",
+      "runtime.a691aab77d1da20b020f.bundle.js.map"
     ]
   },
   "assets": [
     {
-      "name": "Foo.bd91f21b9a15e8d99a02.bundle.js",
-      "size": 413,
+      "name": "Foo.caf18224320d63af205a.bundle.js",
+      "size": 417,
       "chunks": [
-        0
+        "Foo"
       ],
       "chunkNames": [
         "Foo"
@@ -30,13 +34,24 @@
       "emitted": true
     },
     {
-      "name": "main.2963a8857075427bec7f.bundle.js",
-      "size": 8307,
+      "name": "main.80d07090c464a94f9f23.bundle.js",
+      "size": 6896,
       "chunks": [
-        1
+        "main"
       ],
       "chunkNames": [
         "main"
+      ],
+      "emitted": true
+    },
+    {
+      "name": "runtime.a691aab77d1da20b020f.bundle.js",
+      "size": 1758,
+      "chunks": [
+        "runtime"
+      ],
+      "chunkNames": [
+        "runtime"
       ],
       "emitted": true
     },
@@ -44,7 +59,7 @@
       "name": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
       "size": 380,
       "chunks": [
-        1
+        "main"
       ],
       "chunkNames": [
         "main"
@@ -52,10 +67,10 @@
       "emitted": true
     },
     {
-      "name": "Foo.bd91f21b9a15e8d99a02.bundle.js.map",
+      "name": "Foo.caf18224320d63af205a.bundle.js.map",
       "size": 391,
       "chunks": [
-        0
+        "Foo"
       ],
       "chunkNames": [
         "Foo"
@@ -63,10 +78,10 @@
       "emitted": true
     },
     {
-      "name": "main.2963a8857075427bec7f.bundle.js.map",
-      "size": 25704,
+      "name": "main.80d07090c464a94f9f23.bundle.js.map",
+      "size": 18301,
       "chunks": [
-        1
+        "main"
       ],
       "chunkNames": [
         "main"
@@ -77,7 +92,7 @@
       "name": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map",
       "size": 471,
       "chunks": [
-        1
+        "main"
       ],
       "chunkNames": [
         "main"
@@ -85,8 +100,26 @@
       "emitted": true
     },
     {
+      "name": "runtime.a691aab77d1da20b020f.bundle.js.map",
+      "size": 7927,
+      "chunks": [
+        "runtime"
+      ],
+      "chunkNames": [
+        "runtime"
+      ],
+      "emitted": true
+    },
+    {
+      "name": "manifest.json",
+      "size": 486,
+      "chunks": [],
+      "chunkNames": [],
+      "emitted": true
+    },
+    {
       "name": "index.html",
-      "size": 203,
+      "size": 288,
       "chunks": [],
       "chunkNames": [],
       "emitted": true
@@ -96,19 +129,22 @@
   "entrypoints": {
     "main": {
       "chunks": [
-        1
+        "runtime",
+        "main"
       ],
       "assets": [
-        "main.2963a8857075427bec7f.bundle.js",
+        "runtime.a691aab77d1da20b020f.bundle.js",
+        "runtime.a691aab77d1da20b020f.bundle.js.map",
+        "main.80d07090c464a94f9f23.bundle.js",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-        "main.2963a8857075427bec7f.bundle.js.map",
+        "main.80d07090c464a94f9f23.bundle.js.map",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
       ]
     }
   },
   "chunks": [
     {
-      "id": 0,
+      "id": "Foo",
       "rendered": true,
       "initial": false,
       "entry": false,
@@ -118,12 +154,12 @@
         "Foo"
       ],
       "files": [
-        "Foo.bd91f21b9a15e8d99a02.bundle.js",
-        "Foo.bd91f21b9a15e8d99a02.bundle.js.map"
+        "Foo.caf18224320d63af205a.bundle.js",
+        "Foo.caf18224320d63af205a.bundle.js.map"
       ],
-      "hash": "bd91f21b9a15e8d99a02",
+      "hash": "caf18224320d63af205a",
       "parents": [
-        1
+        "main"
       ],
       "modules": [
         {
@@ -138,7 +174,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            0
+            "Foo"
           ],
           "assets": [],
           "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/promise-loader/index.js?global,Foo!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/Foo.ts",
@@ -179,23 +215,25 @@
       ]
     },
     {
-      "id": 1,
+      "id": "main",
       "rendered": true,
       "initial": true,
-      "entry": true,
+      "entry": false,
       "extraAsync": false,
       "size": 10015,
       "names": [
         "main"
       ],
       "files": [
-        "main.2963a8857075427bec7f.bundle.js",
+        "main.80d07090c464a94f9f23.bundle.js",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-        "main.2963a8857075427bec7f.bundle.js.map",
+        "main.80d07090c464a94f9f23.bundle.js.map",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
       ],
-      "hash": "2963a8857075427bec7f",
-      "parents": [],
+      "hash": "80d07090c464a94f9f23",
+      "parents": [
+        "runtime"
+      ],
       "modules": [
         {
           "id": 0,
@@ -209,7 +247,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -256,7 +294,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": null,
@@ -283,7 +321,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": "multi /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.css /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -321,7 +359,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": "multi /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.css /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -359,7 +397,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -397,7 +435,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/App.ts",
@@ -453,7 +491,7 @@
           "optional": false,
           "prefetched": false,
           "chunks": [
-            1
+            "main"
           ],
           "assets": [],
           "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/App.ts",
@@ -492,6 +530,26 @@
           "reasons": []
         }
       ]
+    },
+    {
+      "id": "runtime",
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 0,
+      "names": [
+        "runtime"
+      ],
+      "files": [
+        "runtime.a691aab77d1da20b020f.bundle.js",
+        "runtime.a691aab77d1da20b020f.bundle.js.map"
+      ],
+      "hash": "a691aab77d1da20b020f",
+      "parents": [],
+      "modules": [],
+      "filteredModules": 0,
+      "origins": []
     }
   ],
   "modules": [
@@ -507,7 +565,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -554,7 +612,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": null,
@@ -581,7 +639,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": "multi /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.css /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -619,7 +677,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": "multi /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.css /Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -657,7 +715,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/main.ts",
@@ -695,7 +753,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/App.ts",
@@ -751,7 +809,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        1
+        "main"
       ],
       "assets": [],
       "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/App.ts",
@@ -789,7 +847,7 @@
       "optional": false,
       "prefetched": false,
       "chunks": [
-        0
+        "Foo"
       ],
       "assets": [],
       "issuer": "/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/promise-loader/index.js?global,Foo!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js??ref--3-0!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/ts-loader/index.js??ref--3-1!/Users/Anthony/development/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!/Users/Anthony/development/dojo2/cli-build-app/test-app/src/Foo.ts",

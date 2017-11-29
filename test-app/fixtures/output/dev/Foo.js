@@ -6,7 +6,7 @@
  * All rights reserved
  * 
  */
-dojoWebpackJsonptest_app([0],{
+dojoWebpackJsonptest_app(["Foo"],{
 
 /***/ 7:
 /***/ (function(module, exports, __webpack_require__) {

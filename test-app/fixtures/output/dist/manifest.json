@@ -1,0 +1,10 @@
+{
+  "Foo.js": "Foo.caf18224320d63af205a.bundle.js",
+  "Foo.js.map": "Foo.caf18224320d63af205a.bundle.js.map",
+  "main.css": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
+  "main.css.map": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map",
+  "main.js": "main.80d07090c464a94f9f23.bundle.js",
+  "main.js.map": "main.80d07090c464a94f9f23.bundle.js.map",
+  "runtime.js": "runtime.a691aab77d1da20b020f.bundle.js",
+  "runtime.js.map": "runtime.a691aab77d1da20b020f.bundle.js.map"
+}
