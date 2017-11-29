@@ -3,6 +3,7 @@ import webpack = require('webpack');
 import * as path from 'path';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -21,8 +22,9 @@ function webpackConfig(args: any) {
 			reportFilename: '../info/report.html',
 			statsFilename: '../info/stats.json'
 		}),
-		new HtmlWebpackPlugin({ inject: true, chunks: ['main'], template: 'src/index.html' }),
-		new UglifyJsPlugin({ sourceMap: true, cache: true })
+		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
+		new UglifyJsPlugin({ sourceMap: true, cache: true }),
+		new CleanWebpackPlugin(['./'])
 	];
 
 	config.plugins = config.plugins.map((plugin: any) => {

@@ -3,6 +3,7 @@ import * as path from 'path';
 import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
@@ -84,7 +85,12 @@ export default function webpackConfigFactory(args: any) {
 			new ExtractTextPlugin({
 				filename: 'main.css',
 				allChunks: true
-			})
+			}),
+			new webpack.optimize.CommonsChunkPlugin({
+				name: 'runtime'
+			}),
+			new webpack.NamedChunksPlugin(),
+			new ManifestPlugin()
 		],
 		module: {
 			rules: removeEmpty([
