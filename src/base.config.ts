@@ -90,7 +90,8 @@ export default function webpackConfigFactory(args: any) {
 				name: 'runtime'
 			}),
 			new webpack.NamedChunksPlugin(),
-			new ManifestPlugin()
+			new ManifestPlugin(),
+			new webpack.NamedModulesPlugin()
 		],
 		module: {
 			rules: removeEmpty([
