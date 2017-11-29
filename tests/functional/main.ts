@@ -9,22 +9,6 @@ const normalise = require('normalize-newline');
 
 const projectRootDir = path.join(__dirname, '..', '..', '..');
 
-function getPathsToAssert(mode: string) {
-	const filePaths: string[] = [];
-
-	[
-		...globby.sync(`${projectRootDir}/test-app/output/${mode}/**/*`),
-		...globby.sync(`${projectRootDir}/test-app/fixtures/output/${mode}/**/*`)
-	].forEach(filePath => {
-		const fileName = filePath.match(/\/output\/(.*)/)![0];
-		if (filePaths.indexOf(fileName) === -1 && fileName.indexOf('runtime.js') === -1) {
-			filePaths.push(fileName);
-		}
-	});
-
-	return filePaths;
-}
-
 describe('functional build tests', () => {
 	beforeEach(() => {
 		rimraf.sync(path.join(projectRootDir, 'test-app', 'output'));
@@ -38,37 +22,76 @@ describe('functional build tests', () => {
 
 	it('correctly builds with dist configuration', () => {
 		execa.shellSync('./node_modules/.bin/dojo build --mode dist', { cwd: path.join(projectRootDir, 'test-app') });
-		const paths = getPathsToAssert('dist');
-		paths.forEach(value => {
-			assert.strictEqual(
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')),
-				value
-			);
+		const fixtureManifest = require(path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', 'manifest'));
+		const outputManifest = require(path.join(projectRootDir, 'test-app', 'output', 'dist', 'manifest'));
+		const fixtureFileIdentifiers = Object.keys(fixtureManifest);
+		const outputFileIdentifiers = Object.keys(outputManifest);
+		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
+		fixtureFileIdentifiers.forEach(id => {
+			if (id !== 'runtime.js') {
+				assert.strictEqual(
+					normalise(
+						fs.readFileSync(path.join(projectRootDir, 'test-app', 'output', 'dist', outputManifest[id]), 'utf8')
+					),
+					normalise(
+						fs.readFileSync(
+							path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', fixtureManifest[id]),
+							'utf8'
+						)
+					),
+					id
+				);
+			}
 		});
 	});
 
 	it('correctly builds with dev configuration', () => {
 		execa.shellSync('./node_modules/.bin/dojo build --mode dev', { cwd: path.join(projectRootDir, 'test-app') });
-		const paths = getPathsToAssert('dev');
-		paths.forEach(value => {
-			assert.strictEqual(
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')),
-				value
-			);
+		const fixtureManifest = require(path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dev', 'manifest'));
+		const outputManifest = require(path.join(projectRootDir, 'test-app', 'output', 'dev', 'manifest'));
+		const fixtureFileIdentifiers = Object.keys(fixtureManifest);
+		const outputFileIdentifiers = Object.keys(outputManifest);
+		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
+		fixtureFileIdentifiers.forEach(id => {
+			if (id !== 'runtime.js') {
+				assert.strictEqual(
+					normalise(
+						fs.readFileSync(path.join(projectRootDir, 'test-app', 'output', 'dev', outputManifest[id]), 'utf8')
+					),
+					normalise(
+						fs.readFileSync(
+							path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dev', fixtureManifest[id]),
+							'utf8'
+						)
+					),
+					id
+				);
+			}
 		});
 	});
 
 	it('correctly builds with test configuration', () => {
 		execa.shellSync('./node_modules/.bin/dojo build --mode test', { cwd: path.join(projectRootDir, 'test-app') });
-		const paths = getPathsToAssert('test');
-		paths.forEach(value => {
-			assert.strictEqual(
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', value), 'utf8')),
-				normalise(fs.readFileSync(path.join(projectRootDir, 'test-app', 'fixtures', value), 'utf8')),
-				value
-			);
+		const fixtureManifest = require(path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'test', 'manifest'));
+		const outputManifest = require(path.join(projectRootDir, 'test-app', 'output', 'test', 'manifest'));
+		const fixtureFileIdentifiers = Object.keys(fixtureManifest);
+		const outputFileIdentifiers = Object.keys(outputManifest);
+		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
+		fixtureFileIdentifiers.forEach(id => {
+			if (id !== 'runtime.js') {
+				assert.strictEqual(
+					normalise(
+						fs.readFileSync(path.join(projectRootDir, 'test-app', 'output', 'test', outputManifest[id]), 'utf8')
+					),
+					normalise(
+						fs.readFileSync(
+							path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'test', fixtureManifest[id]),
+							'utf8'
+						)
+					),
+					id
+				);
+			}
 		});
 	});
 });
