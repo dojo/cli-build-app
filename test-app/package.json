@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli-build-app": "file:../dist/dojo-cli-build-app.tgz",
     "@dojo/cli": "0.2.0",
+    "@dojo/cli-build-app": "file:../dist/dojo-cli-build-app.tgz",
     "tslib": "^1.8.0"
   }
 }
