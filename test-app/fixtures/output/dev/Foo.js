@@ -8,7 +8,7 @@
  */
 dojoWebpackJsonptest_app(["Foo"],{
 
-/***/ 7:
+/***/ "./node_modules/umd-compat-loader/index.js?{}!./node_modules/ts-loader/index.js?{\"onlyCompileBundledFiles\":true,\"instance\":\"dojo\"}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!./src/Foo.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
