@@ -29,14 +29,15 @@ describe('functional build tests', () => {
 		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
 		fixtureFileIdentifiers.forEach(id => {
 			if (id !== 'runtime.js') {
-				const fixtureContents = fs.readFileSync(
-					path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', fixtureManifest[id]),
-					'utf8'
-				);
-				const outputContents = fs.readFileSync(
-					path.join(projectRootDir, 'test-app', 'output', 'dist', outputManifest[id]),
-					'utf8'
-				);
+				const fixtureContents = fs
+					.readFileSync(
+						path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', fixtureManifest[id]),
+						'utf8'
+					)
+					.replace(fixtureManifest[id], 'filename');
+				const outputContents = fs
+					.readFileSync(path.join(projectRootDir, 'test-app', 'output', 'dist', outputManifest[id]), 'utf8')
+					.replace(outputManifest[id], 'filename');
 
 				const fixtureContentSections = fixtureContents.split('//# sourceMappingURL');
 				const outputContentSections = outputContents.split('//# sourceMappingURL');
