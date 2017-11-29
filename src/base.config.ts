@@ -71,7 +71,6 @@ export default function webpackConfigFactory(args: any) {
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
-		context: process.cwd(),
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions: ['.ts', '.tsx', '.js']
@@ -82,7 +81,10 @@ export default function webpackConfigFactory(args: any) {
 			new AutoRequireWebpackPlugin(mainEntry),
 			new webpack.BannerPlugin(banner),
 			new IgnorePlugin(/request\/providers\/node/),
-			new ExtractTextPlugin({ filename: 'src/main.css', allChunks: true, disable: true })
+			new ExtractTextPlugin({
+				filename: 'main.css',
+				allChunks: true
+			})
 		],
 		module: {
 			rules: removeEmpty([

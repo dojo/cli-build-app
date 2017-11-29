@@ -1,7 +1,6 @@
 import baseConfigFactory from './base.config';
 import webpack = require('webpack');
 import * as path from 'path';
-import * as OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
@@ -14,7 +13,6 @@ function webpackConfig(args: any) {
 
 	config.plugins = [
 		...plugins,
-		new OptimizeCssAssetsPlugin({ cssProcessorOptions: { map: { inline: false } } }),
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
 			openAnalyzer: false,
