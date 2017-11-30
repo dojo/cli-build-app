@@ -10,7 +10,7 @@ function webpackConfig(args: any) {
 
 	config.plugins = [
 		...plugins,
-		new HtmlWebpackPlugin({ inject: true, chunks: ['main'], template: 'src/index.html' }),
+		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
 		new CleanWebpackPlugin([path.join(output.path!, 'dev')], { allowExternal: true })
 	];
 
