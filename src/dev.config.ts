@@ -11,7 +11,7 @@ function webpackConfig(args: any) {
 	config.plugins = [
 		...plugins,
 		new HtmlWebpackPlugin({ inject: true, chunks: ['main'], template: 'src/index.html' }),
-		new CleanWebpackPlugin(['./'])
+		new CleanWebpackPlugin([path.join(output.path!, 'dev')], { allowExternal: true })
 	];
 
 	config.output = {

@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as WebpackChunkHash from 'webpack-chunk-hash';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -24,7 +25,8 @@ function webpackConfig(args: any) {
 		}),
 		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
-		new CleanWebpackPlugin(['./'])
+		new WebpackChunkHash(),
+		new CleanWebpackPlugin([path.join(output.path!, 'dist')], { allowExternal: true })
 	];
 
 	config.plugins = config.plugins.map((plugin: any) => {

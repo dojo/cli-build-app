@@ -42,7 +42,7 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 					}
 					return false;
 				});
-				return `promise-loader?global,${chunkName}!${module}`;
+				return `@dojo/webpack-contrib/promise-loader?global,${chunkName}!${module}`;
 			}
 		}
 	};
@@ -76,9 +76,10 @@ export default function webpackConfigFactory(args: any) {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions: ['.ts', '.tsx', '.js']
 		},
+		context: process.cwd(),
 		devtool: 'source-map',
 		plugins: [
-			new CssModulePlugin(basePath),
+			new CssModulePlugin(process.cwd()),
 			new AutoRequireWebpackPlugin(mainEntry),
 			new webpack.BannerPlugin(banner),
 			new IgnorePlugin(/request\/providers\/node/),
