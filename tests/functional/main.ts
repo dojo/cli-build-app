@@ -4,7 +4,6 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as rimraf from 'rimraf';
 import * as execa from 'execa';
-import * as globby from 'globby';
 const normalise = require('normalize-newline');
 
 const appRootDir = path.join(__dirname, '..', '..', '..', 'test-app');
