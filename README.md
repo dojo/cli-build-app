@@ -44,11 +44,11 @@ Note: `dist` is the default mode and so can be run without any arguments, `dojo 
 
 #### Dist Mode
 
-The `dist` mode is create a production ready build.
+The `dist` mode create a production ready build.
 
 #### Dev mode
 
-The `dev` mode is creates an application build that has been optimized for debugging and development.
+The `dev` mode creates an application build that has been optimized for debugging and development.
 
 #### Test mode
 
@@ -60,7 +60,7 @@ Eject is not currently supported by `cli-build-app`.
 
 ## How do I contribute?
 
-We appreciate your interest!  Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the
+We appreciate your interest! Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the
 Contributing Guidelines and Style Guide.
 
 ### Installation
