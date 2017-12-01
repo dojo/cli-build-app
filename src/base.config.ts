@@ -4,6 +4,7 @@ import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
+import { WebpackConfiguration } from './interfaces';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
@@ -57,7 +58,7 @@ Copyright [JS Foundation](https://js.foundation/) & contributors
 All rights reserved
 `;
 
-export default function webpackConfigFactory(args: any) {
+export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const config: webpack.Configuration = {
 		entry: {
 			[mainEntry]: [path.join(srcPath, 'main.css'), path.join(srcPath, 'main.ts')]
@@ -79,16 +80,13 @@ export default function webpackConfigFactory(args: any) {
 		context: process.cwd(),
 		devtool: 'source-map',
 		plugins: [
-			new CssModulePlugin(process.cwd()),
+			new CssModulePlugin(basePath),
 			new AutoRequireWebpackPlugin(mainEntry),
 			new webpack.BannerPlugin(banner),
 			new IgnorePlugin(/request\/providers\/node/),
 			new ExtractTextPlugin({
 				filename: 'main.css',
 				allChunks: true
-			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'runtime'
 			}),
 			new webpack.NamedChunksPlugin(),
 			new ManifestPlugin(),
@@ -166,5 +164,5 @@ export default function webpackConfigFactory(args: any) {
 		}
 	};
 
-	return config;
+	return config as WebpackConfiguration;
 }

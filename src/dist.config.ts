@@ -9,9 +9,9 @@ import * as WebpackChunkHash from 'webpack-chunk-hash';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-function webpackConfig(args: any) {
-	const config: webpack.Configuration = baseConfigFactory(args);
-	const { plugins = [], output = {} } = config;
+function webpackConfig(args: any): webpack.Configuration {
+	const config = baseConfigFactory(args);
+	const { plugins, output } = config;
 
 	config.plugins = [
 		...plugins,
@@ -26,10 +26,13 @@ function webpackConfig(args: any) {
 		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
 		new WebpackChunkHash(),
-		new CleanWebpackPlugin([path.join(output.path!, 'dist')], { allowExternal: true })
+		new CleanWebpackPlugin(['dist'], { root: output.path }),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'runtime'
+		})
 	];
 
-	config.plugins = config.plugins.map((plugin: any) => {
+	config.plugins = config.plugins.map(plugin => {
 		if (plugin instanceof ExtractTextPlugin) {
 			return new ExtractTextPlugin({
 				filename: '[name].[contenthash].bundle.css',

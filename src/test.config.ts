@@ -6,9 +6,9 @@ import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 
 const basePath = process.cwd();
 
-function webpackConfig(args: any) {
-	const config: webpack.Configuration = baseConfigFactory(args);
-	const { plugins = [], output = {}, module } = config as any;
+function webpackConfig(args: any): webpack.Configuration {
+	const config = baseConfigFactory(args);
+	const { plugins, output, module } = config;
 	config.entry = () => {
 		const unit = globby
 			.sync([`${basePath}/tests/unit/**/*.ts`])
@@ -32,11 +32,14 @@ function webpackConfig(args: any) {
 	};
 	const externals: any[] = (config.externals as any[]) || [];
 
-	config.plugins = [...plugins, new CleanWebpackPlugin([path.join(output.path!, 'test')], { allowExternal: true })];
+	config.plugins = [...plugins, new CleanWebpackPlugin(['test'], { root: output.path })];
 
-	module.rules = module.rules.map((rule: any) => {
+	module.rules = module.rules.map(rule => {
 		if (Array.isArray(rule.use)) {
-			rule.use = rule.use.map((loader: any) => {
+			rule.use = rule.use.map(loader => {
+				if (typeof loader === 'string') {
+					return loader;
+				}
 				if (loader.loader === 'umd-compat-loader') {
 					return {
 						loader: loader.loader,
@@ -54,7 +57,7 @@ function webpackConfig(args: any) {
 	config.devtool = 'inline-source-map';
 	config.output = {
 		...output,
-		path: path.join(output.path!, 'test')
+		path: path.join(output.path, 'test')
 	};
 	return config;
 }
