@@ -7,95 +7,57 @@ import * as execa from 'execa';
 import * as globby from 'globby';
 const normalise = require('normalize-newline');
 
-const projectRootDir = path.join(__dirname, '..', '..', '..');
+const appRootDir = path.join(__dirname, '..', '..', '..', 'test-app');
+
+function assertOutput(mode: string, stripSourceMaps: boolean = false) {
+	const fixtureManifest = require(path.join(appRootDir, 'fixtures', 'output', mode, 'manifest'));
+	const outputManifest = require(path.join(appRootDir, 'output', mode, 'manifest'));
+	const fixtureFileIdentifiers = Object.keys(fixtureManifest);
+	const outputFileIdentifiers = Object.keys(outputManifest);
+	assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
+	fixtureFileIdentifiers.forEach(id => {
+		if (id.indexOf('runtime.js') === -1) {
+			const fixtureFilePath = path.join(appRootDir, 'fixtures', 'output', mode, fixtureManifest[id]);
+			const outputFilePath = path.join(appRootDir, 'output', mode, outputManifest[id]);
+			let fixtureContents = fs.readFileSync(fixtureFilePath, 'utf8');
+			let outputContents = fs.readFileSync(outputFilePath, 'utf8');
+
+			if (stripSourceMaps) {
+				fixtureContents = fixtureContents.split('//# sourceMappingURL')[0];
+				outputContents = outputContents.split('//# sourceMappingURL')[0];
+			}
+
+			assert.strictEqual(normalise(outputContents), normalise(fixtureContents), id);
+		}
+	});
+}
+
+function clean() {
+	rimraf.sync(path.join(appRootDir, 'output'));
+	rimraf.sync(path.join(appRootDir, 'src', 'app.m.css.d.ts'));
+}
 
 describe('functional build tests', () => {
 	beforeEach(() => {
-		rimraf.sync(path.join(projectRootDir, 'test-app', 'output'));
-		rimraf.sync(path.join(projectRootDir, 'test-app', 'src', 'app.m.css.d.ts'));
+		clean();
 	});
 
 	after(() => {
-		rimraf.sync(path.join(projectRootDir, 'test-app', 'output'));
-		rimraf.sync(path.join(projectRootDir, 'test-app', 'src', 'app.m.css.d.ts'));
+		clean();
 	});
 
 	it('correctly builds with dist configuration', () => {
-		execa.shellSync('./node_modules/.bin/dojo build --mode dist', { cwd: path.join(projectRootDir, 'test-app') });
-		const fixtureManifest = require(path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', 'manifest'));
-		const outputManifest = require(path.join(projectRootDir, 'test-app', 'output', 'dist', 'manifest'));
-		const fixtureFileIdentifiers = Object.keys(fixtureManifest);
-		const outputFileIdentifiers = Object.keys(outputManifest);
-		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
-		fixtureFileIdentifiers.forEach(id => {
-			if (id.indexOf('runtime.js') === -1) {
-				const fixtureContents = fs
-					.readFileSync(
-						path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dist', fixtureManifest[id]),
-						'utf8'
-					)
-					.replace(fixtureManifest[id].replace('.map', ''), 'filename');
-				const outputContents = fs
-					.readFileSync(path.join(projectRootDir, 'test-app', 'output', 'dist', outputManifest[id]), 'utf8')
-					.replace(outputManifest[id].replace('.map', ''), 'filename');
-
-				const fixtureContentSections = fixtureContents.split('//# sourceMappingURL');
-				const outputContentSections = outputContents.split('//# sourceMappingURL');
-
-				assert.strictEqual(normalise(fixtureContentSections[0]), normalise(outputContentSections[0]), id);
-			}
-		});
+		execa.shellSync('./node_modules/.bin/dojo build --mode dist', { cwd: appRootDir });
+		assertOutput('dist');
 	});
 
 	it('correctly builds with dev configuration', () => {
-		execa.shellSync('./node_modules/.bin/dojo build --mode dev', { cwd: path.join(projectRootDir, 'test-app') });
-		const fixtureManifest = require(path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dev', 'manifest'));
-		const outputManifest = require(path.join(projectRootDir, 'test-app', 'output', 'dev', 'manifest'));
-		const fixtureFileIdentifiers = Object.keys(fixtureManifest);
-		const outputFileIdentifiers = Object.keys(outputManifest);
-		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
-		fixtureFileIdentifiers.forEach(id => {
-			if (id !== 'runtime.js') {
-				const fixtureContents = fs.readFileSync(
-					path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'dev', fixtureManifest[id]),
-					'utf8'
-				);
-				const outputContents = fs.readFileSync(
-					path.join(projectRootDir, 'test-app', 'output', 'dev', outputManifest[id]),
-					'utf8'
-				);
-
-				const fixtureContentSections = fixtureContents.split('//# sourceMappingURL');
-				const outputContentSections = outputContents.split('//# sourceMappingURL');
-
-				assert.strictEqual(normalise(fixtureContentSections[0]), normalise(outputContentSections[0]), id);
-			}
-		});
+		execa.shellSync('./node_modules/.bin/dojo build --mode dev', { cwd: appRootDir });
+		assertOutput('dev');
 	});
 
 	it('correctly builds with test configuration', () => {
-		execa.shellSync('./node_modules/.bin/dojo build --mode test', { cwd: path.join(projectRootDir, 'test-app') });
-		const fixtureManifest = require(path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'test', 'manifest'));
-		const outputManifest = require(path.join(projectRootDir, 'test-app', 'output', 'test', 'manifest'));
-		const fixtureFileIdentifiers = Object.keys(fixtureManifest);
-		const outputFileIdentifiers = Object.keys(outputManifest);
-		assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
-		fixtureFileIdentifiers.forEach(id => {
-			if (id !== 'runtime.js') {
-				const fixtureContents = fs.readFileSync(
-					path.join(projectRootDir, 'test-app', 'fixtures', 'output', 'test', fixtureManifest[id]),
-					'utf8'
-				);
-				const outputContents = fs.readFileSync(
-					path.join(projectRootDir, 'test-app', 'output', 'test', outputManifest[id]),
-					'utf8'
-				);
-
-				const fixtureContentSections = fixtureContents.split('//# sourceMappingURL');
-				const outputContentSections = outputContents.split('//# sourceMappingURL');
-
-				assert.strictEqual(normalise(fixtureContentSections[0]), normalise(outputContentSections[0]), id);
-			}
-		});
+		execa.shellSync('./node_modules/.bin/dojo build --mode test', { cwd: appRootDir });
+		assertOutput('test', true);
 	});
 });
