@@ -9,7 +9,7 @@ const normalise = require('normalize-newline');
 
 const appRootDir = path.join(__dirname, '..', '..', '..', 'test-app');
 
-function assertOutput(mode: string, stripSourceMaps: boolean = false) {
+function assertOutput(mode: string) {
 	const fixtureManifest = require(path.join(appRootDir, 'fixtures', 'output', mode, 'manifest'));
 	const outputManifest = require(path.join(appRootDir, 'output', mode, 'manifest'));
 	const fixtureFileIdentifiers = Object.keys(fixtureManifest);
@@ -22,10 +22,8 @@ function assertOutput(mode: string, stripSourceMaps: boolean = false) {
 			let fixtureContents = fs.readFileSync(fixtureFilePath, 'utf8');
 			let outputContents = fs.readFileSync(outputFilePath, 'utf8');
 
-			if (stripSourceMaps || id === 'runtime.js') {
-				fixtureContents = fixtureContents.split('//# sourceMappingURL')[0];
-				outputContents = outputContents.split('//# sourceMappingURL')[0];
-			}
+			fixtureContents = fixtureContents.split('//# sourceMappingURL')[0];
+			outputContents = outputContents.split('//# sourceMappingURL')[0];
 
 			assert.strictEqual(normalise(outputContents), normalise(fixtureContents), id);
 		}
@@ -58,6 +56,6 @@ describe('functional build tests', () => {
 
 	it('correctly builds with test configuration', () => {
 		execa.shellSync('./node_modules/.bin/dojo build --mode test', { cwd: appRootDir });
-		assertOutput('test', true);
+		assertOutput('test');
 	});
 });
