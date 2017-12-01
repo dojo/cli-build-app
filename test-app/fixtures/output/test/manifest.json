@@ -1,6 +1,6 @@
 {
+  "functional.css": "main.css",
   "functional.js": "functional.js",
-  "runtime.css": "main.css",
-  "runtime.js": "runtime.js",
+  "unit.css": "main.css",
   "unit.js": "unit.js"
 }

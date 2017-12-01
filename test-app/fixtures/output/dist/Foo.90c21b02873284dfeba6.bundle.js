@@ -7,4 +7,4 @@
  * 
  */
 dojoWebpackJsonptest_app(["Foo"],{'./node_modules/umd-compat-loader/index.js?{}!./node_modules/ts-loader/index.js?{"onlyCompileBundledFiles":true,"instance":"dojo"}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!./src/Foo.ts':function(e,o,d){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.default=function(){return"foo"}}});
-//# sourceMappingURL=Foo.41fa7727adcd83e7d76e.bundle.js.map
+//# sourceMappingURL=Foo.90c21b02873284dfeba6.bundle.js.map
