@@ -60,8 +60,7 @@ Eject is not currently supported by `cli-build-app`.
 
 ## How do I contribute?
 
-We appreciate your interest! Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the
-Contributing Guidelines and Style Guide.
+We appreciate your interest! Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the Contributing Guidelines. This repository uses [prettier](https://prettier.io/) for code style and is configured with a pre-commit hook to automatically fix formatting issues on staged `.ts` files before performing the commit.
 
 ### Installation
 
@@ -69,16 +68,37 @@ To start working with this package, clone the repository and run `npm install`.
 
 In order to build the project run `grunt dev` or `grunt dist`.
 
+### Scripts
+
+#### test
+
+Builds a new test artifact from the repository source code and re-installs the `test-app` dependencies before running all unit and functional tests.
+
+#### build-test-artifact
+
+Builds and packages `cli-build-app` as `dojo-cli-build-app.tgz` in the `dist` directory.
+
+#### generate-fixtures
+
+Re-generates the test fixtures in `test-app`. Assumes that the dependencies have been installed for the test app.
+
+#### prettier
+
+Runs [prettier](https://prettier.io/) on all `.ts` files in the `src` and `tests` directories, this will fix any detected code style violations.
+
 ### Testing
 
-Test cases MUST be written using [Intern](https://theintern.github.io) using the Object test interface and Assert assertion interface.
+Test cases MUST be written using [Intern](https://theintern.github.io) using the BDD test interface and Assert assertion interface.
 
 90% branch coverage MUST be provided for all code submitted to this repository, as reported by istanbul’s combined coverage results for all supported platforms.
 
-To test locally in node run:
+The command is tested by running via the Dojo CLI and asserting the build output against known fixtures. To do this, a test artifact needs to be built and installed into the `test-app`:
 
-`grunt test`
+```
+npm test
+```
 
+Once the test artifact has been installed, if there have been no changes to the command code `grunt test` can be used to repeat the tests.
 ## Licensing information
 
 © 2017 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
