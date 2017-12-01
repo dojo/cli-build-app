@@ -16,13 +16,13 @@ function assertOutput(mode: string, stripSourceMaps: boolean = false) {
 	const outputFileIdentifiers = Object.keys(outputManifest);
 	assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
 	fixtureFileIdentifiers.forEach(id => {
-		if (id.indexOf('runtime.js') === -1) {
+		if (id !== 'runtime.js.map') {
 			const fixtureFilePath = path.join(appRootDir, 'fixtures', 'output', mode, fixtureManifest[id]);
 			const outputFilePath = path.join(appRootDir, 'output', mode, outputManifest[id]);
 			let fixtureContents = fs.readFileSync(fixtureFilePath, 'utf8');
 			let outputContents = fs.readFileSync(outputFilePath, 'utf8');
 
-			if (stripSourceMaps) {
+			if (stripSourceMaps || id === 'runtime.js') {
 				fixtureContents = fixtureContents.split('//# sourceMappingURL')[0];
 				outputContents = outputContents.split('//# sourceMappingURL')[0];
 			}
