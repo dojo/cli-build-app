@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-fixtures": "rm -rf src/app.m.css.d.ts && rm -rf fixtures/output && rm -rf output && dojo build && rm -rf src/app.m.css.d.ts && dojo build --mode dev && rm -rf src/app.m.css.d.ts && dojo build --mode test && cp -r output fixtures/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate-fixtures": "shx rm -rf src/app.m.css.d.ts && shx rm -rf fixtures/output && shx rm -rf output && dojo build && shx rm -rf src/app.m.css.d.ts && dojo build --mode dev && shx rm -rf src/app.m.css.d.ts && dojo build --mode test && shx cp -r output fixtures/",
+    "build-dist": "dojo build --mode dist",
+    "build-dev": "dojo build --mode dev",
+    "build-test": "dojo build --mode test"
   },
   "author": "",
   "license": "ISC",

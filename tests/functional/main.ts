@@ -45,17 +45,17 @@ describe('functional build tests', () => {
 	});
 
 	it('correctly builds with dist configuration', () => {
-		execa.shellSync('./node_modules/.bin/dojo build --mode dist', { cwd: appRootDir });
+		execa.shellSync('npm run build-dist', { cwd: appRootDir });
 		assertOutput('dist');
 	});
 
 	it('correctly builds with dev configuration', () => {
-		execa.shellSync('./node_modules/.bin/dojo build --mode dev', { cwd: appRootDir });
+		execa.shellSync('npm run build-dev', { cwd: appRootDir });
 		assertOutput('dev');
 	});
 
 	it('correctly builds with test configuration', () => {
-		execa.shellSync('./node_modules/.bin/dojo build --mode test', { cwd: appRootDir });
+		execa.shellSync('npm run build-test', { cwd: appRootDir });
 		assertOutput('test');
 	});
 });
