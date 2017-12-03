@@ -11,7 +11,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.plugins = [
 		...plugins,
 		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
-		new CleanWebpackPlugin(['dev'], { root: output.path }),
+		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
 		})

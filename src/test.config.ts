@@ -32,7 +32,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	};
 	const externals: any[] = (config.externals as any[]) || [];
 
-	config.plugins = [...plugins, new CleanWebpackPlugin(['test'], { root: output.path })];
+	config.plugins = [...plugins, new CleanWebpackPlugin(['test'], { root: output.path, verbose: false })];
 
 	module.rules = module.rules.map(rule => {
 		if (Array.isArray(rule.use)) {

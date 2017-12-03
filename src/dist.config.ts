@@ -26,7 +26,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
 		new WebpackChunkHash(),
-		new CleanWebpackPlugin(['dist'], { root: output.path }),
+		new CleanWebpackPlugin(['dist'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
 		})
