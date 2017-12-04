@@ -5,9 +5,11 @@ import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePl
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import { WebpackConfiguration } from './interfaces';
+import * as loaderUtils from 'loader-utils';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
+const slash = require('slash');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -37,7 +39,7 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 				const filePath = path.relative(basePath, path.join(context, module));
 				let chunkName = path.basename(filePath);
 				Object.keys(bundles).some(name => {
-					if (bundles[name].indexOf(filePath) > -1) {
+					if (bundles[name].indexOf(slash(filePath)) > -1) {
 						chunkName = name;
 						return true;
 					}
@@ -47,6 +49,26 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 			}
 		}
 	};
+}
+
+function getLocalIdent(
+	loaderContext: webpack.loader.LoaderContext,
+	localIdentName: string,
+	localName: string,
+	options: any
+) {
+	if (!options.context) {
+		if (loaderContext.options && typeof loaderContext.options.context === 'string') {
+			options.context = loaderContext.options.context;
+		} else {
+			options.context = loaderContext.context;
+		}
+	}
+	const request = slash(path.relative(options.context, loaderContext.resourcePath));
+	options.content = `${options.hashPrefix}${request}+${localName}`;
+	localIdentName = localIdentName.replace(/\[local\]/gi, localName);
+	const hash = loaderUtils.interpolateName(loaderContext, localIdentName, options);
+	return hash.replace(new RegExp('[^a-zA-Z0-9\\-_\u00A0-\uFFFF]', 'g'), '-').replace(/^((-?[0-9])|--)/, '_$1');
 }
 
 const removeEmpty = (items: any[]) => items.filter(item => item);
@@ -77,7 +99,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions: ['.ts', '.tsx', '.js']
 		},
-		context: process.cwd(),
 		devtool: 'source-map',
 		plugins: [
 			new CssModulePlugin(basePath),
@@ -145,7 +166,16 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						fallback: ['style-loader'],
 						use: [
 							'@dojo/webpack-contrib/css-module-decorator-loader',
-							`css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:8]`,
+							{
+								loader: 'css-loader',
+								options: {
+									modules: true,
+									sourceMap: true,
+									importLoaders: 1,
+									localIdentName: '[hash:base64:8]',
+									getLocalIdent
+								}
+							},
 							{
 								loader: 'postcss-loader?sourceMap',
 								options: {
