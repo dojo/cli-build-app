@@ -16,5 +16,8 @@
     "@dojo/cli-build-app": "file:../dist/dojo-cli-build-app.tgz",
     "tslib": "^1.8.0",
     "intern": "~4.1.0"
+  },
+  "devDependencies": {
+    "shx": "^0.2.2"
   }
 }
