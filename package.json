@@ -20,7 +20,8 @@
     "test": "npm run build-test-artifact && cd test-app && shx rm -rf node_modules package-lock.json && npm i && grunt test",
     "build-test-artifact": "grunt dist && grunt release-publish-flat --dry-run && shx mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz",
     "prettier": "prettier --write src/**/*.ts tests/**/*.ts",
-    "generate-fixtures": "cd test-app && npm run generate-fixtures && cd ..",
+    "generate-unix-fixtures": "cd test-app && npm run generate-unix-fixtures && cd ..",
+    "generate-windows-fixtures": "cd test-app && npm run generate-windows-fixtures && cd ..",
     "precommit": "lint-staged"
   },
   "lint-staged": {

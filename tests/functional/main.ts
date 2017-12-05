@@ -4,19 +4,22 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as rimraf from 'rimraf';
 import * as execa from 'execa';
+import * as os from 'os';
 const normalise = require('normalize-newline');
 
 const appRootDir = path.join(__dirname, '..', '..', '..', 'test-app');
 
+const platform = os.platform().startsWith('win') ? 'windows' : 'unix';
+
 function assertOutput(mode: string) {
-	const fixtureManifest = require(path.join(appRootDir, 'fixtures', 'output', mode, 'manifest'));
+	const fixtureManifest = require(path.join(appRootDir, 'fixtures', 'output', platform, mode, 'manifest'));
 	const outputManifest = require(path.join(appRootDir, 'output', mode, 'manifest'));
 	const fixtureFileIdentifiers = Object.keys(fixtureManifest);
 	const outputFileIdentifiers = Object.keys(outputManifest);
 	assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
 	fixtureFileIdentifiers.forEach(id => {
 		if (id !== 'runtime.js.map') {
-			const fixtureFilePath = path.join(appRootDir, 'fixtures', 'output', mode, fixtureManifest[id]);
+			const fixtureFilePath = path.join(appRootDir, 'fixtures', 'output', platform, mode, fixtureManifest[id]);
 			const outputFilePath = path.join(appRootDir, 'output', mode, outputManifest[id]);
 			let fixtureContents = fs.readFileSync(fixtureFilePath, 'utf8');
 			let outputContents = fs.readFileSync(outputFilePath, 'utf8');
