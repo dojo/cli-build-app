@@ -48,7 +48,7 @@ describe('logger', () => {
 			},
 			{
 				output: {
-					path: path.join(__dirname, './../fixtures')
+					path: path.join(__dirname, '..', 'fixtures')
 				}
 			}
 		);
@@ -67,7 +67,7 @@ ${columns([
 			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
 			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
 		])}
-${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, './../fixtures')}`))}`)}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
@@ -100,7 +100,7 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__d
 			},
 			{
 				output: {
-					path: path.join(__dirname, './../fixtures')
+					path: path.join(__dirname, '..', 'fixtures')
 				}
 			}
 		);
@@ -129,7 +129,7 @@ ${columns([
 			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
 			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
 		])}
-${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, './../fixtures')}`))}`)}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
