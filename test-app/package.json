@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-fixtures": "shx rm -rf src/app.m.css.d.ts && shx rm -rf fixtures/output && shx rm -rf output && dojo build && shx rm -rf src/app.m.css.d.ts && dojo build --mode dev && shx rm -rf src/app.m.css.d.ts && dojo build --mode test",
-    "generate-unix-fixtures": "npm run generate-fixtures && shx cp -r output fixtures/unix",
-    "generate-windoes-fixtures": "npm run generate-fixtures && shx cp -r output fixtures/windows",
+    "generate-fixtures": "shx rm -rf output && shx rm -rf src/app.m.css.d.ts && dojo build && shx rm -rf src/app.m.css.d.ts && dojo build --mode dev && shx rm -rf src/app.m.css.d.ts && dojo build --mode test",
+    "generate-unix-fixtures": "npm run generate-fixtures && shx cp -r output/* fixtures/unix/",
+    "generate-windows-fixtures": "npm run generate-fixtures && shx cp -r output/* fixtures/windows/",
     "build-dist": "dojo build --mode dist",
     "build-dev": "dojo build --mode dev",
     "build-test": "dojo build --mode test"
