@@ -1,8 +1,13 @@
 const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
 import * as path from 'path';
+import * as logSymbols from 'log-symbols';
+import chalk from 'chalk';
 import * as sinon from 'sinon';
 import MockModule from '../support/MockModule';
+
+const stripAnsi = require('strip-ansi');
+const columns = require('cli-columns');
 
 let mockModule: MockModule;
 
@@ -48,14 +53,24 @@ describe('logger', () => {
 			}
 		);
 
+		const expectedLog = `
+${logSymbols.info} cli-build-app: 9.9.9
+${logSymbols.info} typescript: 1.1.1
+${logSymbols.success} hash: hash
+${logSymbols.error} errors: 0
+${logSymbols.warning} warnings: 0
+${''}${''}
+${chalk.yellow('chunks:')}
+${columns(['chunkOne'])}
+${chalk.yellow('assets:')}
+${columns([
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
+		])}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
+	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
-
-		console.warn(mockedLogUpdate.firstCall.args[0]);
-
-		assert.strictEqual(
-			mockedLogUpdate.firstCall.args[0],
-			'\n\u001b[34mℹ\u001b[39m cli-build-app: 9.9.9\n\u001b[34mℹ\u001b[39m typescript: 1.1.1\n\u001b[32m✔\u001b[39m hash: hash\n\u001b[31m✖\u001b[39m errors: 0\n\u001b[33m⚠\u001b[39m warnings: 0\n\n\u001b[33mchunks:\u001b[39m\nchunkOne  \n\u001b[33massets:\u001b[39m\nassetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  assetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  \n\u001b[33moutput at: \u001b[36m\u001b[4mfile:////Users/Anthony/development/dojo2/cli-build-app/_build/tests/fixtures\u001b[24m\u001b[33m\u001b[39m\n\t'
-		);
+		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 	});
 
 	it('logging output with errors', () => {
@@ -90,10 +105,33 @@ describe('logger', () => {
 			}
 		);
 
+		const expectedErrors = `
+${chalk.yellow('errors:')}
+${chalk.red(errors.map((error: string) => stripAnsi(error)))}
+`;
+
+		const expectedWarnings = `
+${chalk.yellow('warnings:')}
+${chalk.gray(warnings.map((warning: string) => stripAnsi(warning)))}
+`;
+
+		const expectedLog = `
+${logSymbols.info} cli-build-app: 9.9.9
+${logSymbols.info} typescript: 1.1.1
+${logSymbols.success} hash: hash
+${logSymbols.error} errors: 1
+${logSymbols.warning} warnings: 1
+${expectedErrors}${expectedWarnings}
+${chalk.yellow('chunks:')}
+${columns(['chunkOne'])}
+${chalk.yellow('assets:')}
+${columns([
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
+			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
+		])}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
+	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
-		assert.strictEqual(
-			mockedLogUpdate.firstCall.args[0],
-			'\n\u001b[34mℹ\u001b[39m cli-build-app: 9.9.9\n\u001b[34mℹ\u001b[39m typescript: 1.1.1\n\u001b[32m✔\u001b[39m hash: hash\n\u001b[31m✖\u001b[39m errors: 1\n\u001b[33m⚠\u001b[39m warnings: 1\n\n\u001b[33merrors:\u001b[39m\n\u001b[31merror\u001b[39m\n\n\u001b[33mwarnings:\u001b[39m\n\u001b[90mwarning\u001b[39m\n\n\u001b[33mchunks:\u001b[39m\nchunkOne  \n\u001b[33massets:\u001b[39m\nassetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  assetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  \n\u001b[33moutput at: \u001b[36m\u001b[4mfile:////Users/Anthony/development/dojo2/cli-build-app/_build/tests/fixtures\u001b[24m\u001b[33m\u001b[39m\n\t'
-		);
+		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 	});
 });
