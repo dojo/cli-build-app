@@ -49,6 +49,9 @@ describe('logger', () => {
 		);
 
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+		console.log(
+			'\n\u001b[34mℹ\u001b[39m cli-build-app: 9.9.9\n\u001b[34mℹ\u001b[39m typescript: 1.1.1\n\u001b[32m✔\u001b[39m hash: hash\n\u001b[31m✖\u001b[39m errors: 0\n\u001b[33m⚠\u001b[39m warnings: 0\n\n\u001b[33mchunks:\u001b[39m\nchunkOne  \n\u001b[33massets:\u001b[39m\nassetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  assetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  \n\u001b[33moutput at: \u001b[36m\u001b[4mfile:////Users/Anthony/development/dojo2/cli-build-app/_build/tests/fixtures\u001b[24m\u001b[33m\u001b[39m\n\t'
+		);
 		assert.isTrue(
 			mockedLogUpdate.calledWith(
 				'\n\u001b[34mℹ\u001b[39m cli-build-app: 9.9.9\n\u001b[34mℹ\u001b[39m typescript: 1.1.1\n\u001b[32m✔\u001b[39m hash: hash\n\u001b[31m✖\u001b[39m errors: 0\n\u001b[33m⚠\u001b[39m warnings: 0\n\n\u001b[33mchunks:\u001b[39m\nchunkOne  \n\u001b[33massets:\u001b[39m\nassetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  assetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  \n\u001b[33moutput at: \u001b[36m\u001b[4mfile:////Users/Anthony/development/dojo2/cli-build-app/_build/tests/fixtures\u001b[24m\u001b[33m\u001b[39m\n\t'
@@ -89,6 +92,11 @@ describe('logger', () => {
 		);
 
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+		console.log(
+			JSON.stringify(
+				'\n\u001b[34mℹ\u001b[39m cli-build-app: 9.9.9\n\u001b[34mℹ\u001b[39m typescript: 1.1.1\n\u001b[32m✔\u001b[39m hash: hash\n\u001b[31m✖\u001b[39m errors: 0\n\u001b[33m⚠\u001b[39m warnings: 0\n\n\u001b[33mchunks:\u001b[39m\nchunkOne  \n\u001b[33massets:\u001b[39m\nassetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  assetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  \n\u001b[33moutput at: \u001b[36m\u001b[4mfile:////Users/Anthony/development/dojo2/cli-build-app/_build/tests/fixtures\u001b[24m\u001b[33m\u001b[39m\n\t'
+			)
+		);
 		assert.isTrue(
 			mockedLogUpdate.calledWith(
 				'\n\u001b[34mℹ\u001b[39m cli-build-app: 9.9.9\n\u001b[34mℹ\u001b[39m typescript: 1.1.1\n\u001b[32m✔\u001b[39m hash: hash\n\u001b[31m✖\u001b[39m errors: 1\n\u001b[33m⚠\u001b[39m warnings: 1\n\n\u001b[33merrors:\u001b[39m\n\u001b[31merror\u001b[39m\n\n\u001b[33mwarnings:\u001b[39m\n\u001b[90mwarning\u001b[39m\n\n\u001b[33mchunks:\u001b[39m\nchunkOne  \n\u001b[33massets:\u001b[39m\nassetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  assetOne.js \u001b[33m(1.00kb)\u001b[39m / \u001b[34m(0.04kb gz)\u001b[39m  \n\u001b[33moutput at: \u001b[36m\u001b[4mfile:////Users/Anthony/development/dojo2/cli-build-app/_build/tests/fixtures\u001b[24m\u001b[33m\u001b[39m\n\t'
