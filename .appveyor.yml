@@ -17,7 +17,7 @@ test_script:
   - npm --version
   # run tests
   - node_modules\.bin\grunt.cmd
-  - npm test
+  - npm test-ci
   - node_modules\.bin\grunt.cmd uploadCoverage
 
 # Don't actually build.
