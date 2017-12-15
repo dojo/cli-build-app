@@ -1,0 +1,10 @@
+{
+	"build-app": {
+		"bundles": {
+			"widgets": [
+				"src/Bar",
+				"src/Baz"
+			]
+		}
+	}
+}
