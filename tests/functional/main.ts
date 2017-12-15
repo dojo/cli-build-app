@@ -15,7 +15,7 @@ function normalise(value: string) {
 		.split('# sourceMappingURL')[0]
 		.replace(/\r\n/g, '\n')
 		.replace(/\\r\\n/g, '\\n')
-		.replace(/main\.[a-z0-9]+\.bundle/, 'main.[HASH].bundle');
+		.replace(/([A-Za-z0-9\-_]+)\.[a-z0-9]+\.bundle/, '$1.[HASH].bundle');
 }
 
 function assertOutput(mode: string) {

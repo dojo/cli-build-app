@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "npm run setup-tests && grunt test --color",
-    "test-ci": "npm run setup-tests && grunt dev && grunt intern:node --test-reporter",
+    "test-ci": "npm run setup-tests && grunt dev && grunt intern:node --test-reporter --color",
     "setup-tests": "npm run build-test-artifact && cd test-app && shx rm -rf node_modules package-lock.json && npm i",
     "build-test-artifact": "grunt dist && grunt release-publish-flat --dry-run && shx mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz",
     "prettier": "prettier --write src/**/*.ts tests/**/*.ts",

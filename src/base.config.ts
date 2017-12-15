@@ -37,7 +37,7 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 		options: {
 			imports(module: string, context: string) {
 				const filePath = path.relative(basePath, path.join(context, module));
-				let chunkName = path.basename(filePath);
+				let chunkName = slash(filePath);
 				Object.keys(bundles).some(name => {
 					if (bundles[name].indexOf(slash(filePath)) > -1) {
 						chunkName = name;

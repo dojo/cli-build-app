@@ -1,12 +1,12 @@
 {
-  "Foo.js": "Foo.90c21b02873284dfeba6.bundle.js",
-  "Foo.js.map": "Foo.90c21b02873284dfeba6.bundle.js.map",
   "main.css": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
   "main.css.map": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map",
-  "main.js": "main.79651062f8f763429fc2.bundle.js",
-  "main.js.map": "main.79651062f8f763429fc2.bundle.js.map",
+  "main.js": "main.a75ed89757cfd98a5277.bundle.js",
+  "main.js.map": "main.a75ed89757cfd98a5277.bundle.js.map",
   "runtime.js": "runtime.d41d8cd98f00b204e980.bundle.js",
   "runtime.js.map": "runtime.d41d8cd98f00b204e980.bundle.js.map",
+  "src/Foo.js": "src/Foo.90c21b02873284dfeba6.bundle.js",
+  "src/Foo.js.map": "src/Foo.90c21b02873284dfeba6.bundle.js.map",
   "widgets.js": "widgets.2ac905e1cc8cc80e0fbf.bundle.js",
   "widgets.js.map": "widgets.2ac905e1cc8cc80e0fbf.bundle.js.map"
 }
