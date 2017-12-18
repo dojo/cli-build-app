@@ -4,11 +4,12 @@ import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
-import { WebpackConfiguration } from './interfaces';
+import { WebAppManifest, WebpackConfiguration } from './interfaces';
 import * as loaderUtils from 'loader-utils';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const slash = require('slash');
 
 const basePath = process.cwd();
@@ -81,6 +82,7 @@ All rights reserved
 `;
 
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
+	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const config: webpack.Configuration = {
 		entry: {
 			[mainEntry]: [path.join(srcPath, 'main.css'), path.join(srcPath, 'main.ts')]
@@ -101,7 +103,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
-		plugins: [
+		plugins: removeEmpty([
 			new CssModulePlugin(basePath),
 			new AutoRequireWebpackPlugin(mainEntry),
 			new webpack.BannerPlugin(banner),
@@ -112,8 +114,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			}),
 			new webpack.NamedChunksPlugin(),
 			new ManifestPlugin(),
-			new webpack.NamedModulesPlugin()
-		],
+			new webpack.NamedModulesPlugin(),
+			manifest && new WebpackPwaManifest(manifest)
+		]),
 		module: {
 			rules: removeEmpty([
 				tsLint && {
