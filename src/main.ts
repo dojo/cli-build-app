@@ -8,6 +8,21 @@ import logger from './logger';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 
+function watch(compiler: webpack.Compiler, config: webpack.Configuration): Promise<void> {
+	return new Promise((resolve, reject) => {
+		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
+		compiler.watch(watchOptions, (err, stats) => {
+			if (err) {
+				reject(err);
+			}
+			if (stats) {
+				logger(stats.toJson(), config);
+			}
+			resolve();
+		});
+	});
+}
+
 const command: Command = {
 	group: 'build',
 	name: 'app',
@@ -18,6 +33,12 @@ const command: Command = {
 			alias: 'm',
 			default: 'dist',
 			choices: ['dist', 'dev', 'test']
+		});
+
+		options('watch', {
+			describe: 'watch for file changes (all modes)',
+			alias: 'w',
+			type: 'boolean'
 		});
 	},
 	run(helper: Helper, args: any) {
@@ -33,6 +54,11 @@ const command: Command = {
 		}
 		const compiler = webpack(config);
 		fixMultipleWatchTrigger(compiler);
+
+		if (args.watch) {
+			return watch(compiler, config);
+		}
+
 		return new Promise((resolve, reject) => {
 			compiler.run((err, stats) => {
 				if (err) {
