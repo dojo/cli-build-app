@@ -1,7 +1,6 @@
 const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
-import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
+import { SinonStub, stub } from 'sinon';
 import MockModule from '../support/MockModule';
 
 let mockModule: MockModule;
@@ -12,17 +11,16 @@ let mockDistConfig: any;
 let mockTestConfig: any;
 let isError: boolean;
 let stats: any;
-let consoleStub = sinon.stub(console, 'log');
+let consoleStub = stub(console, 'log');
 let pluginStub: SinonStub;
 let runStub: SinonStub;
 let watchStub: SinonStub;
 
-function getMockConfiguration(config?: any) {
+function getMockConfiguration(config: any = {}) {
 	return {
 		configuration: {
 			get() {
-				{
-				}
+				return { ...config };
 			}
 		}
 	};
@@ -41,19 +39,22 @@ describe('command', () => {
 			'./dev.config',
 			'./dist.config',
 			'./test.config',
+			'express',
 			'log-update',
 			'ora',
 			'webpack',
 			'webpack-mild-compile',
+			'webpack-dev-middleware',
+			'webpack-hot-middleware',
 			'./logger'
 		]);
-		pluginStub = sinon.stub().callsFake((name: string, callback: Function) => {
+		pluginStub = stub().callsFake((name: string, callback: Function) => {
 			callback();
 		});
-		runStub = sinon.stub().callsFake((callback: Function) => {
+		runStub = stub().callsFake((callback: Function) => {
 			callback(isError, stats);
 		});
-		watchStub = sinon.stub().callsFake((options: any, callback: Function) => {
+		watchStub = stub().callsFake((options: any, callback: Function) => {
 			callback(isError, stats);
 		});
 		mockSpinner = {
@@ -82,7 +83,7 @@ describe('command', () => {
 
 	it('registers the command options', () => {
 		const main = mockModule.getModuleUnderTest().default;
-		const optionsStub = sinon.stub();
+		const optionsStub = stub();
 		main.register(optionsStub);
 		assert.isTrue(
 			optionsStub.calledWith('mode', {
@@ -184,6 +185,114 @@ describe('command', () => {
 			assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
 			assert.isTrue(mockSpinner.start.called);
 			assert.isTrue(mockSpinner.stop.called);
+		});
+	});
+
+	describe('serve option', () => {
+		const entry = { main: [] };
+		const watchOptions = {};
+		const output = { publicPath: '/' };
+		let compiler: any;
+		let plugins: any[];
+		let webpack: any;
+		let pluginStub: SinonStub;
+		let useStub: SinonStub;
+		let listenStub: SinonStub;
+
+		beforeEach(() => {
+			webpack = mockModule.getMock('webpack').ctor;
+			entry.main.length = 0;
+			plugins = [];
+			mockDevConfig.returns({ entry, output, plugins, watchOptions });
+
+			webpack.HotModuleReplacementPlugin = stub();
+			webpack.NoEmitOnErrorsPlugin = stub();
+
+			pluginStub = stub();
+			useStub = stub();
+			listenStub = stub().callsFake((port: string, callback: Function) => {
+				callback(false);
+			});
+
+			compiler = { plugin: pluginStub };
+			mockModule.getMock('webpack').ctor.returns(compiler);
+
+			mockModule.getMock('express').ctor.returns({
+				listen: listenStub,
+				use: useStub
+			});
+		});
+
+		it('starts a webserver on the specified port', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const port = 3000;
+			return main.run(getMockConfiguration(), { serve: true, port }).then(() => {
+				assert.isTrue(listenStub.calledWith(port));
+			});
+		});
+
+		it('registers middleware', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const webpackMiddleware = mockModule.getMock('webpack-dev-middleware').ctor;
+			const hotMiddleware = mockModule.getMock('webpack-hot-middleware').ctor;
+			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+				assert.strictEqual(useStub.callCount, 1);
+				assert.isTrue(
+					webpackMiddleware.calledWith(compiler, {
+						logLevel: 'silent',
+						noInfo: true,
+						publicPath: '/',
+						watchOptions
+					})
+				);
+				assert.isTrue(
+					hotMiddleware.calledWith(compiler, {
+						heartbeat: 10000
+					})
+				);
+			});
+		});
+
+		it('enables hot module replacement', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+				assert.lengthOf(plugins, 2);
+				assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
+				assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
+				assert.sameMembers(entry.main, ['webpack-hot-middleware/client?timeout=20000&reload=true']);
+			});
+		});
+
+		it('provides custom logging', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const logUpdate = mockModule.getMock('log-update').ctor;
+			const filename = '/changed/file.ts';
+
+			pluginStub.callsFake((name: string, callback: Function) => {
+				const value = name === 'invalid' ? filename : stats;
+				callback(value);
+			});
+
+			return main.run(getMockConfiguration(), { serve: true, port: 3000 }).then(() => {
+				assert.isTrue(logUpdate.calledWith('Listening on port 3000'));
+				assert.isTrue(logUpdate.calledWith(`Recompiling; updated file: ${filename}`));
+				assert.isTrue(mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, true));
+			});
+		});
+
+		it('fails on error', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			listenStub.callsFake((port: string, callback: Function) => {
+				callback(true);
+			});
+			return main.run(getMockConfiguration(), { serve: true }).then(
+				() => {
+					throw new Error();
+				},
+				(e: Error) => {
+					assert.isTrue(e);
+				}
+			);
 		});
 	});
 });

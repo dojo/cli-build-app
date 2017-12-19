@@ -12,13 +12,19 @@ const columns = require('cli-columns');
 const stripAnsi = require('strip-ansi');
 const version = jsonFile.readFileSync(path.join(pkgDir.sync(), 'package.json')).version;
 
-export default function logger(stats: any, config: any) {
+export default function logger(stats: any, config: any, isServing: boolean = false) {
 	const assets = stats.assets
 		.map((asset: any) => {
 			const size = (asset.size / 1000).toFixed(2);
+			const assetInfo = `${asset.name} ${chalk.yellow(`(${size}kb)`)}`;
+
+			if (isServing) {
+				return assetInfo;
+			}
+
 			const content = fs.readFileSync(config.output.path + '/' + asset.name, 'utf-8');
 			const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
-			return `${asset.name} ${chalk.yellow(`(${size}kb)`)} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
+			return `${assetInfo} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
 		})
 		.filter((output: string) => output);
 
