@@ -100,6 +100,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			extensions: ['.ts', '.tsx', '.js']
 		},
 		devtool: 'source-map',
+		watchOptions: { ignored: /node_modules/ },
 		plugins: [
 			new CssModulePlugin(basePath),
 			new AutoRequireWebpackPlugin(mainEntry),

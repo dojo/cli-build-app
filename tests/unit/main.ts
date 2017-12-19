@@ -1,6 +1,7 @@
 const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
 import * as sinon from 'sinon';
+import { SinonStub } from 'sinon';
 import MockModule from '../support/MockModule';
 
 let mockModule: MockModule;
@@ -11,6 +12,8 @@ let mockTestConfig: any;
 let isError: boolean;
 let stats: any;
 let consoleStub = sinon.stub(console, 'log');
+let runStub: SinonStub;
+let watchStub: SinonStub;
 
 function getMockConfiguration(config?: any) {
 	return {
@@ -40,10 +43,15 @@ describe('command', () => {
 			'webpack-mild-compile',
 			'./logger'
 		]);
+		runStub = sinon.stub().callsFake((callback: Function) => {
+			callback(isError, stats);
+		});
+		watchStub = sinon.stub().callsFake((options: any, callback: Function) => {
+			callback(isError, stats);
+		});
 		mockModule.getMock('webpack').ctor.returns({
-			run(callback: Function) {
-				callback(isError, stats);
-			}
+			run: runStub,
+			watch: watchStub
 		});
 		mockDevConfig = mockModule.getMock('./dev.config').default;
 		mockDistConfig = mockModule.getMock('./dist.config').default;
@@ -97,6 +105,14 @@ describe('command', () => {
 		});
 	});
 
+	it('can automatically rebuild after file changes', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), { watch: true }).then(() => {
+			assert.isFalse(runStub.called);
+			assert.isTrue(watchStub.calledOnce);
+		});
+	});
+
 	it('logger not called if stats are not returned', () => {
 		stats = null;
 		const main = mockModule.getModuleUnderTest().default;
@@ -110,6 +126,19 @@ describe('command', () => {
 		isError = true;
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'test' }).then(
+			() => {
+				throw new Error();
+			},
+			(e: Error) => {
+				assert.isTrue(e);
+			}
+		);
+	});
+
+	it('rejects if an error occurs in watch mode', () => {
+		isError = true;
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), { watch: true }).then(
 			() => {
 				throw new Error();
 			},
