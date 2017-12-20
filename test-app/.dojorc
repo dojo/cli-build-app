@@ -1,5 +1,7 @@
 {
 	"build-app": {
+		"locale": "en",
+		"supportedLocales": [ "es" ],
 		"features": {
 			"foo": true,
 			"bar": false

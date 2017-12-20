@@ -75,7 +75,7 @@
     "typescript": "~2.6.1"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "~0.1.5",
+    "@dojo/webpack-contrib": "~0.1.6",
     "auto-require-webpack-plugin": "1.0.1",
     "chalk": "2.3.0",
     "clean-webpack-plugin": "0.1.17",
