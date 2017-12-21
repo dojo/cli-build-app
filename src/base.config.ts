@@ -152,7 +152,16 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						{ loader: 'ts-loader', options: { onlyCompileBundledFiles: true, instance: 'dojo' } }
 					])
 				},
-				{ test: /\.js?$/, loader: 'umd-compat-loader' },
+				{
+					test: /\.js?$/,
+					use: removeEmpty([
+						args.features && {
+							loader: '@dojo/webpack-contrib/static-build-loader',
+							options: { features: args.features }
+						},
+						'umd-compat-loader'
+					])
+				},
 				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },
 				{
 					test: /.*\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
