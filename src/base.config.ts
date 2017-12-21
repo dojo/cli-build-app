@@ -143,10 +143,14 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				{
 					include: allPaths,
 					test: /.*\.ts(x)?$/,
-					use: [
+					use: removeEmpty([
+						args.features && {
+							loader: '@dojo/webpack-contrib/static-build-loader',
+							options: { features: args.features }
+						},
 						getUMDCompatLoader({ bundles: args.bundles }),
 						{ loader: 'ts-loader', options: { onlyCompileBundledFiles: true, instance: 'dojo' } }
-					]
+					])
 				},
 				{ test: /\.js?$/, loader: 'umd-compat-loader' },
 				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },

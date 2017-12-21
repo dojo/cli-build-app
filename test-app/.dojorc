@@ -1,5 +1,9 @@
 {
 	"build-app": {
+		"features": {
+			"foo": true,
+			"bar": false
+		},
 		"bundles": {
 			"widgets": [
 				"src/Bar",
