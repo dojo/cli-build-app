@@ -61,7 +61,7 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		webpackMiddleware(compiler, {
 			logLevel: 'silent',
 			noInfo: true,
-			publicPath: (config.output as any).publicPath,
+			publicPath: '/',
 			watchOptions
 		}),
 		hotMiddleware(compiler, {

@@ -97,8 +97,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			filename: '[name].js',
 			jsonpFunction: getJsonpFunctionName(packageName),
 			libraryTarget: 'umd',
-			path: path.resolve('./output'),
-			publicPath: '/'
+			path: path.resolve('./output')
 		},
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
