@@ -2,8 +2,8 @@
   "errors": [],
   "warnings": [],
   "version": "3.8.1",
-  "hash": "53d23b362ea192e4cc82",
-  "time": 6078,
+  "hash": "c7c6301262f272ec9822",
+  "time": 5594,
   "publicPath": "",
   "assetsByChunkName": {
     "main": [
@@ -139,6 +139,13 @@
     {
       "name": "manifest.json",
       "size": 626,
+      "chunks": [],
+      "chunkNames": [],
+      "emitted": true
+    },
+    {
+      "name": "manifest.67922f9d41b46aafda3d4e88ab6f5b6a.json",
+      "size": 191,
       "chunks": [],
       "chunkNames": [],
       "emitted": true
