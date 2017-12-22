@@ -2,9 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
 
-const devConfigFactory = require('@dojo/cli-build-app/dev.config').default;
-const distConfigFactory = require('@dojo/cli-build-app/dist.config').default;
-const testConfigFactory = require('@dojo/cli-build-app/test.config').default;
+import devConfigFactory from './dev.config';
+import distConfigFactory from './dist.config';
+import testConfigFactory from './test.config';
 
 export interface EnvOptions {
 	mode?: 'dev' | 'dist' | 'test';

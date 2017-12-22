@@ -13,11 +13,7 @@ let rc: any = { 'build-app': { bundles: {} } };
 describe('ejected config', () => {
 	beforeEach(() => {
 		mockModule = new MockModule('../../src/ejected.config', require);
-		mockModule.dependencies([
-			'@dojo/cli-build-app/dev.config',
-			'@dojo/cli-build-app/dist.config',
-			'@dojo/cli-build-app/test.config'
-		]);
+		mockModule.dependencies(['./dev.config', './dist.config', './test.config']);
 
 		stub(fs, 'existsSync').returns(true);
 		const readFileSync = fs.readFileSync;
@@ -29,7 +25,7 @@ describe('ejected config', () => {
 		});
 
 		const configs = ['dev', 'dist', 'test'].map(name => {
-			const config = mockModule.getMock(`@dojo/cli-build-app/${name}.config`);
+			const config = mockModule.getMock(`./${name}.config`);
 			config.default = stub();
 			return config.default;
 		});

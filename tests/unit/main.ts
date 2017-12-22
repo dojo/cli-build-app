@@ -393,7 +393,7 @@ describe('command', () => {
 			assert.deepEqual(ejectOptions, {
 				copy: {
 					path: join(basePath, '_build/src'),
-					files: ['./ejected.config.js']
+					files: ['./base.config.js', './dev.config.js', './dist.config.js', './ejected.config.js', './test.config.js']
 				},
 				hints: [
 					`to build run ${chalk.underline(

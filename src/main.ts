@@ -208,7 +208,7 @@ const command: Command = {
 		return {
 			copy: {
 				path: __dirname,
-				files: ['./ejected.config.js']
+				files: ['./base.config.js', './dev.config.js', './dist.config.js', './ejected.config.js', './test.config.js']
 			},
 			hints: [
 				`to build run ${chalk.underline(
