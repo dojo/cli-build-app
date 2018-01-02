@@ -1,4 +1,6 @@
 import { Command, Helper, OptionsHelper } from '@dojo/interfaces/cli';
+import * as logUpdate from 'log-update';
+import * as ora from 'ora';
 import * as webpack from 'webpack';
 
 import devConfigFactory from './dev.config';
@@ -56,11 +58,21 @@ const command: Command = {
 		fixMultipleWatchTrigger(compiler);
 
 		if (args.watch) {
+			const spinner = ora('building').start();
+			compiler.plugin('invalid', () => {
+				logUpdate('');
+				spinner.start();
+			});
+			compiler.plugin('done', () => {
+				spinner.stop();
+			});
 			return watch(compiler, config);
 		}
 
+		const spinner = ora('building').start();
 		return new Promise((resolve, reject) => {
 			compiler.run((err, stats) => {
+				spinner.stop();
 				if (err) {
 					reject(err);
 				}

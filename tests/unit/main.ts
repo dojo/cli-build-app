@@ -6,12 +6,14 @@ import MockModule from '../support/MockModule';
 
 let mockModule: MockModule;
 let mockLogger: any;
+let mockSpinner: any;
 let mockDevConfig: any;
 let mockDistConfig: any;
 let mockTestConfig: any;
 let isError: boolean;
 let stats: any;
 let consoleStub = sinon.stub(console, 'log');
+let pluginStub: SinonStub;
 let runStub: SinonStub;
 let watchStub: SinonStub;
 
@@ -39,17 +41,28 @@ describe('command', () => {
 			'./dev.config',
 			'./dist.config',
 			'./test.config',
+			'log-update',
+			'ora',
 			'webpack',
 			'webpack-mild-compile',
 			'./logger'
 		]);
+		pluginStub = sinon.stub().callsFake((name: string, callback: Function) => {
+			callback();
+		});
 		runStub = sinon.stub().callsFake((callback: Function) => {
 			callback(isError, stats);
 		});
 		watchStub = sinon.stub().callsFake((options: any, callback: Function) => {
 			callback(isError, stats);
 		});
+		mockSpinner = {
+			start: sinon.stub().returnsThis(),
+			stop: sinon.stub().returnsThis()
+		};
+		mockModule.getMock('ora').ctor.returns(mockSpinner);
 		mockModule.getMock('webpack').ctor.returns({
+			plugin: pluginStub,
 			run: runStub,
 			watch: watchStub
 		});
@@ -153,6 +166,24 @@ describe('command', () => {
 		return main.run(getMockConfiguration(), {}).then(() => {
 			console.log('called');
 			assert.isTrue(consoleStub.notCalled);
+		});
+	});
+
+	it('shows a building spinner on start', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), {}).then(() => {
+			assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
+			assert.isTrue(mockSpinner.start.called);
+			assert.isTrue(mockSpinner.stop.called);
+		});
+	});
+
+	it('shows a building spinner in watch mode', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), { watch: true }).then(() => {
+			assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
+			assert.isTrue(mockSpinner.start.called);
+			assert.isTrue(mockSpinner.stop.called);
 		});
 	});
 });
