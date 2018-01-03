@@ -8,7 +8,7 @@
  */
 dojoWebpackJsonptest_app(["widgets"],{
 
-/***/ "./node_modules/umd-compat-loader/index.js?{}!./node_modules/ts-loader/index.js?{\"onlyCompileBundledFiles\":true,\"instance\":\"dojo\"}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!./src/Bar.ts":
+/***/ "./node_modules/@dojo/webpack-contrib/static-build-loader/index.js?{\"features\":{\"foo\":true,\"bar\":false}}!./node_modules/umd-compat-loader/index.js?{}!./node_modules/ts-loader/index.js?{\"onlyCompileBundledFiles\":true,\"instance\":\"dojo\"}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!./src/Bar.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22,7 +22,7 @@ exports.default = default_1;
 
 /***/ }),
 
-/***/ "./node_modules/umd-compat-loader/index.js?{}!./node_modules/ts-loader/index.js?{\"onlyCompileBundledFiles\":true,\"instance\":\"dojo\"}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!./src/Baz.ts":
+/***/ "./node_modules/@dojo/webpack-contrib/static-build-loader/index.js?{\"features\":{\"foo\":true,\"bar\":false}}!./node_modules/umd-compat-loader/index.js?{}!./node_modules/ts-loader/index.js?{\"onlyCompileBundledFiles\":true,\"instance\":\"dojo\"}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=ts&instanceName=0_dojo!./src/Baz.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

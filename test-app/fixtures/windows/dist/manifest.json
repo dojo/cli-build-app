@@ -1,12 +1,12 @@
 {
   "main.css": "main.c284488527122e8726d3743fc01ac38d.bundle.css",
   "main.css.map": "main.c284488527122e8726d3743fc01ac38d.bundle.css.map",
-  "main.js": "main.ad55bbfe98c515b291bb.bundle.js",
-  "main.js.map": "main.ad55bbfe98c515b291bb.bundle.js.map",
+  "main.js": "main.1d7e829ff81a52e0736b.bundle.js",
+  "main.js.map": "main.1d7e829ff81a52e0736b.bundle.js.map",
   "runtime.js": "runtime.d41d8cd98f00b204e980.bundle.js",
   "runtime.js.map": "runtime.d41d8cd98f00b204e980.bundle.js.map",
-  "src/Foo.js": "src/Foo.68985fddd96a4c56e705.bundle.js",
-  "src/Foo.js.map": "src/Foo.68985fddd96a4c56e705.bundle.js.map",
-  "widgets.js": "widgets.af26b7686d414adf2dea.bundle.js",
-  "widgets.js.map": "widgets.af26b7686d414adf2dea.bundle.js.map"
+  "src/Foo.js": "src/Foo.4ceb849f8bf6ae9d7e37.bundle.js",
+  "src/Foo.js.map": "src/Foo.4ceb849f8bf6ae9d7e37.bundle.js.map",
+  "widgets.js": "widgets.030b4fa5d2b5ad5ff1f7.bundle.js",
+  "widgets.js.map": "widgets.030b4fa5d2b5ad5ff1f7.bundle.js.map"
 }
