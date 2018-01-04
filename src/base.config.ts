@@ -2,6 +2,7 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
+import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import { WebAppManifest, WebpackConfiguration } from './interfaces';
@@ -17,6 +18,7 @@ const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
 const allPaths = [srcPath, testPath];
 const mainEntry = 'main';
+const mainEntryPath = path.join(srcPath, 'main.ts');
 const packageJsonPath = path.join(basePath, 'package.json');
 const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
 const packageName = packageJson.name || '';
@@ -85,7 +87,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const config: webpack.Configuration = {
 		entry: {
-			[mainEntry]: [path.join(srcPath, 'main.css'), path.join(srcPath, 'main.ts')]
+			[mainEntry]: [path.join(srcPath, 'main.css'), mainEntryPath]
 		},
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
@@ -115,7 +117,14 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new webpack.NamedChunksPlugin(),
 			new ManifestPlugin(),
 			new webpack.NamedModulesPlugin(),
-			manifest && new WebpackPwaManifest(manifest)
+			manifest && new WebpackPwaManifest(manifest),
+			args.locale &&
+				new I18nPlugin({
+					defaultLocale: args.locale,
+					supportedLocales: args.supportedLocales,
+					cldrPaths: args.cldrPaths,
+					target: mainEntryPath
+				})
 		]),
 		module: {
 			rules: removeEmpty([
