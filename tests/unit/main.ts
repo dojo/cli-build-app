@@ -389,7 +389,11 @@ describe('command', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const packageJson = require(join(basePath, 'package.json'));
 			const ejectOptions = main.eject(getMockConfiguration());
+			const rcPattern = /build-options\.json$/;
 
+			assert.lengthOf(ejectOptions.copy.files.filter((file: string) => rcPattern.test(file)), 1);
+
+			ejectOptions.copy.files = ejectOptions.copy.files.filter((file: string) => !rcPattern.test(file));
 			assert.deepEqual(ejectOptions, {
 				copy: {
 					path: join(basePath, '_build/src'),

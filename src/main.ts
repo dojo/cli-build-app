@@ -11,6 +11,7 @@ import devConfigFactory from './dev.config';
 import testConfigFactory from './test.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
+import { moveBuildOptions } from './util';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
@@ -204,11 +205,18 @@ const command: Command = {
 
 		return build(config);
 	},
-	eject(): EjectOutput {
+	eject(helper: Helper): EjectOutput {
 		return {
 			copy: {
 				path: __dirname,
-				files: ['./base.config.js', './dev.config.js', './dist.config.js', './ejected.config.js', './test.config.js']
+				files: [
+					moveBuildOptions(`${this.group}-${this.name}`),
+					'./base.config.js',
+					'./dev.config.js',
+					'./dist.config.js',
+					'./ejected.config.js',
+					'./test.config.js'
+				]
 			},
 			hints: [
 				`to build run ${chalk.underline(
