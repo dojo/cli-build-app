@@ -28,18 +28,21 @@ export default function logger(stats: any, config: any) {
 
 	let errors = '';
 	let warnings = '';
-
-	if (stats.errors.length) {
-		errors = `
-${chalk.yellow('errors:')}
-${chalk.red(stats.errors.map((error: string) => stripAnsi(error)))}
-`;
-	}
+	let signOff = chalk.green('The build completed successfully.');
 
 	if (stats.warnings.length) {
+		signOff = chalk.yellow('The build completed with warnings.');
 		warnings = `
 ${chalk.yellow('warnings:')}
 ${chalk.gray(stats.warnings.map((warning: string) => stripAnsi(warning)))}
+`;
+	}
+
+	if (stats.errors.length) {
+		signOff = chalk.red('The build completed with errors.');
+		errors = `
+${chalk.yellow('errors:')}
+${chalk.red(stats.errors.map((error: string) => stripAnsi(error)))}
 `;
 	}
 
@@ -55,5 +58,7 @@ ${columns(chunks)}
 ${chalk.yellow('assets:')}
 ${columns(assets)}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${config.output.path}`))}`)}
+
+${signOff}
 	`);
 }

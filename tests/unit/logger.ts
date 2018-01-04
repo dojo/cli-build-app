@@ -68,6 +68,8 @@ ${columns([
 			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
 		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
+
+${chalk.green('The build completed successfully.')}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
@@ -130,6 +132,8 @@ ${columns([
 			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
 		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
+
+${chalk.red('The build completed with errors.')}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
