@@ -4,6 +4,18 @@ export interface Output extends webpack.Output {
 	path: string;
 }
 
+export interface ServiceWorkerOptions {
+	[key: string]: any;
+	request?: ServiceWorkerRoute[];
+}
+
+export interface ServiceWorkerRoute {
+	method: string;
+	origin?: string | RegExp;
+	path: string;
+	strategy: 'cacheFirst' | 'cacheOnly' | 'fastest' | 'networkFirst' | 'networkOnly';
+}
+
 export interface Module extends webpack.NewModule {
 	rules: webpack.NewUseRule[];
 }
