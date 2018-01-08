@@ -1,5 +1,6 @@
 const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
+import * as fs from 'fs';
 import * as path from 'path';
 import * as logSymbols from 'log-symbols';
 import chalk from 'chalk';
@@ -13,6 +14,7 @@ let mockModule: MockModule;
 
 function assertOutput(isServing = false) {
 	const logger = mockModule.getModuleUnderTest().default;
+	const runningMessage = isServing ? 'running...' : undefined;
 	logger(
 		{
 			hash: 'hash',
@@ -39,12 +41,17 @@ function assertOutput(isServing = false) {
 				path: path.join(__dirname, '..', 'fixtures')
 			}
 		},
-		isServing
+		runningMessage
 	);
 
 	let assetOne = `assetOne.js ${chalk.yellow('(1.00kb)')}`;
 	if (!isServing) {
 		assetOne += ` / ${chalk.blue('(0.04kb gz)')}`;
+	}
+
+	let signOff = chalk.green('The build completed successfully.');
+	if (runningMessage) {
+		signOff += `\n\n${runningMessage}`;
 	}
 
 	const expectedLog = `
@@ -60,7 +67,7 @@ ${chalk.yellow('assets:')}
 ${columns([assetOne, assetOne])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
-${chalk.green('The build completed successfully.')}
+${signOff}
 	`;
 	const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 	assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
@@ -76,6 +83,11 @@ describe('logger', () => {
 
 	afterEach(() => {
 		mockModule.destroy();
+
+		const existsSync = fs.existsSync as any;
+		if (typeof existsSync.restore === 'function') {
+			existsSync.restore();
+		}
 	});
 
 	it('logging output with no errors', () => {
@@ -83,6 +95,7 @@ describe('logger', () => {
 	});
 
 	it('logging output while serving', () => {
+		sinon.stub(fs, 'existsSync').returns(false);
 		assertOutput(true);
 	});
 

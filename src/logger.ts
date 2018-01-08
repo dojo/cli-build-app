@@ -12,17 +12,18 @@ const columns = require('cli-columns');
 const stripAnsi = require('strip-ansi');
 const version = jsonFile.readFileSync(path.join(pkgDir.sync(), 'package.json')).version;
 
-export default function logger(stats: any, config: any, isServing: boolean = false) {
+export default function logger(stats: any, config: any, runningMessage: string = '') {
 	const assets = stats.assets
 		.map((asset: any) => {
 			const size = (asset.size / 1000).toFixed(2);
 			const assetInfo = `${asset.name} ${chalk.yellow(`(${size}kb)`)}`;
+			const contentFilePath = path.join(config.output.path, asset.name);
 
-			if (isServing) {
+			if (!fs.existsSync(contentFilePath)) {
 				return assetInfo;
 			}
 
-			const content = fs.readFileSync(config.output.path + '/' + asset.name, 'utf-8');
+			const content = fs.readFileSync(contentFilePath, 'utf-8');
 			const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
 			return `${assetInfo} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
 		})
@@ -50,6 +51,10 @@ ${chalk.gray(stats.warnings.map((warning: string) => stripAnsi(warning)))}
 ${chalk.yellow('errors:')}
 ${chalk.red(stats.errors.map((error: string) => stripAnsi(error)))}
 `;
+	}
+
+	if (runningMessage) {
+		signOff += `\n\n${runningMessage}`;
 	}
 
 	logUpdate(`

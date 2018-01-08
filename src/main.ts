@@ -1,4 +1,5 @@
 import { Command, Helper, OptionsHelper } from '@dojo/interfaces/cli';
+import * as express from 'express';
 import * as logUpdate from 'log-update';
 import * as ora from 'ora';
 import * as webpack from 'webpack';
@@ -11,11 +12,23 @@ import logger from './logger';
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
 const webpackMiddleware = require('webpack-dev-middleware');
-const express = require('express');
 
 function createCompiler(config: webpack.Configuration) {
 	const compiler = webpack(config);
 	fixMultipleWatchTrigger(compiler);
+	return compiler;
+}
+
+function createWatchCompiler(config: webpack.Configuration) {
+	const compiler = createCompiler(config);
+	const spinner = ora('building').start();
+	compiler.plugin('invalid', () => {
+		logUpdate('');
+		spinner.start();
+	});
+	compiler.plugin('done', () => {
+		spinner.stop();
+	});
 	return compiler;
 }
 
@@ -36,7 +49,25 @@ function build(config: webpack.Configuration) {
 	});
 }
 
-function serve(config: webpack.Configuration, args: any): Promise<void> {
+function fileWatch(config: webpack.Configuration, args: any): Promise<void> {
+	const compiler = createWatchCompiler(config);
+
+	return new Promise<void>((resolve, reject) => {
+		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
+		compiler.watch(watchOptions, (err, stats) => {
+			if (err) {
+				reject(err);
+			}
+			if (stats) {
+				const runningMessage = args.serve ? `Listening on port ${args.port}` : 'watching...';
+				logger(stats.toJson(), config, runningMessage);
+			}
+			resolve();
+		});
+	});
+}
+
+function memoryWatch(config: webpack.Configuration, args: any, app: express.Application): Promise<void> {
 	const entry = config.entry as any;
 	const plugins = config.plugins as webpack.Plugin[];
 	const timeout = 20 * 1000;
@@ -47,14 +78,10 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	});
 
 	const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
-	const app = express();
-	const compiler = createCompiler(config);
+	const compiler = createWatchCompiler(config);
 
-	compiler.plugin('invalid', filename => {
-		logUpdate(`Recompiling; updated file: ${filename}`);
-	});
 	compiler.plugin('done', stats => {
-		logger(stats.toJson(), config, true);
+		logger(stats.toJson(), config, `Listening on port ${args.port}...`);
 	});
 
 	app.use(
@@ -69,40 +96,36 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 	);
 
-	return new Promise((resolve, reject) => {
-		logUpdate(`Listening on port ${args.port}`);
-		app.listen(args.port, (error: Error) => {
-			if (error) {
-				reject(error);
-			} else {
-				resolve();
-			}
-		});
-	});
+	return Promise.resolve();
 }
 
-function watch(config: webpack.Configuration): Promise<void> {
-	const compiler = createCompiler(config);
-	const spinner = ora('building').start();
-	compiler.plugin('invalid', () => {
-		logUpdate('');
-		spinner.start();
-	});
-	compiler.plugin('done', () => {
-		spinner.stop();
-	});
-	return new Promise((resolve, reject) => {
-		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
-		compiler.watch(watchOptions, (err, stats) => {
-			if (err) {
-				reject(err);
+function serve(config: webpack.Configuration, args: any): Promise<void> {
+	const app = express();
+
+	if (args.watch !== 'memory') {
+		const outputDir = (config.output && config.output.path) || process.cwd();
+		app.use(express.static(outputDir));
+	}
+
+	return Promise.resolve()
+		.then(() => {
+			if (args.watch === 'memory') {
+				return memoryWatch(config, args, app);
+			} else if (args.watch) {
+				return fileWatch(config, args);
 			}
-			if (stats) {
-				logger(stats.toJson(), config);
-			}
-			resolve();
+		})
+		.then(() => {
+			return new Promise<void>((resolve, reject) => {
+				app.listen(args.port, (error: Error) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve();
+					}
+				});
+			});
 		});
-	});
 }
 
 const command: Command = {
@@ -118,13 +141,12 @@ const command: Command = {
 		});
 
 		options('watch', {
-			describe: 'watch for file changes (all modes)',
-			alias: 'w',
-			type: 'boolean'
+			describe: 'watch for file changes: "memory" (dev mode only) or "file" (all modes; default)',
+			alias: 'w'
 		});
 
 		options('serve', {
-			describe: 'start a webserver and reload after source changes (dev mode only)',
+			describe: 'start a webserver',
 			alias: 's',
 			type: 'boolean'
 		});
@@ -140,7 +162,7 @@ const command: Command = {
 		console.log = () => {};
 		const rc = helper.configuration.get() || {};
 		let config: webpack.Configuration;
-		if (args.mode === 'dev' || args.serve) {
+		if (args.mode === 'dev') {
 			config = devConfigFactory(rc);
 		} else if (args.mode === 'test') {
 			config = testConfigFactory(rc);
@@ -153,7 +175,10 @@ const command: Command = {
 		}
 
 		if (args.watch) {
-			return watch(config);
+			if (args.watch === 'memory') {
+				console.warn('Memory watch requires the dev server. Using file watch instead...');
+			}
+			return fileWatch(config, args);
 		}
 
 		return build(config);

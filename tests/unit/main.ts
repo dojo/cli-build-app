@@ -58,8 +58,8 @@ describe('command', () => {
 			callback(isError, stats);
 		});
 		mockSpinner = {
-			start: sinon.stub().returnsThis(),
-			stop: sinon.stub().returnsThis()
+			start: stub().returnsThis(),
+			stop: stub().returnsThis()
 		};
 		mockModule.getMock('ora').ctor.returns(mockSpinner);
 		mockModule.getMock('webpack').ctor.returns({
@@ -119,14 +119,6 @@ describe('command', () => {
 		});
 	});
 
-	it('can automatically rebuild after file changes', () => {
-		const main = mockModule.getModuleUnderTest().default;
-		return main.run(getMockConfiguration(), { watch: true }).then(() => {
-			assert.isFalse(runStub.called);
-			assert.isTrue(watchStub.calledOnce);
-		});
-	});
-
 	it('logger not called if stats are not returned', () => {
 		stats = null;
 		const main = mockModule.getModuleUnderTest().default;
@@ -140,19 +132,6 @@ describe('command', () => {
 		isError = true;
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'test' }).then(
-			() => {
-				throw new Error();
-			},
-			(e: Error) => {
-				assert.isTrue(e);
-			}
-		);
-	});
-
-	it('rejects if an error occurs in watch mode', () => {
-		isError = true;
-		const main = mockModule.getModuleUnderTest().default;
-		return main.run(getMockConfiguration(), { watch: true }).then(
 			() => {
 				throw new Error();
 			},
@@ -179,31 +158,79 @@ describe('command', () => {
 		});
 	});
 
-	it('shows a building spinner in watch mode', () => {
-		const main = mockModule.getModuleUnderTest().default;
-		return main.run(getMockConfiguration(), { watch: true }).then(() => {
-			assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
-			assert.isTrue(mockSpinner.start.called);
-			assert.isTrue(mockSpinner.stop.called);
+	describe('watch option', () => {
+		it('automatically rebuilds after file changes', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { watch: true }).then(() => {
+				assert.isFalse(runStub.called);
+				assert.isTrue(watchStub.calledOnce);
+			});
+		});
+
+		it('rejects if an error occurs', () => {
+			isError = true;
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { watch: true }).then(
+				() => {
+					throw new Error();
+				},
+				(e: Error) => {
+					assert.isTrue(e);
+				}
+			);
+		});
+
+		it('shows a building spinner', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { watch: true }).then(() => {
+				assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
+				assert.isTrue(mockSpinner.start.called);
+				assert.isTrue(mockSpinner.stop.called);
+			});
+		});
+
+		it('provides custom logging', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const filename = '/changed/file.ts';
+
+			pluginStub.callsFake((name: string, callback: Function) => {
+				const value = name === 'invalid' ? filename : stats;
+				callback(value);
+			});
+
+			return main.run(getMockConfiguration(), { watch: true }).then(() => {
+				assert.isTrue(mockLogger.calledWith('stats', 'dist config', 'watching...'));
+			});
+		});
+
+		it('warns when attempting memory watch without the dev server', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			stub(console, 'warn');
+			return main.run(getMockConfiguration(), { watch: 'memory' }).then(() => {
+				assert.isTrue(
+					(console.warn as any).calledWith('Memory watch requires the dev server. Using file watch instead...')
+				);
+			});
 		});
 	});
 
 	describe('serve option', () => {
 		const entry = { main: [] };
 		const watchOptions = {};
-		const output = { publicPath: '/' };
 		let compiler: any;
-		let plugins: any[];
-		let webpack: any;
-		let pluginStub: SinonStub;
-		let useStub: SinonStub;
 		let listenStub: SinonStub;
+		let output: any;
+		let pluginStub: SinonStub;
+		let plugins: any[];
+		let useStub: SinonStub;
+		let webpack: any;
 
 		beforeEach(() => {
 			webpack = mockModule.getMock('webpack').ctor;
 			entry.main.length = 0;
+			output = { publicPath: '/' };
 			plugins = [];
-			mockDevConfig.returns({ entry, output, plugins, watchOptions });
+			mockDistConfig.returns({ entry, output, plugins, watchOptions });
 
 			webpack.HotModuleReplacementPlugin = stub();
 			webpack.NoEmitOnErrorsPlugin = stub();
@@ -214,10 +241,12 @@ describe('command', () => {
 				callback(false);
 			});
 
-			compiler = { plugin: pluginStub };
+			compiler = { plugin: pluginStub, watch: watchStub };
 			mockModule.getMock('webpack').ctor.returns(compiler);
 
-			mockModule.getMock('express').ctor.returns({
+			const expressMock = mockModule.getMock('express').ctor;
+			expressMock.static = stub();
+			expressMock.returns({
 				listen: listenStub,
 				use: useStub
 			});
@@ -231,11 +260,37 @@ describe('command', () => {
 			});
 		});
 
-		it('registers middleware', () => {
+		it('serves from the output directory', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const express = mockModule.getMock('express').ctor;
+			const outputDir = '/output/dev';
+			output.path = outputDir;
+			return main.run(getMockConfiguration(), { serve: true, watch: true }).then(() => {
+				assert.isTrue(express.static.calledWith(outputDir));
+				assert.isTrue(watchStub.called);
+			});
+		});
+
+		it('fails on error', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			listenStub.callsFake((port: string, callback: Function) => {
+				callback(true);
+			});
+			return main.run(getMockConfiguration(), { serve: true }).then(
+				() => {
+					throw new Error();
+				},
+				(e: Error) => {
+					assert.isTrue(e);
+				}
+			);
+		});
+
+		it('registers middleware with --watch=memory', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const webpackMiddleware = mockModule.getMock('webpack-dev-middleware').ctor;
 			const hotMiddleware = mockModule.getMock('webpack-hot-middleware').ctor;
-			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+			return main.run(getMockConfiguration(), { serve: true, watch: 'memory' }).then(() => {
 				assert.strictEqual(useStub.callCount, 1);
 				assert.isTrue(
 					webpackMiddleware.calledWith(compiler, {
@@ -253,9 +308,9 @@ describe('command', () => {
 			});
 		});
 
-		it('enables hot module replacement', () => {
+		it('enables hot module replacement with --watch=memory', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+			return main.run(getMockConfiguration(), { serve: true, watch: 'memory' }).then(() => {
 				assert.lengthOf(plugins, 2);
 				assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
 				assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
@@ -263,36 +318,18 @@ describe('command', () => {
 			});
 		});
 
-		it('provides custom logging', () => {
+		it('provides custom logging with --watch=memory', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			const logUpdate = mockModule.getMock('log-update').ctor;
-			const filename = '/changed/file.ts';
 
 			pluginStub.callsFake((name: string, callback: Function) => {
-				const value = name === 'invalid' ? filename : stats;
-				callback(value);
+				callback(stats);
 			});
 
-			return main.run(getMockConfiguration(), { serve: true, port: 3000 }).then(() => {
-				assert.isTrue(logUpdate.calledWith('Listening on port 3000'));
-				assert.isTrue(logUpdate.calledWith(`Recompiling; updated file: ${filename}`));
-				assert.isTrue(mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, true));
+			return main.run(getMockConfiguration(), { serve: true, port: 3000, watch: 'memory' }).then(() => {
+				assert.isTrue(
+					mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, 'Listening on port 3000...')
+				);
 			});
-		});
-
-		it('fails on error', () => {
-			const main = mockModule.getModuleUnderTest().default;
-			listenStub.callsFake((port: string, callback: Function) => {
-				callback(true);
-			});
-			return main.run(getMockConfiguration(), { serve: true }).then(
-				() => {
-					throw new Error();
-				},
-				(e: Error) => {
-					assert.isTrue(e);
-				}
-			);
 		});
 	});
 });
