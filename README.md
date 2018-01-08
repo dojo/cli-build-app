@@ -58,6 +58,32 @@ The `test` mode creates bundles that can be used to run the unit and functional 
 
 Eject is not currently supported by `cli-build-app`.
 
+### Configuration
+
+#### Service Workers
+
+Service Workers can be used in `dev` and `dist` modes by adding a `pwa.serviceWorker` object in the `.dojorc`. The default implementation relies on [`sw-toolbox`](https://googlechromelabs.github.io/sw-toolbox/), requiring only a set of routes (`pwa.serviceWorker.request`) that can be registered according to the various [strategies](https://googlechromelabs.github.io/sw-toolbox/api.html#handlers). For example, with the following configuration the `/foo` route will be requested from both the cache and the network in parallel:
+
+```
+{
+	"build-app": {
+		"pwa": {
+			"serviceWorker": {
+				"request": [
+					{
+						"method": "get",
+						"path": "/foo",
+						"strategy": "fastest"
+					}
+				]
+			}
+		}
+	}
+}
+```
+
+If the provided handler does not suffice for your application, then a custom handler can be specified with the `pwa.serviceWorker.ServiceWorker.entry` option. The [`offline-plugin`](https://github.com/NekR/offline-plugin) is used to provide service worker functionality, and all of its options can be included in the `.dojorc`. However, AppCache is disabled and minification is enforced in `dist` mode.
+
 ## How do I contribute?
 
 We appreciate your interest! Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the Contributing Guidelines. This repository uses [prettier](https://prettier.io/) for code style and is configured with a pre-commit hook to automatically fix formatting issues on staged `.ts` files before performing the commit.

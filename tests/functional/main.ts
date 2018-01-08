@@ -24,6 +24,7 @@ function assertOutput(mode: string) {
 	const fixtureFileIdentifiers = Object.keys(fixtureManifest);
 	const outputFileIdentifiers = Object.keys(outputManifest);
 	assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
+	assertServiceWorkerOutput(mode);
 	fixtureFileIdentifiers.forEach(id => {
 		if (id !== 'runtime.js.map') {
 			const fixtureFilePath = path.join(appRootDir, 'fixtures', platform, mode, fixtureManifest[id]);
@@ -34,6 +35,16 @@ function assertOutput(mode: string) {
 			assert.strictEqual(normalise(outputContents), normalise(fixtureContents), id);
 		}
 	});
+}
+
+function assertServiceWorkerOutput(mode: string) {
+	const outputFilePath = path.join(appRootDir, 'output', mode, 'sw.js');
+
+	if (mode === 'test') {
+		assert.isFalse(fs.existsSync(outputFilePath), 'sw.js should not be output');
+	} else {
+		assert.isTrue(fs.existsSync(outputFilePath), 'sw.js should be output');
+	}
 }
 
 function clean() {

@@ -5,11 +5,11 @@ import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePl
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
-import { WebAppManifest, WebpackConfiguration } from './interfaces';
+import { ServiceWorkerOptions, WebAppManifest, WebpackConfiguration } from './interfaces';
 import * as loaderUtils from 'loader-utils';
 
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
+const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const slash = require('slash');
 
@@ -85,9 +85,14 @@ All rights reserved
 
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
+	const serviceWorker: ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const config: webpack.Configuration = {
 		entry: {
-			[mainEntry]: [path.join(srcPath, 'main.css'), mainEntryPath]
+			[mainEntry]: removeEmpty([
+				serviceWorker && path.join(__dirname, 'service-worker-entry.js'),
+				path.join(srcPath, 'main.css'),
+				mainEntryPath
+			])
 		},
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
@@ -118,6 +123,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new ManifestPlugin(),
 			new webpack.NamedModulesPlugin(),
 			manifest && new WebpackPwaManifest(manifest),
+			serviceWorker && new webpack.DefinePlugin({ SW_ROUTES: JSON.stringify(serviceWorker.request || []) }),
 			args.locale &&
 				new I18nPlugin({
 					defaultLocale: args.locale,

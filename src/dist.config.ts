@@ -7,6 +7,7 @@ import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
+const OfflinePlugin = require('offline-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 function webpackConfig(args: any): webpack.Configuration {
@@ -41,6 +42,21 @@ function webpackConfig(args: any): webpack.Configuration {
 		}
 		return plugin;
 	});
+
+	const serviceWorker = args.pwa && args.pwa.serviceWorker;
+	if (serviceWorker) {
+		config.plugins.push(
+			new OfflinePlugin({
+				...serviceWorker,
+				ServiceWorker: {
+					entry: path.join(__dirname, 'service-worker.js'),
+					...serviceWorker.ServiceWorker,
+					minify: true
+				},
+				AppCache: false
+			})
+		);
+	}
 
 	config.output = {
 		...output,

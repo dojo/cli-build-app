@@ -16,6 +16,13 @@
 			"manifest": {
 				"name": "Test App",
 				"description": "A test application for @dojo/cli-build-app"
+			},
+			"serviceWorker": {
+				"request": [{
+					"method": "get",
+					"path": "/",
+					"strategy": "fastest"
+				}]
 			}
 		}
 	}
