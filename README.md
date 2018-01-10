@@ -54,6 +54,23 @@ The `dev` mode creates an application build that has been optimized for debuggin
 
 The `test` mode creates bundles that can be used to run the unit and functional tests of the application.
 
+### Serving the Application
+
+A web server can be started with the `--serve` flag. By default, the application is served on port 9999, but this can be changed with the `--port` (`-p`) flag:
+
+```bash
+dojo build -s -p 3000 # serve the app on port 3000
+```
+
+### Watching
+
+Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
+
+```bash
+dojo build -w # start a file-based watch
+dojo build -s -w=memory # build to an in-memory file system with HMR
+```
+
 ### Eject
 
 Eject is not currently supported by `cli-build-app`.
