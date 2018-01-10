@@ -1,13 +1,17 @@
-import { Command, Helper, OptionsHelper } from '@dojo/interfaces/cli';
+import { Command, EjectOutput, Helper, OptionsHelper } from '@dojo/interfaces/cli';
 import * as express from 'express';
 import * as logUpdate from 'log-update';
 import * as ora from 'ora';
+import * as path from 'path';
 import * as webpack from 'webpack';
+import chalk from 'chalk';
 
+const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
 import testConfigFactory from './test.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
+import { moveBuildOptions } from './util';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
@@ -47,6 +51,21 @@ function build(config: webpack.Configuration) {
 			resolve();
 		});
 	});
+}
+
+function buildNpmDependencies(): any {
+	try {
+		const packagePath = pkgDir.sync(__dirname);
+		const packageJsonFilePath = path.join(packagePath, 'package.json');
+		const packageJson = require(packageJsonFilePath);
+
+		return {
+			[packageJson.name]: packageJson.version,
+			...packageJson.dependencies
+		};
+	} catch (e) {
+		throw new Error(`Failed reading dependencies from package.json - ${e.message}`);
+	}
 }
 
 function fileWatch(config: webpack.Configuration, args: any): Promise<void> {
@@ -185,6 +204,29 @@ const command: Command = {
 		}
 
 		return build(config);
+	},
+	eject(helper: Helper): EjectOutput {
+		return {
+			copy: {
+				path: __dirname,
+				files: [
+					moveBuildOptions(`${this.group}-${this.name}`),
+					'./base.config.js',
+					'./dev.config.js',
+					'./dist.config.js',
+					'./ejected.config.js',
+					'./test.config.js'
+				]
+			},
+			hints: [
+				`to build run ${chalk.underline(
+					'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|test}'
+				)}`
+			],
+			npm: {
+				devDependencies: { ...buildNpmDependencies() }
+			}
+		};
 	}
 };
 export default command;

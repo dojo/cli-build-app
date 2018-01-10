@@ -1,6 +1,8 @@
 const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
+import { join } from 'path';
 import { SinonStub, stub } from 'sinon';
+import chalk from 'chalk';
 import MockModule from '../support/MockModule';
 
 let mockModule: MockModule;
@@ -372,6 +374,56 @@ describe('command', () => {
 						mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, 'Listening on port 3000...')
 					);
 				});
+		});
+	});
+
+	describe('eject', () => {
+		const basePath = process.cwd();
+
+		beforeEach(() => {
+			mockModule.dependencies(['pkg-dir']);
+			mockModule.getMock('pkg-dir').ctor.sync = stub().returns(basePath);
+		});
+
+		it('outputs the ejected config and updates package dev dependencies', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const packageJson = require(join(basePath, 'package.json'));
+			const ejectOptions = main.eject(getMockConfiguration());
+			const rcPattern = /build-options\.json$/;
+
+			assert.lengthOf(ejectOptions.copy.files.filter((file: string) => rcPattern.test(file)), 1);
+
+			ejectOptions.copy.files = ejectOptions.copy.files.filter((file: string) => !rcPattern.test(file));
+			assert.deepEqual(ejectOptions, {
+				copy: {
+					path: join(basePath, '_build/src'),
+					files: ['./base.config.js', './dev.config.js', './dist.config.js', './ejected.config.js', './test.config.js']
+				},
+				hints: [
+					`to build run ${chalk.underline(
+						'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|test}'
+					)}`
+				],
+				npm: {
+					devDependencies: {
+						[packageJson.name]: packageJson.version,
+						...packageJson.dependencies
+					}
+				}
+			});
+		});
+
+		it('throws an error when ejecting when deps cannot be read', () => {
+			const message = 'Keyboard not found. Press F1 to resume.';
+			mockModule.getMock('pkg-dir').ctor.sync.throws(() => new Error(message));
+			assert.throws(
+				() => {
+					const main = mockModule.getModuleUnderTest().default;
+					main.eject(getMockConfiguration());
+				},
+				Error,
+				`Failed reading dependencies from package.json - ${message}`
+			);
 		});
 	});
 });

@@ -73,7 +73,20 @@ dojo build -s -w=memory # build to an in-memory file system with HMR
 
 ### Eject
 
-Eject is not currently supported by `cli-build-app`.
+Ejecting `@dojo/cli-build-app` will produce the following files under the `config/build-app` directory:
+
+- `build-options.json`: the build-specific config options removed from the `.dojorc`
+- `ejected.config.js`: the root webpack config that passes the build options to the appropriate mode-specific config based on the `--env.mode` flag's value.
+- `base.config.js`: a common configuration used by the mode-specific configs.
+- `dev.config.js`: the configuration used during development.
+- `dist.config.js`: the production configuration.
+- `test.config.js`: the configuration used when running tests.
+
+As already noted, the dojorc's `build-app` options are moved to `config/build-app/build-options.json` after ejecting. Further, the modes are specified using webpack's `env` flag (e.g., `--env.mode=dev`), defaulting to `dist`. You can run a build using webpack with:
+
+```bash
+node_modules/.bin/webpack --config=config/build-app/ejected.config.js --env.mode={dev|dist|test}
+```
 
 ## How do I contribute?
 
