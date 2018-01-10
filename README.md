@@ -64,7 +64,7 @@ dojo build -s -p 3000 # serve the app on port 3000
 
 ### Watching
 
-Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
+Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
 
 ```bash
 dojo build -w # start a file-based watch

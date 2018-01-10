@@ -206,11 +206,17 @@ describe('command', () => {
 		it('warns when attempting memory watch without the dev server', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			stub(console, 'warn');
-			return main.run(getMockConfiguration(), { watch: 'memory' }).then(() => {
-				assert.isTrue(
-					(console.warn as any).calledWith('Memory watch requires the dev server. Using file watch instead...')
-				);
-			});
+			return main
+				.run(getMockConfiguration(), { watch: 'memory' })
+				.then(() => {
+					assert.isTrue(
+						(console as any).warn.calledWith('Memory watch requires the dev server. Using file watch instead...')
+					);
+					(console as any).warn.restore();
+				})
+				.catch(() => {
+					(console as any).warn.restore();
+				});
 		});
 	});
 
@@ -230,6 +236,7 @@ describe('command', () => {
 			entry.main.length = 0;
 			output = { publicPath: '/' };
 			plugins = [];
+			mockDevConfig.returns({ entry, output, plugins, watchOptions });
 			mockDistConfig.returns({ entry, output, plugins, watchOptions });
 
 			webpack.HotModuleReplacementPlugin = stub();
@@ -263,7 +270,7 @@ describe('command', () => {
 		it('serves from the output directory', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const express = mockModule.getMock('express').ctor;
-			const outputDir = '/output/dev';
+			const outputDir = '/output/dist';
 			output.path = outputDir;
 			return main.run(getMockConfiguration(), { serve: true, watch: true }).then(() => {
 				assert.isTrue(express.static.calledWith(outputDir));
@@ -286,36 +293,64 @@ describe('command', () => {
 			);
 		});
 
+		it('limits --watch=memory to --mode=dev', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			stub(console, 'warn');
+			return main
+				.run(getMockConfiguration(), { serve: true, watch: 'memory' })
+				.then(() => {
+					assert.isTrue(
+						(console as any).warn.calledWith('Memory watch requires `--mode=dev`. Using file watch instead...')
+					);
+					(console as any).warn.restore();
+				})
+				.catch(() => {
+					(console as any).warn.restore();
+				});
+		});
+
 		it('registers middleware with --watch=memory', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const webpackMiddleware = mockModule.getMock('webpack-dev-middleware').ctor;
 			const hotMiddleware = mockModule.getMock('webpack-hot-middleware').ctor;
-			return main.run(getMockConfiguration(), { serve: true, watch: 'memory' }).then(() => {
-				assert.strictEqual(useStub.callCount, 1);
-				assert.isTrue(
-					webpackMiddleware.calledWith(compiler, {
-						logLevel: 'silent',
-						noInfo: true,
-						publicPath: '/',
-						watchOptions
-					})
-				);
-				assert.isTrue(
-					hotMiddleware.calledWith(compiler, {
-						heartbeat: 10000
-					})
-				);
-			});
+			return main
+				.run(getMockConfiguration(), {
+					mode: 'dev',
+					serve: true,
+					watch: 'memory'
+				})
+				.then(() => {
+					assert.strictEqual(useStub.callCount, 1);
+					assert.isTrue(
+						webpackMiddleware.calledWith(compiler, {
+							logLevel: 'silent',
+							noInfo: true,
+							publicPath: '/',
+							watchOptions
+						})
+					);
+					assert.isTrue(
+						hotMiddleware.calledWith(compiler, {
+							heartbeat: 10000
+						})
+					);
+				});
 		});
 
 		it('enables hot module replacement with --watch=memory', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockConfiguration(), { serve: true, watch: 'memory' }).then(() => {
-				assert.lengthOf(plugins, 2);
-				assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
-				assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
-				assert.sameMembers(entry.main, ['webpack-hot-middleware/client?timeout=20000&reload=true']);
-			});
+			return main
+				.run(getMockConfiguration(), {
+					mode: 'dev',
+					serve: true,
+					watch: 'memory'
+				})
+				.then(() => {
+					assert.lengthOf(plugins, 2);
+					assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
+					assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
+					assert.sameMembers(entry.main, ['webpack-hot-middleware/client?timeout=20000&reload=true']);
+				});
 		});
 
 		it('provides custom logging with --watch=memory', () => {
@@ -325,11 +360,18 @@ describe('command', () => {
 				callback(stats);
 			});
 
-			return main.run(getMockConfiguration(), { serve: true, port: 3000, watch: 'memory' }).then(() => {
-				assert.isTrue(
-					mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, 'Listening on port 3000...')
-				);
-			});
+			return main
+				.run(getMockConfiguration(), {
+					mode: 'dev',
+					port: 3000,
+					serve: true,
+					watch: 'memory'
+				})
+				.then(() => {
+					assert.isTrue(
+						mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, 'Listening on port 3000...')
+					);
+				});
 		});
 	});
 });

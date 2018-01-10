@@ -109,9 +109,12 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 
 	return Promise.resolve()
 		.then(() => {
-			if (args.watch === 'memory') {
+			if (args.watch === 'memory' && args.mode === 'dev') {
 				return memoryWatch(config, args, app);
 			} else if (args.watch) {
+				if (args.watch === 'memory') {
+					console.warn('Memory watch requires `--mode=dev`. Using file watch instead...');
+				}
 				return fileWatch(config, args);
 			}
 		})
