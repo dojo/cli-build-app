@@ -12,7 +12,10 @@ The official CLI command for building Dojo 2 applications.
 - [Usage](#usage)
 - [Features](#features)
   - [Building](#building)
+  - [Serving](#serving-the-application)
+  - [Watching](#watching)
   - [Eject](#eject)
+  - [Configuration](#configuration)
 - [How do I contribute?](#how-do-i-contribute)
   - [Installation](#installation)
   - [Testing](#testing)
@@ -44,7 +47,7 @@ Note: `dist` is the default mode and so can be run without any arguments, `dojo 
 
 #### Dist Mode
 
-The `dist` mode create a production ready build.
+The `dist` mode creates a production ready build.
 
 #### Dev mode
 
@@ -68,7 +71,7 @@ Building with the `--watch` option observes the file system for changes, and rec
 
 ```bash
 dojo build -w # start a file-based watch
-dojo build -s -w=memory # build to an in-memory file system with HMR
+dojo build -s -w=memory -m=dev # build to an in-memory file system with HMR
 ```
 
 ### Eject
@@ -86,6 +89,94 @@ As already noted, the dojorc's `build-app` options are moved to `config/build-ap
 
 ```bash
 node_modules/.bin/webpack --config=config/build-app/ejected.config.js --env.mode={dev|dist|test}
+```
+
+### Configuration
+
+Applications use a `.dojorc` file at the project root to control various aspects of development such as testing and building. This file, if provided, MUST be valid JSON, and the following options can be used beneath the `"build-app"` key:
+
+#### `bundles`: object
+
+Useful for breaking an application into smaller bundles, the `bundles` option is a map of webpack bundle names to arrays of modules that should be bundled together. For example, with the following configuration both `src/Foo` and `src/Bar` will be grouped in the `foo.[hash].js` bundle:
+
+```
+{
+	"build-app": {
+		"bundles": {
+			"foo": [
+				"src/Foo",
+				"src/Bar"
+			]
+		}
+	}
+}
+```
+
+#### `cldrPaths`: string[]
+
+An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data) files. Used in conjunction with the `locale` and `supportedLocales` options (see below). If a path contains the string `{locale}`, that file will be loaded for each locale listed in the `locale` and `supportedLocales` properties. For example, with the following configuration the `numbers.json` file will be loaded for the "en", "es", and "fr" locales:
+
+```
+{
+	"build-app": {
+		"locale": "en",
+		"supportedLocales": [ "es", "fr" ]
+		"cldrPaths": [
+			"cldr-data/main/{locale}/numbers.json"
+		]
+	}
+}
+```
+
+#### `features`: object
+
+A map of [`has`](https://github.com/dojo/has/) features to boolean flags that can be used when building in `dist` mode to remove unneeded imports or conditional branches. See the [`static-build-loader`](https://github.com/dojo/webpack-contrib/#static-build-loader) documentation for more information.
+
+#### `locale`: string
+
+The default locale for the application. When the application loads, the root locale is set to the user's locale if it supported (see below), or to the default `locale` as a fallback.
+
+#### `pwa`: object
+
+A parent map that houses settings specific to creating progressive web applications.
+
+#### `pwa.manifest`: object
+
+Specifies information for a [web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest). For example:
+
+```
+{
+	"build-app": {
+		"pwa": {
+			"manifest": {
+				"name": "Todo MVC",
+				"description": "A simple to-do application created with Dojo 2"
+			}
+		}
+	}
+}
+```
+
+#### `supportedLocales`: string[]
+
+An array of supported locales beyond the default. When the application loads, the user's locale is checked against the list of supported locales. If the user's locale is compatible with the supported locales, then the user's locale is used throughout the application. Otherwise, the default `locale` is used. For example, with the following configuration the application locale will be set to Pashto or Arabic if either is listed as the user's locale, with Farsi used as the default.
+
+Example:
+
+```
+{
+	"build-app": {
+		"locale": "fa",
+		"supportedLocales": [ "ps", "ar" ],
+		"compression": "gzip",
+		"bundles": {
+			"widgets": [
+				"src/widgets/Header",
+				"src/widgets/Footer"
+			]
+		}
+	}
+}
 ```
 
 ## How do I contribute?
