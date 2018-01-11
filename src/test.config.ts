@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as globby from 'globby';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const basePath = process.cwd();
 
@@ -32,7 +33,15 @@ function webpackConfig(args: any): webpack.Configuration {
 	};
 	const externals: any[] = (config.externals as any[]) || [];
 
-	config.plugins = [...plugins, new CleanWebpackPlugin(['test'], { root: output.path, verbose: false })];
+	config.plugins = [
+		...plugins.map(plugin => {
+			if (plugin instanceof ExtractTextPlugin && (plugin as any).filename === 'main.css') {
+				(plugin as any).options = { ...(plugin as any).options, disable: true };
+			}
+			return plugin;
+		}),
+		new CleanWebpackPlugin(['test'], { root: output.path, verbose: false })
+	];
 
 	module.rules = module.rules.map(rule => {
 		if (Array.isArray(rule.use)) {
@@ -52,7 +61,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		return rule;
 	});
 	module.rules.push({
-		test: /src\/.*\.ts(x)$/,
+		test: /src\/.*\.ts(x)?$/,
 		use: {
 			loader: '@theintern/istanbul-loader'
 		},

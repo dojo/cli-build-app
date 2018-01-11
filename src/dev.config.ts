@@ -3,6 +3,7 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
@@ -10,6 +11,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.plugins = [
 		...plugins,
+		new ManifestPlugin(),
 		new HtmlWebpackPlugin({ inject: true, chunks: ['runtime', 'main'], template: 'src/index.html' }),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({

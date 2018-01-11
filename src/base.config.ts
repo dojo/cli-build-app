@@ -4,7 +4,6 @@ import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import * as ManifestPlugin from 'webpack-manifest-plugin';
 import { WebAppManifest, WebpackConfiguration } from './interfaces';
 import * as loaderUtils from 'loader-utils';
 
@@ -115,7 +114,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				allChunks: true
 			}),
 			new webpack.NamedChunksPlugin(),
-			new ManifestPlugin(),
 			new webpack.NamedModulesPlugin(),
 			manifest && new WebpackPwaManifest(manifest),
 			args.locale &&

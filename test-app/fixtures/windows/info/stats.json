@@ -3,7 +3,7 @@
   "warnings": [],
   "version": "3.8.1",
   "hash": "721b999868308380229a",
-  "time": 11234,
+  "time": 10406,
   "publicPath": "",
   "assetsByChunkName": {
     "main": [
@@ -137,15 +137,15 @@
       "emitted": true
     },
     {
-      "name": "manifest.json",
-      "size": 626,
+      "name": "manifest.67922f9d41b46aafda3d4e88ab6f5b6a.json",
+      "size": 191,
       "chunks": [],
       "chunkNames": [],
       "emitted": true
     },
     {
-      "name": "manifest.67922f9d41b46aafda3d4e88ab6f5b6a.json",
-      "size": 191,
+      "name": "manifest.json",
+      "size": 626,
       "chunks": [],
       "chunkNames": [],
       "emitted": true
