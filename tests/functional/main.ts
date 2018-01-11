@@ -62,6 +62,17 @@ describe('functional build tests', () => {
 
 	it('correctly builds with test configuration', () => {
 		execa.shellSync('npm run build-test', { cwd: appRootDir });
-		assertOutput('test');
+
+		const fixturePath = path.join(appRootDir, 'fixtures', platform, 'test');
+		const outputPath = path.join(appRootDir, 'output', 'test');
+
+		['functional.js', 'unit.js'].forEach(name => {
+			const fixtureFilePath = path.join(fixturePath, name);
+			const outputFilePath = path.join(outputPath, name);
+			const fixtureContents = fs.readFileSync(fixtureFilePath, 'utf8');
+			const outputContents = fs.readFileSync(outputFilePath, 'utf8');
+
+			assert.strictEqual(normalise(outputContents), normalise(fixtureContents), name);
+		});
 	});
 });
