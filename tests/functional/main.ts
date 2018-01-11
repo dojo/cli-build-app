@@ -65,6 +65,11 @@ describe('functional build tests', () => {
 
 		const fixturePath = path.join(appRootDir, 'fixtures', platform, 'test');
 		const outputPath = path.join(appRootDir, 'output', 'test');
+		const normaliseTestOutput = (value: string) => {
+			// Normalize CSS files to just the file name since the full path will differ between
+			// environments (e.g., /path/to/app.m.css => app.m.css)
+			return normalise(value).replace(/"([^"]+)\/([\w-\.]+).css"/g, '$2.css');
+		};
 
 		['functional.js', 'unit.js'].forEach(name => {
 			const fixtureFilePath = path.join(fixturePath, name);
@@ -72,7 +77,7 @@ describe('functional build tests', () => {
 			const fixtureContents = fs.readFileSync(fixtureFilePath, 'utf8');
 			const outputContents = fs.readFileSync(outputFilePath, 'utf8');
 
-			assert.strictEqual(normalise(outputContents), normalise(fixtureContents), name);
+			assert.strictEqual(normaliseTestOutput(outputContents), normaliseTestOutput(fixtureContents), name);
 		});
 	});
 });
