@@ -1,5 +1,6 @@
 {
 	"build-app": {
+		"compression": [ "gzip", "brotli" ],
 		"locale": "en",
 		"supportedLocales": [ "es" ],
 		"features": {

@@ -132,6 +132,10 @@ An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data)
 }
 ```
 
+#### `compression`: Array<'gzip' | 'brotli'>
+
+Options for compression when running in `dist` mode. Each array value represents a different algorithm, allowing both gzip and brotli builds to be output side-by-side.
+
 #### `features`: object
 
 A map of [`has`](https://github.com/dojo/has/) features to boolean flags that can be used when building in `dist` mode to remove unneeded imports or conditional branches. See the [`static-build-loader`](https://github.com/dojo/webpack-contrib/#static-build-loader) documentation for more information.
