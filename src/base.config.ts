@@ -2,6 +2,7 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
+import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -211,6 +212,26 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	});
 
 	const config: webpack.Configuration = {
+		externals: [
+			function(context, request, callback) {
+				const externals = (args.externals && args.externals.dependencies) || [];
+				function resolveExternal(externals: (string | { name?: string; type?: string })[]): string | void {
+					for (let external of externals) {
+						const name = external && (typeof external === 'string' ? external : external.name);
+						if (name && new RegExp(`^${name}[!\/]?`).test(request)) {
+							return typeof external === 'string' ? request : `${external.type} ${request}`;
+						}
+					}
+				}
+
+				const external = resolveExternal(externals);
+				if (external) {
+					return callback(null, `${external}`);
+				}
+
+				callback(null, undefined);
+			}
+		],
 		entry: {
 			[mainEntry]: removeEmpty([
 				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
@@ -251,6 +272,13 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					supportedLocales: args.supportedLocales,
 					cldrPaths: args.cldrPaths,
 					target: mainEntryPath
+				}),
+			args.externals &&
+				args.externals.dependencies &&
+				new ExternalLoaderPlugin({
+					dependencies: args.externals.dependencies,
+					hash: true,
+					outputPath: args.externals.outputPath
 				})
 		]),
 		module: {
