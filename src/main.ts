@@ -36,17 +36,18 @@ function createWatchCompiler(config: webpack.Configuration) {
 	return compiler;
 }
 
-function build(config: webpack.Configuration) {
+function build(config: webpack.Configuration, args: any) {
 	const compiler = createCompiler(config);
 	const spinner = ora('building').start();
-	return new Promise((resolve, reject) => {
+	return new Promise<void>((resolve, reject) => {
 		compiler.run((err, stats) => {
 			spinner.stop();
 			if (err) {
 				reject(err);
 			}
 			if (stats) {
-				logger(stats.toJson(), config);
+				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
+				logger(stats.toJson(), config, runningMessage);
 			}
 			resolve();
 		});
@@ -130,12 +131,16 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		.then(() => {
 			if (args.watch === 'memory' && args.mode === 'dev') {
 				return memoryWatch(config, args, app);
-			} else if (args.watch) {
+			}
+
+			if (args.watch) {
 				if (args.watch === 'memory') {
 					console.warn('Memory watch requires `--mode=dev`. Using file watch instead...');
 				}
 				return fileWatch(config, args);
 			}
+
+			return build(config, args);
 		})
 		.then(() => {
 			return new Promise<void>((resolve, reject) => {
@@ -203,7 +208,7 @@ const command: Command = {
 			return fileWatch(config, args);
 		}
 
-		return build(config);
+		return build(config, args);
 	},
 	eject(helper: Helper): EjectOutput {
 		return {

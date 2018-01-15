@@ -250,7 +250,7 @@ describe('command', () => {
 				callback(false);
 			});
 
-			compiler = { plugin: pluginStub, watch: watchStub };
+			compiler = { plugin: pluginStub, run: runStub, watch: watchStub };
 			mockModule.getMock('webpack').ctor.returns(compiler);
 
 			const expressMock = mockModule.getMock('express').ctor;
