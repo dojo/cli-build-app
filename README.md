@@ -62,7 +62,8 @@ The `test` mode creates bundles that can be used to run the unit and functional 
 A web server can be started with the `--serve` flag. By default, the application is served on port 9999, but this can be changed with the `--port` (`-p`) flag:
 
 ```bash
-dojo build -s -p 3000 # serve the app on port 3000
+# build once and then serve the app on port 3000
+dojo build -s -p 3000
 ```
 
 ### Watching
