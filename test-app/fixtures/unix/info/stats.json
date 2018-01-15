@@ -2,8 +2,8 @@
   "errors": [],
   "warnings": [],
   "version": "3.8.1",
-  "hash": "407d835d05258fa309b7",
-  "time": 6730,
+  "hash": "2e794083c1c01a32d3e8",
+  "time": 7382,
   "publicPath": "",
   "assetsByChunkName": {
     "main": [
@@ -854,22 +854,13 @@
             "main"
           ],
           "assets": [],
-          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "issuerId": "./node_modules/@dojo/shim/Promise.js",
-          "issuerName": "./node_modules/@dojo/shim/Promise.js",
+          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+          "issuerId": "./node_modules/@dojo/shim/Map.js",
+          "issuerName": "./node_modules/@dojo/shim/Map.js",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
-            {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
-              "type": "cjs require",
-              "userRequest": "./Symbol",
-              "loc": "6:0-19"
-            },
             {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
@@ -878,6 +869,15 @@
               "type": "cjs require",
               "userRequest": "./Symbol",
               "loc": "8:0-19"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "type": "cjs require",
+              "userRequest": "./Symbol",
+              "loc": "6:0-19"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/Observable.js",
@@ -889,15 +889,6 @@
               "loc": "7:0-19"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/iterator.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
-              "module": "./node_modules/@dojo/shim/iterator.js",
-              "moduleName": "./node_modules/@dojo/shim/iterator.js",
-              "type": "cjs require",
-              "userRequest": "./Symbol",
-              "loc": "3:0-19"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/object.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/object.js",
               "module": "./node_modules/@dojo/shim/object.js",
@@ -905,6 +896,15 @@
               "type": "cjs require",
               "userRequest": "./Symbol",
               "loc": "5:15-34"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/iterator.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
+              "module": "./node_modules/@dojo/shim/iterator.js",
+              "moduleName": "./node_modules/@dojo/shim/iterator.js",
+              "type": "cjs require",
+              "userRequest": "./Symbol",
+              "loc": "3:0-19"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/WeakMap.js",
@@ -992,13 +992,13 @@
               "loc": "11:15-43"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "moduleId": "./node_modules/@dojo/core/has.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
+              "module": "./node_modules/@dojo/core/has.js",
+              "moduleName": "./node_modules/@dojo/core/has.js",
               "type": "cjs require",
-              "userRequest": "./global",
-              "loc": "4:15-34"
+              "userRequest": "@dojo/shim/global",
+              "loc": "4:15-43"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
@@ -1010,28 +1010,19 @@
               "loc": "5:15-34"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Observable.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-              "module": "./node_modules/@dojo/shim/Observable.js",
-              "moduleName": "./node_modules/@dojo/shim/Observable.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "./global",
               "loc": "4:15-34"
             },
             {
-              "moduleId": "./node_modules/@dojo/core/has.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
-              "module": "./node_modules/@dojo/core/has.js",
-              "moduleName": "./node_modules/@dojo/core/has.js",
-              "type": "cjs require",
-              "userRequest": "@dojo/shim/global",
-              "loc": "4:15-43"
-            },
-            {
-              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
-              "module": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleId": "./node_modules/@dojo/shim/Observable.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+              "module": "./node_modules/@dojo/shim/Observable.js",
+              "moduleName": "./node_modules/@dojo/shim/Observable.js",
               "type": "cjs require",
               "userRequest": "./global",
               "loc": "4:15-34"
@@ -1053,6 +1044,15 @@
               "type": "cjs require",
               "userRequest": "../global",
               "loc": "3:15-35"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
+              "module": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+              "type": "cjs require",
+              "userRequest": "./global",
+              "loc": "4:15-34"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/support/has.js",
@@ -1253,27 +1253,27 @@
             "main"
           ],
           "assets": [],
-          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "issuerId": "./node_modules/@dojo/shim/Promise.js",
-          "issuerName": "./node_modules/@dojo/shim/Promise.js",
+          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+          "issuerId": "./node_modules/@dojo/shim/Map.js",
+          "issuerName": "./node_modules/@dojo/shim/Map.js",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "moduleId": "./node_modules/@dojo/shim/Map.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+              "module": "./node_modules/@dojo/shim/Map.js",
+              "moduleName": "./node_modules/@dojo/shim/Map.js",
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "7:12-36"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Map.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
-              "module": "./node_modules/@dojo/shim/Map.js",
-              "moduleName": "./node_modules/@dojo/shim/Map.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "7:12-36"
@@ -1306,15 +1306,6 @@
               "loc": "6:21-54"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
-              "module": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
-              "type": "cjs require",
-              "userRequest": "./support/has",
-              "loc": "3:12-36"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/object.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/object.js",
               "module": "./node_modules/@dojo/shim/object.js",
@@ -1331,6 +1322,15 @@
               "type": "cjs require",
               "userRequest": "./has",
               "loc": "4:12-28"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
+              "module": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+              "type": "cjs require",
+              "userRequest": "./support/has",
+              "loc": "3:12-36"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/string.js",
@@ -1821,6 +1821,15 @@
               "loc": "32:28-47"
             },
             {
+              "moduleId": "./node_modules/globalize/dist/globalize/number.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
+              "module": "./node_modules/globalize/dist/globalize/number.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/number.js",
+              "type": "cjs require",
+              "userRequest": "cldrjs",
+              "loc": "34:28-47"
+            },
+            {
               "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/plural.js",
               "module": "./node_modules/globalize/dist/globalize/plural.js",
@@ -1839,15 +1848,6 @@
               "loc": "31:28-47"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/number.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
-              "module": "./node_modules/globalize/dist/globalize/number.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/number.js",
-              "type": "cjs require",
-              "userRequest": "cldrjs",
-              "loc": "34:28-47"
-            },
-            {
               "moduleId": "./node_modules/globalize/dist/globalize/date.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
               "module": "./node_modules/globalize/dist/globalize/date.js",
@@ -1857,15 +1857,6 @@
               "loc": "35:28-47"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
-              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "type": "cjs require",
-              "userRequest": "cldrjs",
-              "loc": "36:28-47"
-            },
-            {
               "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
               "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -1873,6 +1864,15 @@
               "type": "cjs require",
               "userRequest": "cldrjs",
               "loc": "34:28-47"
+            },
+            {
+              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
+              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "type": "cjs require",
+              "userRequest": "cldrjs",
+              "loc": "36:28-47"
             }
           ],
           "usedExports": true,
@@ -1922,6 +1922,15 @@
               "loc": "33:49-74"
             },
             {
+              "moduleId": "./node_modules/globalize/dist/globalize/number.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
+              "module": "./node_modules/globalize/dist/globalize/number.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/number.js",
+              "type": "cjs require",
+              "userRequest": "../globalize",
+              "loc": "34:49-74"
+            },
+            {
               "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/plural.js",
               "module": "./node_modules/globalize/dist/globalize/plural.js",
@@ -1940,15 +1949,6 @@
               "loc": "31:49-74"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/number.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
-              "module": "./node_modules/globalize/dist/globalize/number.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/number.js",
-              "type": "cjs require",
-              "userRequest": "../globalize",
-              "loc": "34:49-74"
-            },
-            {
               "moduleId": "./node_modules/globalize/dist/globalize/date.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
               "module": "./node_modules/globalize/dist/globalize/date.js",
@@ -1958,15 +1958,6 @@
               "loc": "35:49-74"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
-              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "type": "cjs require",
-              "userRequest": "../globalize",
-              "loc": "36:49-74"
-            },
-            {
               "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
               "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -1974,6 +1965,15 @@
               "type": "cjs require",
               "userRequest": "../globalize",
               "loc": "34:49-74"
+            },
+            {
+              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
+              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "type": "cjs require",
+              "userRequest": "../globalize",
+              "loc": "36:49-74"
             }
           ],
           "usedExports": true,
@@ -2495,10 +2495,10 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "moduleId": "./node_modules/@dojo/core/has.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
+              "module": "./node_modules/@dojo/core/has.js",
+              "moduleName": "./node_modules/@dojo/core/has.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2513,15 +2513,6 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Observable.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-              "module": "./node_modules/@dojo/shim/Observable.js",
-              "moduleName": "./node_modules/@dojo/shim/Observable.js",
-              "type": "cjs require",
-              "userRequest": "tslib",
-              "loc": "3:14-30"
-            },
-            {
               "moduleId": "./node_modules/@dojo/core/Evented.js",
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/Evented.js",
               "module": "./node_modules/@dojo/core/Evented.js",
@@ -2531,19 +2522,19 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/core/has.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
-              "module": "./node_modules/@dojo/core/has.js",
-              "moduleName": "./node_modules/@dojo/core/has.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/core/lang.js",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
-              "module": "./node_modules/@dojo/core/lang.js",
-              "moduleName": "./node_modules/@dojo/core/lang.js",
+              "moduleId": "./node_modules/@dojo/shim/Observable.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+              "module": "./node_modules/@dojo/shim/Observable.js",
+              "moduleName": "./node_modules/@dojo/shim/Observable.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2553,6 +2544,15 @@
               "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/load/util.js",
               "module": "./node_modules/@dojo/core/load/util.js",
               "moduleName": "./node_modules/@dojo/core/load/util.js",
+              "type": "cjs require",
+              "userRequest": "tslib",
+              "loc": "3:14-30"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/core/lang.js",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
+              "module": "./node_modules/@dojo/core/lang.js",
+              "moduleName": "./node_modules/@dojo/core/lang.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2705,7 +2705,7 @@
         },
         {
           "id": "./src/app.m.css",
-          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??ref--9-4!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??postcss!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
           "name": "./src/app.m.css",
           "index": 5,
           "index2": 2,
@@ -2752,7 +2752,7 @@
         },
         {
           "id": "./src/main.css",
-          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??ref--9-4!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??postcss!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
           "name": "./src/main.css",
           "index": 1,
           "index2": 0,
@@ -3708,22 +3708,13 @@
         "main"
       ],
       "assets": [],
-      "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-      "issuerId": "./node_modules/@dojo/shim/Promise.js",
-      "issuerName": "./node_modules/@dojo/shim/Promise.js",
+      "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+      "issuerId": "./node_modules/@dojo/shim/Map.js",
+      "issuerName": "./node_modules/@dojo/shim/Map.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
-        {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
-          "type": "cjs require",
-          "userRequest": "./Symbol",
-          "loc": "6:0-19"
-        },
         {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
@@ -3732,6 +3723,15 @@
           "type": "cjs require",
           "userRequest": "./Symbol",
           "loc": "8:0-19"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "type": "cjs require",
+          "userRequest": "./Symbol",
+          "loc": "6:0-19"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/Observable.js",
@@ -3743,15 +3743,6 @@
           "loc": "7:0-19"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/iterator.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
-          "module": "./node_modules/@dojo/shim/iterator.js",
-          "moduleName": "./node_modules/@dojo/shim/iterator.js",
-          "type": "cjs require",
-          "userRequest": "./Symbol",
-          "loc": "3:0-19"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/object.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/object.js",
           "module": "./node_modules/@dojo/shim/object.js",
@@ -3759,6 +3750,15 @@
           "type": "cjs require",
           "userRequest": "./Symbol",
           "loc": "5:15-34"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/iterator.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
+          "module": "./node_modules/@dojo/shim/iterator.js",
+          "moduleName": "./node_modules/@dojo/shim/iterator.js",
+          "type": "cjs require",
+          "userRequest": "./Symbol",
+          "loc": "3:0-19"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/WeakMap.js",
@@ -3846,13 +3846,13 @@
           "loc": "11:15-43"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "moduleId": "./node_modules/@dojo/core/has.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
+          "module": "./node_modules/@dojo/core/has.js",
+          "moduleName": "./node_modules/@dojo/core/has.js",
           "type": "cjs require",
-          "userRequest": "./global",
-          "loc": "4:15-34"
+          "userRequest": "@dojo/shim/global",
+          "loc": "4:15-43"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
@@ -3864,28 +3864,19 @@
           "loc": "5:15-34"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Observable.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-          "module": "./node_modules/@dojo/shim/Observable.js",
-          "moduleName": "./node_modules/@dojo/shim/Observable.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "./global",
           "loc": "4:15-34"
         },
         {
-          "moduleId": "./node_modules/@dojo/core/has.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
-          "module": "./node_modules/@dojo/core/has.js",
-          "moduleName": "./node_modules/@dojo/core/has.js",
-          "type": "cjs require",
-          "userRequest": "@dojo/shim/global",
-          "loc": "4:15-43"
-        },
-        {
-          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
-          "module": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleId": "./node_modules/@dojo/shim/Observable.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+          "module": "./node_modules/@dojo/shim/Observable.js",
+          "moduleName": "./node_modules/@dojo/shim/Observable.js",
           "type": "cjs require",
           "userRequest": "./global",
           "loc": "4:15-34"
@@ -3907,6 +3898,15 @@
           "type": "cjs require",
           "userRequest": "../global",
           "loc": "3:15-35"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
+          "module": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+          "type": "cjs require",
+          "userRequest": "./global",
+          "loc": "4:15-34"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/support/has.js",
@@ -4107,27 +4107,27 @@
         "main"
       ],
       "assets": [],
-      "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-      "issuerId": "./node_modules/@dojo/shim/Promise.js",
-      "issuerName": "./node_modules/@dojo/shim/Promise.js",
+      "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+      "issuerId": "./node_modules/@dojo/shim/Map.js",
+      "issuerName": "./node_modules/@dojo/shim/Map.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "moduleId": "./node_modules/@dojo/shim/Map.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+          "module": "./node_modules/@dojo/shim/Map.js",
+          "moduleName": "./node_modules/@dojo/shim/Map.js",
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "7:12-36"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Map.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
-          "module": "./node_modules/@dojo/shim/Map.js",
-          "moduleName": "./node_modules/@dojo/shim/Map.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "7:12-36"
@@ -4160,15 +4160,6 @@
           "loc": "6:21-54"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
-          "module": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
-          "type": "cjs require",
-          "userRequest": "./support/has",
-          "loc": "3:12-36"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/object.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/object.js",
           "module": "./node_modules/@dojo/shim/object.js",
@@ -4185,6 +4176,15 @@
           "type": "cjs require",
           "userRequest": "./has",
           "loc": "4:12-28"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Symbol.js",
+          "module": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+          "type": "cjs require",
+          "userRequest": "./support/has",
+          "loc": "3:12-36"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/string.js",
@@ -4789,6 +4789,15 @@
           "loc": "32:28-47"
         },
         {
+          "moduleId": "./node_modules/globalize/dist/globalize/number.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
+          "module": "./node_modules/globalize/dist/globalize/number.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/number.js",
+          "type": "cjs require",
+          "userRequest": "cldrjs",
+          "loc": "34:28-47"
+        },
+        {
           "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/plural.js",
           "module": "./node_modules/globalize/dist/globalize/plural.js",
@@ -4807,15 +4816,6 @@
           "loc": "31:28-47"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/number.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
-          "module": "./node_modules/globalize/dist/globalize/number.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/number.js",
-          "type": "cjs require",
-          "userRequest": "cldrjs",
-          "loc": "34:28-47"
-        },
-        {
           "moduleId": "./node_modules/globalize/dist/globalize/date.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
           "module": "./node_modules/globalize/dist/globalize/date.js",
@@ -4825,15 +4825,6 @@
           "loc": "35:28-47"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
-          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "type": "cjs require",
-          "userRequest": "cldrjs",
-          "loc": "36:28-47"
-        },
-        {
           "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
           "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -4841,6 +4832,15 @@
           "type": "cjs require",
           "userRequest": "cldrjs",
           "loc": "34:28-47"
+        },
+        {
+          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
+          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "type": "cjs require",
+          "userRequest": "cldrjs",
+          "loc": "36:28-47"
         }
       ],
       "usedExports": true,
@@ -4890,6 +4890,15 @@
           "loc": "33:49-74"
         },
         {
+          "moduleId": "./node_modules/globalize/dist/globalize/number.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
+          "module": "./node_modules/globalize/dist/globalize/number.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/number.js",
+          "type": "cjs require",
+          "userRequest": "../globalize",
+          "loc": "34:49-74"
+        },
+        {
           "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/plural.js",
           "module": "./node_modules/globalize/dist/globalize/plural.js",
@@ -4908,15 +4917,6 @@
           "loc": "31:49-74"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/number.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
-          "module": "./node_modules/globalize/dist/globalize/number.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/number.js",
-          "type": "cjs require",
-          "userRequest": "../globalize",
-          "loc": "34:49-74"
-        },
-        {
           "moduleId": "./node_modules/globalize/dist/globalize/date.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
           "module": "./node_modules/globalize/dist/globalize/date.js",
@@ -4926,15 +4926,6 @@
           "loc": "35:49-74"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
-          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "type": "cjs require",
-          "userRequest": "../globalize",
-          "loc": "36:49-74"
-        },
-        {
           "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
           "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -4942,6 +4933,15 @@
           "type": "cjs require",
           "userRequest": "../globalize",
           "loc": "34:49-74"
+        },
+        {
+          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/globalize/dist/globalize/relative-time.js",
+          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "type": "cjs require",
+          "userRequest": "../globalize",
+          "loc": "36:49-74"
         }
       ],
       "usedExports": true,
@@ -5463,10 +5463,10 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "moduleId": "./node_modules/@dojo/core/has.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
+          "module": "./node_modules/@dojo/core/has.js",
+          "moduleName": "./node_modules/@dojo/core/has.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5481,15 +5481,6 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Observable.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-          "module": "./node_modules/@dojo/shim/Observable.js",
-          "moduleName": "./node_modules/@dojo/shim/Observable.js",
-          "type": "cjs require",
-          "userRequest": "tslib",
-          "loc": "3:14-30"
-        },
-        {
           "moduleId": "./node_modules/@dojo/core/Evented.js",
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/Evented.js",
           "module": "./node_modules/@dojo/core/Evented.js",
@@ -5499,19 +5490,19 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/core/has.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/has.js",
-          "module": "./node_modules/@dojo/core/has.js",
-          "moduleName": "./node_modules/@dojo/core/has.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/core/lang.js",
-          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
-          "module": "./node_modules/@dojo/core/lang.js",
-          "moduleName": "./node_modules/@dojo/core/lang.js",
+          "moduleId": "./node_modules/@dojo/shim/Observable.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+          "module": "./node_modules/@dojo/shim/Observable.js",
+          "moduleName": "./node_modules/@dojo/shim/Observable.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5521,6 +5512,15 @@
           "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/load/util.js",
           "module": "./node_modules/@dojo/core/load/util.js",
           "moduleName": "./node_modules/@dojo/core/load/util.js",
+          "type": "cjs require",
+          "userRequest": "tslib",
+          "loc": "3:14-30"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/core/lang.js",
+          "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
+          "module": "./node_modules/@dojo/core/lang.js",
+          "moduleName": "./node_modules/@dojo/core/lang.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5673,7 +5673,7 @@
     },
     {
       "id": "./src/app.m.css",
-      "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??ref--9-4!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+      "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??postcss!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
       "name": "./src/app.m.css",
       "index": 5,
       "index2": 2,
@@ -5720,7 +5720,7 @@
     },
     {
       "id": "./src/main.css",
-      "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??ref--9-4!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+      "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/extract-text-webpack-plugin/dist/loader.js??ref--9-0!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/style-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js??ref--9-3!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js??postcss!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
       "name": "./src/main.css",
       "index": 1,
       "index2": 0,
@@ -5826,13 +5826,13 @@
           "files": [
             "extract-text-webpack-plugin-output-filename"
           ],
-          "hash": "e50103c44d1fea24e978",
+          "hash": "59b92655564980e4ef6b",
           "parents": [],
           "modules": [
             {
-              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
               "index": 0,
               "index2": 1,
               "size": 491,
@@ -5872,18 +5872,18 @@
                 0
               ],
               "assets": [],
-              "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
               "failed": false,
               "errors": 0,
               "warnings": 0,
               "reasons": [
                 {
-                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-                  "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+                  "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
                   "type": "cjs require",
                   "userRequest": "../node_modules/css-loader/lib/css-base.js",
                   "loc": "1:27-80"
@@ -5899,10 +5899,10 @@
           "filteredModules": 0,
           "origins": [
             {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "module": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "module": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
               "loc": "",
               "reasons": []
             }
@@ -5911,9 +5911,9 @@
       ],
       "modules": [
         {
-          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
           "index": 0,
           "index2": 1,
           "size": 491,
@@ -5953,18 +5953,18 @@
             0
           ],
           "assets": [],
-          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
             {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
-              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/main.css",
+              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
               "type": "cjs require",
               "userRequest": "../node_modules/css-loader/lib/css-base.js",
               "loc": "1:27-80"
@@ -5979,7 +5979,7 @@
       ],
       "filteredModules": 0,
       "children": [],
-      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??ref--9-4!src/main.css"
+      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??postcss!src/main.css"
     },
     {
       "errors": [],
@@ -6355,13 +6355,13 @@
           "files": [
             "extract-text-webpack-plugin-output-filename"
           ],
-          "hash": "57e8846743df597a8772",
+          "hash": "ee308e144123846d8398",
           "parents": [],
           "modules": [
             {
-              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
               "index": 0,
               "index2": 1,
               "size": 574,
@@ -6401,18 +6401,18 @@
                 0
               ],
               "assets": [],
-              "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
               "failed": false,
               "errors": 0,
               "warnings": 0,
               "reasons": [
                 {
-                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-                  "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+                  "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
                   "type": "cjs require",
                   "userRequest": "../node_modules/css-loader/lib/css-base.js",
                   "loc": "1:27-80"
@@ -6428,10 +6428,10 @@
           "filteredModules": 0,
           "origins": [
             {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "module": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "module": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
               "loc": "",
               "reasons": []
             }
@@ -6440,9 +6440,9 @@
       ],
       "modules": [
         {
-          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+          "identifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
           "index": 0,
           "index2": 1,
           "size": 574,
@@ -6482,18 +6482,18 @@
             0
           ],
           "assets": [],
-          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+          "issuer": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
             {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
-              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "moduleIdentifier": "/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/mwistrand/projects/dojo2/cli-build-app/test-app/src/app.m.css",
+              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
               "type": "cjs require",
               "userRequest": "../node_modules/css-loader/lib/css-base.js",
               "loc": "1:27-80"
@@ -6508,7 +6508,7 @@
       ],
       "filteredModules": 0,
       "children": [],
-      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??ref--9-4!node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!src/app.m.css"
+      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??postcss!node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!src/app.m.css"
     }
   ]
 }
