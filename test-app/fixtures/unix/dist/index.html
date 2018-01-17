@@ -7,17 +7,14 @@
  * All rights reserved
  * 
  */
-
 ._3x1SGCoi {
   background: aqua;
 }
-
 .YxttPEx- {
   width: 240px;
   height: 100px;
   color: blue;
 }
-
 </style></head>
 	<body>
 		<div id="app"></div>
@@ -28,8 +25,11 @@
 		var element = document.getElementById('app');
 		var target;
 		paths.some(function (path, i) {
-			target = html[i];
-			return path && ((typeof path === 'string' && path === window.location.hash) || (typeof path === 'object' && path.match && new RegExp(path.match.join('|')).test(window.location.hash)));
+			var match = (typeof path === 'string' && path === window.location.hash) || path && (typeof path === 'object' && path.match && new RegExp(path.match.join('|')).test(window.location.hash));
+			if (match) {
+				target = html[i];
+			}
+			return match;
 		});
 		if (target && element) {
 			var frag = document.createRange().createContextualFragment(target);

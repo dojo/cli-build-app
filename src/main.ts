@@ -198,6 +198,9 @@ const command: Command = {
 		}
 
 		if (args.serve) {
+			if (args.mode === 'test') {
+				return Promise.reject(new Error('Cannot use `--serve` with `--mode=test`'));
+			}
 			return serve(config, args);
 		}
 
