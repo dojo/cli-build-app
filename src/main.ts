@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as logUpdate from 'log-update';
 import * as ora from 'ora';
 import * as path from 'path';
-import * as fallback from 'express-history-api-fallback';
+import * as history from 'connect-history-api-fallback';
 import * as webpack from 'webpack';
 import chalk from 'chalk';
 
@@ -122,12 +122,11 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 
 function serve(config: webpack.Configuration, args: any): Promise<void> {
 	const app = express();
+	app.use(history());
 
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();
 		app.use(express.static(outputDir));
-		const indexFile = path.join(outputDir, 'index.html');
-		app.use(fallback(indexFile));
 	}
 
 	return Promise.resolve()
