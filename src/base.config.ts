@@ -140,19 +140,19 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{
 					include: allPaths,
-					test: /.*\.ts?$/,
+					test: /\.ts(x)?$/,
 					enforce: 'pre',
 					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=ts&instanceName=0_dojo'
 				},
 				{
 					include: allPaths,
-					test: /.*\.m\.css?$/,
+					test: /\.m\.css$/,
 					enforce: 'pre',
 					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=css'
 				},
 				{
 					include: allPaths,
-					test: /.*\.ts(x)?$/,
+					test: /\.ts(x)?$/,
 					use: removeEmpty([
 						args.features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
@@ -163,7 +163,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					])
 				},
 				{
-					test: /\.js?$/,
+					test: /\.js(x)?$/,
 					use: removeEmpty([
 						args.features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
@@ -174,7 +174,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },
 				{
-					test: /.*\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
+					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
 					loader: 'file-loader?hash=sha512&digest=hex&name=[hash:base64:8].[ext]'
 				},
 				{
@@ -182,10 +182,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					exclude: allPaths,
 					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
 				},
-				{ test: /\.m\.css.js$/, exclude: allPaths, use: ['json-css-module-loader'] },
+				{ test: /\.m\.css\.js$/, exclude: allPaths, use: ['json-css-module-loader'] },
 				{
 					include: allPaths,
-					test: /.*\.css?$/,
+					test: /\.css$/,
 					use: ExtractTextPlugin.extract({
 						fallback: ['style-loader'],
 						use: [
