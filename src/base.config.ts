@@ -84,6 +84,36 @@ All rights reserved
 
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
+
+	const postCssModuleLoader = ExtractTextPlugin.extract({
+		fallback: ['style-loader'],
+		use: [
+			'@dojo/webpack-contrib/css-module-decorator-loader',
+			{
+				loader: 'css-loader',
+				options: {
+					modules: true,
+					sourceMap: true,
+					importLoaders: 1,
+					localIdentName: '[hash:base64:8]',
+					getLocalIdent
+				}
+			},
+			{
+				loader: 'postcss-loader?sourceMap',
+				options: {
+					ident: 'postcss',
+					plugins: [
+						require('postcss-import')(),
+						require('postcss-cssnext')({
+							features: { autoprefixer: { browsers: ['last 2 versions', 'ie >= 10'] } }
+						})
+					]
+				}
+			}
+		]
+	});
+
 	const config: webpack.Configuration = {
 		entry: {
 			[mainEntry]: [path.join(srcPath, 'main.css'), mainEntryPath]
@@ -179,41 +209,24 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{
 					test: /\.css$/,
+					exclude: [...allPaths, /\.m\.css$/],
+					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
+				},
+				{
+					test: (path: string) => /\.m\.css$/.test(path) && existsSync(path + '.js'),
 					exclude: allPaths,
 					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
+				},
+				{
+					test: (path: string) => /\.m\.css$/.test(path) && !existsSync(path + '.js'),
+					exclude: allPaths,
+					use: postCssModuleLoader
 				},
 				{ test: /\.m\.css\.js$/, exclude: allPaths, use: ['json-css-module-loader'] },
 				{
 					include: allPaths,
 					test: /\.css$/,
-					use: ExtractTextPlugin.extract({
-						fallback: ['style-loader'],
-						use: [
-							'@dojo/webpack-contrib/css-module-decorator-loader',
-							{
-								loader: 'css-loader',
-								options: {
-									modules: true,
-									sourceMap: true,
-									importLoaders: 1,
-									localIdentName: '[hash:base64:8]',
-									getLocalIdent
-								}
-							},
-							{
-								loader: 'postcss-loader?sourceMap',
-								options: {
-									ident: 'postcss',
-									plugins: [
-										require('postcss-import')(),
-										require('postcss-cssnext')({
-											features: { autoprefixer: { browsers: ['last 2 versions', 'ie >= 10'] } }
-										})
-									]
-								}
-							}
-						]
-					})
+					use: postCssModuleLoader
 				}
 			])
 		}
