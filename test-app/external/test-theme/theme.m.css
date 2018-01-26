@@ -1,0 +1,5 @@
+@import './variables';
+
+.root {
+	background: var(--background-color);
+}

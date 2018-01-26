@@ -11,6 +11,7 @@ if (has('foo')) {
 App().then(result => {
 	console.log(result());
 	const div = document.createElement('div');
-	div.classList.add(css.root);
+	div.innerHTML = 'hello, world';
+	div.classList.add(...css.root.split(' '));
 	document.body.appendChild(div);
 });
