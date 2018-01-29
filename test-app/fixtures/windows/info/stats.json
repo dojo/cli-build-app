@@ -2,15 +2,15 @@
   "errors": [],
   "warnings": [],
   "version": "3.8.1",
-  "hash": "ca4c35f6d37a6e815904",
-  "time": 13404,
+  "hash": "99c783dd3167c6d177be",
+  "time": 10840,
   "publicPath": "",
   "assetsByChunkName": {
     "main": [
-      "main.19f9bd45e062ae2c6158.bundle.js",
-      "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-      "main.19f9bd45e062ae2c6158.bundle.js.map",
-      "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
+      "main.2d4d550782e710f7ba01.bundle.js",
+      "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css",
+      "main.2d4d550782e710f7ba01.bundle.js.map",
+      "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css.map"
     ],
     "runtime": [
       "runtime.d41d8cd98f00b204e980.bundle.js",
@@ -27,8 +27,8 @@
   },
   "assets": [
     {
-      "name": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map",
-      "size": 471,
+      "name": "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css.map",
+      "size": 695,
       "chunks": [
         "main"
       ],
@@ -38,8 +38,8 @@
       "emitted": true
     },
     {
-      "name": "main.19f9bd45e062ae2c6158.bundle.js",
-      "size": 142512,
+      "name": "main.2d4d550782e710f7ba01.bundle.js",
+      "size": 142627,
       "chunks": [
         "main"
       ],
@@ -71,8 +71,8 @@
       "emitted": true
     },
     {
-      "name": "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-      "size": 380,
+      "name": "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css",
+      "size": 410,
       "chunks": [
         "main"
       ],
@@ -82,8 +82,8 @@
       "emitted": true
     },
     {
-      "name": "main.19f9bd45e062ae2c6158.bundle.js.map",
-      "size": 647936,
+      "name": "main.2d4d550782e710f7ba01.bundle.js.map",
+      "size": 648071,
       "chunks": [
         "main"
       ],
@@ -168,10 +168,10 @@
       "assets": [
         "runtime.d41d8cd98f00b204e980.bundle.js",
         "runtime.d41d8cd98f00b204e980.bundle.js.map",
-        "main.19f9bd45e062ae2c6158.bundle.js",
-        "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-        "main.19f9bd45e062ae2c6158.bundle.js.map",
-        "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
+        "main.2d4d550782e710f7ba01.bundle.js",
+        "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css",
+        "main.2d4d550782e710f7ba01.bundle.js.map",
+        "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css.map"
       ]
     }
   },
@@ -182,17 +182,17 @@
       "initial": true,
       "entry": false,
       "extraAsync": false,
-      "size": 437182,
+      "size": 437321,
       "names": [
         "main"
       ],
       "files": [
-        "main.19f9bd45e062ae2c6158.bundle.js",
-        "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-        "main.19f9bd45e062ae2c6158.bundle.js.map",
-        "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
+        "main.2d4d550782e710f7ba01.bundle.js",
+        "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css",
+        "main.2d4d550782e710f7ba01.bundle.js.map",
+        "main.263bd84fccf9b4d8c3e0bdff8180c20d.bundle.css.map"
       ],
-      "hash": "19f9bd45e062ae2c6158",
+      "hash": "2d4d550782e710f7ba01",
       "parents": [
         "runtime"
       ],
@@ -501,7 +501,7 @@
               "moduleName": "./src/main.ts",
               "type": "cjs require",
               "userRequest": "@dojo/has/has",
-              "loc": "5:12-36"
+              "loc": "6:12-36"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/support/has.js",
@@ -854,22 +854,13 @@
             "main"
           ],
           "assets": [],
-          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-          "issuerId": "./node_modules/@dojo/shim/Promise.js",
-          "issuerName": "./node_modules/@dojo/shim/Promise.js",
+          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+          "issuerId": "./node_modules/@dojo/shim/Map.js",
+          "issuerName": "./node_modules/@dojo/shim/Map.js",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
-            {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
-              "type": "cjs require",
-              "userRequest": "./Symbol",
-              "loc": "6:0-19"
-            },
             {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
@@ -878,6 +869,15 @@
               "type": "cjs require",
               "userRequest": "./Symbol",
               "loc": "8:0-19"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "type": "cjs require",
+              "userRequest": "./Symbol",
+              "loc": "6:0-19"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/Observable.js",
@@ -992,15 +992,6 @@
               "loc": "11:15-43"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
-              "type": "cjs require",
-              "userRequest": "./global",
-              "loc": "4:15-34"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
               "module": "./node_modules/@dojo/shim/Map.js",
@@ -1008,15 +999,6 @@
               "type": "cjs require",
               "userRequest": "./global",
               "loc": "5:15-34"
-            },
-            {
-              "moduleId": "./node_modules/@dojo/shim/Observable.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Observable.js",
-              "module": "./node_modules/@dojo/shim/Observable.js",
-              "moduleName": "./node_modules/@dojo/shim/Observable.js",
-              "type": "cjs require",
-              "userRequest": "./global",
-              "loc": "4:15-34"
             },
             {
               "moduleId": "./node_modules/@dojo/core/has.js",
@@ -1028,10 +1010,19 @@
               "loc": "4:15-43"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
-              "module": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "type": "cjs require",
+              "userRequest": "./global",
+              "loc": "4:15-34"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Observable.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Observable.js",
+              "module": "./node_modules/@dojo/shim/Observable.js",
+              "moduleName": "./node_modules/@dojo/shim/Observable.js",
               "type": "cjs require",
               "userRequest": "./global",
               "loc": "4:15-34"
@@ -1044,6 +1035,15 @@
               "type": "cjs require",
               "userRequest": "./global",
               "loc": "3:15-34"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
+              "module": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+              "type": "cjs require",
+              "userRequest": "./global",
+              "loc": "4:15-34"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/support/has.js",
@@ -1262,27 +1262,27 @@
             "main"
           ],
           "assets": [],
-          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-          "issuerId": "./node_modules/@dojo/shim/Promise.js",
-          "issuerName": "./node_modules/@dojo/shim/Promise.js",
+          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+          "issuerId": "./node_modules/@dojo/shim/Map.js",
+          "issuerName": "./node_modules/@dojo/shim/Map.js",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "moduleId": "./node_modules/@dojo/shim/Map.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+              "module": "./node_modules/@dojo/shim/Map.js",
+              "moduleName": "./node_modules/@dojo/shim/Map.js",
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "7:12-36"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Map.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
-              "module": "./node_modules/@dojo/shim/Map.js",
-              "moduleName": "./node_modules/@dojo/shim/Map.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "7:12-36"
@@ -1315,15 +1315,6 @@
               "loc": "6:21-54"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
-              "module": "./node_modules/@dojo/shim/Symbol.js",
-              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
-              "type": "cjs require",
-              "userRequest": "./support/has",
-              "loc": "3:12-36"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/object.js",
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\object.js",
               "module": "./node_modules/@dojo/shim/object.js",
@@ -1331,6 +1322,15 @@
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "4:12-36"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
+              "module": "./node_modules/@dojo/shim/Symbol.js",
+              "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+              "type": "cjs require",
+              "userRequest": "./support/has",
+              "loc": "3:12-36"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/support/queue.js",
@@ -1830,13 +1830,13 @@
               "loc": "32:28-47"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
-              "module": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
+              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
               "type": "cjs require",
               "userRequest": "cldrjs",
-              "loc": "31:28-47"
+              "loc": "36:28-47"
             },
             {
               "moduleId": "./node_modules/globalize/dist/globalize/number.js",
@@ -1848,13 +1848,13 @@
               "loc": "34:28-47"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
-              "module": "./node_modules/globalize/dist/globalize/plural.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
+              "module": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
               "type": "cjs require",
               "userRequest": "cldrjs",
-              "loc": "34:28-47"
+              "loc": "31:28-47"
             },
             {
               "moduleId": "./node_modules/globalize/dist/globalize/date.js",
@@ -1866,6 +1866,15 @@
               "loc": "35:28-47"
             },
             {
+              "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
+              "module": "./node_modules/globalize/dist/globalize/plural.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+              "type": "cjs require",
+              "userRequest": "cldrjs",
+              "loc": "34:28-47"
+            },
+            {
               "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\unit.js",
               "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -1873,15 +1882,6 @@
               "type": "cjs require",
               "userRequest": "cldrjs",
               "loc": "34:28-47"
-            },
-            {
-              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
-              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "type": "cjs require",
-              "userRequest": "cldrjs",
-              "loc": "36:28-47"
             }
           ],
           "usedExports": true,
@@ -1931,13 +1931,13 @@
               "loc": "17:17-41"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
-              "module": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
+              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
               "type": "cjs require",
               "userRequest": "../globalize",
-              "loc": "31:49-74"
+              "loc": "36:49-74"
             },
             {
               "moduleId": "./node_modules/globalize/dist/globalize/number.js",
@@ -1949,13 +1949,13 @@
               "loc": "34:49-74"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
-              "module": "./node_modules/globalize/dist/globalize/plural.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
+              "module": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
               "type": "cjs require",
               "userRequest": "../globalize",
-              "loc": "34:49-74"
+              "loc": "31:49-74"
             },
             {
               "moduleId": "./node_modules/globalize/dist/globalize/date.js",
@@ -1967,6 +1967,15 @@
               "loc": "35:49-74"
             },
             {
+              "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
+              "module": "./node_modules/globalize/dist/globalize/plural.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+              "type": "cjs require",
+              "userRequest": "../globalize",
+              "loc": "34:49-74"
+            },
+            {
               "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\unit.js",
               "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -1974,15 +1983,6 @@
               "type": "cjs require",
               "userRequest": "../globalize",
               "loc": "34:49-74"
-            },
-            {
-              "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
-              "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-              "type": "cjs require",
-              "userRequest": "../globalize",
-              "loc": "36:49-74"
             }
           ],
           "usedExports": true,
@@ -2467,7 +2467,7 @@
           "id": "./node_modules/tslib/tslib.es6.js",
           "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\tslib\\tslib.es6.js",
           "name": "./node_modules/tslib/tslib.es6.js",
-          "index": 4,
+          "index": 3,
           "index2": 1,
           "size": 8033,
           "cacheable": true,
@@ -2478,13 +2478,22 @@
             "main"
           ],
           "assets": [],
-          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\App.ts",
-          "issuerId": "./src/App.ts",
-          "issuerName": "./src/App.ts",
+          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.ts",
+          "issuerId": "./src/main.ts",
+          "issuerName": "./src/main.ts",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
+            {
+              "moduleId": "./src/main.ts",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.ts",
+              "module": "./src/main.ts",
+              "moduleName": "./src/main.ts",
+              "type": "cjs require",
+              "userRequest": "tslib",
+              "loc": "3:14-30"
+            },
             {
               "moduleId": "./src/App.ts",
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\App.ts",
@@ -2504,19 +2513,28 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "moduleId": "./node_modules/@dojo/shim/Map.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+              "module": "./node_modules/@dojo/shim/Map.js",
+              "moduleName": "./node_modules/@dojo/shim/Map.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Map.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
-              "module": "./node_modules/@dojo/shim/Map.js",
-              "moduleName": "./node_modules/@dojo/shim/Map.js",
+              "moduleId": "./node_modules/@dojo/core/has.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\has.js",
+              "module": "./node_modules/@dojo/core/has.js",
+              "moduleName": "./node_modules/@dojo/core/has.js",
+              "type": "cjs require",
+              "userRequest": "tslib",
+              "loc": "3:14-30"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2540,10 +2558,10 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/core/has.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\has.js",
-              "module": "./node_modules/@dojo/core/has.js",
-              "moduleName": "./node_modules/@dojo/core/has.js",
+              "moduleId": "./node_modules/@dojo/core/lang.js",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\lang.js",
+              "module": "./node_modules/@dojo/core/lang.js",
+              "moduleName": "./node_modules/@dojo/core/lang.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2553,15 +2571,6 @@
               "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\load\\util.js",
               "module": "./node_modules/@dojo/core/load/util.js",
               "moduleName": "./node_modules/@dojo/core/load/util.js",
-              "type": "cjs require",
-              "userRequest": "tslib",
-              "loc": "3:14-30"
-            },
-            {
-              "moduleId": "./node_modules/@dojo/core/lang.js",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\lang.js",
-              "module": "./node_modules/@dojo/core/lang.js",
-              "moduleName": "./node_modules/@dojo/core/lang.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2615,7 +2624,7 @@
             "__makeTemplateObject"
           ],
           "optimizationBailout": [],
-          "depth": 3,
+          "depth": 2,
           "source": "/*! *****************************************************************************\r\nCopyright (c) Microsoft Corporation. All rights reserved.\r\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use\r\nthis file except in compliance with the License. You may obtain a copy of the\r\nLicense at http://www.apache.org/licenses/LICENSE-2.0\r\n\r\nTHIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY\r\nKIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED\r\nWARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,\r\nMERCHANTABLITY OR NON-INFRINGEMENT.\r\n\r\nSee the Apache Version 2.0 License for specific language governing permissions\r\nand limitations under the License.\r\n***************************************************************************** */\r\n/* global Reflect, Promise */\r\n\r\nvar extendStatics = Object.setPrototypeOf ||\r\n    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\r\n    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\r\n\r\nexport function __extends(d, b) {\r\n    extendStatics(d, b);\r\n    function __() { this.constructor = d; }\r\n    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\r\n}\r\n\r\nexport var __assign = Object.assign || function __assign(t) {\r\n    for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n        s = arguments[i];\r\n        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];\r\n    }\r\n    return t;\r\n}\r\n\r\nexport function __rest(s, e) {\r\n    var t = {};\r\n    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)\r\n        t[p] = s[p];\r\n    if (s != null && typeof Object.getOwnPropertySymbols === \"function\")\r\n        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)\r\n            t[p[i]] = s[p[i]];\r\n    return t;\r\n}\r\n\r\nexport function __decorate(decorators, target, key, desc) {\r\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\r\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\r\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\r\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\r\n}\r\n\r\nexport function __param(paramIndex, decorator) {\r\n    return function (target, key) { decorator(target, key, paramIndex); }\r\n}\r\n\r\nexport function __metadata(metadataKey, metadataValue) {\r\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(metadataKey, metadataValue);\r\n}\r\n\r\nexport function __awaiter(thisArg, _arguments, P, generator) {\r\n    return new (P || (P = Promise))(function (resolve, reject) {\r\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\r\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\r\n        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\r\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\r\n    });\r\n}\r\n\r\nexport function __generator(thisArg, body) {\r\n    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\r\n    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\r\n    function verb(n) { return function (v) { return step([n, v]); }; }\r\n    function step(op) {\r\n        if (f) throw new TypeError(\"Generator is already executing.\");\r\n        while (_) try {\r\n            if (f = 1, y && (t = y[op[0] & 2 ? \"return\" : op[0] ? \"throw\" : \"next\"]) && !(t = t.call(y, op[1])).done) return t;\r\n            if (y = 0, t) op = [0, t.value];\r\n            switch (op[0]) {\r\n                case 0: case 1: t = op; break;\r\n                case 4: _.label++; return { value: op[1], done: false };\r\n                case 5: _.label++; y = op[1]; op = [0]; continue;\r\n                case 7: op = _.ops.pop(); _.trys.pop(); continue;\r\n                default:\r\n                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\r\n                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\r\n                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\r\n                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\r\n                    if (t[2]) _.ops.pop();\r\n                    _.trys.pop(); continue;\r\n            }\r\n            op = body.call(thisArg, _);\r\n        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\r\n        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\r\n    }\r\n}\r\n\r\nexport function __exportStar(m, exports) {\r\n    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];\r\n}\r\n\r\nexport function __values(o) {\r\n    var m = typeof Symbol === \"function\" && o[Symbol.iterator], i = 0;\r\n    if (m) return m.call(o);\r\n    return {\r\n        next: function () {\r\n            if (o && i >= o.length) o = void 0;\r\n            return { value: o && o[i++], done: !o };\r\n        }\r\n    };\r\n}\r\n\r\nexport function __read(o, n) {\r\n    var m = typeof Symbol === \"function\" && o[Symbol.iterator];\r\n    if (!m) return o;\r\n    var i = m.call(o), r, ar = [], e;\r\n    try {\r\n        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);\r\n    }\r\n    catch (error) { e = { error: error }; }\r\n    finally {\r\n        try {\r\n            if (r && !r.done && (m = i[\"return\"])) m.call(i);\r\n        }\r\n        finally { if (e) throw e.error; }\r\n    }\r\n    return ar;\r\n}\r\n\r\nexport function __spread() {\r\n    for (var ar = [], i = 0; i < arguments.length; i++)\r\n        ar = ar.concat(__read(arguments[i]));\r\n    return ar;\r\n}\r\n\r\nexport function __await(v) {\r\n    return this instanceof __await ? (this.v = v, this) : new __await(v);\r\n}\r\n\r\nexport function __asyncGenerator(thisArg, _arguments, generator) {\r\n    if (!Symbol.asyncIterator) throw new TypeError(\"Symbol.asyncIterator is not defined.\");\r\n    var g = generator.apply(thisArg, _arguments || []), i, q = [];\r\n    return i = {}, verb(\"next\"), verb(\"throw\"), verb(\"return\"), i[Symbol.asyncIterator] = function () { return this; }, i;\r\n    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }\r\n    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }\r\n    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);  }\r\n    function fulfill(value) { resume(\"next\", value); }\r\n    function reject(value) { resume(\"throw\", value); }\r\n    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }\r\n}\r\n\r\nexport function __asyncDelegator(o) {\r\n    var i, p;\r\n    return i = {}, verb(\"next\"), verb(\"throw\", function (e) { throw e; }), verb(\"return\"), i[Symbol.iterator] = function () { return this; }, i;\r\n    function verb(n, f) { if (o[n]) i[n] = function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === \"return\" } : f ? f(v) : v; }; }\r\n}\r\n\r\nexport function __asyncValues(o) {\r\n    if (!Symbol.asyncIterator) throw new TypeError(\"Symbol.asyncIterator is not defined.\");\r\n    var m = o[Symbol.asyncIterator];\r\n    return m ? m.call(o) : typeof __values === \"function\" ? __values(o) : o[Symbol.iterator]();\r\n}\r\n\r\nexport function __makeTemplateObject(cooked, raw) {\r\n    if (Object.defineProperty) { Object.defineProperty(cooked, \"raw\", { value: raw }); } else { cooked.raw = raw; }\r\n    return cooked;\r\n};\r\n"
         },
         {
@@ -2687,7 +2696,7 @@
           "id": "./src/App.ts",
           "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\App.ts",
           "name": "./src/App.ts",
-          "index": 3,
+          "index": 4,
           "index2": 9,
           "size": 2561,
           "cacheable": true,
@@ -2712,7 +2721,7 @@
               "moduleName": "./src/main.ts",
               "type": "cjs require",
               "userRequest": "./App",
-              "loc": "3:12-28"
+              "loc": "4:12-28"
             }
           ],
           "usedExports": true,
@@ -2727,7 +2736,7 @@
           "name": "./src/app.m.css",
           "index": 5,
           "index2": 2,
-          "size": 93,
+          "size": 103,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -2750,7 +2759,7 @@
               "moduleName": "./src/main.ts",
               "type": "cjs require",
               "userRequest": "./app.m.css",
-              "loc": "4:10-32"
+              "loc": "5:10-32"
             },
             {
               "moduleId": "./src/App.ts",
@@ -2766,7 +2775,7 @@
           "providedExports": null,
           "optimizationBailout": [],
           "depth": 2,
-          "source": "// removed by extract-text-webpack-plugin\nmodule.exports = {\" _key\":\"app\",\"root\":\"YxttPEx-\"};"
+          "source": "// removed by extract-text-webpack-plugin\nmodule.exports = {\" _key\":\"app\",\"root\":\"YxttPEx- _2d86pM5c\"};"
         },
         {
           "id": "./src/main.css",
@@ -2812,7 +2821,7 @@
           "name": "./src/main.ts",
           "index": 2,
           "index2": 53,
-          "size": 460,
+          "size": 589,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -2842,7 +2851,7 @@
           "providedExports": null,
           "optimizationBailout": [],
           "depth": 1,
-          "source": "\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar App_1 = require(\"./App\");\r\nvar css = require(\"./app.m.css\");\r\nvar has_1 = require(\"@dojo/has/has\");\r\n// !has('bar')\r\n// elided: import './Bar'\r\nif (true) {\r\n    console.log('foo');\r\n}\r\nApp_1.default().then(function (result) {\r\n    console.log(result());\r\n    var div = document.createElement('div');\r\n    div.classList.add(css.root);\r\n    document.body.appendChild(div);\r\n});\r\n"
+          "source": "\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar tslib_1 = require(\"tslib\");\r\nvar App_1 = require(\"./App\");\r\nvar css = require(\"./app.m.css\");\r\nvar has_1 = require(\"@dojo/has/has\");\r\n// !has('bar')\r\n// elided: import './Bar'\r\nif (true) {\r\n    console.log('foo');\r\n}\r\nApp_1.default().then(function (result) {\r\n    console.log(result());\r\n    var div = document.createElement('div');\r\n    div.innerHTML = 'hello, world';\r\n    (_a = div.classList).add.apply(_a, tslib_1.__spread(css.root.split(' ')));\r\n    document.body.appendChild(div);\r\n    var _a;\r\n});\r\n"
         }
       ],
       "filteredModules": 0,
@@ -3373,7 +3382,7 @@
           "moduleName": "./src/main.ts",
           "type": "cjs require",
           "userRequest": "@dojo/has/has",
-          "loc": "5:12-36"
+          "loc": "6:12-36"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/support/has.js",
@@ -3726,22 +3735,13 @@
         "main"
       ],
       "assets": [],
-      "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-      "issuerId": "./node_modules/@dojo/shim/Promise.js",
-      "issuerName": "./node_modules/@dojo/shim/Promise.js",
+      "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+      "issuerId": "./node_modules/@dojo/shim/Map.js",
+      "issuerName": "./node_modules/@dojo/shim/Map.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
-        {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
-          "type": "cjs require",
-          "userRequest": "./Symbol",
-          "loc": "6:0-19"
-        },
         {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
@@ -3750,6 +3750,15 @@
           "type": "cjs require",
           "userRequest": "./Symbol",
           "loc": "8:0-19"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "type": "cjs require",
+          "userRequest": "./Symbol",
+          "loc": "6:0-19"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/Observable.js",
@@ -3864,15 +3873,6 @@
           "loc": "11:15-43"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
-          "type": "cjs require",
-          "userRequest": "./global",
-          "loc": "4:15-34"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
           "module": "./node_modules/@dojo/shim/Map.js",
@@ -3880,15 +3880,6 @@
           "type": "cjs require",
           "userRequest": "./global",
           "loc": "5:15-34"
-        },
-        {
-          "moduleId": "./node_modules/@dojo/shim/Observable.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Observable.js",
-          "module": "./node_modules/@dojo/shim/Observable.js",
-          "moduleName": "./node_modules/@dojo/shim/Observable.js",
-          "type": "cjs require",
-          "userRequest": "./global",
-          "loc": "4:15-34"
         },
         {
           "moduleId": "./node_modules/@dojo/core/has.js",
@@ -3900,10 +3891,19 @@
           "loc": "4:15-43"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
-          "module": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "type": "cjs require",
+          "userRequest": "./global",
+          "loc": "4:15-34"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Observable.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Observable.js",
+          "module": "./node_modules/@dojo/shim/Observable.js",
+          "moduleName": "./node_modules/@dojo/shim/Observable.js",
           "type": "cjs require",
           "userRequest": "./global",
           "loc": "4:15-34"
@@ -3916,6 +3916,15 @@
           "type": "cjs require",
           "userRequest": "./global",
           "loc": "3:15-34"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
+          "module": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+          "type": "cjs require",
+          "userRequest": "./global",
+          "loc": "4:15-34"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/support/has.js",
@@ -4134,27 +4143,27 @@
         "main"
       ],
       "assets": [],
-      "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-      "issuerId": "./node_modules/@dojo/shim/Promise.js",
-      "issuerName": "./node_modules/@dojo/shim/Promise.js",
+      "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+      "issuerId": "./node_modules/@dojo/shim/Map.js",
+      "issuerName": "./node_modules/@dojo/shim/Map.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "moduleId": "./node_modules/@dojo/shim/Map.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+          "module": "./node_modules/@dojo/shim/Map.js",
+          "moduleName": "./node_modules/@dojo/shim/Map.js",
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "7:12-36"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Map.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
-          "module": "./node_modules/@dojo/shim/Map.js",
-          "moduleName": "./node_modules/@dojo/shim/Map.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "7:12-36"
@@ -4187,15 +4196,6 @@
           "loc": "6:21-54"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
-          "module": "./node_modules/@dojo/shim/Symbol.js",
-          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
-          "type": "cjs require",
-          "userRequest": "./support/has",
-          "loc": "3:12-36"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/object.js",
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\object.js",
           "module": "./node_modules/@dojo/shim/object.js",
@@ -4203,6 +4203,15 @@
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "4:12-36"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Symbol.js",
+          "module": "./node_modules/@dojo/shim/Symbol.js",
+          "moduleName": "./node_modules/@dojo/shim/Symbol.js",
+          "type": "cjs require",
+          "userRequest": "./support/has",
+          "loc": "3:12-36"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/support/queue.js",
@@ -4816,13 +4825,13 @@
           "loc": "32:28-47"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
-          "module": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
+          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
           "type": "cjs require",
           "userRequest": "cldrjs",
-          "loc": "31:28-47"
+          "loc": "36:28-47"
         },
         {
           "moduleId": "./node_modules/globalize/dist/globalize/number.js",
@@ -4834,13 +4843,13 @@
           "loc": "34:28-47"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
-          "module": "./node_modules/globalize/dist/globalize/plural.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
+          "module": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
           "type": "cjs require",
           "userRequest": "cldrjs",
-          "loc": "34:28-47"
+          "loc": "31:28-47"
         },
         {
           "moduleId": "./node_modules/globalize/dist/globalize/date.js",
@@ -4852,6 +4861,15 @@
           "loc": "35:28-47"
         },
         {
+          "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
+          "module": "./node_modules/globalize/dist/globalize/plural.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+          "type": "cjs require",
+          "userRequest": "cldrjs",
+          "loc": "34:28-47"
+        },
+        {
           "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\unit.js",
           "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -4859,15 +4877,6 @@
           "type": "cjs require",
           "userRequest": "cldrjs",
           "loc": "34:28-47"
-        },
-        {
-          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
-          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "type": "cjs require",
-          "userRequest": "cldrjs",
-          "loc": "36:28-47"
         }
       ],
       "usedExports": true,
@@ -4917,13 +4926,13 @@
           "loc": "17:17-41"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
-          "module": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
+          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
           "type": "cjs require",
           "userRequest": "../globalize",
-          "loc": "31:49-74"
+          "loc": "36:49-74"
         },
         {
           "moduleId": "./node_modules/globalize/dist/globalize/number.js",
@@ -4935,13 +4944,13 @@
           "loc": "34:49-74"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
-          "module": "./node_modules/globalize/dist/globalize/plural.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\currency.js",
+          "module": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
           "type": "cjs require",
           "userRequest": "../globalize",
-          "loc": "34:49-74"
+          "loc": "31:49-74"
         },
         {
           "moduleId": "./node_modules/globalize/dist/globalize/date.js",
@@ -4953,6 +4962,15 @@
           "loc": "35:49-74"
         },
         {
+          "moduleId": "./node_modules/globalize/dist/globalize/plural.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\plural.js",
+          "module": "./node_modules/globalize/dist/globalize/plural.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/plural.js",
+          "type": "cjs require",
+          "userRequest": "../globalize",
+          "loc": "34:49-74"
+        },
+        {
           "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\unit.js",
           "module": "./node_modules/globalize/dist/globalize/unit.js",
@@ -4960,15 +4978,6 @@
           "type": "cjs require",
           "userRequest": "../globalize",
           "loc": "34:49-74"
-        },
-        {
-          "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\imports-loader\\index.js?define=>false!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\globalize\\dist\\globalize\\relative-time.js",
-          "module": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/relative-time.js",
-          "type": "cjs require",
-          "userRequest": "../globalize",
-          "loc": "36:49-74"
         }
       ],
       "usedExports": true,
@@ -5453,7 +5462,7 @@
       "id": "./node_modules/tslib/tslib.es6.js",
       "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\tslib\\tslib.es6.js",
       "name": "./node_modules/tslib/tslib.es6.js",
-      "index": 4,
+      "index": 3,
       "index2": 1,
       "size": 8033,
       "cacheable": true,
@@ -5464,13 +5473,22 @@
         "main"
       ],
       "assets": [],
-      "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\App.ts",
-      "issuerId": "./src/App.ts",
-      "issuerName": "./src/App.ts",
+      "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.ts",
+      "issuerId": "./src/main.ts",
+      "issuerName": "./src/main.ts",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
+        {
+          "moduleId": "./src/main.ts",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.ts",
+          "module": "./src/main.ts",
+          "moduleName": "./src/main.ts",
+          "type": "cjs require",
+          "userRequest": "tslib",
+          "loc": "3:14-30"
+        },
         {
           "moduleId": "./src/App.ts",
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\App.ts",
@@ -5490,19 +5508,28 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "moduleId": "./node_modules/@dojo/shim/Map.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
+          "module": "./node_modules/@dojo/shim/Map.js",
+          "moduleName": "./node_modules/@dojo/shim/Map.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Map.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Map.js",
-          "module": "./node_modules/@dojo/shim/Map.js",
-          "moduleName": "./node_modules/@dojo/shim/Map.js",
+          "moduleId": "./node_modules/@dojo/core/has.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\has.js",
+          "module": "./node_modules/@dojo/core/has.js",
+          "moduleName": "./node_modules/@dojo/core/has.js",
+          "type": "cjs require",
+          "userRequest": "tslib",
+          "loc": "3:14-30"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\shim\\Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5526,10 +5553,10 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/core/has.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\has.js",
-          "module": "./node_modules/@dojo/core/has.js",
-          "moduleName": "./node_modules/@dojo/core/has.js",
+          "moduleId": "./node_modules/@dojo/core/lang.js",
+          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\lang.js",
+          "module": "./node_modules/@dojo/core/lang.js",
+          "moduleName": "./node_modules/@dojo/core/lang.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5539,15 +5566,6 @@
           "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\load\\util.js",
           "module": "./node_modules/@dojo/core/load/util.js",
           "moduleName": "./node_modules/@dojo/core/load/util.js",
-          "type": "cjs require",
-          "userRequest": "tslib",
-          "loc": "3:14-30"
-        },
-        {
-          "moduleId": "./node_modules/@dojo/core/lang.js",
-          "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\core\\lang.js",
-          "module": "./node_modules/@dojo/core/lang.js",
-          "moduleName": "./node_modules/@dojo/core/lang.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5601,7 +5619,7 @@
         "__makeTemplateObject"
       ],
       "optimizationBailout": [],
-      "depth": 3,
+      "depth": 2,
       "source": "/*! *****************************************************************************\r\nCopyright (c) Microsoft Corporation. All rights reserved.\r\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use\r\nthis file except in compliance with the License. You may obtain a copy of the\r\nLicense at http://www.apache.org/licenses/LICENSE-2.0\r\n\r\nTHIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY\r\nKIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED\r\nWARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,\r\nMERCHANTABLITY OR NON-INFRINGEMENT.\r\n\r\nSee the Apache Version 2.0 License for specific language governing permissions\r\nand limitations under the License.\r\n***************************************************************************** */\r\n/* global Reflect, Promise */\r\n\r\nvar extendStatics = Object.setPrototypeOf ||\r\n    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\r\n    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\r\n\r\nexport function __extends(d, b) {\r\n    extendStatics(d, b);\r\n    function __() { this.constructor = d; }\r\n    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\r\n}\r\n\r\nexport var __assign = Object.assign || function __assign(t) {\r\n    for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n        s = arguments[i];\r\n        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];\r\n    }\r\n    return t;\r\n}\r\n\r\nexport function __rest(s, e) {\r\n    var t = {};\r\n    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)\r\n        t[p] = s[p];\r\n    if (s != null && typeof Object.getOwnPropertySymbols === \"function\")\r\n        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)\r\n            t[p[i]] = s[p[i]];\r\n    return t;\r\n}\r\n\r\nexport function __decorate(decorators, target, key, desc) {\r\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\r\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\r\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\r\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\r\n}\r\n\r\nexport function __param(paramIndex, decorator) {\r\n    return function (target, key) { decorator(target, key, paramIndex); }\r\n}\r\n\r\nexport function __metadata(metadataKey, metadataValue) {\r\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(metadataKey, metadataValue);\r\n}\r\n\r\nexport function __awaiter(thisArg, _arguments, P, generator) {\r\n    return new (P || (P = Promise))(function (resolve, reject) {\r\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\r\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\r\n        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\r\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\r\n    });\r\n}\r\n\r\nexport function __generator(thisArg, body) {\r\n    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\r\n    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\r\n    function verb(n) { return function (v) { return step([n, v]); }; }\r\n    function step(op) {\r\n        if (f) throw new TypeError(\"Generator is already executing.\");\r\n        while (_) try {\r\n            if (f = 1, y && (t = y[op[0] & 2 ? \"return\" : op[0] ? \"throw\" : \"next\"]) && !(t = t.call(y, op[1])).done) return t;\r\n            if (y = 0, t) op = [0, t.value];\r\n            switch (op[0]) {\r\n                case 0: case 1: t = op; break;\r\n                case 4: _.label++; return { value: op[1], done: false };\r\n                case 5: _.label++; y = op[1]; op = [0]; continue;\r\n                case 7: op = _.ops.pop(); _.trys.pop(); continue;\r\n                default:\r\n                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\r\n                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\r\n                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\r\n                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\r\n                    if (t[2]) _.ops.pop();\r\n                    _.trys.pop(); continue;\r\n            }\r\n            op = body.call(thisArg, _);\r\n        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\r\n        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\r\n    }\r\n}\r\n\r\nexport function __exportStar(m, exports) {\r\n    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];\r\n}\r\n\r\nexport function __values(o) {\r\n    var m = typeof Symbol === \"function\" && o[Symbol.iterator], i = 0;\r\n    if (m) return m.call(o);\r\n    return {\r\n        next: function () {\r\n            if (o && i >= o.length) o = void 0;\r\n            return { value: o && o[i++], done: !o };\r\n        }\r\n    };\r\n}\r\n\r\nexport function __read(o, n) {\r\n    var m = typeof Symbol === \"function\" && o[Symbol.iterator];\r\n    if (!m) return o;\r\n    var i = m.call(o), r, ar = [], e;\r\n    try {\r\n        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);\r\n    }\r\n    catch (error) { e = { error: error }; }\r\n    finally {\r\n        try {\r\n            if (r && !r.done && (m = i[\"return\"])) m.call(i);\r\n        }\r\n        finally { if (e) throw e.error; }\r\n    }\r\n    return ar;\r\n}\r\n\r\nexport function __spread() {\r\n    for (var ar = [], i = 0; i < arguments.length; i++)\r\n        ar = ar.concat(__read(arguments[i]));\r\n    return ar;\r\n}\r\n\r\nexport function __await(v) {\r\n    return this instanceof __await ? (this.v = v, this) : new __await(v);\r\n}\r\n\r\nexport function __asyncGenerator(thisArg, _arguments, generator) {\r\n    if (!Symbol.asyncIterator) throw new TypeError(\"Symbol.asyncIterator is not defined.\");\r\n    var g = generator.apply(thisArg, _arguments || []), i, q = [];\r\n    return i = {}, verb(\"next\"), verb(\"throw\"), verb(\"return\"), i[Symbol.asyncIterator] = function () { return this; }, i;\r\n    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }\r\n    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }\r\n    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);  }\r\n    function fulfill(value) { resume(\"next\", value); }\r\n    function reject(value) { resume(\"throw\", value); }\r\n    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }\r\n}\r\n\r\nexport function __asyncDelegator(o) {\r\n    var i, p;\r\n    return i = {}, verb(\"next\"), verb(\"throw\", function (e) { throw e; }), verb(\"return\"), i[Symbol.iterator] = function () { return this; }, i;\r\n    function verb(n, f) { if (o[n]) i[n] = function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === \"return\" } : f ? f(v) : v; }; }\r\n}\r\n\r\nexport function __asyncValues(o) {\r\n    if (!Symbol.asyncIterator) throw new TypeError(\"Symbol.asyncIterator is not defined.\");\r\n    var m = o[Symbol.asyncIterator];\r\n    return m ? m.call(o) : typeof __values === \"function\" ? __values(o) : o[Symbol.iterator]();\r\n}\r\n\r\nexport function __makeTemplateObject(cooked, raw) {\r\n    if (Object.defineProperty) { Object.defineProperty(cooked, \"raw\", { value: raw }); } else { cooked.raw = raw; }\r\n    return cooked;\r\n};\r\n"
     },
     {
@@ -5673,7 +5691,7 @@
       "id": "./src/App.ts",
       "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--3-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js??ref--3-1!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\ts-loader\\index.js??ref--3-2!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=ts&instanceName=0_dojo!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\App.ts",
       "name": "./src/App.ts",
-      "index": 3,
+      "index": 4,
       "index2": 9,
       "size": 2561,
       "cacheable": true,
@@ -5698,7 +5716,7 @@
           "moduleName": "./src/main.ts",
           "type": "cjs require",
           "userRequest": "./App",
-          "loc": "3:12-28"
+          "loc": "4:12-28"
         }
       ],
       "usedExports": true,
@@ -5713,7 +5731,7 @@
       "name": "./src/app.m.css",
       "index": 5,
       "index2": 2,
-      "size": 93,
+      "size": 103,
       "cacheable": true,
       "built": true,
       "optional": false,
@@ -5736,7 +5754,7 @@
           "moduleName": "./src/main.ts",
           "type": "cjs require",
           "userRequest": "./app.m.css",
-          "loc": "4:10-32"
+          "loc": "5:10-32"
         },
         {
           "moduleId": "./src/App.ts",
@@ -5752,7 +5770,7 @@
       "providedExports": null,
       "optimizationBailout": [],
       "depth": 2,
-      "source": "// removed by extract-text-webpack-plugin\nmodule.exports = {\" _key\":\"app\",\"root\":\"YxttPEx-\"};"
+      "source": "// removed by extract-text-webpack-plugin\nmodule.exports = {\" _key\":\"app\",\"root\":\"YxttPEx- _2d86pM5c\"};"
     },
     {
       "id": "./src/main.css",
@@ -5798,7 +5816,7 @@
       "name": "./src/main.ts",
       "index": 2,
       "index2": 53,
-      "size": 460,
+      "size": 589,
       "cacheable": true,
       "built": true,
       "optional": false,
@@ -5828,11 +5846,195 @@
       "providedExports": null,
       "optimizationBailout": [],
       "depth": 1,
-      "source": "\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar App_1 = require(\"./App\");\r\nvar css = require(\"./app.m.css\");\r\nvar has_1 = require(\"@dojo/has/has\");\r\n// !has('bar')\r\n// elided: import './Bar'\r\nif (true) {\r\n    console.log('foo');\r\n}\r\nApp_1.default().then(function (result) {\r\n    console.log(result());\r\n    var div = document.createElement('div');\r\n    div.classList.add(css.root);\r\n    document.body.appendChild(div);\r\n});\r\n"
+      "source": "\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar tslib_1 = require(\"tslib\");\r\nvar App_1 = require(\"./App\");\r\nvar css = require(\"./app.m.css\");\r\nvar has_1 = require(\"@dojo/has/has\");\r\n// !has('bar')\r\n// elided: import './Bar'\r\nif (true) {\r\n    console.log('foo');\r\n}\r\nApp_1.default().then(function (result) {\r\n    console.log(result());\r\n    var div = document.createElement('div');\r\n    div.innerHTML = 'hello, world';\r\n    (_a = div.classList).add.apply(_a, tslib_1.__spread(css.root.split(' ')));\r\n    document.body.appendChild(div);\r\n    var _a;\r\n});\r\n"
     }
   ],
   "filteredModules": 0,
   "children": [
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "assetsByChunkName": {},
+      "assets": [],
+      "filteredAssets": 0,
+      "entrypoints": {
+        "undefined": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "extract-text-webpack-plugin-output-filename"
+          ]
+        }
+      },
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "extraAsync": false,
+          "size": 2750,
+          "names": [],
+          "files": [
+            "extract-text-webpack-plugin-output-filename"
+          ],
+          "hash": "e38819652f75cc024eb7",
+          "parents": [],
+          "modules": [
+            {
+              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "index": 0,
+              "index2": 1,
+              "size": 490,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [],
+              "usedExports": true,
+              "providedExports": null,
+              "optimizationBailout": [],
+              "depth": 0,
+              "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".QHEFgSeI {\\n\\tbackground: purple;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/main.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,mBAAmB;CACnB\",\"file\":\"main.css\",\"sourcesContent\":[\".app {\\n\\tbackground: purple;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"main.css\",\n\t\"app\": \"QHEFgSeI\"\n};"
+            },
+            {
+              "id": "./node_modules/css-loader/lib/css-base.js",
+              "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\lib\\css-base.js",
+              "name": "./node_modules/css-loader/lib/css-base.js",
+              "index": 1,
+              "index2": 0,
+              "size": 2260,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [
+                {
+                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+                  "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+                  "type": "cjs require",
+                  "userRequest": "../node_modules/css-loader/lib/css-base.js",
+                  "loc": "1:27-80"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": null,
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
+            }
+          ],
+          "filteredModules": 0,
+          "origins": [
+            {
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "module": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "loc": "",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "index": 0,
+          "index2": 1,
+          "size": 490,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [],
+          "depth": 0,
+          "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".QHEFgSeI {\\n\\tbackground: purple;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/main.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,mBAAmB;CACnB\",\"file\":\"main.css\",\"sourcesContent\":[\".app {\\n\\tbackground: purple;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"main.css\",\n\t\"app\": \"QHEFgSeI\"\n};"
+        },
+        {
+          "id": "./node_modules/css-loader/lib/css-base.js",
+          "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\lib\\css-base.js",
+          "name": "./node_modules/css-loader/lib/css-base.js",
+          "index": 1,
+          "index2": 0,
+          "size": 2260,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
+              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
+              "type": "cjs require",
+              "userRequest": "../node_modules/css-loader/lib/css-base.js",
+              "loc": "1:27-80"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
+        }
+      ],
+      "filteredModules": 0,
+      "children": [],
+      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??postcss!src/main.css"
+    },
     {
       "errors": [],
       "warnings": [],
@@ -6202,196 +6404,12 @@
           "initial": true,
           "entry": true,
           "extraAsync": false,
-          "size": 2750,
+          "size": 3891,
           "names": [],
           "files": [
             "extract-text-webpack-plugin-output-filename"
           ],
-          "hash": "e38819652f75cc024eb7",
-          "parents": [],
-          "modules": [
-            {
-              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "index": 0,
-              "index2": 1,
-              "size": 490,
-              "cacheable": true,
-              "built": true,
-              "optional": false,
-              "prefetched": false,
-              "chunks": [
-                0
-              ],
-              "assets": [],
-              "issuer": null,
-              "issuerId": null,
-              "issuerName": null,
-              "failed": false,
-              "errors": 0,
-              "warnings": 0,
-              "reasons": [],
-              "usedExports": true,
-              "providedExports": null,
-              "optimizationBailout": [],
-              "depth": 0,
-              "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".QHEFgSeI {\\n\\tbackground: purple;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/main.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,mBAAmB;CACnB\",\"file\":\"main.css\",\"sourcesContent\":[\".app {\\n\\tbackground: purple;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"main.css\",\n\t\"app\": \"QHEFgSeI\"\n};"
-            },
-            {
-              "id": "./node_modules/css-loader/lib/css-base.js",
-              "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\lib\\css-base.js",
-              "name": "./node_modules/css-loader/lib/css-base.js",
-              "index": 1,
-              "index2": 0,
-              "size": 2260,
-              "cacheable": true,
-              "built": true,
-              "optional": false,
-              "prefetched": false,
-              "chunks": [
-                0
-              ],
-              "assets": [],
-              "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "failed": false,
-              "errors": 0,
-              "warnings": 0,
-              "reasons": [
-                {
-                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-                  "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-                  "type": "cjs require",
-                  "userRequest": "../node_modules/css-loader/lib/css-base.js",
-                  "loc": "1:27-80"
-                }
-              ],
-              "usedExports": true,
-              "providedExports": null,
-              "optimizationBailout": [],
-              "depth": 1,
-              "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
-            }
-          ],
-          "filteredModules": 0,
-          "origins": [
-            {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "module": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "loc": "",
-              "reasons": []
-            }
-          ]
-        }
-      ],
-      "modules": [
-        {
-          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-          "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-          "index": 0,
-          "index2": 1,
-          "size": 490,
-          "cacheable": true,
-          "built": true,
-          "optional": false,
-          "prefetched": false,
-          "chunks": [
-            0
-          ],
-          "assets": [],
-          "issuer": null,
-          "issuerId": null,
-          "issuerName": null,
-          "failed": false,
-          "errors": 0,
-          "warnings": 0,
-          "reasons": [],
-          "usedExports": true,
-          "providedExports": null,
-          "optimizationBailout": [],
-          "depth": 0,
-          "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".QHEFgSeI {\\n\\tbackground: purple;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/main.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,mBAAmB;CACnB\",\"file\":\"main.css\",\"sourcesContent\":[\".app {\\n\\tbackground: purple;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"main.css\",\n\t\"app\": \"QHEFgSeI\"\n};"
-        },
-        {
-          "id": "./node_modules/css-loader/lib/css-base.js",
-          "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\static-build-loader\\index.js??ref--4-0!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\umd-compat-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\lib\\css-base.js",
-          "name": "./node_modules/css-loader/lib/css-base.js",
-          "index": 1,
-          "index2": 0,
-          "size": 2260,
-          "cacheable": true,
-          "built": true,
-          "optional": false,
-          "prefetched": false,
-          "chunks": [
-            0
-          ],
-          "assets": [],
-          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-          "failed": false,
-          "errors": 0,
-          "warnings": 0,
-          "reasons": [
-            {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\main.css",
-              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./src/main.css",
-              "type": "cjs require",
-              "userRequest": "../node_modules/css-loader/lib/css-base.js",
-              "loc": "1:27-80"
-            }
-          ],
-          "usedExports": true,
-          "providedExports": null,
-          "optimizationBailout": [],
-          "depth": 1,
-          "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
-        }
-      ],
-      "filteredModules": 0,
-      "children": [],
-      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??postcss!src/main.css"
-    },
-    {
-      "errors": [],
-      "warnings": [],
-      "publicPath": "",
-      "assetsByChunkName": {},
-      "assets": [],
-      "filteredAssets": 0,
-      "entrypoints": {
-        "undefined": {
-          "chunks": [
-            0
-          ],
-          "assets": [
-            "extract-text-webpack-plugin-output-filename"
-          ]
-        }
-      },
-      "chunks": [
-        {
-          "id": 0,
-          "rendered": true,
-          "initial": true,
-          "entry": true,
-          "extraAsync": false,
-          "size": 2833,
-          "names": [],
-          "files": [
-            "extract-text-webpack-plugin-output-filename"
-          ],
-          "hash": "f8b6e042d6abb2ec1077",
+          "hash": "fbad80cf96e599ee8eac",
           "parents": [],
           "modules": [
             {
@@ -6399,8 +6417,8 @@
               "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
               "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
               "index": 0,
-              "index2": 1,
-              "size": 573,
+              "index2": 2,
+              "size": 1134,
               "cacheable": true,
               "built": true,
               "optional": false,
@@ -6420,7 +6438,54 @@
               "providedExports": null,
               "optimizationBailout": [],
               "depth": 0,
-              "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,gBAAgB;CAChB,aAAa;CACb,cAAc;CACd\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx-\"\n};"
+              "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\nexports.i(require(\"-!../node_modules/css-loader/index.js?{\\\"modules\\\":true,\\\"sourceMap\\\":true,\\\"importLoaders\\\":1,\\\"localIdentName\\\":\\\"[hash:base64:8]\\\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css\"), undefined);\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\twidth: 100px;\\n\\theight: 100px;\\n\\tcolor: red;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CAEC,aAAa;CACb,cAAc;CACd,WAAW;CACX\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tcomposes: root from '../external/test-theme/theme.m.css';\\n\\twidth: 100px;\\n\\theight: 100px;\\n\\tcolor: red;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx- \" + require(\"-!../node_modules/css-loader/index.js?{\\\"modules\\\":true,\\\"sourceMap\\\":true,\\\"importLoaders\\\":1,\\\"localIdentName\\\":\\\"[hash:base64:8]\\\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css\").locals[\"root\"] + \"\"\n};"
+            },
+            {
+              "id": "./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+              "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\external\\test-theme\\theme.m.css",
+              "name": "./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+              "index": 2,
+              "index2": 1,
+              "size": 497,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
+              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [
+                {
+                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+                  "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
+                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "type": "cjs require",
+                  "userRequest": "-!../node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css",
+                  "loc": "3:10-243"
+                },
+                {
+                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+                  "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
+                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "type": "cjs require",
+                  "userRequest": "-!../node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css",
+                  "loc": "10:23-256"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": null,
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "exports = module.exports = require(\"../../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \"._2d86pM5c {\\n\\tbackground: green;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/external/test-theme/theme.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,kBAAkB;CAClB\",\"file\":\"theme.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: green;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\n\t\"root\": \"_2d86pM5c\"\n};"
             },
             {
               "id": "./node_modules/css-loader/lib/css-base.js",
@@ -6452,6 +6517,15 @@
                   "type": "cjs require",
                   "userRequest": "../node_modules/css-loader/lib/css-base.js",
                   "loc": "1:27-80"
+                },
+                {
+                  "moduleId": "./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+                  "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\external\\test-theme\\theme.m.css",
+                  "module": "./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+                  "moduleName": "./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+                  "type": "cjs require",
+                  "userRequest": "../../node_modules/css-loader/lib/css-base.js",
+                  "loc": "1:27-83"
                 }
               ],
               "usedExports": true,
@@ -6480,8 +6554,8 @@
           "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
           "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
           "index": 0,
-          "index2": 1,
-          "size": 573,
+          "index2": 2,
+          "size": 1134,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -6501,7 +6575,54 @@
           "providedExports": null,
           "optimizationBailout": [],
           "depth": 0,
-          "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,gBAAgB;CAChB,aAAa;CACb,cAAc;CACd\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx-\"\n};"
+          "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\nexports.i(require(\"-!../node_modules/css-loader/index.js?{\\\"modules\\\":true,\\\"sourceMap\\\":true,\\\"importLoaders\\\":1,\\\"localIdentName\\\":\\\"[hash:base64:8]\\\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css\"), undefined);\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\twidth: 100px;\\n\\theight: 100px;\\n\\tcolor: red;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CAEC,aAAa;CACb,cAAc;CACd,WAAW;CACX\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tcomposes: root from '../external/test-theme/theme.m.css';\\n\\twidth: 100px;\\n\\theight: 100px;\\n\\tcolor: red;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx- \" + require(\"-!../node_modules/css-loader/index.js?{\\\"modules\\\":true,\\\"sourceMap\\\":true,\\\"importLoaders\\\":1,\\\"localIdentName\\\":\\\"[hash:base64:8]\\\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css\").locals[\"root\"] + \"\"\n};"
+        },
+        {
+          "id": "./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+          "identifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\external\\test-theme\\theme.m.css",
+          "name": "./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+          "index": 2,
+          "index2": 1,
+          "size": 497,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
+          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
+              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "type": "cjs require",
+              "userRequest": "-!../node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css",
+              "loc": "3:10-243"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-decorator-loader\\index.js!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\@dojo\\webpack-contrib\\css-module-dts-loader\\index.js?type=css!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\src\\app.m.css",
+              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "type": "cjs require",
+              "userRequest": "-!../node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!../node_modules/postcss-loader/lib/index.js??postcss!../external/test-theme/theme.m.css",
+              "loc": "10:23-256"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "exports = module.exports = require(\"../../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \"._2d86pM5c {\\n\\tbackground: green;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"C:/Users/Tom/Documents/sitepen/cli-build-app/test-app/external/test-theme/theme.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,kBAAkB;CAClB\",\"file\":\"theme.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: green;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\n\t\"root\": \"_2d86pM5c\"\n};"
         },
         {
           "id": "./node_modules/css-loader/lib/css-base.js",
@@ -6533,6 +6654,15 @@
               "type": "cjs require",
               "userRequest": "../node_modules/css-loader/lib/css-base.js",
               "loc": "1:27-80"
+            },
+            {
+              "moduleId": "./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+              "moduleIdentifier": "C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\css-loader\\index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\node_modules\\postcss-loader\\lib\\index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!C:\\Users\\Tom\\Documents\\sitepen\\cli-build-app\\test-app\\external\\test-theme\\theme.m.css",
+              "module": "./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+              "moduleName": "./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./external/test-theme/theme.m.css",
+              "type": "cjs require",
+              "userRequest": "../../node_modules/css-loader/lib/css-base.js",
+              "loc": "1:27-83"
             }
           ],
           "usedExports": true,
