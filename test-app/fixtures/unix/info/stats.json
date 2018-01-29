@@ -2,14 +2,14 @@
   "errors": [],
   "warnings": [],
   "version": "3.8.1",
-  "hash": "241f4d75ab3c74075bea",
-  "time": 14934,
+  "hash": "0a9953d32ceab7d3fcab",
+  "time": 16040,
   "publicPath": "",
   "assetsByChunkName": {
     "main": [
-      "main.b22bfddfabf981e3d8e1.bundle.js",
+      "main.769f7a4eba1298f63375.bundle.js",
       "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-      "main.b22bfddfabf981e3d8e1.bundle.js.map",
+      "main.769f7a4eba1298f63375.bundle.js.map",
       "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
     ],
     "runtime": [
@@ -38,7 +38,7 @@
       "emitted": true
     },
     {
-      "name": "main.b22bfddfabf981e3d8e1.bundle.js",
+      "name": "main.769f7a4eba1298f63375.bundle.js",
       "size": 142512,
       "chunks": [
         "main"
@@ -82,8 +82,8 @@
       "emitted": true
     },
     {
-      "name": "main.b22bfddfabf981e3d8e1.bundle.js.map",
-      "size": 643344,
+      "name": "main.769f7a4eba1298f63375.bundle.js.map",
+      "size": 643334,
       "chunks": [
         "main"
       ],
@@ -168,9 +168,9 @@
       "assets": [
         "runtime.d41d8cd98f00b204e980.bundle.js",
         "runtime.d41d8cd98f00b204e980.bundle.js.map",
-        "main.b22bfddfabf981e3d8e1.bundle.js",
+        "main.769f7a4eba1298f63375.bundle.js",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-        "main.b22bfddfabf981e3d8e1.bundle.js.map",
+        "main.769f7a4eba1298f63375.bundle.js.map",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
       ]
     }
@@ -182,17 +182,17 @@
       "initial": true,
       "entry": false,
       "extraAsync": false,
-      "size": 433036,
+      "size": 433020,
       "names": [
         "main"
       ],
       "files": [
-        "main.b22bfddfabf981e3d8e1.bundle.js",
+        "main.769f7a4eba1298f63375.bundle.js",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css",
-        "main.b22bfddfabf981e3d8e1.bundle.js.map",
+        "main.769f7a4eba1298f63375.bundle.js.map",
         "main.05f1cc6b6e304d3c23228d058630fea2.bundle.css.map"
       ],
-      "hash": "b22bfddfabf981e3d8e1",
+      "hash": "769f7a4eba1298f63375",
       "parents": [
         "runtime"
       ],
@@ -478,7 +478,7 @@
           "name": "./node_modules/@dojo/has/has.js",
           "index": 12,
           "index2": 12,
-          "size": 6591,
+          "size": 6575,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -526,7 +526,7 @@
           "providedExports": null,
           "optimizationBailout": [],
           "depth": 2,
-          "source": "\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nfunction isFeatureTestThenable(value) {\n    return value && value.then;\n}\n/**\n * A cache of results of feature tests\n */\nexports.testCache = {};\n/**\n * A cache of the un-resolved feature tests\n */\nexports.testFunctions = {};\n/**\n * A cache of unresolved thenables (probably promises)\n * @type {{}}\n */\nvar testThenables = {};\n/**\n * A reference to the global scope (`window` in a browser, `global` in NodeJS)\n */\nvar globalScope = (function () {\n    /* istanbul ignore else */\n    if (typeof window !== 'undefined') {\n        // Browsers\n        return window;\n    }\n    else if (typeof global !== 'undefined') {\n        // Node\n        return global;\n    }\n    else if (typeof self !== 'undefined') {\n        // Web workers\n        return self;\n    }\n    /* istanbul ignore next */\n    return {};\n})();\n/* Grab the staticFeatures if there are available */\nvar staticFeatures = (globalScope.DojoHasEnvironment || {}).staticFeatures;\n/* Cleaning up the DojoHasEnviornment */\nif ('DojoHasEnvironment' in globalScope) {\n    delete globalScope.DojoHasEnvironment;\n}\n/**\n * Custom type guard to narrow the `staticFeatures` to either a map or a function that\n * returns a map.\n *\n * @param value The value to guard for\n */\nfunction isStaticFeatureFunction(value) {\n    return typeof value === 'function';\n}\n/**\n * The cache of asserted features that were available in the global scope when the\n * module loaded\n */\nvar staticCache = staticFeatures\n    ? isStaticFeatureFunction(staticFeatures)\n        ? staticFeatures.apply(globalScope)\n        : staticFeatures\n    : {};/* Providing an empty cache, if none was in the environment\n\n/**\n* AMD plugin function.\n*\n* Conditional loads modules based on a has feature test value.\n*\n* @param resourceId Gives the resolved module id to load.\n* @param require The loader require function with respect to the module that contained the plugin resource in its\n*                dependency list.\n* @param load Callback to loader that consumes result of plugin demand.\n*/\nfunction load(resourceId, require, load, config) {\n    resourceId ? require([resourceId], load) : load();\n}\nexports.load = load;\n/**\n * AMD plugin function.\n *\n * Resolves resourceId into a module id based on possibly-nested tenary expression that branches on has feature test\n * value(s).\n *\n * @param resourceId The id of the module\n * @param normalize Resolves a relative module id into an absolute module id\n */\nfunction normalize(resourceId, normalize) {\n    var tokens = resourceId.match(/[\\?:]|[^:\\?]*/g) || [];\n    var i = 0;\n    function get(skip) {\n        var term = tokens[i++];\n        if (term === ':') {\n            // empty string module name, resolves to null\n            return null;\n        }\n        else {\n            // postfixed with a ? means it is a feature to branch on, the term is the name of the feature\n            if (tokens[i++] === '?') {\n                if (!skip && has(term)) {\n                    // matched the feature, get the first value from the options\n                    return get();\n                }\n                else {\n                    // did not match, get the second value, passing over the first\n                    get(true);\n                    return get(skip);\n                }\n            }\n            // a module\n            return term;\n        }\n    }\n    var id = get();\n    return id && normalize(id);\n}\nexports.normalize = normalize;\n/**\n * Check if a feature has already been registered\n *\n * @param feature the name of the feature\n */\nfunction exists(feature) {\n    var normalizedFeature = feature.toLowerCase();\n    return Boolean(normalizedFeature in staticCache || normalizedFeature in exports.testCache || exports.testFunctions[normalizedFeature]);\n}\nexports.exists = exists;\n/**\n * Register a new test for a named feature.\n *\n * @example\n * has.add('dom-addeventlistener', !!document.addEventListener);\n *\n * @example\n * has.add('touch-events', function () {\n *    return 'ontouchstart' in document\n * });\n *\n * @param feature the name of the feature\n * @param value the value reported of the feature, or a function that will be executed once on first test\n * @param overwrite if an existing value should be overwritten. Defaults to false.\n */\nfunction add(feature, value, overwrite) {\n    if (overwrite === void 0) { overwrite = false; }\n    var normalizedFeature = feature.toLowerCase();\n    if (exists(normalizedFeature) && !overwrite && !(normalizedFeature in staticCache)) {\n        throw new TypeError(\"Feature \\\"\" + feature + \"\\\" exists and overwrite not true.\");\n    }\n    if (typeof value === 'function') {\n        exports.testFunctions[normalizedFeature] = value;\n    }\n    else if (isFeatureTestThenable(value)) {\n        testThenables[feature] = value.then(function (resolvedValue) {\n            exports.testCache[feature] = resolvedValue;\n            delete testThenables[feature];\n        }, function () {\n            delete testThenables[feature];\n        });\n    }\n    else {\n        exports.testCache[normalizedFeature] = value;\n        delete exports.testFunctions[normalizedFeature];\n    }\n}\nexports.add = add;\n/**\n * Return the current value of a named feature.\n *\n * @param feature The name (if a string) or identifier (if an integer) of the feature to test.\n */\nfunction has(feature) {\n    var result;\n    var normalizedFeature = feature.toLowerCase();\n    if (normalizedFeature in staticCache) {\n        result = staticCache[normalizedFeature];\n    }\n    else if (exports.testFunctions[normalizedFeature]) {\n        result = exports.testCache[normalizedFeature] = exports.testFunctions[normalizedFeature].call(null);\n        delete exports.testFunctions[normalizedFeature];\n    }\n    else if (normalizedFeature in exports.testCache) {\n        result = exports.testCache[normalizedFeature];\n    }\n    else if (feature in testThenables) {\n        return false;\n    }\n    else {\n        throw new TypeError(\"Attempt to detect unregistered has feature \\\"\" + feature + \"\\\"\");\n    }\n    return result;\n}\nexports.default = has;\n/*\n * Out of the box feature tests\n */\n/* Environments */\n/* Used as a value to provide a debug only code path */\nadd('debug', true);\n/* Detects if the environment is \"browser like\" */\nadd('host-browser', typeof document !== 'undefined' && typeof location !== 'undefined');\n/* Detects if the environment appears to be NodeJS */\nadd('host-node', function () {\n    if (typeof process === 'object' && process.versions && process.versions.node) {\n        return process.versions.node;\n    }\n});\n"
+          "source": "\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nfunction isFeatureTestThenable(value) {\n    return value && value.then;\n}\n/**\n * A cache of results of feature tests\n */\nexports.testCache = {};\n/**\n * A cache of the un-resolved feature tests\n */\nexports.testFunctions = {};\n/**\n * A cache of unresolved thenables (probably promises)\n * @type {{}}\n */\nvar testThenables = {};\n/**\n * A reference to the global scope (`window` in a browser, `global` in NodeJS)\n */\nvar globalScope = (function () {\n    /* istanbul ignore else */\n    if (typeof window !== 'undefined') {\n        // Browsers\n        return window;\n    }\n    else if (typeof global !== 'undefined') {\n        // Node\n        return global;\n    }\n    else if (typeof self !== 'undefined') {\n        // Web workers\n        return self;\n    }\n    /* istanbul ignore next */\n    return {};\n})();\n/* Grab the staticFeatures if there are available */\nvar staticFeatures = (globalScope.DojoHasEnvironment || {}).staticFeatures;\n/* Cleaning up the DojoHasEnviornment */\nif ('DojoHasEnvironment' in globalScope) {\n    delete globalScope.DojoHasEnvironment;\n}\n/**\n * Custom type guard to narrow the `staticFeatures` to either a map or a function that\n * returns a map.\n *\n * @param value The value to guard for\n */\nfunction isStaticFeatureFunction(value) {\n    return typeof value === 'function';\n}\n/**\n * The cache of asserted features that were available in the global scope when the\n * module loaded\n */\nvar staticCache = staticFeatures\n    ? isStaticFeatureFunction(staticFeatures) ? staticFeatures.apply(globalScope) : staticFeatures\n    : {};/* Providing an empty cache, if none was in the environment\n\n/**\n* AMD plugin function.\n*\n* Conditional loads modules based on a has feature test value.\n*\n* @param resourceId Gives the resolved module id to load.\n* @param require The loader require function with respect to the module that contained the plugin resource in its\n*                dependency list.\n* @param load Callback to loader that consumes result of plugin demand.\n*/\nfunction load(resourceId, require, load, config) {\n    resourceId ? require([resourceId], load) : load();\n}\nexports.load = load;\n/**\n * AMD plugin function.\n *\n * Resolves resourceId into a module id based on possibly-nested tenary expression that branches on has feature test\n * value(s).\n *\n * @param resourceId The id of the module\n * @param normalize Resolves a relative module id into an absolute module id\n */\nfunction normalize(resourceId, normalize) {\n    var tokens = resourceId.match(/[\\?:]|[^:\\?]*/g) || [];\n    var i = 0;\n    function get(skip) {\n        var term = tokens[i++];\n        if (term === ':') {\n            // empty string module name, resolves to null\n            return null;\n        }\n        else {\n            // postfixed with a ? means it is a feature to branch on, the term is the name of the feature\n            if (tokens[i++] === '?') {\n                if (!skip && has(term)) {\n                    // matched the feature, get the first value from the options\n                    return get();\n                }\n                else {\n                    // did not match, get the second value, passing over the first\n                    get(true);\n                    return get(skip);\n                }\n            }\n            // a module\n            return term;\n        }\n    }\n    var id = get();\n    return id && normalize(id);\n}\nexports.normalize = normalize;\n/**\n * Check if a feature has already been registered\n *\n * @param feature the name of the feature\n */\nfunction exists(feature) {\n    var normalizedFeature = feature.toLowerCase();\n    return Boolean(normalizedFeature in staticCache || normalizedFeature in exports.testCache || exports.testFunctions[normalizedFeature]);\n}\nexports.exists = exists;\n/**\n * Register a new test for a named feature.\n *\n * @example\n * has.add('dom-addeventlistener', !!document.addEventListener);\n *\n * @example\n * has.add('touch-events', function () {\n *    return 'ontouchstart' in document\n * });\n *\n * @param feature the name of the feature\n * @param value the value reported of the feature, or a function that will be executed once on first test\n * @param overwrite if an existing value should be overwritten. Defaults to false.\n */\nfunction add(feature, value, overwrite) {\n    if (overwrite === void 0) { overwrite = false; }\n    var normalizedFeature = feature.toLowerCase();\n    if (exists(normalizedFeature) && !overwrite && !(normalizedFeature in staticCache)) {\n        throw new TypeError(\"Feature \\\"\" + feature + \"\\\" exists and overwrite not true.\");\n    }\n    if (typeof value === 'function') {\n        exports.testFunctions[normalizedFeature] = value;\n    }\n    else if (isFeatureTestThenable(value)) {\n        testThenables[feature] = value.then(function (resolvedValue) {\n            exports.testCache[feature] = resolvedValue;\n            delete testThenables[feature];\n        }, function () {\n            delete testThenables[feature];\n        });\n    }\n    else {\n        exports.testCache[normalizedFeature] = value;\n        delete exports.testFunctions[normalizedFeature];\n    }\n}\nexports.add = add;\n/**\n * Return the current value of a named feature.\n *\n * @param feature The name (if a string) or identifier (if an integer) of the feature to test.\n */\nfunction has(feature) {\n    var result;\n    var normalizedFeature = feature.toLowerCase();\n    if (normalizedFeature in staticCache) {\n        result = staticCache[normalizedFeature];\n    }\n    else if (exports.testFunctions[normalizedFeature]) {\n        result = exports.testCache[normalizedFeature] = exports.testFunctions[normalizedFeature].call(null);\n        delete exports.testFunctions[normalizedFeature];\n    }\n    else if (normalizedFeature in exports.testCache) {\n        result = exports.testCache[normalizedFeature];\n    }\n    else if (feature in testThenables) {\n        return false;\n    }\n    else {\n        throw new TypeError(\"Attempt to detect unregistered has feature \\\"\" + feature + \"\\\"\");\n    }\n    return result;\n}\nexports.default = has;\n/*\n * Out of the box feature tests\n */\n/* Environments */\n/* Used as a value to provide a debug only code path */\nadd('debug', true);\n/* Detects if the environment is \"browser like\" */\nadd('host-browser', typeof document !== 'undefined' && typeof location !== 'undefined');\n/* Detects if the environment appears to be NodeJS */\nadd('host-node', function () {\n    if (typeof process === 'object' && process.versions && process.versions.node) {\n        return process.versions.node;\n    }\n});\n"
         },
         {
           "id": "./node_modules/@dojo/i18n/cldr/load.js",
@@ -854,22 +854,13 @@
             "main"
           ],
           "assets": [],
-          "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "issuerId": "./node_modules/@dojo/shim/Promise.js",
-          "issuerName": "./node_modules/@dojo/shim/Promise.js",
+          "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+          "issuerId": "./node_modules/@dojo/shim/Map.js",
+          "issuerName": "./node_modules/@dojo/shim/Map.js",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
-            {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
-              "type": "cjs require",
-              "userRequest": "./Symbol",
-              "loc": "6:0-19"
-            },
             {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
               "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
@@ -878,6 +869,15 @@
               "type": "cjs require",
               "userRequest": "./Symbol",
               "loc": "8:0-19"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "type": "cjs require",
+              "userRequest": "./Symbol",
+              "loc": "6:0-19"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/Observable.js",
@@ -889,15 +889,6 @@
               "loc": "7:0-19"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/iterator.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
-              "module": "./node_modules/@dojo/shim/iterator.js",
-              "moduleName": "./node_modules/@dojo/shim/iterator.js",
-              "type": "cjs require",
-              "userRequest": "./Symbol",
-              "loc": "3:0-19"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/object.js",
               "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/object.js",
               "module": "./node_modules/@dojo/shim/object.js",
@@ -905,6 +896,15 @@
               "type": "cjs require",
               "userRequest": "./Symbol",
               "loc": "5:15-34"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/iterator.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
+              "module": "./node_modules/@dojo/shim/iterator.js",
+              "moduleName": "./node_modules/@dojo/shim/iterator.js",
+              "type": "cjs require",
+              "userRequest": "./Symbol",
+              "loc": "3:0-19"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/WeakMap.js",
@@ -992,15 +992,6 @@
               "loc": "11:15-43"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
-              "type": "cjs require",
-              "userRequest": "./global",
-              "loc": "4:15-34"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
               "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
               "module": "./node_modules/@dojo/shim/Map.js",
@@ -1010,10 +1001,10 @@
               "loc": "5:15-34"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Observable.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-              "module": "./node_modules/@dojo/shim/Observable.js",
-              "moduleName": "./node_modules/@dojo/shim/Observable.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "./global",
               "loc": "4:15-34"
@@ -1026,6 +1017,15 @@
               "type": "cjs require",
               "userRequest": "@dojo/shim/global",
               "loc": "4:15-43"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Observable.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+              "module": "./node_modules/@dojo/shim/Observable.js",
+              "moduleName": "./node_modules/@dojo/shim/Observable.js",
+              "type": "cjs require",
+              "userRequest": "./global",
+              "loc": "4:15-34"
             },
             {
               "moduleId": "./node_modules/@dojo/shim/Symbol.js",
@@ -1262,27 +1262,27 @@
             "main"
           ],
           "assets": [],
-          "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "issuerId": "./node_modules/@dojo/shim/Promise.js",
-          "issuerName": "./node_modules/@dojo/shim/Promise.js",
+          "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+          "issuerId": "./node_modules/@dojo/shim/Map.js",
+          "issuerName": "./node_modules/@dojo/shim/Map.js",
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "reasons": [
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
+              "moduleId": "./node_modules/@dojo/shim/Map.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+              "module": "./node_modules/@dojo/shim/Map.js",
+              "moduleName": "./node_modules/@dojo/shim/Map.js",
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "7:12-36"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Map.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
-              "module": "./node_modules/@dojo/shim/Map.js",
-              "moduleName": "./node_modules/@dojo/shim/Map.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "./support/has",
               "loc": "7:12-36"
@@ -1642,19 +1642,19 @@
               "loc": "17:17-36"
             },
             {
-              "moduleId": "./node_modules/cldrjs/dist/cldr/event.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/event.js",
-              "module": "./node_modules/cldrjs/dist/cldr/event.js",
-              "moduleName": "./node_modules/cldrjs/dist/cldr/event.js",
+              "moduleId": "./node_modules/cldrjs/dist/cldr/supplemental.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/supplemental.js",
+              "module": "./node_modules/cldrjs/dist/cldr/supplemental.js",
+              "moduleName": "./node_modules/cldrjs/dist/cldr/supplemental.js",
               "type": "amd require",
               "userRequest": "../cldr",
               "loc": "19:2-34"
             },
             {
-              "moduleId": "./node_modules/cldrjs/dist/cldr/supplemental.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/supplemental.js",
-              "module": "./node_modules/cldrjs/dist/cldr/supplemental.js",
-              "moduleName": "./node_modules/cldrjs/dist/cldr/supplemental.js",
+              "moduleId": "./node_modules/cldrjs/dist/cldr/event.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/event.js",
+              "module": "./node_modules/cldrjs/dist/cldr/event.js",
+              "moduleName": "./node_modules/cldrjs/dist/cldr/event.js",
               "type": "amd require",
               "userRequest": "../cldr",
               "loc": "19:2-34"
@@ -1830,6 +1830,15 @@
               "loc": "32:28-47"
             },
             {
+              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
+              "module": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+              "type": "cjs require",
+              "userRequest": "cldrjs",
+              "loc": "31:28-47"
+            },
+            {
               "moduleId": "./node_modules/globalize/dist/globalize/number.js",
               "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
               "module": "./node_modules/globalize/dist/globalize/number.js",
@@ -1848,22 +1857,13 @@
               "loc": "34:28-47"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
-              "module": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/date.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
+              "module": "./node_modules/globalize/dist/globalize/date.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/date.js",
               "type": "cjs require",
               "userRequest": "cldrjs",
-              "loc": "31:28-47"
-            },
-            {
-              "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
-              "module": "./node_modules/globalize/dist/globalize/unit.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
-              "type": "cjs require",
-              "userRequest": "cldrjs",
-              "loc": "34:28-47"
+              "loc": "35:28-47"
             },
             {
               "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
@@ -1875,13 +1875,13 @@
               "loc": "36:28-47"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/date.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
-              "module": "./node_modules/globalize/dist/globalize/date.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/date.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
+              "module": "./node_modules/globalize/dist/globalize/unit.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
               "type": "cjs require",
               "userRequest": "cldrjs",
-              "loc": "35:28-47"
+              "loc": "34:28-47"
             }
           ],
           "usedExports": true,
@@ -1931,6 +1931,15 @@
               "loc": "17:17-41"
             },
             {
+              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
+              "module": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+              "type": "cjs require",
+              "userRequest": "../globalize",
+              "loc": "31:49-74"
+            },
+            {
               "moduleId": "./node_modules/globalize/dist/globalize/number.js",
               "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
               "module": "./node_modules/globalize/dist/globalize/number.js",
@@ -1949,22 +1958,13 @@
               "loc": "34:49-74"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
-              "module": "./node_modules/globalize/dist/globalize/currency.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/date.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
+              "module": "./node_modules/globalize/dist/globalize/date.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/date.js",
               "type": "cjs require",
               "userRequest": "../globalize",
-              "loc": "31:49-74"
-            },
-            {
-              "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
-              "module": "./node_modules/globalize/dist/globalize/unit.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
-              "type": "cjs require",
-              "userRequest": "../globalize",
-              "loc": "34:49-74"
+              "loc": "35:49-74"
             },
             {
               "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
@@ -1976,13 +1976,13 @@
               "loc": "36:49-74"
             },
             {
-              "moduleId": "./node_modules/globalize/dist/globalize/date.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
-              "module": "./node_modules/globalize/dist/globalize/date.js",
-              "moduleName": "./node_modules/globalize/dist/globalize/date.js",
+              "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
+              "module": "./node_modules/globalize/dist/globalize/unit.js",
+              "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
               "type": "cjs require",
               "userRequest": "../globalize",
-              "loc": "35:49-74"
+              "loc": "34:49-74"
             }
           ],
           "usedExports": true,
@@ -2504,15 +2504,6 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Promise.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-              "module": "./node_modules/@dojo/shim/Promise.js",
-              "moduleName": "./node_modules/@dojo/shim/Promise.js",
-              "type": "cjs require",
-              "userRequest": "tslib",
-              "loc": "3:14-30"
-            },
-            {
               "moduleId": "./node_modules/@dojo/shim/Map.js",
               "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
               "module": "./node_modules/@dojo/shim/Map.js",
@@ -2522,19 +2513,19 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/shim/Observable.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-              "module": "./node_modules/@dojo/shim/Observable.js",
-              "moduleName": "./node_modules/@dojo/shim/Observable.js",
+              "moduleId": "./node_modules/@dojo/shim/Promise.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+              "module": "./node_modules/@dojo/shim/Promise.js",
+              "moduleName": "./node_modules/@dojo/shim/Promise.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/core/lang.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
-              "module": "./node_modules/@dojo/core/lang.js",
-              "moduleName": "./node_modules/@dojo/core/lang.js",
+              "moduleId": "./node_modules/@dojo/core/has.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/has.js",
+              "module": "./node_modules/@dojo/core/has.js",
+              "moduleName": "./node_modules/@dojo/core/has.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -2549,10 +2540,19 @@
               "loc": "3:14-30"
             },
             {
-              "moduleId": "./node_modules/@dojo/core/has.js",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/has.js",
-              "module": "./node_modules/@dojo/core/has.js",
-              "moduleName": "./node_modules/@dojo/core/has.js",
+              "moduleId": "./node_modules/@dojo/core/lang.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
+              "module": "./node_modules/@dojo/core/lang.js",
+              "moduleName": "./node_modules/@dojo/core/lang.js",
+              "type": "cjs require",
+              "userRequest": "tslib",
+              "loc": "3:14-30"
+            },
+            {
+              "moduleId": "./node_modules/@dojo/shim/Observable.js",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+              "module": "./node_modules/@dojo/shim/Observable.js",
+              "moduleName": "./node_modules/@dojo/shim/Observable.js",
               "type": "cjs require",
               "userRequest": "tslib",
               "loc": "3:14-30"
@@ -3350,7 +3350,7 @@
       "name": "./node_modules/@dojo/has/has.js",
       "index": 12,
       "index2": 12,
-      "size": 6591,
+      "size": 6575,
       "cacheable": true,
       "built": true,
       "optional": false,
@@ -3398,7 +3398,7 @@
       "providedExports": null,
       "optimizationBailout": [],
       "depth": 2,
-      "source": "\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nfunction isFeatureTestThenable(value) {\n    return value && value.then;\n}\n/**\n * A cache of results of feature tests\n */\nexports.testCache = {};\n/**\n * A cache of the un-resolved feature tests\n */\nexports.testFunctions = {};\n/**\n * A cache of unresolved thenables (probably promises)\n * @type {{}}\n */\nvar testThenables = {};\n/**\n * A reference to the global scope (`window` in a browser, `global` in NodeJS)\n */\nvar globalScope = (function () {\n    /* istanbul ignore else */\n    if (typeof window !== 'undefined') {\n        // Browsers\n        return window;\n    }\n    else if (typeof global !== 'undefined') {\n        // Node\n        return global;\n    }\n    else if (typeof self !== 'undefined') {\n        // Web workers\n        return self;\n    }\n    /* istanbul ignore next */\n    return {};\n})();\n/* Grab the staticFeatures if there are available */\nvar staticFeatures = (globalScope.DojoHasEnvironment || {}).staticFeatures;\n/* Cleaning up the DojoHasEnviornment */\nif ('DojoHasEnvironment' in globalScope) {\n    delete globalScope.DojoHasEnvironment;\n}\n/**\n * Custom type guard to narrow the `staticFeatures` to either a map or a function that\n * returns a map.\n *\n * @param value The value to guard for\n */\nfunction isStaticFeatureFunction(value) {\n    return typeof value === 'function';\n}\n/**\n * The cache of asserted features that were available in the global scope when the\n * module loaded\n */\nvar staticCache = staticFeatures\n    ? isStaticFeatureFunction(staticFeatures)\n        ? staticFeatures.apply(globalScope)\n        : staticFeatures\n    : {};/* Providing an empty cache, if none was in the environment\n\n/**\n* AMD plugin function.\n*\n* Conditional loads modules based on a has feature test value.\n*\n* @param resourceId Gives the resolved module id to load.\n* @param require The loader require function with respect to the module that contained the plugin resource in its\n*                dependency list.\n* @param load Callback to loader that consumes result of plugin demand.\n*/\nfunction load(resourceId, require, load, config) {\n    resourceId ? require([resourceId], load) : load();\n}\nexports.load = load;\n/**\n * AMD plugin function.\n *\n * Resolves resourceId into a module id based on possibly-nested tenary expression that branches on has feature test\n * value(s).\n *\n * @param resourceId The id of the module\n * @param normalize Resolves a relative module id into an absolute module id\n */\nfunction normalize(resourceId, normalize) {\n    var tokens = resourceId.match(/[\\?:]|[^:\\?]*/g) || [];\n    var i = 0;\n    function get(skip) {\n        var term = tokens[i++];\n        if (term === ':') {\n            // empty string module name, resolves to null\n            return null;\n        }\n        else {\n            // postfixed with a ? means it is a feature to branch on, the term is the name of the feature\n            if (tokens[i++] === '?') {\n                if (!skip && has(term)) {\n                    // matched the feature, get the first value from the options\n                    return get();\n                }\n                else {\n                    // did not match, get the second value, passing over the first\n                    get(true);\n                    return get(skip);\n                }\n            }\n            // a module\n            return term;\n        }\n    }\n    var id = get();\n    return id && normalize(id);\n}\nexports.normalize = normalize;\n/**\n * Check if a feature has already been registered\n *\n * @param feature the name of the feature\n */\nfunction exists(feature) {\n    var normalizedFeature = feature.toLowerCase();\n    return Boolean(normalizedFeature in staticCache || normalizedFeature in exports.testCache || exports.testFunctions[normalizedFeature]);\n}\nexports.exists = exists;\n/**\n * Register a new test for a named feature.\n *\n * @example\n * has.add('dom-addeventlistener', !!document.addEventListener);\n *\n * @example\n * has.add('touch-events', function () {\n *    return 'ontouchstart' in document\n * });\n *\n * @param feature the name of the feature\n * @param value the value reported of the feature, or a function that will be executed once on first test\n * @param overwrite if an existing value should be overwritten. Defaults to false.\n */\nfunction add(feature, value, overwrite) {\n    if (overwrite === void 0) { overwrite = false; }\n    var normalizedFeature = feature.toLowerCase();\n    if (exists(normalizedFeature) && !overwrite && !(normalizedFeature in staticCache)) {\n        throw new TypeError(\"Feature \\\"\" + feature + \"\\\" exists and overwrite not true.\");\n    }\n    if (typeof value === 'function') {\n        exports.testFunctions[normalizedFeature] = value;\n    }\n    else if (isFeatureTestThenable(value)) {\n        testThenables[feature] = value.then(function (resolvedValue) {\n            exports.testCache[feature] = resolvedValue;\n            delete testThenables[feature];\n        }, function () {\n            delete testThenables[feature];\n        });\n    }\n    else {\n        exports.testCache[normalizedFeature] = value;\n        delete exports.testFunctions[normalizedFeature];\n    }\n}\nexports.add = add;\n/**\n * Return the current value of a named feature.\n *\n * @param feature The name (if a string) or identifier (if an integer) of the feature to test.\n */\nfunction has(feature) {\n    var result;\n    var normalizedFeature = feature.toLowerCase();\n    if (normalizedFeature in staticCache) {\n        result = staticCache[normalizedFeature];\n    }\n    else if (exports.testFunctions[normalizedFeature]) {\n        result = exports.testCache[normalizedFeature] = exports.testFunctions[normalizedFeature].call(null);\n        delete exports.testFunctions[normalizedFeature];\n    }\n    else if (normalizedFeature in exports.testCache) {\n        result = exports.testCache[normalizedFeature];\n    }\n    else if (feature in testThenables) {\n        return false;\n    }\n    else {\n        throw new TypeError(\"Attempt to detect unregistered has feature \\\"\" + feature + \"\\\"\");\n    }\n    return result;\n}\nexports.default = has;\n/*\n * Out of the box feature tests\n */\n/* Environments */\n/* Used as a value to provide a debug only code path */\nadd('debug', true);\n/* Detects if the environment is \"browser like\" */\nadd('host-browser', typeof document !== 'undefined' && typeof location !== 'undefined');\n/* Detects if the environment appears to be NodeJS */\nadd('host-node', function () {\n    if (typeof process === 'object' && process.versions && process.versions.node) {\n        return process.versions.node;\n    }\n});\n"
+      "source": "\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nfunction isFeatureTestThenable(value) {\n    return value && value.then;\n}\n/**\n * A cache of results of feature tests\n */\nexports.testCache = {};\n/**\n * A cache of the un-resolved feature tests\n */\nexports.testFunctions = {};\n/**\n * A cache of unresolved thenables (probably promises)\n * @type {{}}\n */\nvar testThenables = {};\n/**\n * A reference to the global scope (`window` in a browser, `global` in NodeJS)\n */\nvar globalScope = (function () {\n    /* istanbul ignore else */\n    if (typeof window !== 'undefined') {\n        // Browsers\n        return window;\n    }\n    else if (typeof global !== 'undefined') {\n        // Node\n        return global;\n    }\n    else if (typeof self !== 'undefined') {\n        // Web workers\n        return self;\n    }\n    /* istanbul ignore next */\n    return {};\n})();\n/* Grab the staticFeatures if there are available */\nvar staticFeatures = (globalScope.DojoHasEnvironment || {}).staticFeatures;\n/* Cleaning up the DojoHasEnviornment */\nif ('DojoHasEnvironment' in globalScope) {\n    delete globalScope.DojoHasEnvironment;\n}\n/**\n * Custom type guard to narrow the `staticFeatures` to either a map or a function that\n * returns a map.\n *\n * @param value The value to guard for\n */\nfunction isStaticFeatureFunction(value) {\n    return typeof value === 'function';\n}\n/**\n * The cache of asserted features that were available in the global scope when the\n * module loaded\n */\nvar staticCache = staticFeatures\n    ? isStaticFeatureFunction(staticFeatures) ? staticFeatures.apply(globalScope) : staticFeatures\n    : {};/* Providing an empty cache, if none was in the environment\n\n/**\n* AMD plugin function.\n*\n* Conditional loads modules based on a has feature test value.\n*\n* @param resourceId Gives the resolved module id to load.\n* @param require The loader require function with respect to the module that contained the plugin resource in its\n*                dependency list.\n* @param load Callback to loader that consumes result of plugin demand.\n*/\nfunction load(resourceId, require, load, config) {\n    resourceId ? require([resourceId], load) : load();\n}\nexports.load = load;\n/**\n * AMD plugin function.\n *\n * Resolves resourceId into a module id based on possibly-nested tenary expression that branches on has feature test\n * value(s).\n *\n * @param resourceId The id of the module\n * @param normalize Resolves a relative module id into an absolute module id\n */\nfunction normalize(resourceId, normalize) {\n    var tokens = resourceId.match(/[\\?:]|[^:\\?]*/g) || [];\n    var i = 0;\n    function get(skip) {\n        var term = tokens[i++];\n        if (term === ':') {\n            // empty string module name, resolves to null\n            return null;\n        }\n        else {\n            // postfixed with a ? means it is a feature to branch on, the term is the name of the feature\n            if (tokens[i++] === '?') {\n                if (!skip && has(term)) {\n                    // matched the feature, get the first value from the options\n                    return get();\n                }\n                else {\n                    // did not match, get the second value, passing over the first\n                    get(true);\n                    return get(skip);\n                }\n            }\n            // a module\n            return term;\n        }\n    }\n    var id = get();\n    return id && normalize(id);\n}\nexports.normalize = normalize;\n/**\n * Check if a feature has already been registered\n *\n * @param feature the name of the feature\n */\nfunction exists(feature) {\n    var normalizedFeature = feature.toLowerCase();\n    return Boolean(normalizedFeature in staticCache || normalizedFeature in exports.testCache || exports.testFunctions[normalizedFeature]);\n}\nexports.exists = exists;\n/**\n * Register a new test for a named feature.\n *\n * @example\n * has.add('dom-addeventlistener', !!document.addEventListener);\n *\n * @example\n * has.add('touch-events', function () {\n *    return 'ontouchstart' in document\n * });\n *\n * @param feature the name of the feature\n * @param value the value reported of the feature, or a function that will be executed once on first test\n * @param overwrite if an existing value should be overwritten. Defaults to false.\n */\nfunction add(feature, value, overwrite) {\n    if (overwrite === void 0) { overwrite = false; }\n    var normalizedFeature = feature.toLowerCase();\n    if (exists(normalizedFeature) && !overwrite && !(normalizedFeature in staticCache)) {\n        throw new TypeError(\"Feature \\\"\" + feature + \"\\\" exists and overwrite not true.\");\n    }\n    if (typeof value === 'function') {\n        exports.testFunctions[normalizedFeature] = value;\n    }\n    else if (isFeatureTestThenable(value)) {\n        testThenables[feature] = value.then(function (resolvedValue) {\n            exports.testCache[feature] = resolvedValue;\n            delete testThenables[feature];\n        }, function () {\n            delete testThenables[feature];\n        });\n    }\n    else {\n        exports.testCache[normalizedFeature] = value;\n        delete exports.testFunctions[normalizedFeature];\n    }\n}\nexports.add = add;\n/**\n * Return the current value of a named feature.\n *\n * @param feature The name (if a string) or identifier (if an integer) of the feature to test.\n */\nfunction has(feature) {\n    var result;\n    var normalizedFeature = feature.toLowerCase();\n    if (normalizedFeature in staticCache) {\n        result = staticCache[normalizedFeature];\n    }\n    else if (exports.testFunctions[normalizedFeature]) {\n        result = exports.testCache[normalizedFeature] = exports.testFunctions[normalizedFeature].call(null);\n        delete exports.testFunctions[normalizedFeature];\n    }\n    else if (normalizedFeature in exports.testCache) {\n        result = exports.testCache[normalizedFeature];\n    }\n    else if (feature in testThenables) {\n        return false;\n    }\n    else {\n        throw new TypeError(\"Attempt to detect unregistered has feature \\\"\" + feature + \"\\\"\");\n    }\n    return result;\n}\nexports.default = has;\n/*\n * Out of the box feature tests\n */\n/* Environments */\n/* Used as a value to provide a debug only code path */\nadd('debug', true);\n/* Detects if the environment is \"browser like\" */\nadd('host-browser', typeof document !== 'undefined' && typeof location !== 'undefined');\n/* Detects if the environment appears to be NodeJS */\nadd('host-node', function () {\n    if (typeof process === 'object' && process.versions && process.versions.node) {\n        return process.versions.node;\n    }\n});\n"
     },
     {
       "id": "./node_modules/@dojo/i18n/cldr/load.js",
@@ -3726,22 +3726,13 @@
         "main"
       ],
       "assets": [],
-      "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-      "issuerId": "./node_modules/@dojo/shim/Promise.js",
-      "issuerName": "./node_modules/@dojo/shim/Promise.js",
+      "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+      "issuerId": "./node_modules/@dojo/shim/Map.js",
+      "issuerName": "./node_modules/@dojo/shim/Map.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
-        {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
-          "type": "cjs require",
-          "userRequest": "./Symbol",
-          "loc": "6:0-19"
-        },
         {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
           "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
@@ -3750,6 +3741,15 @@
           "type": "cjs require",
           "userRequest": "./Symbol",
           "loc": "8:0-19"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "type": "cjs require",
+          "userRequest": "./Symbol",
+          "loc": "6:0-19"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/Observable.js",
@@ -3761,15 +3761,6 @@
           "loc": "7:0-19"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/iterator.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
-          "module": "./node_modules/@dojo/shim/iterator.js",
-          "moduleName": "./node_modules/@dojo/shim/iterator.js",
-          "type": "cjs require",
-          "userRequest": "./Symbol",
-          "loc": "3:0-19"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/object.js",
           "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/object.js",
           "module": "./node_modules/@dojo/shim/object.js",
@@ -3777,6 +3768,15 @@
           "type": "cjs require",
           "userRequest": "./Symbol",
           "loc": "5:15-34"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/iterator.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/iterator.js",
+          "module": "./node_modules/@dojo/shim/iterator.js",
+          "moduleName": "./node_modules/@dojo/shim/iterator.js",
+          "type": "cjs require",
+          "userRequest": "./Symbol",
+          "loc": "3:0-19"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/WeakMap.js",
@@ -3864,15 +3864,6 @@
           "loc": "11:15-43"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
-          "type": "cjs require",
-          "userRequest": "./global",
-          "loc": "4:15-34"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
           "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
           "module": "./node_modules/@dojo/shim/Map.js",
@@ -3882,10 +3873,10 @@
           "loc": "5:15-34"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Observable.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-          "module": "./node_modules/@dojo/shim/Observable.js",
-          "moduleName": "./node_modules/@dojo/shim/Observable.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "./global",
           "loc": "4:15-34"
@@ -3898,6 +3889,15 @@
           "type": "cjs require",
           "userRequest": "@dojo/shim/global",
           "loc": "4:15-43"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Observable.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+          "module": "./node_modules/@dojo/shim/Observable.js",
+          "moduleName": "./node_modules/@dojo/shim/Observable.js",
+          "type": "cjs require",
+          "userRequest": "./global",
+          "loc": "4:15-34"
         },
         {
           "moduleId": "./node_modules/@dojo/shim/Symbol.js",
@@ -4134,27 +4134,27 @@
         "main"
       ],
       "assets": [],
-      "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-      "issuerId": "./node_modules/@dojo/shim/Promise.js",
-      "issuerName": "./node_modules/@dojo/shim/Promise.js",
+      "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+      "issuerId": "./node_modules/@dojo/shim/Map.js",
+      "issuerName": "./node_modules/@dojo/shim/Map.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "reasons": [
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
+          "moduleId": "./node_modules/@dojo/shim/Map.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
+          "module": "./node_modules/@dojo/shim/Map.js",
+          "moduleName": "./node_modules/@dojo/shim/Map.js",
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "7:12-36"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Map.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
-          "module": "./node_modules/@dojo/shim/Map.js",
-          "moduleName": "./node_modules/@dojo/shim/Map.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "./support/has",
           "loc": "7:12-36"
@@ -4628,19 +4628,19 @@
           "loc": "17:17-36"
         },
         {
-          "moduleId": "./node_modules/cldrjs/dist/cldr/event.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/event.js",
-          "module": "./node_modules/cldrjs/dist/cldr/event.js",
-          "moduleName": "./node_modules/cldrjs/dist/cldr/event.js",
+          "moduleId": "./node_modules/cldrjs/dist/cldr/supplemental.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/supplemental.js",
+          "module": "./node_modules/cldrjs/dist/cldr/supplemental.js",
+          "moduleName": "./node_modules/cldrjs/dist/cldr/supplemental.js",
           "type": "amd require",
           "userRequest": "../cldr",
           "loc": "19:2-34"
         },
         {
-          "moduleId": "./node_modules/cldrjs/dist/cldr/supplemental.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/supplemental.js",
-          "module": "./node_modules/cldrjs/dist/cldr/supplemental.js",
-          "moduleName": "./node_modules/cldrjs/dist/cldr/supplemental.js",
+          "moduleId": "./node_modules/cldrjs/dist/cldr/event.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/cldrjs/dist/cldr/event.js",
+          "module": "./node_modules/cldrjs/dist/cldr/event.js",
+          "moduleName": "./node_modules/cldrjs/dist/cldr/event.js",
           "type": "amd require",
           "userRequest": "../cldr",
           "loc": "19:2-34"
@@ -4816,6 +4816,15 @@
           "loc": "32:28-47"
         },
         {
+          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
+          "module": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+          "type": "cjs require",
+          "userRequest": "cldrjs",
+          "loc": "31:28-47"
+        },
+        {
           "moduleId": "./node_modules/globalize/dist/globalize/number.js",
           "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
           "module": "./node_modules/globalize/dist/globalize/number.js",
@@ -4834,22 +4843,13 @@
           "loc": "34:28-47"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
-          "module": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/date.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
+          "module": "./node_modules/globalize/dist/globalize/date.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/date.js",
           "type": "cjs require",
           "userRequest": "cldrjs",
-          "loc": "31:28-47"
-        },
-        {
-          "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
-          "module": "./node_modules/globalize/dist/globalize/unit.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
-          "type": "cjs require",
-          "userRequest": "cldrjs",
-          "loc": "34:28-47"
+          "loc": "35:28-47"
         },
         {
           "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
@@ -4861,13 +4861,13 @@
           "loc": "36:28-47"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/date.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
-          "module": "./node_modules/globalize/dist/globalize/date.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/date.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
+          "module": "./node_modules/globalize/dist/globalize/unit.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
           "type": "cjs require",
           "userRequest": "cldrjs",
-          "loc": "35:28-47"
+          "loc": "34:28-47"
         }
       ],
       "usedExports": true,
@@ -4917,6 +4917,15 @@
           "loc": "17:17-41"
         },
         {
+          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
+          "module": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+          "type": "cjs require",
+          "userRequest": "../globalize",
+          "loc": "31:49-74"
+        },
+        {
           "moduleId": "./node_modules/globalize/dist/globalize/number.js",
           "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/number.js",
           "module": "./node_modules/globalize/dist/globalize/number.js",
@@ -4935,22 +4944,13 @@
           "loc": "34:49-74"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/currency.js",
-          "module": "./node_modules/globalize/dist/globalize/currency.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/currency.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/date.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
+          "module": "./node_modules/globalize/dist/globalize/date.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/date.js",
           "type": "cjs require",
           "userRequest": "../globalize",
-          "loc": "31:49-74"
-        },
-        {
-          "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
-          "module": "./node_modules/globalize/dist/globalize/unit.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
-          "type": "cjs require",
-          "userRequest": "../globalize",
-          "loc": "34:49-74"
+          "loc": "35:49-74"
         },
         {
           "moduleId": "./node_modules/globalize/dist/globalize/relative-time.js",
@@ -4962,13 +4962,13 @@
           "loc": "36:49-74"
         },
         {
-          "moduleId": "./node_modules/globalize/dist/globalize/date.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/date.js",
-          "module": "./node_modules/globalize/dist/globalize/date.js",
-          "moduleName": "./node_modules/globalize/dist/globalize/date.js",
+          "moduleId": "./node_modules/globalize/dist/globalize/unit.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/imports-loader/index.js?define=>false!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/globalize/dist/globalize/unit.js",
+          "module": "./node_modules/globalize/dist/globalize/unit.js",
+          "moduleName": "./node_modules/globalize/dist/globalize/unit.js",
           "type": "cjs require",
           "userRequest": "../globalize",
-          "loc": "35:49-74"
+          "loc": "34:49-74"
         }
       ],
       "usedExports": true,
@@ -5490,15 +5490,6 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Promise.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
-          "module": "./node_modules/@dojo/shim/Promise.js",
-          "moduleName": "./node_modules/@dojo/shim/Promise.js",
-          "type": "cjs require",
-          "userRequest": "tslib",
-          "loc": "3:14-30"
-        },
-        {
           "moduleId": "./node_modules/@dojo/shim/Map.js",
           "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Map.js",
           "module": "./node_modules/@dojo/shim/Map.js",
@@ -5508,19 +5499,19 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/shim/Observable.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
-          "module": "./node_modules/@dojo/shim/Observable.js",
-          "moduleName": "./node_modules/@dojo/shim/Observable.js",
+          "moduleId": "./node_modules/@dojo/shim/Promise.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Promise.js",
+          "module": "./node_modules/@dojo/shim/Promise.js",
+          "moduleName": "./node_modules/@dojo/shim/Promise.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/core/lang.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
-          "module": "./node_modules/@dojo/core/lang.js",
-          "moduleName": "./node_modules/@dojo/core/lang.js",
+          "moduleId": "./node_modules/@dojo/core/has.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/has.js",
+          "module": "./node_modules/@dojo/core/has.js",
+          "moduleName": "./node_modules/@dojo/core/has.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -5535,10 +5526,19 @@
           "loc": "3:14-30"
         },
         {
-          "moduleId": "./node_modules/@dojo/core/has.js",
-          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/has.js",
-          "module": "./node_modules/@dojo/core/has.js",
-          "moduleName": "./node_modules/@dojo/core/has.js",
+          "moduleId": "./node_modules/@dojo/core/lang.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/core/lang.js",
+          "module": "./node_modules/@dojo/core/lang.js",
+          "moduleName": "./node_modules/@dojo/core/lang.js",
+          "type": "cjs require",
+          "userRequest": "tslib",
+          "loc": "3:14-30"
+        },
+        {
+          "moduleId": "./node_modules/@dojo/shim/Observable.js",
+          "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/source-map-loader-cli/index.js??ref--0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/shim/Observable.js",
+          "module": "./node_modules/@dojo/shim/Observable.js",
+          "moduleName": "./node_modules/@dojo/shim/Observable.js",
           "type": "cjs require",
           "userRequest": "tslib",
           "loc": "3:14-30"
@@ -6022,6 +6022,190 @@
       "warnings": [],
       "publicPath": "",
       "assetsByChunkName": {},
+      "assets": [],
+      "filteredAssets": 0,
+      "entrypoints": {
+        "undefined": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "extract-text-webpack-plugin-output-filename"
+          ]
+        }
+      },
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "extraAsync": false,
+          "size": 2831,
+          "names": [],
+          "files": [
+            "extract-text-webpack-plugin-output-filename"
+          ],
+          "hash": "750a0b134843ff0b25fd",
+          "parents": [],
+          "modules": [
+            {
+              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "index": 0,
+              "index2": 1,
+              "size": 571,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [],
+              "usedExports": true,
+              "providedExports": null,
+              "optimizationBailout": [],
+              "depth": 0,
+              "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,gBAAgB;CAChB,aAAa;CACb,cAAc;CACd\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx-\"\n};"
+            },
+            {
+              "id": "./node_modules/css-loader/lib/css-base.js",
+              "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/lib/css-base.js",
+              "name": "./node_modules/css-loader/lib/css-base.js",
+              "index": 1,
+              "index2": 0,
+              "size": 2260,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [
+                {
+                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+                  "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+                  "type": "cjs require",
+                  "userRequest": "../node_modules/css-loader/lib/css-base.js",
+                  "loc": "1:27-80"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": null,
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
+            }
+          ],
+          "filteredModules": 0,
+          "origins": [
+            {
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "module": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "loc": "",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+          "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+          "index": 0,
+          "index2": 1,
+          "size": 571,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [],
+          "depth": 0,
+          "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,gBAAgB;CAChB,aAAa;CACb,cAAc;CACd\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx-\"\n};"
+        },
+        {
+          "id": "./node_modules/css-loader/lib/css-base.js",
+          "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/lib/css-base.js",
+          "name": "./node_modules/css-loader/lib/css-base.js",
+          "index": 1,
+          "index2": 0,
+          "size": 2260,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
+              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
+              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
+              "type": "cjs require",
+              "userRequest": "../node_modules/css-loader/lib/css-base.js",
+              "loc": "1:27-80"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
+        }
+      ],
+      "filteredModules": 0,
+      "children": [],
+      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??postcss!node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!src/app.m.css"
+    },
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "assetsByChunkName": {},
       "assets": [
         {
           "name": "index.html",
@@ -6361,190 +6545,6 @@
       "filteredModules": 0,
       "children": [],
       "name": "html-webpack-plugin for \"index.html\""
-    },
-    {
-      "errors": [],
-      "warnings": [],
-      "publicPath": "",
-      "assetsByChunkName": {},
-      "assets": [],
-      "filteredAssets": 0,
-      "entrypoints": {
-        "undefined": {
-          "chunks": [
-            0
-          ],
-          "assets": [
-            "extract-text-webpack-plugin-output-filename"
-          ]
-        }
-      },
-      "chunks": [
-        {
-          "id": 0,
-          "rendered": true,
-          "initial": true,
-          "entry": true,
-          "extraAsync": false,
-          "size": 2831,
-          "names": [],
-          "files": [
-            "extract-text-webpack-plugin-output-filename"
-          ],
-          "hash": "750a0b134843ff0b25fd",
-          "parents": [],
-          "modules": [
-            {
-              "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-              "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-              "index": 0,
-              "index2": 1,
-              "size": 571,
-              "cacheable": true,
-              "built": true,
-              "optional": false,
-              "prefetched": false,
-              "chunks": [
-                0
-              ],
-              "assets": [],
-              "issuer": null,
-              "issuerId": null,
-              "issuerName": null,
-              "failed": false,
-              "errors": 0,
-              "warnings": 0,
-              "reasons": [],
-              "usedExports": true,
-              "providedExports": null,
-              "optimizationBailout": [],
-              "depth": 0,
-              "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,gBAAgB;CAChB,aAAa;CACb,cAAc;CACd\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx-\"\n};"
-            },
-            {
-              "id": "./node_modules/css-loader/lib/css-base.js",
-              "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/lib/css-base.js",
-              "name": "./node_modules/css-loader/lib/css-base.js",
-              "index": 1,
-              "index2": 0,
-              "size": 2260,
-              "cacheable": true,
-              "built": true,
-              "optional": false,
-              "prefetched": false,
-              "chunks": [
-                0
-              ],
-              "assets": [],
-              "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-              "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-              "failed": false,
-              "errors": 0,
-              "warnings": 0,
-              "reasons": [
-                {
-                  "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-                  "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-                  "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-                  "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-                  "type": "cjs require",
-                  "userRequest": "../node_modules/css-loader/lib/css-base.js",
-                  "loc": "1:27-80"
-                }
-              ],
-              "usedExports": true,
-              "providedExports": null,
-              "optimizationBailout": [],
-              "depth": 1,
-              "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
-            }
-          ],
-          "filteredModules": 0,
-          "origins": [
-            {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "module": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-              "loc": "",
-              "reasons": []
-            }
-          ]
-        }
-      ],
-      "modules": [
-        {
-          "id": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-          "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-          "name": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-          "index": 0,
-          "index2": 1,
-          "size": 571,
-          "cacheable": true,
-          "built": true,
-          "optional": false,
-          "prefetched": false,
-          "chunks": [
-            0
-          ],
-          "assets": [],
-          "issuer": null,
-          "issuerId": null,
-          "issuerName": null,
-          "failed": false,
-          "errors": 0,
-          "warnings": 0,
-          "reasons": [],
-          "usedExports": true,
-          "providedExports": null,
-          "optimizationBailout": [],
-          "depth": 0,
-          "source": "exports = module.exports = require(\"../node_modules/css-loader/lib/css-base.js\")(true);\n// imports\n\n\n// module\nexports.push([module.id, \".YxttPEx- {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\", \"\", {\"version\":3,\"sources\":[\"/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css\"],\"names\":[],\"mappings\":\"AAAA;CACC,gBAAgB;CAChB,aAAa;CACb,cAAc;CACd\",\"file\":\"app.m.css\",\"sourcesContent\":[\".root {\\n\\tbackground: red;\\n\\twidth: 100px;\\n\\theight: 100px;\\n}\\n\"],\"sourceRoot\":\"\"}]);\n\n// exports\nexports.locals = {\" _key\": \"app\",\n\t\"root\": \"YxttPEx-\"\n};"
-        },
-        {
-          "id": "./node_modules/css-loader/lib/css-base.js",
-          "identifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/static-build-loader/index.js??ref--4-0!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/umd-compat-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/lib/css-base.js",
-          "name": "./node_modules/css-loader/lib/css-base.js",
-          "index": 1,
-          "index2": 0,
-          "size": 2260,
-          "cacheable": true,
-          "built": true,
-          "optional": false,
-          "prefetched": false,
-          "chunks": [
-            0
-          ],
-          "assets": [],
-          "issuer": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-          "issuerId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-          "issuerName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-          "failed": false,
-          "errors": 0,
-          "warnings": 0,
-          "reasons": [
-            {
-              "moduleId": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!./node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!./src/app.m.css",
-              "moduleIdentifier": "/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/css-loader/index.js?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!/Users/tom/workspace/sitepen/cli-build-app/test-app/node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!/Users/tom/workspace/sitepen/cli-build-app/test-app/src/app.m.css",
-              "module": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-              "moduleName": "./node_modules/@dojo/webpack-contrib/css-module-decorator-loader!./node_modules/css-loader?{\"modules\":true,\"sourceMap\":true,\"importLoaders\":1,\"localIdentName\":\"[hash:base64:8]\"}!./node_modules/postcss-loader/lib?{\"ident\":\"postcss\",\"plugins\":[null,{\"version\":\"6.0.16\",\"plugins\":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],\"postcssPlugin\":\"postcss-cssnext\",\"postcssVersion\":\"6.0.16\"}]}!./node_modules/@dojo/webpack-contrib/css-module-dts-loader?type=css!./src/app.m.css",
-              "type": "cjs require",
-              "userRequest": "../node_modules/css-loader/lib/css-base.js",
-              "loc": "1:27-80"
-            }
-          ],
-          "usedExports": true,
-          "providedExports": null,
-          "optimizationBailout": [],
-          "depth": 1,
-          "source": "/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n"
-        }
-      ],
-      "filteredModules": 0,
-      "children": [],
-      "name": "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/@dojo/webpack-contrib/css-module-decorator-loader/index.js!node_modules/css-loader/index.js??ref--9-3!node_modules/postcss-loader/lib/index.js??postcss!node_modules/@dojo/webpack-contrib/css-module-dts-loader/index.js?type=css!src/app.m.css"
     }
   ]
 }
