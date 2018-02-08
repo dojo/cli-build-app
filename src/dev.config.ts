@@ -7,7 +7,7 @@ import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
-	const { plugins, output } = config;
+	const { plugins, output, module } = config;
 
 	config.plugins = [
 		...plugins,
@@ -18,6 +18,21 @@ function webpackConfig(args: any): webpack.Configuration {
 			name: 'runtime'
 		})
 	];
+
+	module.rules = module.rules.map(rule => {
+		if (Array.isArray(rule.use)) {
+			rule.use.forEach((loader: any) => {
+				if (typeof loader === 'string') {
+					return loader;
+				}
+				if (loader.loader === 'css-loader') {
+					loader.options.localIdentName = '[name]__[local]__[hash:base64:5]';
+					return loader;
+				}
+			});
+		}
+		return rule;
+	});
 
 	config.output = {
 		...output,
