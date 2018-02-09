@@ -7,8 +7,6 @@
 
 The official CLI command for building Dojo 2 applications.
 
-*WARNING* This is currently _alpha_ software. This is not yet production ready, so you should use at your own risk.
-
 - [Usage](#usage)
 - [Features](#features)
   - [Building](#building)
@@ -71,8 +69,11 @@ dojo build -s -p 3000
 Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
 
 ```bash
-dojo build -w # start a file-based watch
-dojo build -s -w=memory -m=dev # build to an in-memory file system with HMR
+# start a file-based watch
+dojo build -w
+
+# build to an in-memory file system with HMR
+dojo build -s -w=memory -m=dev
 ```
 
 ### Eject
