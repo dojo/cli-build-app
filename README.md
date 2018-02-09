@@ -224,4 +224,4 @@ npm test
 Once the test artifact has been installed, if there have been no changes to the command code `grunt test` can be used to repeat the tests.
 ## Licensing information
 
-© 2017 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
+© 2018 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
