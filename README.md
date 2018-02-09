@@ -1,6 +1,6 @@
 # @dojo/cli-build-app
 
-[![Build Status](https://travis-ci.org/dojo/cli-build.svg?branch=master)](https://travis-ci.org/dojo/cli-build-app)
+[![Build Status](https://travis-ci.org/dojo/cli-build-app.svg?branch=master)](https://travis-ci.org/dojo/cli-build-app)
 [![Build status](https://ci.appveyor.com/api/projects/status/31du0respjt6p98i/branch/master?svg=true)](https://ci.appveyor.com/project/Dojo/cli-build-app/branch/master)
 [![codecov](https://codecov.io/gh/dojo/cli-build-app/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-build-app)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-build-app.svg)](https://badge.fury.io/js/%40dojo%2Fcli-build-app)
@@ -29,7 +29,7 @@ npm install @dojo/cli-build-app
 
 ## Features
 
-`@dojo/cli-build-app` is an optional command for the [`@dojo/cli`](https://github.com/dojo/cli).
+`@dojo/cli-build-app` is a command for the [`@dojo/cli`](https://github.com/dojo/cli).
 
 ### Building
 
