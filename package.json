@@ -33,7 +33,7 @@
     ]
   },
   "devDependencies": {
-    "@dojo/interfaces": "0.1.0",
+    "@dojo/cli": "~0.4.2",
     "@dojo/loader": "0.1.0",
     "@types/chalk": "2.2.0",
     "@types/clean-webpack-plugin": "0.1.0",
