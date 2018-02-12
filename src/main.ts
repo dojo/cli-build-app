@@ -1,4 +1,4 @@
-import { Command, EjectOutput, Helper, OptionsHelper } from '@dojo/interfaces/cli';
+import { Command, EjectOutput, Helper, OptionsHelper } from '@dojo/cli/interfaces';
 import * as express from 'express';
 import * as logUpdate from 'log-update';
 import * as ora from 'ora';

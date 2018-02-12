@@ -33,7 +33,7 @@
     ]
   },
   "devDependencies": {
-    "@dojo/interfaces": "0.1.0",
+    "@dojo/cli": "0.6.0",
     "@dojo/loader": "0.1.0",
     "@types/chalk": "2.2.0",
     "@types/clean-webpack-plugin": "0.1.0",
@@ -73,7 +73,6 @@
     "shelljs": "0.7.8",
     "shx": "0.2.2",
     "sinon": "4.1.2",
-    "tslint-plugin-prettier": "1.3.0",
     "typescript": "2.6.1"
   },
   "dependencies": {
