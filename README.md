@@ -1,13 +1,11 @@
 # @dojo/cli-build-app
 
-[![Build Status](https://travis-ci.org/dojo/cli-build.svg?branch=master)](https://travis-ci.org/dojo/cli-build-app)
+[![Build Status](https://travis-ci.org/dojo/cli-build-app.svg?branch=master)](https://travis-ci.org/dojo/cli-build-app)
 [![Build status](https://ci.appveyor.com/api/projects/status/31du0respjt6p98i/branch/master?svg=true)](https://ci.appveyor.com/project/Dojo/cli-build-app/branch/master)
 [![codecov](https://codecov.io/gh/dojo/cli-build-app/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-build-app)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-build-app.svg)](https://badge.fury.io/js/%40dojo%2Fcli-build-app)
 
 The official CLI command for building Dojo 2 applications.
-
-*WARNING* This is currently _alpha_ software. This is not yet production ready, so you should use at your own risk.
 
 - [Usage](#usage)
 - [Features](#features)
@@ -31,7 +29,7 @@ npm install @dojo/cli-build-app
 
 ## Features
 
-`@dojo/cli-build-app` is an optional command for the [`@dojo/cli`](https://github.com/dojo/cli).
+`@dojo/cli-build-app` is a command for the [`@dojo/cli`](https://github.com/dojo/cli).
 
 ### Building
 
@@ -71,8 +69,11 @@ dojo build -s -p 3000
 Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
 
 ```bash
-dojo build -w # start a file-based watch
-dojo build -s -w=memory -m=dev # build to an in-memory file system with HMR
+# start a file-based watch
+dojo build -w
+
+# build to an in-memory file system with HMR
+dojo build -s -w=memory -m=dev
 ```
 
 ### Eject
@@ -223,4 +224,4 @@ npm test
 Once the test artifact has been installed, if there have been no changes to the command code `grunt test` can be used to repeat the tests.
 ## Licensing information
 
-© 2017 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
+© 2018 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
