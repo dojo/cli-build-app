@@ -113,6 +113,30 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			}
 		]
 	});
+	const cssLoader = ExtractTextPlugin.extract({
+		fallback: ['style-loader'],
+		use: [
+			{
+				loader: 'css-loader',
+				options: {
+					sourceMap: true,
+					importLoaders: 1
+				}
+			},
+			{
+				loader: 'postcss-loader?sourceMap',
+				options: {
+					ident: 'postcss',
+					plugins: [
+						require('postcss-import')(),
+						require('postcss-cssnext')({
+							features: { autoprefixer: { browsers: ['last 2 versions', 'ie >= 10'] } }
+						})
+					]
+				}
+			}
+		]
+	});
 
 	const config: webpack.Configuration = {
 		entry: {
@@ -226,6 +250,12 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				{
 					include: allPaths,
 					test: /\.css$/,
+					exclude: /\.m\.css$/,
+					use: cssLoader
+				},
+				{
+					include: allPaths,
+					test: /\.m\.css$/,
 					use: postCssModuleLoader
 				}
 			])
