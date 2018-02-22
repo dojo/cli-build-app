@@ -12,7 +12,7 @@
       "requires": {
         "@dojo/core": "0.3.1",
         "@dojo/has": "0.1.2",
-        "@dojo/shim": "0.2.5",
+        "@dojo/shim": "0.2.6",
         "chalk": "2.3.0",
         "cliui": "4.0.0",
         "configstore": "3.1.1",
@@ -293,13 +293,31 @@
       "dev": true
     },
     "@dojo/shim": {
-      "version": "0.2.5",
-      "resolved": "https://registry.npmjs.org/@dojo/shim/-/shim-0.2.5.tgz",
-      "integrity": "sha512-RhUPwaMmxWRTTKA3rO5gwRwRvoyVZNRsZMsQof852AwZq2bReUOYy4K9Ed6wF5SKQrJngVxNxiaGFddaZLLwSg==",
+      "version": "0.2.6",
+      "resolved": "https://registry.npmjs.org/@dojo/shim/-/shim-0.2.6.tgz",
+      "integrity": "sha512-c9wdqJmUiGae2bCVnkki7lS2OwKHHUnOBAD8tju1rlNmXLrCONY1/1oNtOX9NZk+/KUIEZfqM/wVNninxJwYqA==",
       "requires": {
-        "intersection-observer": "0.4.3",
-        "pepjs": "0.4.3",
-        "tslib": "1.9.0"
+        "intersection-observer": "0.4.2",
+        "pepjs": "0.4.2",
+        "tslib": "1.8.1",
+        "web-animations-js": "2.3.1"
+      },
+      "dependencies": {
+        "intersection-observer": {
+          "version": "0.4.2",
+          "resolved": "https://registry.npmjs.org/intersection-observer/-/intersection-observer-0.4.2.tgz",
+          "integrity": "sha512-SFGCL4d6A7J+aXNHTx94zV7ydngTKraDBvoJjn5iGgsXYhXgAXIYj8i3ewJoO80BRB7qtBB3sBlrdGNwTktzLg=="
+        },
+        "pepjs": {
+          "version": "0.4.2",
+          "resolved": "https://registry.npmjs.org/pepjs/-/pepjs-0.4.2.tgz",
+          "integrity": "sha1-EyZO6olJhP9CPIPkDS+k4d7Byfo="
+        },
+        "tslib": {
+          "version": "1.8.1",
+          "resolved": "https://registry.npmjs.org/tslib/-/tslib-1.8.1.tgz",
+          "integrity": "sha1-aUavLR1lGnsYY7Ux1uWvpBqkTqw="
+        }
       }
     },
     "@dojo/webpack-contrib": {
@@ -307,7 +325,7 @@
       "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.1.6.tgz",
       "integrity": "sha512-vBmLT8pgycXZEnMUFO+1ddSQLfUbh22EBl4ptklDUxQ8P4tK1Q2ckU8v32sFZ0BIDplWIfhmFNqxBLzcYZ8YlA==",
       "requires": {
-        "@dojo/shim": "0.2.5",
+        "@dojo/shim": "0.2.6",
         "loader-utils": "1.1.0",
         "recast": "0.12.9"
       }
@@ -326,7 +344,7 @@
         "@dojo/core": "0.3.1",
         "@dojo/has": "0.1.2",
         "@dojo/interfaces": "0.2.1",
-        "@dojo/shim": "0.2.5",
+        "@dojo/shim": "0.2.6",
         "decompress": "4.2.0",
         "semver": "5.4.1",
         "tslib": "1.8.1"
@@ -401,7 +419,7 @@
         "@dojo/core": "0.3.1",
         "@dojo/has": "0.1.2",
         "@dojo/interfaces": "0.2.1",
-        "@dojo/shim": "0.2.5",
+        "@dojo/shim": "0.2.6",
         "@types/jszip": "0.0.33",
         "jszip": "3.1.5",
         "tslib": "1.8.1"
@@ -7057,11 +7075,6 @@
       "resolved": "https://registry.npmjs.org/interpret/-/interpret-1.1.0.tgz",
       "integrity": "sha1-ftGxQQxqDg94z5XTuEQMY/eLhhQ="
     },
-    "intersection-observer": {
-      "version": "0.4.3",
-      "resolved": "https://registry.npmjs.org/intersection-observer/-/intersection-observer-0.4.3.tgz",
-      "integrity": "sha512-sRobbVo/+DVGkbco/UkuREmXSr5ypWeQ7S7tYDhzIIP3NFtAHLkkFYdivFAIgNe4sfDYBFAjxEgUyxiEmA/dgQ=="
-    },
     "invariant": {
       "version": "2.2.2",
       "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.2.tgz",
@@ -11956,11 +11969,6 @@
       "integrity": "sha1-elfrVQpng/kRUzH89GY9XI4AelA=",
       "dev": true
     },
-    "pepjs": {
-      "version": "0.4.3",
-      "resolved": "https://registry.npmjs.org/pepjs/-/pepjs-0.4.3.tgz",
-      "integrity": "sha1-FggOlwqud5kTdWwtrviOqnSG30E="
-    },
     "performance-now": {
       "version": "2.1.0",
       "resolved": "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz",
@@ -16103,6 +16111,11 @@
         "chokidar": "1.7.0",
         "graceful-fs": "4.1.11"
       }
+    },
+    "web-animations-js": {
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/web-animations-js/-/web-animations-js-2.3.1.tgz",
+      "integrity": "sha1-Om2bwVGWN3qQ+OKAP6UmIWWwRRA="
     },
     "webpack": {
       "version": "3.8.1",
