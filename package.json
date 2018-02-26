@@ -33,7 +33,7 @@
     ]
   },
   "devDependencies": {
-    "@dojo/cli": "0.6.0",
+    "@dojo/cli": "0.6.1",
     "@dojo/loader": "0.1.0",
     "@types/chalk": "2.2.0",
     "@types/clean-webpack-plugin": "0.1.0",
@@ -76,6 +76,7 @@
     "typescript": "2.6.1"
   },
   "dependencies": {
+    "@dojo/shim": "~0.2.6",
     "@dojo/webpack-contrib": "0.1.6",
     "@theintern/istanbul-loader": "1.0.0-beta.1",
     "auto-require-webpack-plugin": "1.0.1",
