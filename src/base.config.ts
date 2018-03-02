@@ -140,7 +140,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 
 	const config: webpack.Configuration = {
 		entry: {
-			[mainEntry]: ['@dojo/shim/browser', path.join(srcPath, 'main.css'), mainEntryPath]
+			[mainEntry]: [path.join(srcPath, 'main.css'), mainEntryPath]
 		},
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
