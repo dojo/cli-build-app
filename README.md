@@ -45,7 +45,7 @@ Note: `dist` is the default mode and so can be run without any arguments, `dojo 
 
 #### Dist Mode
 
-The `dist` mode creates a production ready build.
+The `dist` mode creates a production-ready build.
 
 #### Dev mode
 
@@ -99,7 +99,7 @@ Applications use a `.dojorc` file at the project root to control various aspects
 
 #### `bundles`: object
 
-Useful for breaking an application into smaller bundles, the `bundles` option is a map of webpack bundle names to arrays of modules that should be bundled together. For example, with the following configuration both `src/Foo` and `src/Bar` will be grouped in the `foo.[hash].js` bundle:
+Useful for breaking an application into smaller bundles, the `bundles` option is a map of webpack bundle names to arrays of modules that should be bundled together. For example, with the following configuration, both `src/Foo` and `src/Bar` will be grouped in the `foo.[hash].js` bundle:
 
 ```
 {
@@ -161,7 +161,7 @@ Specifies information for a [web app manifest](https://developer.mozilla.org/en-
 
 #### `supportedLocales`: string[]
 
-An array of supported locales beyond the default. When the application loads, the user's locale is checked against the list of supported locales. If the user's locale is compatible with the supported locales, then the user's locale is used throughout the application. Otherwise, the default `locale` is used. For example, with the following configuration the application locale will be set to Pashto or Arabic if either is listed as the user's locale, with Farsi used as the default.
+An array of supported locales beyond the default. When the application loads, the user's locale is checked against the list of supported locales. If the user's locale is compatible with the supported locales, then the user's locale is used throughout the application. Otherwise, the default `locale` is used. For example, with the following configuration, the application locale will be set to Pashto or Arabic if either is listed as the user's locale, with Farsi used as the default.
 
 Example:
 
@@ -222,6 +222,7 @@ npm test
 ```
 
 Once the test artifact has been installed, if there have been no changes to the command code `grunt test` can be used to repeat the tests.
+
 ## Licensing information
 
 © 2018 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
