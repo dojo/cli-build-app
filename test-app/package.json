@@ -16,11 +16,12 @@
   "license": "ISC",
   "dependencies": {
     "@dojo/cli": "0.6.1",
-    "@dojo/i18n": "0.5.0",
     "@dojo/core": "0.4.0",
     "@dojo/has": "0.1.1",
+    "@dojo/i18n": "0.5.0",
     "@dojo/shim": "0.2.6",
     "intern": "4.1.0",
+    "jsdom": "^11.6.2",
     "tslib": "1.8.0"
   },
   "devDependencies": {

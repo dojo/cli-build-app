@@ -1,6 +1,7 @@
 import baseConfigFactory from './base.config';
 import webpack = require('webpack');
 import * as path from 'path';
+import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -33,6 +34,16 @@ function webpackConfig(args: any): webpack.Configuration {
 			name: 'runtime'
 		})
 	];
+
+	if (args.watch !== 'memory' && args['build-time-render']) {
+		config.plugins.push(
+			new BuildTimeRender({
+				...args['build-time-render'],
+				entries: ['runtime', ...Object.keys(config.entry!)],
+				useManifest: true
+			})
+		);
+	}
 
 	config.plugins = config.plugins.map(plugin => {
 		if (plugin instanceof ExtractTextPlugin) {

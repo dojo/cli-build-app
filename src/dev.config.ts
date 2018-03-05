@@ -2,6 +2,7 @@ import baseConfigFactory from './base.config';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
+import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 
@@ -18,6 +19,16 @@ function webpackConfig(args: any): webpack.Configuration {
 			name: 'runtime'
 		})
 	];
+
+	if (args.watch !== 'memory' && args['build-time-render']) {
+		config.plugins.push(
+			new BuildTimeRender({
+				...args['build-time-render'],
+				entries: ['runtime', ...Object.keys(config.entry!)],
+				useManifest: true
+			})
+		);
+	}
 
 	module.rules = module.rules.map(rule => {
 		if (Array.isArray(rule.use)) {

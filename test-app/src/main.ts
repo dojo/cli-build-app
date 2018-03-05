@@ -8,10 +8,25 @@ if (has('foo')) {
 	console.log('foo');
 }
 
+const btr = has('build-time-render');
+
 App().then(result => {
 	console.log(result());
-	const div = document.createElement('div');
-	div.innerHTML = 'hello, world';
-	div.classList.add(...css.root.split(' '));
-	document.body.appendChild(div);
 });
+let div = document.getElementById('div');
+if (!div) {
+	div = document.createElement('div');
+	div.id = 'div';
+}
+if (btr) {
+	div.setAttribute('hasBtr', 'true');
+}
+
+div.textContent = `Built with Build Time Render: ${!!div.getAttribute('hasBtr')}
+Currently Rendered by BTR: ${has('build-time-render')}`;
+
+div.classList.add(...css.root.split(' '));
+const root = document.getElementById('app');
+if (div.parentNode === null) {
+	root!.appendChild(div);
+}

@@ -2,7 +2,7 @@
 
 .root {
 	composes: root from '../external/test-theme/theme.m.css';
-	width: 100px;
+	width: 240px;
 	height: 100px;
 	color: var(--foreground-color);
 }
