@@ -328,9 +328,9 @@
       }
     },
     "@dojo/webpack-contrib": {
-      "version": "0.2.2",
-      "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.2.2.tgz",
-      "integrity": "sha512-C0jsE6egi7JoErqBnJ/OnUw9K5OUvS0pEP+jZMmpOWdB/MTmcHRPZhNs3f6HEHEGSN4gF+4HyGcaIINLel9zDQ==",
+      "version": "0.2.3",
+      "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.2.3.tgz",
+      "integrity": "sha512-hXIR1+dC61N3xFAYUbL92s792mJbyDWaRRPE+oid/YU7i1x1KJaCZ+wUNNjSQF1QHOnQUFUe9oqKWmliSeq14A==",
       "requires": {
         "@dojo/shim": "0.2.5",
         "copy-webpack-plugin": "4.0.1",
