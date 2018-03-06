@@ -159,6 +159,40 @@ Specifies information for a [web app manifest](https://developer.mozilla.org/en-
 }
 ```
 
+#### `build-time-render`: object
+
+Renders the application to HTML during the build and in-lines the critical CSS. This allows the application to effectively render static HTML pages and provide some advantages of SSR (server side rendering) such as performance, SEO etc without the complexities of running a server to support full SSR.
+
+ * root (required) : The `id` of the root DOM node that application `merge` onto.
+ * paths (optional): An array of hash routes to render the application for during the build, for more complex routes an object can be provided with a basic "matcher" (regular expression) that is used to match against the applications route on page load. *Only supports hash routing.*
+
+```json
+{
+	"build-app": {
+		"build-time-render": {
+			"root": "app",
+			"paths": [
+				"#home",
+				{
+					"path": "#comments/9999",
+					"match": [ "#comments\/.*" ]
+				}
+			]
+		}
+	}
+}
+```
+
+Build time rendering exposes a `has` flag `build-time-render` that can be used to skip functionality that cannot be executed at build time, for example fetching external data.
+
+```ts
+if (!has('build-time-render')) {
+	fetch( /* ... */ );
+}
+```
+
+**Note:** The application needs to use the `merge` API from `Projector`
+
 #### `supportedLocales`: string[]
 
 An array of supported locales beyond the default. When the application loads, the user's locale is checked against the list of supported locales. If the user's locale is compatible with the supported locales, then the user's locale is used throughout the application. Otherwise, the default `locale` is used. For example, with the following configuration, the application locale will be set to Pashto or Arabic if either is listed as the user's locale, with Farsi used as the default.
