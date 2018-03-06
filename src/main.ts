@@ -49,7 +49,7 @@ function build(config: webpack.Configuration, args: any) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
 				logger(stats.toJson(), config, runningMessage);
 			}
-			resolve();
+			resolve(process.exit(0));
 		});
 	});
 }

@@ -76,7 +76,7 @@
     "typescript": "2.6.1"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "0.2.1",
+    "@dojo/webpack-contrib": "0.2.3",
     "@theintern/istanbul-loader": "1.0.0-beta.1",
     "auto-require-webpack-plugin": "1.0.1",
     "chalk": "2.3.0",

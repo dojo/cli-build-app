@@ -140,7 +140,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 
 	const config: webpack.Configuration = {
 		entry: {
-			[mainEntry]: [path.join(srcPath, 'main.css'), mainEntryPath]
+			[mainEntry]: removeEmpty([
+				args['build-time-render'] && '@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				path.join(srcPath, 'main.css'),
+				mainEntryPath
+			])
 		},
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {

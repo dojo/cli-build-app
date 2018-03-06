@@ -17,6 +17,7 @@ let consoleStub = stub(console, 'log');
 let pluginStub: SinonStub;
 let runStub: SinonStub;
 let watchStub: SinonStub;
+let exitStub: SinonStub;
 
 function getMockConfiguration(config: any = {}) {
 	return {
@@ -30,6 +31,7 @@ function getMockConfiguration(config: any = {}) {
 
 describe('command', () => {
 	beforeEach(() => {
+		exitStub = stub(process, 'exit');
 		isError = false;
 		stats = {
 			toJson() {
@@ -81,6 +83,7 @@ describe('command', () => {
 	afterEach(() => {
 		mockModule.destroy();
 		consoleStub.restore();
+		exitStub.restore();
 	});
 
 	it('registers the command options', () => {
