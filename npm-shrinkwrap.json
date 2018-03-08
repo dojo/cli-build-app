@@ -1,6 +1,6 @@
 {
   "name": "@dojo/cli-build-app",
-  "version": "0.3.3",
+  "version": "0.3.4-pre",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -328,9 +328,9 @@
       }
     },
     "@dojo/webpack-contrib": {
-      "version": "0.2.3",
-      "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.2.3.tgz",
-      "integrity": "sha512-hXIR1+dC61N3xFAYUbL92s792mJbyDWaRRPE+oid/YU7i1x1KJaCZ+wUNNjSQF1QHOnQUFUe9oqKWmliSeq14A==",
+      "version": "0.2.4",
+      "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.2.4.tgz",
+      "integrity": "sha512-Muxjw+4iAgu4/xQWc0wM7mvb0m+D5t8EF3YbWNw0oG7DyeQLGvucnBibzyKxx8j067YUEBfWPFCKmxujfRH4Xw==",
       "requires": {
         "@dojo/shim": "0.2.5",
         "copy-webpack-plugin": "4.0.1",
