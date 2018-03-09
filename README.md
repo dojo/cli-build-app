@@ -57,7 +57,7 @@ The `test` mode creates bundles that can be used to run the unit and functional 
 
 ### Serving the Application
 
-A web server can be started with the `--serve` flag. By default, the application is served on port 9999, but this can be changed with the `--port` (`-p`) flag:
+A web server can be started with the `--serve` flag while running in `dev` or `dist` modes. By default, the application is served on port 9999, but this can be changed with the `--port` (`-p`) flag:
 
 ```bash
 # build once and then serve the app on port 3000

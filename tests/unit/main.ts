@@ -264,6 +264,18 @@ describe('command', () => {
 			});
 		});
 
+		it('should disallow serve in test mode', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main
+				.run(getMockConfiguration(), { serve: true, mode: 'test' })
+				.then(() => {
+					throw new Error('should not resolve');
+				})
+				.catch((error: Error) => {
+					assert.strictEqual(error.message, 'Cannot use `--serve` with `--mode=test`');
+				});
+		});
+
 		it('starts a webserver on the specified port', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const port = 3000;
