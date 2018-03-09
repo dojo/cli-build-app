@@ -19,11 +19,14 @@ const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
 const allPaths = [srcPath, testPath];
-const mainEntry = 'main';
 const mainEntryPath = path.join(srcPath, 'main.ts');
+
+export const mainEntry = 'main';
+
 const packageJsonPath = path.join(basePath, 'package.json');
 const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
-const packageName = packageJson.name || '';
+export const packageName = packageJson.name || '';
+
 const tsLintPath = path.join(basePath, 'tslint.json');
 const tsLint = existsSync(tsLintPath) ? require(tsLintPath) : false;
 

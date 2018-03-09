@@ -2,7 +2,7 @@ const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 const { assert } = intern.getPlugin('chai');
 import * as path from 'path';
 
-import MockModule from '../support/MockModule';
+import MockModule from '../../support/MockModule';
 
 const key = 'build-app';
 const rc = { [key]: { bundles: {} } };
@@ -10,7 +10,7 @@ let mockModule: MockModule;
 
 describe('util', () => {
 	beforeEach(() => {
-		mockModule = new MockModule('../../src/util', require);
+		mockModule = new MockModule('../../../src/util/eject', require);
 		mockModule.dependencies(['fs']);
 		mockModule.getMock('fs').existsSync.returns(true);
 		mockModule.getMock('fs').mkdtempSync.returns('/tmp');
