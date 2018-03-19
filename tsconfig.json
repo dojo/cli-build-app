@@ -9,7 +9,7 @@
 		"target": "es5",
 		"noUnusedLocals": true,
 		"moduleResolution": "node",
-		"importHelpers": true,
+		"importHelpers": false,
 		"downlevelIteration": true,
 		"types": [ "intern" ],
 		"lib": [
