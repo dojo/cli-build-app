@@ -102,8 +102,9 @@ describe('command', () => {
 
 	it('can run dev mode', () => {
 		const main = mockModule.getModuleUnderTest().default;
-		main.run(getMockConfiguration(), { mode: 'dev' }).then(() => {
-			assert.isTrue(mockDevConfig.called);
+		main.run(getMockConfiguration({ foo: 'bar' }), { mode: 'dev', watch: 'memory' }).then(() => {
+			assert.isTrue(mockDevConfig.calledOnce);
+			assert.isTrue(mockDevConfig.calledWith({ mode: 'dev', watch: 'memory', foo: 'bar' }));
 			assert.isTrue(mockLogger.calledWith('stats', 'dev config'));
 		});
 	});
@@ -111,7 +112,8 @@ describe('command', () => {
 	it('can run dist mode', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'dist' }).then(() => {
-			assert.isTrue(mockDistConfig.called);
+			assert.isTrue(mockDistConfig.calledOnce);
+			assert.isTrue(mockDistConfig.calledWith({ mode: 'dist' }));
 			assert.isTrue(mockLogger.calledWith('stats', 'dist config'));
 		});
 	});
@@ -119,7 +121,8 @@ describe('command', () => {
 	it('can run test mode', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'test' }).then(() => {
-			assert.isTrue(mockTestConfig.called);
+			assert.isTrue(mockTestConfig.calledOnce);
+			assert.isTrue(mockTestConfig.calledWith({ mode: 'test' }));
 			assert.isTrue(mockLogger.calledWith('stats', 'test config'));
 		});
 	});

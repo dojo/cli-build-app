@@ -189,12 +189,13 @@ const command: Command = {
 		console.log = () => {};
 		const rc = helper.configuration.get() || {};
 		let config: webpack.Configuration;
+		const combinedArgs = { ...rc, ...args };
 		if (args.mode === 'dev') {
-			config = devConfigFactory(rc);
+			config = devConfigFactory(combinedArgs);
 		} else if (args.mode === 'test') {
-			config = testConfigFactory(rc);
+			config = testConfigFactory(combinedArgs);
 		} else {
-			config = distConfigFactory(rc);
+			config = distConfigFactory(combinedArgs);
 		}
 
 		if (args.serve) {
