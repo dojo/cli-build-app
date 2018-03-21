@@ -102,9 +102,9 @@ describe('command', () => {
 
 	it('can run dev mode', () => {
 		const main = mockModule.getModuleUnderTest().default;
-		main.run(getMockConfiguration({ foo: 'bar' }), { mode: 'dev', watch: 'memory' }).then(() => {
+		main.run(getMockConfiguration({ foo: 'bar' }), { mode: 'dev', watch: 'memory', serve: true }).then(() => {
 			assert.isTrue(mockDevConfig.calledOnce);
-			assert.isTrue(mockDevConfig.calledWith({ mode: 'dev', watch: 'memory', foo: 'bar' }));
+			assert.isTrue(mockDevConfig.calledWith({ mode: 'dev', watch: 'memory', foo: 'bar', serve: true }));
 			assert.isTrue(mockLogger.calledWith('stats', 'dev config'));
 		});
 	});
