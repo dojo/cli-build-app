@@ -1,0 +1,41 @@
+<html><head><style>
+/*!
+ * 
+ * [Dojo](https://dojo.io/)
+ * Copyright [JS Foundation](https://js.foundation/) & contributors
+ * [New BSD license](https://github.com/dojo/meta/blob/master/LICENSE)
+ * All rights reserved
+ * 
+ */
+._3x1SGCoi {
+  background: aqua;
+}
+.YxttPEx- {
+  width: 240px;
+  height: 100px;
+  color: blue;
+}
+</style></head>
+	<body>
+		<div id="app"></div>
+		<div id="app-root"></div>
+	<script>
+	(function () {
+		var paths = [""];
+		var html = ["<div id=\"app\"><div id=\"div\" hasbtr=\"true\" class=\"YxttPEx- _3x1SGCoi\">Built with Build Time Render: true\nCurrently Rendered by BTR: true</div></div>"];
+		var element = document.getElementById('app');
+		var target;
+		paths.some(function (path, i) {
+			var match = (typeof path === 'string' && path === window.location.hash) || path && (typeof path === 'object' && path.match && new RegExp(path.match.join('|')).test(window.location.hash));
+			if (match) {
+				target = html[i];
+			}
+			return match;
+		});
+		if (target && element) {
+			var frag = document.createRange().createContextualFragment(target);
+			element.parentNode.replaceChild(frag, element);
+		}
+	}())
+</script><link rel="stylesheet" href="main.578d56e7da7e196d1015b6a234550cdd.bundle.css" media="none" onload="if(media!='all')media='all'" /><script type="text/javascript" src="runtime.d41d8cd98f00b204e980.bundle.js"></script><script type="text/javascript" src="main.f799949c613911085108.bundle.js"></script></body>
+</html>
