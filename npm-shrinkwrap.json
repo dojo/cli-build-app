@@ -321,9 +321,9 @@
       }
     },
     "@dojo/webpack-contrib": {
-      "version": "0.2.5",
-      "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.2.5.tgz",
-      "integrity": "sha512-b7LaH3drkpuhJFMRAqgV0lE8rLUZ1ZksAjW0W5IjJmHQO0rUlzmyLyiNG3xCCyKkOMt/j1C1Ot2GwURRXIyJwQ==",
+      "version": "0.2.6",
+      "resolved": "https://registry.npmjs.org/@dojo/webpack-contrib/-/webpack-contrib-0.2.6.tgz",
+      "integrity": "sha512-s5FlGi2MkGAmUiz8gTa+r3mlR+d6I0URTVy7qh4cVKbqmLcdOrOgPqyAc219BaV5fCJI504YrhbOJOsmV6ZAqQ==",
       "requires": {
         "@dojo/shim": "0.2.7",
         "copy-webpack-plugin": "4.0.1",
@@ -335,14 +335,7 @@
         "source-map": "0.6.1",
         "ts-loader": "3.1.1",
         "typed-css-modules": "0.3.1",
-        "typescript": "2.6.2"
-      },
-      "dependencies": {
-        "typescript": {
-          "version": "2.6.2",
-          "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.6.2.tgz",
-          "integrity": "sha1-PFtv1/beCRQmkCfwPAlGdY92c6Q="
-        }
+        "typescript": "2.6.1"
       }
     },
     "@sinonjs/formatio": {
@@ -15603,8 +15596,7 @@
     "typescript": {
       "version": "2.6.1",
       "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.6.1.tgz",
-      "integrity": "sha1-7znN6ierrAtQAkLWcmq5DgyEZjE=",
-      "dev": true
+      "integrity": "sha1-7znN6ierrAtQAkLWcmq5DgyEZjE="
     },
     "typings-core": {
       "version": "2.3.3",
