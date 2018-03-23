@@ -10,6 +10,9 @@
 			"widgets": [
 				"src/Bar",
 				"src/Baz"
+			],
+			"lazy": [
+				"src/LazyWidget"
 			]
 		},
 		"pwa": {
