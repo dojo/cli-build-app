@@ -99,7 +99,9 @@ Applications use a `.dojorc` file at the project root to control various aspects
 
 #### `bundles`: object
 
-Useful for breaking an application into smaller bundles, the `bundles` option is a map of webpack bundle names to arrays of modules that should be bundled together. For example, with the following configuration, both `src/Foo` and `src/Bar` will be grouped in the `foo.[hash].js` bundle:
+Useful for breaking an application into smaller bundles, the `bundles` option is a map of webpack bundle names to arrays of modules that should be bundled together. For example, with the following configuration, both `src/Foo` and `src/Bar` will be grouped in the `foo.[hash].js` bundle.
+
+Widget modules defined used with `w()` will be automatically converted to a lazily imported, local registry item in the parent widget. This provides a mechanism for declarative code splitting in your application.
 
 ```
 {

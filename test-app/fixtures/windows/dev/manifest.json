@@ -1,4 +1,5 @@
 {
+  "lazy.js": "lazy.js",
   "main.css": "main.css",
   "main.js": "main.js",
   "runtime.js": "runtime.js",

@@ -2,6 +2,7 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
+import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { WebAppManifest, WebpackConfiguration } from './interfaces';
@@ -84,6 +85,24 @@ All rights reserved
 
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
+	const lazyModules = Object.keys(args.bundles || {}).reduce(
+		(lazy, key) => {
+			lazy.push(...args.bundles[key]);
+			return lazy;
+		},
+		[] as string[]
+	);
+
+	const tsLoaderOptions: any = {
+		onlyCompileBundledFiles: true,
+		instance: 'dojo'
+	};
+
+	if (lazyModules.length > 0) {
+		tsLoaderOptions.getCustomTransformers = () => ({
+			before: [registryTransformer(basePath, lazyModules)]
+		});
+	}
 
 	const postCssModuleLoader = ExtractTextPlugin.extract({
 		fallback: ['style-loader'],
@@ -217,7 +236,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 							options: { features: args.features }
 						},
 						getUMDCompatLoader({ bundles: args.bundles }),
-						{ loader: 'ts-loader', options: { onlyCompileBundledFiles: true, instance: 'dojo' } }
+						{
+							loader: 'ts-loader',
+							options: tsLoaderOptions
+						}
 					])
 				},
 				{
