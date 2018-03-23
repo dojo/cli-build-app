@@ -93,6 +93,17 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		[] as string[]
 	);
 
+	const tsLoaderOptions: any = {
+		onlyCompileBundledFiles: true,
+		instance: 'dojo'
+	};
+
+	if (lazyModules.length > 0) {
+		tsLoaderOptions.getCustomTransformers = () => ({
+			before: [registryTransformer(basePath, lazyModules)]
+		});
+	}
+
 	const postCssModuleLoader = ExtractTextPlugin.extract({
 		fallback: ['style-loader'],
 		use: [
@@ -227,13 +238,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						getUMDCompatLoader({ bundles: args.bundles }),
 						{
 							loader: 'ts-loader',
-							options: {
-								onlyCompileBundledFiles: true,
-								instance: 'dojo',
-								getCustomTransformers: () => ({
-									before: [registryTransformer(basePath, lazyModules)]
-								})
-							}
+							options: tsLoaderOptions
 						}
 					])
 				},
