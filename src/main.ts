@@ -47,7 +47,11 @@ function build(config: webpack.Configuration, args: any) {
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
-				logger(stats.toJson(), config, runningMessage);
+				const hasErrors = logger(stats.toJson(), config, runningMessage);
+				if (hasErrors) {
+					reject({});
+					return;
+				}
 			}
 			resolve(process.exit(0));
 		});

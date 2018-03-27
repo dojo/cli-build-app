@@ -310,6 +310,22 @@ describe('command', () => {
 			);
 		});
 
+		it('fails for build errors', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			mockLogger.returns(true);
+			listenStub.callsFake((port: string, callback: Function) => {
+				callback(null, 'stats');
+			});
+			return main.run(getMockConfiguration(), {}).then(
+				() => {
+					throw new Error();
+				},
+				(e: Error) => {
+					assert.deepEqual(e, {});
+				}
+			);
+		});
+
 		it('limits --watch=memory to --mode=dev', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			stub(console, 'warn');
