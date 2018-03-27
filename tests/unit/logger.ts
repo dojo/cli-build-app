@@ -15,7 +15,7 @@ let mockModule: MockModule;
 function assertOutput(isServing = false) {
 	const logger = mockModule.getModuleUnderTest().default;
 	const runningMessage = isServing ? 'running...' : undefined;
-	logger(
+	const hasErrors = logger(
 		{
 			hash: 'hash',
 			assets: [
@@ -71,6 +71,7 @@ ${signOff}
 	`;
 	const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 	assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
+	assert.isFalse(hasErrors);
 }
 
 describe('logger', () => {
@@ -103,7 +104,7 @@ describe('logger', () => {
 		const errors: any = ['error'];
 		const warnings: any = ['warning'];
 		const logger = mockModule.getModuleUnderTest().default;
-		logger(
+		const hasErrors = logger(
 			{
 				hash: 'hash',
 				assets: [
@@ -161,5 +162,6 @@ ${chalk.red('The build completed with errors.')}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
+		assert.isTrue(hasErrors);
 	});
 });
