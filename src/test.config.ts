@@ -61,7 +61,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		return rule;
 	});
 	module.rules.push({
-		test: /src\/.*\.ts(x)?$/,
+		test: /src[\\\/].*\.ts(x)?$/,
 		use: {
 			loader: '@theintern/istanbul-loader'
 		},
