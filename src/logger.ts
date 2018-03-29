@@ -12,7 +12,7 @@ const columns = require('cli-columns');
 const stripAnsi = require('strip-ansi');
 const version = jsonFile.readFileSync(path.join(pkgDir.sync(), 'package.json')).version;
 
-export default function logger(stats: any, config: any, runningMessage: string = '') {
+export default function logger(stats: any, config: any, runningMessage: string = ''): boolean {
 	const assets = stats.assets
 		.map((asset: any) => {
 			const size = (asset.size / 1000).toFixed(2);
@@ -72,4 +72,5 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${config.output
 
 ${signOff}
 	`);
+	return !!errors;
 }
