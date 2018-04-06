@@ -53,7 +53,7 @@ function build(config: webpack.Configuration, args: any) {
 					return;
 				}
 			}
-			resolve(process.exit(0));
+			resolve(args.serve || process.exit(0));
 		});
 	});
 }

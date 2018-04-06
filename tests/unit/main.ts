@@ -284,6 +284,14 @@ describe('command', () => {
 			});
 		});
 
+		it('should not terminate the process when serving', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			const port = 3000;
+			return main.run(getMockConfiguration(), { serve: true, port }).then(() => {
+				assert.isFalse(exitStub.called);
+			});
+		});
+
 		it('serves from the output directory', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const express = mockModule.getMock('express').ctor;
