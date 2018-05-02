@@ -5,13 +5,10 @@
   "requires": true,
   "dependencies": {
     "@dojo/cli": {
-      "version": "0.6.1",
-      "resolved": "https://registry.npmjs.org/@dojo/cli/-/cli-0.6.1.tgz",
-      "integrity": "sha512-dBmmIt1dDpaPblN2mxQflyAi34D+AtChB4Jp0i2y5YguomHa7W/+ZvaLhZaUksSZAadcVZ3NKG7vncDTohDcbw==",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@dojo/cli/-/cli-2.0.0.tgz",
+      "integrity": "sha512-MIJDEZOE9rQuch31NF24QvpvewzB9h6pj2qrXcjaj2/PYmIHBGlcAOCRZ/JBesPjbYTwasU4pqygTsf2mQt0zA==",
       "requires": {
-        "@dojo/core": "0.3.1",
-        "@dojo/has": "0.1.1",
-        "@dojo/shim": "0.2.6",
         "chalk": "2.3.1",
         "cliui": "4.0.0",
         "configstore": "3.1.1",
@@ -23,19 +20,14 @@
         "globby": "6.1.0",
         "inquirer": "4.0.2",
         "pkg-dir": "2.0.0",
+        "slice-ansi": "1.0.0",
+        "string-width": "2.1.1",
+        "tslib": "1.8.1",
         "typings-core": "2.3.3",
         "update-notifier": "2.3.0",
         "yargs": "10.1.2"
       },
       "dependencies": {
-        "@dojo/core": {
-          "version": "0.3.1",
-          "resolved": "https://registry.npmjs.org/@dojo/core/-/core-0.3.1.tgz",
-          "integrity": "sha512-PEwqxpsuTTG0b2wwy0TLHEFf/R6ZBE4zizo4EXzGUVRc5O44w5Hbn+NN48v/o8hwQRKxmX3ywLI0Z1CMZ6NM6w==",
-          "requires": {
-            "tslib": "1.8.1"
-          }
-        },
         "tslib": {
           "version": "1.8.1",
           "resolved": "https://registry.npmjs.org/tslib/-/tslib-1.8.1.tgz",
@@ -44,9 +36,9 @@
       }
     },
     "@dojo/core": {
-      "version": "0.5.0",
-      "resolved": "https://registry.npmjs.org/@dojo/core/-/core-0.5.0.tgz",
-      "integrity": "sha512-kEyKjH/HRMf7rXxFiOvM0Lco8fPcoGtECZx8kr2tskgrIBPN8F3aaRTT8GZ9duUjoIp953RK8ggbMzBt7+ap+Q==",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@dojo/core/-/core-2.0.0.tgz",
+      "integrity": "sha512-iojqMIn49L/bwv/Ryy2v7qKeioHxjHQqJNLhEXBJ+zJoQ47IeG92Y5tmdGsZ6SKZk6sFuWHl7gL9Wbw0qVySHw==",
       "requires": {
         "tslib": "1.8.1"
       },
@@ -59,14 +51,14 @@
       }
     },
     "@dojo/has": {
-      "version": "0.1.1",
-      "resolved": "https://registry.npmjs.org/@dojo/has/-/has-0.1.1.tgz",
-      "integrity": "sha512-McwwBLpM0R0zsIy0+1WkHFXYYNalMOPJydqW3dd089K+AaOCto4AtFKA6+GDEuXDgJE9cMG5tX48hFwIL3dtxQ=="
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@dojo/has/-/has-2.0.0.tgz",
+      "integrity": "sha512-WFdsD2jVqsLvOTtEs8Q9TlJF7f0VgO8NXRccuOPKjw9tXKvB6XrnZjGgh+zkLxOUrm8m3rExMu8MHGM8ZHLPPQ=="
     },
     "@dojo/i18n": {
-      "version": "0.6.0",
-      "resolved": "https://registry.npmjs.org/@dojo/i18n/-/i18n-0.6.0.tgz",
-      "integrity": "sha512-7D576mCfFqotuancUdO6nQnCwaPgB26f4LDw7WBEslXp4aIszMo7azrXY5g5x/2xEM6KCBUpUwB+kCU+qcLWIA==",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@dojo/i18n/-/i18n-2.0.0.tgz",
+      "integrity": "sha512-N7waSXe8ER602TW6WzEaqxMgbjGkFeu6B6xgRFQHoT08MuuwnnFAvjpBG3k3JVq1Kn6hBZqOYP2Fi2xqtdlasA==",
       "requires": {
         "globalize": "1.3.0",
         "tslib": "1.8.1"
@@ -85,9 +77,9 @@
       "integrity": "sha512-rpBALDc5Ya/+JrlyFvrt7wKGdGA1xq2gSFGce6j3L9meB8tAFYQvs/bx9DDp+CSdpEzzeVZWr8C4FpoUId2New=="
     },
     "@dojo/shim": {
-      "version": "0.2.6",
-      "resolved": "https://registry.npmjs.org/@dojo/shim/-/shim-0.2.6.tgz",
-      "integrity": "sha512-c9wdqJmUiGae2bCVnkki7lS2OwKHHUnOBAD8tju1rlNmXLrCONY1/1oNtOX9NZk+/KUIEZfqM/wVNninxJwYqA==",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@dojo/shim/-/shim-2.0.0.tgz",
+      "integrity": "sha512-v/zD80U+8ajNrfxwKH6yy//l6ATQ/LzeYVXcqmBkGQ0NA4vDujLS3ceF3Wt0XL55JXLUYaVSQACMqy0H9DPD3A==",
       "requires": {
         "intersection-observer": "0.4.2",
         "pepjs": "0.4.2",
@@ -96,9 +88,9 @@
       }
     },
     "@dojo/widget-core": {
-      "version": "0.10.0",
-      "resolved": "https://registry.npmjs.org/@dojo/widget-core/-/widget-core-0.10.0.tgz",
-      "integrity": "sha512-WZ8A4BLZBgSLhjrwFx5yp4ToBj2C9y0jtC79N8dyvWJ2xwol61ZfgEUUkkpROlkk4rQjVQ2wPFOhQw0NwoJqjw==",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@dojo/widget-core/-/widget-core-2.0.0.tgz",
+      "integrity": "sha512-D58yrDvAvlTmOySHA4gminwKU3zJfs8UwQ6MWauI35rwCo+ssFkWWEly2j7YJa3L8e1dHxe6YoFKhK5bc4ZIFA==",
       "requires": {
         "@types/web-animations-js": "2.2.5",
         "tslib": "1.8.1"
@@ -117,9 +109,7 @@
       "integrity": "sha512-BTcYNMxOnGlTEaOYqab9WygE2sLz9ZRWRsuTwUttceewzEDn/Ok/4lWdIgwwX+bb3MybvFPU1wBkq8Co+Bfqyw==",
       "requires": {
         "@dojo/core": "0.3.1",
-        "@dojo/has": "0.1.1",
         "@dojo/interfaces": "0.2.1",
-        "@dojo/shim": "0.2.6",
         "decompress": "4.2.0",
         "semver": "5.4.1",
         "tslib": "1.8.0"
@@ -161,9 +151,7 @@
       "integrity": "sha512-J9wLAMjAU+Wyv5jGmHdVN4xnuyaD24kK7mAoLUPBLRNxflkJoTo9Ph5g4BKUHp+xpKd/IMU00ulgMMf++Xqm4A==",
       "requires": {
         "@dojo/core": "0.3.1",
-        "@dojo/has": "0.1.1",
         "@dojo/interfaces": "0.2.1",
-        "@dojo/shim": "0.2.6",
         "@types/jszip": "0.0.33",
         "jszip": "3.1.5",
         "tslib": "1.8.0"
@@ -1889,7 +1877,6 @@
       "integrity": "sha512-6RtCkpWtpDiR2mzHn5N6pZdej4MePan7J5Acs2n2iSmqCUP97UbyEPDVsObxo7Mv+IktI0auqft7/WPHxFehpg==",
       "requires": {
         "@dojo/core": "0.1.0",
-        "@dojo/has": "0.1.1",
         "@dojo/interfaces": "0.1.0",
         "@dojo/shim": "0.1.0",
         "@theintern/digdug": "2.0.4",
@@ -3285,6 +3272,14 @@
       "version": "3.0.2",
       "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.2.tgz",
       "integrity": "sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0="
+    },
+    "slice-ansi": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/slice-ansi/-/slice-ansi-1.0.0.tgz",
+      "integrity": "sha512-POqxBK6Lb3q6s047D/XsDVNPnF9Dl8JSaqe9h9lURl0OdNqy/ujDrOiIHtsqXMGbWWTIomRzAMaTyawAU//Reg==",
+      "requires": {
+        "is-fullwidth-code-point": "2.0.0"
+      }
     },
     "sntp": {
       "version": "2.1.0",
