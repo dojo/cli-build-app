@@ -49,6 +49,11 @@ function webpackConfig(args: any): webpack.Configuration {
 		new CleanWebpackPlugin(['dist'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
+		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: '"production"'
+			}
 		})
 	];
 
