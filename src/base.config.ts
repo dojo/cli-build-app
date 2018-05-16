@@ -3,6 +3,7 @@ import * as path from 'path';
 import { existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
+import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { WebAppManifest, WebpackConfiguration } from './interfaces';
@@ -92,6 +93,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		[] as string[]
 	);
+	const externalDependencies = (args.externals && args.externals.dependencies) || [];
+	const includesExternals = Boolean(externalDependencies.length);
 
 	const tsLoaderOptions: any = {
 		onlyCompileBundledFiles: true,
@@ -158,6 +161,13 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	});
 
 	const config: webpack.Configuration = {
+		externals: removeEmpty(
+			externalDependencies.map((externalDependency: string | { name?: string }) => {
+				const name = typeof externalDependency === 'string' ? externalDependency : externalDependency.name;
+
+				return name && new RegExp(`^${name}[!/]`);
+			})
+		),
 		entry: {
 			[mainEntry]: removeEmpty([
 				args['build-time-render'] && '@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
@@ -192,6 +202,12 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			}),
 			new webpack.NamedChunksPlugin(),
 			new webpack.NamedModulesPlugin(),
+			includesExternals &&
+				new ExternalLoaderPlugin({
+					dependencies: externalDependencies,
+					outputPath: args.externals && args.externals.outputPath,
+					pathPrefix: args.withTests ? '../_build/src' : ''
+				}),
 			manifest && new WebpackPwaManifest(manifest),
 			args.locale &&
 				new I18nPlugin({
