@@ -223,7 +223,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{
 					include: allPaths,
-					test: /\.m\.css$/,
+					test: /\.m\.(p)?css$/,
 					enforce: 'pre',
 					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=css'
 				},
@@ -268,20 +268,20 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
 				},
 				{
-					test: (path: string) => /\.m\.css$/.test(path) && !existsSync(path + '.js'),
+					test: (path: string) => /\.m\.(p)?css$/.test(path) && !existsSync(path + '.js'),
 					exclude: allPaths,
 					use: postCssModuleLoader
 				},
 				{ test: /\.m\.css\.js$/, exclude: allPaths, use: ['json-css-module-loader'] },
 				{
 					include: allPaths,
-					test: /\.css$/,
+					test: /\.(p)?css$/,
 					exclude: /\.m\.css$/,
 					use: cssLoader
 				},
 				{
 					include: allPaths,
-					test: /\.m\.css$/,
+					test: /\.m\.(p)?css$/,
 					use: postCssModuleLoader
 				}
 			])
