@@ -92,6 +92,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		[] as string[]
 	);
+	const externalDependencies = (args.externals && args.externals.dependencies) || [];
 
 	const tsLoaderOptions: any = {
 		onlyCompileBundledFiles: true,
@@ -158,6 +159,25 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	});
 
 	const config: webpack.Configuration = {
+		externals: [
+			function(context, request, callback) {
+				function findExternalType(externals: (string | { name?: string; type?: string })[]): string | void {
+					for (let external of externals) {
+						const name = external && (typeof external === 'string' ? external : external.name);
+						if (name && new RegExp(`^${name}[!\/]`).test(request)) {
+							return (typeof external === 'string' ? '' : external.type) || 'umd';
+						}
+					}
+				}
+
+				const type = findExternalType(externalDependencies.concat('intern'));
+				if (type) {
+					return callback(null, `${type} ${request}`);
+				}
+
+				callback(undefined, undefined);
+			}
+		],
 		entry: {
 			[mainEntry]: removeEmpty([
 				args['build-time-render'] && '@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',

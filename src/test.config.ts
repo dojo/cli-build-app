@@ -4,12 +4,15 @@ import * as webpack from 'webpack';
 import * as globby from 'globby';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 
 const basePath = process.cwd();
 
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const { plugins, output, module } = config;
+	const externalDependencies = (args.externals && args.externals.dependencies) || [];
+	const includesExternals = Boolean(externalDependencies.length);
 	config.entry = () => {
 		const unit = globby
 			.sync([`${basePath}/tests/unit/**/*.ts`])
@@ -42,6 +45,16 @@ function webpackConfig(args: any): webpack.Configuration {
 		}),
 		new CleanWebpackPlugin(['test'], { root: output.path, verbose: false })
 	];
+
+	if (includesExternals) {
+		config.plugins.push(
+			new ExternalLoaderPlugin({
+				dependencies: externalDependencies,
+				outputPath: args.externals && args.externals.outputPath,
+				pathPrefix: args.withTests ? '../_build/src' : ''
+			})
+		);
+	}
 
 	module.rules = module.rules.map(rule => {
 		if (Array.isArray(rule.use)) {

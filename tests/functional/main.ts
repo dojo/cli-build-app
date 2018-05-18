@@ -23,6 +23,21 @@ function assertOutput(mode: string) {
 	const outputManifest = require(path.join(appRootDir, 'output', mode, 'manifest'));
 	const fixtureFileIdentifiers = Object.keys(fixtureManifest);
 	const outputFileIdentifiers = Object.keys(outputManifest);
+	const thirdPartyPath = path.join(appRootDir, 'external', 'third-party', 'third-party.js');
+	const copiedThirdPartyPath = path.join(
+		appRootDir,
+		'output',
+		mode,
+		'externals',
+		'third-party',
+		'v2.0.0',
+		'third-party.js'
+	);
+	assert.strictEqual(
+		normalise(fs.readFileSync(thirdPartyPath, 'utf8')),
+		normalise(fs.readFileSync(copiedThirdPartyPath, 'utf8')),
+		'Did not properly copy external script'
+	);
 	assert.deepEqual(outputFileIdentifiers, fixtureFileIdentifiers);
 	fixtureFileIdentifiers.forEach(id => {
 		if (id !== 'runtime.js.map') {

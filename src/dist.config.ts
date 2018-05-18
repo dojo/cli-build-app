@@ -7,6 +7,7 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
+import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -14,6 +15,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const { plugins, output } = config;
+	const externalDependencies = (args.externals && args.externals.dependencies) || [];
+	const includesExternals = Boolean(externalDependencies.length);
 
 	config.plugins = [
 		...plugins,
@@ -41,6 +44,17 @@ function webpackConfig(args: any): webpack.Configuration {
 				...args['build-time-render'],
 				entries: ['runtime', ...Object.keys(config.entry!)],
 				useManifest: true
+			})
+		);
+	}
+
+	if (includesExternals) {
+		config.plugins.push(
+			new ExternalLoaderPlugin({
+				dependencies: externalDependencies,
+				outputPath: args.externals && args.externals.outputPath,
+				pathPrefix: args.withTests ? '../_build/src' : '',
+				hash: true
 			})
 		);
 	}
