@@ -23,6 +23,16 @@
 		},
 		"build-time-render": {
 			"root": "app"
+		},
+		"externals": {
+			"dependencies": [
+				{
+					"name": "third-party",
+					"from": "external/third-party",
+					"to": "third-party/v2.0.0/",
+					"inject": "third-party.js"
+				}
+			]
 		}
 	}
 }
