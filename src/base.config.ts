@@ -139,9 +139,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 
 	if (lazyModules.length > 0) {
 		customTransformers.push(registryTransformer(basePath, lazyModules));
-		if (!args.legacy) {
-			customTransformers.push(importTransformer(basePath, args.bundles));
-		}
+	}
+
+	if (!args.legacy) {
+		customTransformers.push(importTransformer(basePath, args.bundles));
 	}
 
 	const tsLoaderOptions: any = {
