@@ -188,6 +188,13 @@ const command: Command = {
 			default: 9999,
 			type: 'number'
 		});
+
+		options('legacy', {
+			describe: 'build app with legacy browser support',
+			alias: 'l',
+			default: true,
+			type: 'boolean'
+		});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
