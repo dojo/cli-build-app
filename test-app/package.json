@@ -5,12 +5,9 @@
   "main": "index.js",
   "scripts": {
     "install-build-app": "npm install --no-save ../dist/dojo-cli-build-app.tgz",
-    "generate-fixtures": "shx rm -rf output && shx rm -rf src/app.m.css.d.ts && dojo build && shx rm -rf src/app.m.css.d.ts && dojo build --mode dev && shx rm -rf src/app.m.css.d.ts && dojo build --mode test",
-    "generate-unix-fixtures": "npm run generate-fixtures && shx cp -r output/* fixtures/unix/",
-    "generate-windows-fixtures": "npm run generate-fixtures && shx cp -r output/* fixtures/windows/",
-    "build-dist": "dojo build --mode dist",
-    "build-dev": "dojo build --mode dev",
-    "build-test": "dojo build --mode test"
+    "build:dist": "dojo build --mode dist",
+    "build:dev": "dojo build --mode dev",
+    "build:test": "dojo build --mode test"
   },
   "author": "",
   "license": "ISC",
