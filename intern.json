@@ -1,7 +1,6 @@
 {
   "suites": [
-    "./_build/tests/unit/all.js",
-    "./_build/tests/functional/all.js"
+    "./_build/tests/unit/all.js"
   ],
 
   "coverage": [

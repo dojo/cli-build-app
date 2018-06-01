@@ -1,14 +1,12 @@
 /_build
-/bower_components
+/output
 /dist
 /html-report
 /node_modules
-/typings
-.baseDir.ts
-.tscache
 coverage/
 coverage-unmapped.json
 coverage-final.json
 coverage-final.lcov
 npm-debug.log
 yarn.lock
+test-app/package-lock.json
