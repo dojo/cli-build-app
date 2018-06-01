@@ -20,7 +20,7 @@
     "test:ci": "run-p --race serve test",
     "serve": "http-server -p 9999 -c-1 --silent",
     "test": "npm run artefact:package && npm run artefact:install && grunt dev && grunt intern:node --test-reporter --color && npm run artefact:build && cypress run",
-    "artefact:build": "cd test-app npm run build:dist && npm run build:dev",
+    "artefact:build": "cd test-app && npm run build:dist && npm run build:dev",
     "artefact:install": "cd test-app && shx rm -rf node_modules && npm i && npm run install-build-app",
     "artefact:package": "grunt dist && grunt release-publish-flat --dry-run && shx mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz",
     "prettier": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'",
