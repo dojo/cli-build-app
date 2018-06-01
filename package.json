@@ -17,13 +17,13 @@
     "url": "https://github.com/dojo/cli-build-app.git"
   },
   "scripts": {
+    "clean": "shx rm -rf _build",
+    "cypress:ci": "npm run setup-tests && grunt dev && cypress run",
     "test": "npm run setup-tests && grunt test --color",
     "test-ci": "npm run setup-tests && grunt dev && grunt intern:node --test-reporter --color",
     "setup-tests": "npm run build-test-artifact && cd test-app && shx rm -rf node_modules && npm i && npm run install-build-app",
     "build-test-artifact": "grunt dist && grunt release-publish-flat --dry-run && shx mv dist/dojo-cli-build-app-* dist/dojo-cli-build-app.tgz",
     "prettier": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'",
-    "generate-unix-fixtures": "cd test-app && npm run generate-unix-fixtures && cd ..",
-    "generate-windows-fixtures": "cd test-app && npm run generate-windows-fixtures && cd ..",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -61,6 +61,7 @@
     "@types/webpack-manifest-plugin": "1.3.1",
     "@types/yargs": "8.0.2",
     "codecov.io": "0.1.6",
+    "cypress": "^3.0.1",
     "execa": "0.8.0",
     "grunt": "1.0.1",
     "grunt-dojo2": "latest",

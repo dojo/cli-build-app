@@ -1,8 +1,0 @@
-{
-  "name": "Test App",
-  "short_name": "Test App",
-  "orientation": "portrait",
-  "display": "standalone",
-  "start_url": ".",
-  "description": "A test application for @dojo/cli-build-app"
-}

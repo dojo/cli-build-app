@@ -1,0 +1,14 @@
+{
+  "baseUrl": "http://127.0.0.1:9001",
+  "ignoreTestFiles": "*.js.map",
+  "fixturesFolder": "_build/tests/fixtures",
+  "integrationFolder": "_build/tests/integration",
+  "screenshotsFolder": "output/tests/screenshots",
+  "videosFolder": "output/tests/videos",
+  "supportFile": false,
+  "pluginsFile": false,
+  "reporter": "junit",
+  "reporterOptions": {
+	  "mochaFile": "./output/report/junit.xml"
+  }
+}

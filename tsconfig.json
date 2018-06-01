@@ -11,7 +11,7 @@
 		"moduleResolution": "node",
 		"importHelpers": false,
 		"downlevelIteration": true,
-		"types": [ "intern" ],
+		"types": [ "intern", "cypress" ],
 		"lib": [
 			"dom",
 			"es5",
