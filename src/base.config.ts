@@ -8,6 +8,7 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { WebAppManifest, WebpackConfiguration } from './interfaces';
 import * as loaderUtils from 'loader-utils';
 import * as ts from 'typescript';
+import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
@@ -108,7 +109,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
-	const features = args.legacy ? args.features : ['chrome'];
+	const features = args.legacy ? { ...(args.features || {}), ...getFeatures('chrome') } : args.features;
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
 		(lazy, key) => {
 			lazy.push(...args.bundles[key]);

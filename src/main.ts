@@ -201,11 +201,11 @@ const command: Command = {
 		const rc = helper.configuration.get() || {};
 		let config: webpack.Configuration;
 		if (args.mode === 'dev') {
-			config = devConfigFactory(rc);
+			config = devConfigFactory({ ...rc, ...args });
 		} else if (args.mode === 'test') {
-			config = testConfigFactory(rc);
+			config = testConfigFactory({ ...rc, ...args });
 		} else {
-			config = distConfigFactory(rc);
+			config = distConfigFactory({ ...rc, ...args });
 		}
 
 		if (args.serve) {
