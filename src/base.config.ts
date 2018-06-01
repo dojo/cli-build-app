@@ -109,7 +109,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
-	const features = args.legacy ? { ...(args.features || {}), ...getFeatures('chrome') } : args.features;
+	const features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
 		(lazy, key) => {
 			lazy.push(...args.bundles[key]);
