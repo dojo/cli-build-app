@@ -85,20 +85,37 @@ Copyright [JS Foundation](https://js.foundation/) & contributors
 All rights reserved
 `;
 
-function importTransformer(basePath: string, lazyModules: string[]) {
-	return (context: any) => {
-		return (file: any) => ts.visitEachChild(file, visit, context);
+function importTransformer(basePath: string, bundles: any = {}) {
+	return function(context: any) {
+		let resolvedModules: any;
+		return function(file: any) {
+			resolvedModules = file.resolvedModules;
+			return ts.visitEachChild(file, visit, context);
+		};
 		function visit(node: any): any {
-			if (node.kind === ts.SyntaxKind.CallExpression) {
-				if (node.expression.kind === ts.SyntaxKind.ImportKeyword) {
-					node.arguments[0] = ts.addSyntheticLeadingComment(
-						node.arguments[0],
-						ts.SyntaxKind.MultiLineCommentTrivia,
-						` webpackChunkName: "love-you" `,
-						false
-					);
-					return node;
-				}
+			if (node.kind === ts.SyntaxKind.CallExpression && node.expression.kind === ts.SyntaxKind.ImportKeyword) {
+				const moduleText = node.arguments[0].text;
+				const { resolvedFileName } = resolvedModules.get(moduleText);
+				let chunkName = slash(
+					resolvedFileName
+						.replace(basePath, '')
+						.replace('.ts', '')
+						.replace(/^\//, '')
+				);
+				Object.keys(bundles).some(function(name) {
+					if (bundles[name].indexOf(slash(chunkName)) !== -1) {
+						chunkName = name;
+						return true;
+					}
+					return false;
+				});
+				node.arguments[0] = ts.addSyntheticLeadingComment(
+					node.arguments[0],
+					ts.SyntaxKind.MultiLineCommentTrivia,
+					` webpackChunkName: "${chunkName}" `,
+					false
+				);
+				return node;
 			}
 			return ts.visitEachChild(node, visit, context);
 		}
@@ -123,7 +140,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	if (lazyModules.length > 0) {
 		customTransformers.push(registryTransformer(basePath, lazyModules));
 		if (!args.legacy) {
-			customTransformers.push(importTransformer(basePath, lazyModules));
+			customTransformers.push(importTransformer(basePath, args.bundles));
 		}
 	}
 
