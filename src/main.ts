@@ -188,17 +188,24 @@ const command: Command = {
 			default: 9999,
 			type: 'number'
 		});
+
+		options('legacy', {
+			describe: 'build app with legacy browser support',
+			alias: 'l',
+			default: true,
+			type: 'boolean'
+		});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
 		const rc = helper.configuration.get() || {};
 		let config: webpack.Configuration;
 		if (args.mode === 'dev') {
-			config = devConfigFactory(rc);
+			config = devConfigFactory({ ...rc, ...args });
 		} else if (args.mode === 'test') {
-			config = testConfigFactory(rc);
+			config = testConfigFactory({ ...rc, ...args });
 		} else {
-			config = distConfigFactory(rc);
+			config = distConfigFactory({ ...rc, ...args });
 		}
 
 		if (args.serve) {

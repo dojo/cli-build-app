@@ -7,6 +7,8 @@ import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { WebAppManifest, WebpackConfiguration } from './interfaces';
 import * as loaderUtils from 'loader-utils';
+import * as ts from 'typescript';
+import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
@@ -83,8 +85,48 @@ Copyright [JS Foundation](https://js.foundation/) & contributors
 All rights reserved
 `;
 
+function importTransformer(basePath: string, bundles: any = {}) {
+	return function(context: any) {
+		let resolvedModules: any;
+		return function(file: any) {
+			resolvedModules = file.resolvedModules;
+			return ts.visitEachChild(file, visit, context);
+		};
+		function visit(node: any): any {
+			if (node.kind === ts.SyntaxKind.CallExpression && node.expression.kind === ts.SyntaxKind.ImportKeyword) {
+				const moduleText = node.arguments[0].text;
+				const { resolvedFileName } = resolvedModules.get(moduleText);
+				let chunkName = slash(
+					resolvedFileName
+						.replace(basePath, '')
+						.replace('.ts', '')
+						.replace(/^(\/|\\)/, '')
+				);
+				Object.keys(bundles).some(function(name) {
+					if (bundles[name].indexOf(slash(chunkName)) !== -1) {
+						chunkName = name;
+						return true;
+					}
+					return false;
+				});
+				node.arguments[0] = ts.addSyntheticLeadingComment(
+					node.arguments[0],
+					ts.SyntaxKind.MultiLineCommentTrivia,
+					` webpackChunkName: "${chunkName}" `,
+					false
+				);
+				return node;
+			}
+			return ts.visitEachChild(node, visit, context);
+		}
+	};
+}
+
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
+	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
+	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
+	const features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
 		(lazy, key) => {
 			lazy.push(...args.bundles[key]);
@@ -93,16 +135,24 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		[] as string[]
 	);
 
-	const tsLoaderOptions: any = {
-		onlyCompileBundledFiles: true,
-		instance: 'dojo'
-	};
+	const customTransformers: any[] = [];
 
 	if (lazyModules.length > 0) {
-		tsLoaderOptions.getCustomTransformers = () => ({
-			before: [registryTransformer(basePath, lazyModules)]
-		});
+		customTransformers.push(registryTransformer(basePath, lazyModules));
 	}
+
+	if (!args.legacy) {
+		customTransformers.push(importTransformer(basePath, args.bundles));
+	}
+
+	const tsLoaderOptions: any = {
+		onlyCompileBundledFiles: true,
+		instance: 'dojo',
+		compilerOptions,
+		getCustomTransformers() {
+			return { before: customTransformers };
+		}
+	};
 
 	const postCssModuleLoader = ExtractTextPlugin.extract({
 		fallback: ['style-loader'],
@@ -177,7 +227,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
-			extensions: ['.ts', '.tsx', '.js']
+			extensions
 		},
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
@@ -231,11 +281,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					include: allPaths,
 					test: /\.ts(x)?$/,
 					use: removeEmpty([
-						args.features && {
+						features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
-							options: { features: args.features }
+							options: { features }
 						},
-						getUMDCompatLoader({ bundles: args.bundles }),
+						args.legacy && getUMDCompatLoader({ bundles: args.bundles }),
 						{
 							loader: 'ts-loader',
 							options: tsLoaderOptions
@@ -243,11 +293,20 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					])
 				},
 				{
+					test: /\.mjs?$/,
+					use: removeEmpty([
+						features && {
+							loader: '@dojo/webpack-contrib/static-build-loader',
+							options: { features }
+						}
+					])
+				},
+				{
 					test: /\.js(x)?$/,
 					use: removeEmpty([
-						args.features && {
+						features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
-							options: { features: args.features }
+							options: { features }
 						},
 						'umd-compat-loader'
 					])

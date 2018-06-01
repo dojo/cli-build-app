@@ -7,6 +7,8 @@
     "install-build-app": "npm install --no-save ../dist/dojo-cli-build-app.tgz",
     "build:dist": "dojo build --mode dist",
     "build:dev": "dojo build --mode dev",
+    "build:dist:evergreen": "dojo build --mode dist --legacy false",
+    "build:dev:evergreen": "dojo build --mode dev --legacy false",
     "build:test": "dojo build --mode test"
   },
   "author": "",
