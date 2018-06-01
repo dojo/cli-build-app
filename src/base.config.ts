@@ -100,7 +100,7 @@ function importTransformer(basePath: string, bundles: any = {}) {
 					resolvedFileName
 						.replace(basePath, '')
 						.replace('.ts', '')
-						.replace(/^\//, '')
+						.replace(/^(\/|\\)/, '')
 				);
 				Object.keys(bundles).some(function(name) {
 					if (bundles[name].indexOf(slash(chunkName)) !== -1) {
