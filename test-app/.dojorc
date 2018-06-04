@@ -19,6 +19,14 @@
 			"manifest": {
 				"name": "Test App",
 				"description": "A test application for @dojo/cli-build-app"
+			},
+			"serviceWorker": {
+				"clientsClaim": true,
+				"excludeBundles": [ "src/LazyWidget" ],
+				"routes": [
+					{ "urlPattern": "\\.(jpg|png|gif|svg)$", "strategy": "cacheFirst", "expiration": { "maxEntries": 25 } },
+					{ "urlPattern": "/api", "strategy": "networkFirst" }
+				]
 			}
 		},
 		"build-time-render": {

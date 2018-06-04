@@ -8,7 +8,7 @@ const key = 'build-app';
 const rc = { [key]: { bundles: {} } };
 let mockModule: MockModule;
 
-describe('util', () => {
+describe('util/eject', () => {
 	beforeEach(() => {
 		mockModule = new MockModule('../../../src/util/eject', require);
 		mockModule.dependencies(['fs']);

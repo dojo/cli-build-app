@@ -35,7 +35,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	if (serviceWorker) {
 		const serviceWorkerOptions =
-			typeof serviceWorker === 'string' ? serviceWorker : deepAssign(serviceWorker, { cachePrefix: packageName });
+			typeof serviceWorker === 'string' ? serviceWorker : deepAssign({ cachePrefix: packageName }, serviceWorker);
 		config.plugins.push(new ServiceWorkerPlugin(serviceWorkerOptions));
 
 		if (typeof serviceWorker !== 'string') {
