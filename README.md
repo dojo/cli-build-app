@@ -170,7 +170,7 @@ For example:
 
 Generates a fully-functional service worker that is activated on startup, complete with precaching and custom route handling. Alternatively, you can create your own service worker file and `@dojo/cli-build-app` will ensure it is copied to the correct output directory. Under the hood, the `ServicerWorkerPlugin` from `@dojo/webpack-contrib` is used to generate the service worker, and [all of its options](https://github.com/dojo/webpack-contrib/#service-worker-plugin) are valid `pwa.serviceWorker` properties. Note that if `pwa.serviceWorker.cachePrefix` is not included, it defaults to the `name` property from the application's `package.json`.
 
-```json
+```js
 {
 	"build-app": {
 		"pwa": {
