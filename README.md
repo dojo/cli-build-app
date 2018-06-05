@@ -146,7 +146,12 @@ A parent map that houses settings specific to creating progressive web applicati
 
 #### `pwa.manifest`: object
 
-Specifies information for a [web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest). For example:
+Specifies information for a [web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest). If provided, the following `<meta>` tags are injected into the application's `index.html`:
+
+- `mobile-web-app-capable="yes"`: indicates to Chrome on Android that the application can be added to the user's homescreen.
+- `apple-mobile-web-app-capable="yes"`: indicates to iOS devices that the application can be added to the user's homescreen.
+
+For example:
 
 ```
 {
@@ -155,6 +160,43 @@ Specifies information for a [web app manifest](https://developer.mozilla.org/en-
 			"manifest": {
 				"name": "Todo MVC",
 				"description": "A simple to-do application created with Dojo 2"
+			}
+		}
+	}
+}
+```
+
+#### `pwa.serviceWorker`: object
+
+Generates a fully-functional service worker that is activated on startup, complete with precaching and custom route handling. Alternatively, you can create your own service worker file and `@dojo/cli-build-app` will ensure it is copied to the correct output directory. Under the hood, the `ServicerWorkerPlugin` from `@dojo/webpack-contrib` is used to generate the service worker, and [all of its options](https://github.com/dojo/webpack-contrib/#service-worker-plugin) are valid `pwa.serviceWorker` properties. Note that if `pwa.serviceWorker.cachePrefix` is not included, it defaults to the `name` property from the application's `package.json`.
+
+```js
+{
+	"build-app": {
+		"pwa": {
+			"serviceWorker": {
+				"cachePrefix": "my-app",
+
+				// exclude the "admin" bundle from caching
+				"excludeBundles": [ "admin" ],
+
+				"routes": [
+					// Use the cache-first strategy for loading images, adding them to the "my-app-images" cache.
+					// Only the first ten images should be cached, and for one week.
+					{
+						"urlPattern": ".*\\.(png|jpg|gif|svg)",
+						"strategy": "cacheFirst",
+						"cacheName": "my-app-images",
+						"expiration": { "maxEntries": 10, "maxAgeSeconds": 604800 }
+					},
+
+					// Use the cache-first strategy to cache up to 25 articles that expire after one day.
+					{
+						"urlPattern": "http://my-app-url.com/api/articles",
+						"strategy": "cacheFirst",
+						"expiration": { "maxEntries": 25, "maxAgeSeconds": 86400 }
+					}
+				]
 			}
 		}
 	}

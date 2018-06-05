@@ -19,6 +19,8 @@ Currently Rendered by BTR: false`
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('script[src^="lazy"]').should('exist');
 		cy.get('script[src^="src/Foo"]').should('exist');
+		cy.get('meta[name="mobile-web-app-capable"]').should('exist');
+		cy.get('meta[name="apple-mobile-web-app-capable"]').should('exist');
 	});
 
 	it('dev', () => {
@@ -41,5 +43,7 @@ Currently Rendered by BTR: false`
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('script[src^="lazy"]').should('exist');
 		cy.get('script[src^="src/Foo"]').should('exist');
+		cy.get('meta[name="mobile-web-app-capable"]').should('exist');
+		cy.get('meta[name="apple-mobile-web-app-capable"]').should('exist');
 	});
 });

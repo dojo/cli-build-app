@@ -11,7 +11,7 @@ import devConfigFactory from './dev.config';
 import testConfigFactory from './test.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
-import { moveBuildOptions } from './util';
+import { moveBuildOptions } from './util/eject';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');

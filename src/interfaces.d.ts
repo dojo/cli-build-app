@@ -8,6 +8,49 @@ export interface Module extends webpack.NewModule {
 	rules: webpack.NewUseRule[];
 }
 
+export interface ServiceWorkerOptions {
+	importScripts?: string[];
+	routes?: ServiceWorkerRoute[];
+	precache?: ServiceWorkerPrecacheOptions;
+}
+
+export interface ServiceWorkerPrecacheOptions {
+	prefix?: string;
+	clientsClaim?: boolean;
+	index?: string;
+	baseDir?: string;
+	follow?: boolean;
+	ignore?: string[];
+	patterns?: string | string[];
+	maxCacheSize?: number;
+	skipWaiting?: boolean;
+	strict?: boolean;
+}
+
+export interface ServiceWorkerRoute {
+	urlPattern: string;
+	strategy: ServiceWorkerStrategy;
+	options?: ServiceWorkerRouteOptions;
+}
+
+export interface ServiceWorkerRouteOptions {
+	broadcastUpdate?: {
+		channelName: string;
+		options: { headersToCheck?: string[]; source?: string };
+	};
+	cacheName?: string;
+	cacheableResponse?: { statuses?: number[]; headers?: { [key: string]: string } };
+	expiration?: { maxEntries?: number; maxAgeSeconds?: number };
+	networkTimeoutSeconds?: number;
+}
+
+export type ServiceWorkerStrategy =
+	| 'cacheFirst'
+	| 'cacheOnly'
+	| 'networkFirst'
+	| 'networkOnly'
+	| 'staleWhileRevalidate';
+
 export interface WebpackConfiguration extends webpack.Configuration {
 	plugins: webpack.Plugin[];
 	output: Output;
