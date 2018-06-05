@@ -150,7 +150,6 @@ Specifies information for a [web app manifest](https://developer.mozilla.org/en-
 
 - `mobile-web-app-capable="yes"`: indicates to Chrome on Android that the application can be added to the user's homescreen.
 - `apple-mobile-web-app-capable="yes"`: indicates to iOS devices that the application can be added to the user's homescreen.
-- `apple-touch-icon="${pwa.manifest.icons[0].src}"`: specifies the URL for the icon to display on iOS homescreens. Uses the first icon listed in the `pwa.manifest.icons` array when present.
 
 For example:
 

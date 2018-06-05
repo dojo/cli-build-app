@@ -1,6 +1,5 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
-import { getHtmlMetaTags } from './util/pwa';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
@@ -24,7 +23,12 @@ function webpackConfig(args: any): webpack.Configuration {
 		new HtmlWebpackPlugin({
 			inject: true,
 			chunks: ['runtime', 'main'],
-			meta: manifest ? getHtmlMetaTags(manifest) : {},
+			meta: manifest
+				? {
+						'mobile-web-app-capable': 'yes',
+						'apple-mobile-web-app-capable': 'yes'
+					}
+				: {},
 			template: 'src/index.html'
 		}),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),

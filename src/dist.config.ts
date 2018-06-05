@@ -1,6 +1,5 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
-import { getHtmlMetaTags } from './util/pwa';
 import webpack = require('webpack');
 import * as path from 'path';
 import { deepAssign } from '@dojo/core/lang';
@@ -37,7 +36,12 @@ function webpackConfig(args: any): webpack.Configuration {
 		new HtmlWebpackPlugin({
 			inject: true,
 			chunks: ['runtime', 'main'],
-			meta: manifest ? getHtmlMetaTags(manifest) : {},
+			meta: manifest
+				? {
+						'mobile-web-app-capable': 'yes',
+						'apple-mobile-web-app-capable': 'yes'
+					}
+				: {},
 			template: 'src/index.html'
 		}),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
