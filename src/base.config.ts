@@ -241,7 +241,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new IgnorePlugin(/request\/providers\/node/),
 			new ExtractTextPlugin({
 				filename: 'main.css',
-				allChunks: true
+				allChunks: true,
+				ignoreOrder: true
 			}),
 			new webpack.NamedChunksPlugin(),
 			new webpack.NamedModulesPlugin(),
