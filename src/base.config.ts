@@ -213,7 +213,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const config: webpack.Configuration = {
 		entry: {
 			[mainEntry]: removeEmpty([
-				args['build-time-render'] && '@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
 				path.join(srcPath, 'main.css'),
 				mainEntryPath
 			])
