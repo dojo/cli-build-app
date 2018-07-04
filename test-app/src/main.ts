@@ -1,9 +1,10 @@
-import App from './App';
-import LazyApp from './LazyApp';
-import * as css from './app.m.css';
 import has from '@dojo/has/has';
-'!has("bar")';
+import App from './App';
+import * as css from './app.m.css';
 import './Bar';
+import LazyApp from './LazyApp';
+
+'!has("bar")';
 
 if (has('foo')) {
 	console.log('foo');
@@ -21,6 +22,10 @@ if (!div) {
 }
 if (btr) {
 	div.setAttribute('hasBtr', 'true');
+}
+
+if (process.env.NODE_ENV === 'production') {
+	div.setAttribute('nodeenv', 'production');
 }
 
 div.textContent = `Built with Build Time Render: ${!!div.getAttribute('hasBtr')}
