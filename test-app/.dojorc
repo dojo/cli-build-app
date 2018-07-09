@@ -18,7 +18,11 @@
 		"pwa": {
 			"manifest": {
 				"name": "Test App",
-				"description": "A test application for @dojo/cli-build-app"
+				"description": "A test application for @dojo/cli-build-app",
+				"icons": [
+					{ "src": "./icon-16x16.png", "sizes": "16x16", "type": "image/png" },
+					{ "src": "./icon-32x32.png", "sizes": "32x32", "type": "image/png" }
+				]
 			},
 			"serviceWorker": {
 				"clientsClaim": true,

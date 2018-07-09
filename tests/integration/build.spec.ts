@@ -22,6 +22,9 @@ Currently Rendered by BTR: false`
 		cy.get('script[src^="src/Foo"]').should('exist');
 		cy.get('meta[name="mobile-web-app-capable"]').should('exist');
 		cy.get('meta[name="apple-mobile-web-app-capable"]').should('exist');
+		cy.get('meta[name="apple-mobile-web-app-title"]').should('exist');
+		cy.get('meta[name="apple-mobile-web-app-status-bar-style"]').should('exist');
+		cy.get('link[rel="apple-touch-icon"]').should('have.length', 2);
 	});
 
 	it('dev', () => {
@@ -47,5 +50,8 @@ Currently Rendered by BTR: false`
 		cy.get('script[src^="src/Foo"]').should('exist');
 		cy.get('meta[name="mobile-web-app-capable"]').should('exist');
 		cy.get('meta[name="apple-mobile-web-app-capable"]').should('exist');
+		cy.get('meta[name="apple-mobile-web-app-title"]').should('exist');
+		cy.get('meta[name="apple-mobile-web-app-status-bar-style"]').should('exist');
+		cy.get('link[rel="apple-touch-icon"]').should('have.length', 2);
 	});
 });
