@@ -57,10 +57,10 @@ export interface WebpackConfiguration extends webpack.Configuration {
 	module: Module;
 }
 
-export interface WebAppIcons {
+export interface WebAppIcon {
 	sizes: string;
 	src: string;
-	type: string;
+	type?: string;
 }
 
 export interface WebAppManifest {
@@ -68,7 +68,7 @@ export interface WebAppManifest {
 	description?: string;
 	dir?: 'auto' | 'ltr' | 'rtl';
 	display?: 'browser' | 'fullscreen' | 'minimal-ui' | 'standalone';
-	icons?: WebAppIcons[];
+	icons?: WebAppIcon[];
 	lang?: string;
 	name?: string;
 	orientation?:

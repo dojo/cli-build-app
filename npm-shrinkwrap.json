@@ -17582,9 +17582,9 @@
       "integrity": "sha512-nMIkvPWAH7t4iCUfLMBYDv02v5bCL7ACfKed9+k+429r2gVMxy8BMEYiC3SAOun0H9xfa4b22kQCAp3/53hf9A=="
     },
     "webpack-pwa-manifest": {
-      "version": "3.3.4",
-      "resolved": "https://registry.npmjs.org/webpack-pwa-manifest/-/webpack-pwa-manifest-3.3.4.tgz",
-      "integrity": "sha512-WV23XvvkUWsfS5b55eukDv1WXv7iPdDb45ZxjsYXB2dk9kjBF3WVRLVNMuaMgH1Xn/k9/2xliW9KsS7hR+d+eA==",
+      "version": "3.6.2",
+      "resolved": "https://registry.npmjs.org/webpack-pwa-manifest/-/webpack-pwa-manifest-3.6.2.tgz",
+      "integrity": "sha512-lEjAY9CGv5aj3IyoNhO7wVBP9YN7ZKLFC48yu9iO92PQIW4NI/2iS1GOpQl9/DaUWS31jmF/n3wLd20XIyjaIg==",
       "requires": {
         "css-color-names": "0.0.4",
         "jimp": "0.2.28",

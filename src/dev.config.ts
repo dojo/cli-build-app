@@ -1,5 +1,6 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
+import { getManifestOptions } from './util/pwa';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
@@ -10,6 +11,8 @@ import ServiceWorkerPlugin, {
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
+
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
@@ -23,14 +26,10 @@ function webpackConfig(args: any): webpack.Configuration {
 		new HtmlWebpackPlugin({
 			inject: true,
 			chunks: ['runtime', 'main'],
-			meta: manifest
-				? {
-						'mobile-web-app-capable': 'yes',
-						'apple-mobile-web-app-capable': 'yes'
-					}
-				: {},
+			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
+		manifest && new WebpackPwaManifest(getManifestOptions(manifest)),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'

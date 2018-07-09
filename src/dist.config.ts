@@ -1,5 +1,6 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
+import { getManifestOptions } from './util/pwa';
 import webpack = require('webpack');
 import * as path from 'path';
 import { deepAssign } from '@dojo/core/lang';
@@ -14,6 +15,7 @@ import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 function webpackConfig(args: any): webpack.Configuration {
@@ -36,14 +38,10 @@ function webpackConfig(args: any): webpack.Configuration {
 		new HtmlWebpackPlugin({
 			inject: true,
 			chunks: ['runtime', 'main'],
-			meta: manifest
-				? {
-						'mobile-web-app-capable': 'yes',
-						'apple-mobile-web-app-capable': 'yes'
-					}
-				: {},
+			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
+		manifest && new WebpackPwaManifest(getManifestOptions(manifest)),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
 		new WebpackChunkHash(),
 		new CleanWebpackPlugin(['dist'], { root: output.path, verbose: false }),
