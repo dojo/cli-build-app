@@ -1,6 +1,5 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
-import { getManifestOptions } from './util/pwa';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
@@ -29,7 +28,12 @@ function webpackConfig(args: any): webpack.Configuration {
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
-		manifest && new WebpackPwaManifest(getManifestOptions(manifest)),
+		manifest &&
+			new WebpackPwaManifest({
+				...manifest,
+				ios: true,
+				icons: Array.isArray(manifest.icons) ? manifest.icons.map(icon => ({ ...icon, ios: true })) : manifest.icons
+			}),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
