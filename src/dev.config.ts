@@ -11,6 +11,8 @@ import ServiceWorkerPlugin, {
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
@@ -23,14 +25,15 @@ function webpackConfig(args: any): webpack.Configuration {
 		new HtmlWebpackPlugin({
 			inject: true,
 			chunks: ['runtime', 'main'],
-			meta: manifest
-				? {
-						'mobile-web-app-capable': 'yes',
-						'apple-mobile-web-app-capable': 'yes'
-					}
-				: {},
+			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
+		manifest &&
+			new WebpackPwaManifest({
+				...manifest,
+				ios: true,
+				icons: Array.isArray(manifest.icons) ? manifest.icons.map(icon => ({ ...icon, ios: true })) : manifest.icons
+			}),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'

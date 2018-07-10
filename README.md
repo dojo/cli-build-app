@@ -150,6 +150,8 @@ Specifies information for a [web app manifest](https://developer.mozilla.org/en-
 
 - `mobile-web-app-capable="yes"`: indicates to Chrome on Android that the application can be added to the user's homescreen.
 - `apple-mobile-web-app-capable="yes"`: indicates to iOS devices that the application can be added to the user's homescreen.
+- `apple-mobile-web-app-status-bar-style="default"`: indicates to iOS devices that the status bar should use the default appearance.
+- `apple-touch-icon="{{icon}}"`: the equivalent of the manifests' `icons` since iOS does not currently read icons from the manifest. A separate meta tag is injected for each entry in the `icons` array.
 
 For example:
 
@@ -159,7 +161,13 @@ For example:
 		"pwa": {
 			"manifest": {
 				"name": "Todo MVC",
-				"description": "A simple to-do application created with Dojo 2"
+				"description": "A simple to-do application created with Dojo 2",
+				"icons": [
+					{ "src": "./favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
+					{ "src": "./favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+					{ "src": "./favicon-48x48.png", "sizes": "48x48", "type": "image/png" },
+					{ "src": "./favicon-256x256.png", "sizes": "256x256", "type": "image/png" }
+				]
 			}
 		}
 	}
