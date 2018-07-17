@@ -1,13 +1,6 @@
 {
-  "suites": [
-    "./_build/tests/unit/all.js"
-  ],
-
-  "coverage": [
-    "./_build/src/**/*.js"
-  ],
-
-  "configs": {
-    "local": {}
-  }
+	"extends": "./node_modules/@dojo/scripts/intern/base.json",
+	"capabilities+": {
+		"name": "@dojo/cli-build-app"
+	}
 }

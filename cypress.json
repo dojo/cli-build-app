@@ -1,10 +1,11 @@
 {
   "baseUrl": "http://127.0.0.1:9999",
-  "ignoreTestFiles": "*.js.map",
-  "fixturesFolder": "_build/tests/fixtures",
-  "integrationFolder": "_build/tests/integration",
+  "ignoreTestFiles": ["*.js.map", "*.d.ts"],
+  "fixturesFolder": "dist/dev/tests/fixtures",
+  "integrationFolder": "dist/dev/tests/integration",
   "screenshotsFolder": "output/tests/screenshots",
   "videosFolder": "output/tests/videos",
   "supportFile": false,
-  "pluginsFile": false
+  "pluginsFile": false,
+  "chromeWebSecurity": false
 }

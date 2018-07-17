@@ -215,7 +215,9 @@ describe('command', () => {
 				.run(getMockConfiguration(), { watch: 'memory' })
 				.then(() => {
 					assert.isTrue(
-						(console as any).warn.calledWith('Memory watch requires the dev server. Using file watch instead...')
+						(console as any).warn.calledWith(
+							'Memory watch requires the dev server. Using file watch instead...'
+						)
 					);
 					(console as any).warn.restore();
 				})
@@ -341,7 +343,9 @@ describe('command', () => {
 				.run(getMockConfiguration(), { serve: true, watch: 'memory' })
 				.then(() => {
 					assert.isTrue(
-						(console as any).warn.calledWith('Memory watch requires `--mode=dev`. Using file watch instead...')
+						(console as any).warn.calledWith(
+							'Memory watch requires `--mode=dev`. Using file watch instead...'
+						)
 					);
 					(console as any).warn.restore();
 				})
@@ -410,7 +414,11 @@ describe('command', () => {
 				})
 				.then(() => {
 					assert.isTrue(
-						mockLogger.calledWith('stats', { entry, output, plugins, watchOptions }, 'Listening on port 3000...')
+						mockLogger.calledWith(
+							'stats',
+							{ entry, output, plugins, watchOptions },
+							'Listening on port 3000...'
+						)
 					);
 				});
 		});
@@ -435,8 +443,14 @@ describe('command', () => {
 			ejectOptions.copy.files = ejectOptions.copy.files.filter((file: string) => !rcPattern.test(file));
 			assert.deepEqual(ejectOptions, {
 				copy: {
-					path: join(basePath, '_build/src'),
-					files: ['./base.config.js', './dev.config.js', './dist.config.js', './ejected.config.js', './test.config.js']
+					path: join(basePath, 'dist/dev/src'),
+					files: [
+						'./base.config.js',
+						'./dev.config.js',
+						'./dist.config.js',
+						'./ejected.config.js',
+						'./test.config.js'
+					]
 				},
 				hints: [
 					`to build run ${chalk.underline(

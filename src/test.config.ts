@@ -34,7 +34,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const externals: any[] = (config.externals as any[]) || [];
 
 	config.plugins = [
-		...plugins.map(plugin => {
+		...plugins.map((plugin) => {
 			if (plugin instanceof ExtractTextPlugin && (plugin as any).filename === 'main.css') {
 				(plugin as any).options = { ...(plugin as any).options, disable: true };
 			}
@@ -43,9 +43,9 @@ function webpackConfig(args: any): webpack.Configuration {
 		new CleanWebpackPlugin(['test'], { root: output.path, verbose: false })
 	];
 
-	module.rules = module.rules.map(rule => {
+	module.rules = module.rules.map((rule) => {
 		if (Array.isArray(rule.use)) {
-			rule.use = rule.use.map(loader => {
+			rule.use = rule.use.map((loader) => {
 				if (typeof loader === 'string') {
 					return loader;
 				}

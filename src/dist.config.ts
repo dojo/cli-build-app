@@ -2,7 +2,7 @@ import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 import webpack = require('webpack');
 import * as path from 'path';
-import { deepAssign } from '@dojo/core/lang';
+import { deepAssign } from '@dojo/framework/core/lang';
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
@@ -44,7 +44,9 @@ function webpackConfig(args: any): webpack.Configuration {
 			new WebpackPwaManifest({
 				...manifest,
 				ios: true,
-				icons: Array.isArray(manifest.icons) ? manifest.icons.map(icon => ({ ...icon, ios: true })) : manifest.icons
+				icons: Array.isArray(manifest.icons)
+					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
+					: manifest.icons
 			}),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
 		new WebpackChunkHash(),
@@ -80,7 +82,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		);
 	}
 
-	config.plugins = config.plugins.map(plugin => {
+	config.plugins = config.plugins.map((plugin) => {
 		if (plugin instanceof ExtractTextPlugin) {
 			return new ExtractTextPlugin({
 				filename: '[name].[contenthash].bundle.css',

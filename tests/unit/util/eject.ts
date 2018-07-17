@@ -30,7 +30,9 @@ describe('util/eject', () => {
 			moveBuildOptions(key);
 
 			assert.isTrue(fs.writeFileSync.calledWith(path.join('/tmp', 'build-options.json'), buildOptions));
-			assert.isTrue(fs.writeFileSync.calledWith(path.join(process.cwd(), '.dojorc'), JSON.stringify({ [key]: {} })));
+			assert.isTrue(
+				fs.writeFileSync.calledWith(path.join(process.cwd(), '.dojorc'), JSON.stringify({ [key]: {} }))
+			);
 		});
 
 		it('should default to an empty object when the key is missing from the rc', () => {
