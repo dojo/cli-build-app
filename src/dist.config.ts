@@ -59,7 +59,7 @@ function webpackConfig(args: any): webpack.Configuration {
 				NODE_ENV: '"production"'
 			}
 		})
-	];
+	].filter((item) => item);
 
 	if (serviceWorker) {
 		const serviceWorkerOptions =
