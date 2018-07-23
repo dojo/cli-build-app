@@ -40,7 +40,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
 		})
-	];
+	].filter((item) => item);
 
 	if (serviceWorker) {
 		const serviceWorkerOptions =

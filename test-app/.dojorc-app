@@ -1,0 +1,22 @@
+{
+	"build-app": {
+		"locale": "en",
+		"supportedLocales": [ "es" ],
+		"features": {
+			"foo": true,
+			"bar": false
+		},
+		"bundles": {
+			"widgets": [
+				"src/Bar",
+				"src/Baz"
+			],
+			"lazy": [
+				"src/LazyWidget"
+			]
+		},
+		"build-time-render": {
+			"root": "app"
+		}
+	}
+}
