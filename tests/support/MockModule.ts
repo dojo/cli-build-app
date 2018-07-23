@@ -23,7 +23,7 @@ export default class MockModule {
 	}
 
 	dependencies(dependencies: string[]): void {
-		dependencies.forEach(dependencyName => {
+		dependencies.forEach((dependencyName) => {
 			let dependency;
 			try {
 				dependency = require(resolvePath(this.basePath, dependencyName));

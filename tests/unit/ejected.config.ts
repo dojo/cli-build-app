@@ -14,7 +14,7 @@ describe('ejected config', () => {
 		mockModule = new MockModule('../../src/ejected.config', require);
 		mockModule.dependencies(['./dev.config', './dist.config', './test.config', './build-options.json']);
 
-		const configs = ['dev', 'dist', 'test'].map(name => {
+		const configs = ['dev', 'dist', 'test'].map((name) => {
 			const config = mockModule.getMock(`./${name}.config`);
 			config.default = stub();
 			return config.default;

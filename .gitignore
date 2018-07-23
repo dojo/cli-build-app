@@ -1,12 +1,7 @@
-/_build
-/output
+/coverage
 /dist
-/html-report
 /node_modules
-coverage/
-coverage-unmapped.json
-coverage-final.json
-coverage-final.lcov
+/output
 npm-debug.log
 yarn.lock
 test-app/package-lock.json

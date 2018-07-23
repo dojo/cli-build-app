@@ -14,15 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli": "2.0.0",
-    "@dojo/core": "2.0.0",
-    "@dojo/has": "2.0.0",
-    "@dojo/i18n": "2.0.0",
-    "@dojo/shim": "2.0.0",
-    "@dojo/widget-core": "2.0.0",
-    "intern": "4.1.0",
+    "@dojo/cli": "3.0.0-alpha.1",
+    "@dojo/framework": "3.0.0-alpha.1",
+    "intern": "~4.2.0",
     "jsdom": "11.6.2",
-    "tslib": "1.8.0",
+    "tslib": "~1.8.0",
     "typescript": "2.6.1"
   },
   "devDependencies": {

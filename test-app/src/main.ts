@@ -1,4 +1,4 @@
-import has from '@dojo/has/has';
+import has from '@dojo/framework/has/has';
 import App from './App';
 import * as css from './app.m.css';
 import './Bar';

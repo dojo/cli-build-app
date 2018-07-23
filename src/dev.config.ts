@@ -3,7 +3,7 @@ import { WebAppManifest } from './interfaces';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import webpack = require('webpack');
-import { deepAssign } from '@dojo/core/lang';
+import { deepAssign } from '@dojo/framework/core/lang';
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
@@ -32,7 +32,9 @@ function webpackConfig(args: any): webpack.Configuration {
 			new WebpackPwaManifest({
 				...manifest,
 				ios: true,
-				icons: Array.isArray(manifest.icons) ? manifest.icons.map(icon => ({ ...icon, ios: true })) : manifest.icons
+				icons: Array.isArray(manifest.icons)
+					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
+					: manifest.icons
 			}),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
 		new webpack.optimize.CommonsChunkPlugin({
@@ -61,7 +63,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		);
 	}
 
-	module.rules = module.rules.map(rule => {
+	module.rules = module.rules.map((rule) => {
 		if (Array.isArray(rule.use)) {
 			rule.use.forEach((loader: any) => {
 				if (typeof loader === 'string') {

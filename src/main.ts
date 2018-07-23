@@ -97,14 +97,14 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 	const timeout = 20 * 1000;
 
 	plugins.push(new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());
-	Object.keys(entry).forEach(name => {
+	Object.keys(entry).forEach((name) => {
 		entry[name].unshift(`webpack-hot-middleware/client?timeout=${timeout}&reload=true`);
 	});
 
 	const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
 	const compiler = createWatchCompiler(config);
 
-	compiler.plugin('done', stats => {
+	compiler.plugin('done', (stats) => {
 		logger(stats.toJson(), config, `Listening on port ${args.port}...`);
 	});
 
