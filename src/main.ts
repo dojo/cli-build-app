@@ -192,7 +192,7 @@ const command: Command = {
 		options('legacy', {
 			describe: 'build app with legacy browser support',
 			alias: 'l',
-			default: true,
+			default: false,
 			type: 'boolean'
 		});
 	},
