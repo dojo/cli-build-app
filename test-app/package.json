@@ -5,17 +5,17 @@
   "main": "index.js",
   "scripts": {
     "install-build-app": "npm install --no-save ../dist/dojo-cli-build-app.tgz",
-    "build:dist": "dojo build --mode dist",
-    "build:dev": "dojo build --mode dev",
-    "build:dist:evergreen": "dojo build --mode dist --legacy false",
-    "build:dev:evergreen": "dojo build --mode dev --legacy false",
+    "build:dist": "dojo build --mode dist --legacy",
+    "build:dev": "dojo build --mode dev --legacy",
+    "build:dist:evergreen": "dojo build --mode dist",
+    "build:dev:evergreen": "dojo build --mode dev",
     "build:test": "dojo build --mode test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli": "3.0.0-alpha.1",
-    "@dojo/framework": "3.0.0-alpha.1",
+    "@dojo/cli": "~3.0.0",
+    "@dojo/framework": "~3.0.0",
     "intern": "~4.2.0",
     "jsdom": "11.6.2",
     "tslib": "~1.8.0",
