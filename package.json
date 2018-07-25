@@ -127,6 +127,8 @@
     "strip-ansi": "4.0.0",
     "style-loader": "0.19.0",
     "ts-loader": "3.1.1",
+    "tslint": "5.8.0",
+    "tslint-loader": "3.5.3",
     "typed-css-modules": "0.3.1",
     "uglifyjs-webpack-plugin": "1.1.0",
     "umd-compat-loader": "2.1.1",
