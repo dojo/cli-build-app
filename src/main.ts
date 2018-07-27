@@ -203,7 +203,7 @@ const command: Command = {
 		if (args.mode === 'dev') {
 			config = devConfigFactory({ ...rc, ...args });
 		} else if (args.mode === 'test') {
-			config = testConfigFactory({ ...rc, ...args });
+			config = testConfigFactory({ ...rc, ...args, legacy: true });
 		} else {
 			config = distConfigFactory({ ...rc, ...args });
 		}
