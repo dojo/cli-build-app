@@ -65,8 +65,8 @@ function webpackConfig(args: any): webpack.Configuration {
 	module.rules.push({
 		test: /src[\\\/].*\.ts(x)?$/,
 		use: {
-			loader: '@theintern/istanbul-loader',
-			options: { config: { instrumenterOptions } }
+			loader: '@dojo/webpack-contrib/istanbul-loader',
+			options: { instrumenterOptions }
 		},
 		enforce: 'post'
 	});
