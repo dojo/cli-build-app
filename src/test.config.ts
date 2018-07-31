@@ -33,6 +33,8 @@ function webpackConfig(args: any): webpack.Configuration {
 	};
 	const externals: any[] = (config.externals as any[]) || [];
 
+	const instrumenterOptions = args.legacy ? {} : { esModules: true };
+
 	config.plugins = [
 		...plugins.map((plugin) => {
 			if (plugin instanceof ExtractTextPlugin && (plugin as any).filename === 'main.css') {
@@ -63,7 +65,8 @@ function webpackConfig(args: any): webpack.Configuration {
 	module.rules.push({
 		test: /src[\\\/].*\.ts(x)?$/,
 		use: {
-			loader: '@theintern/istanbul-loader'
+			loader: '@dojo/webpack-contrib/istanbul-loader',
+			options: { instrumenterOptions }
 		},
 		enforce: 'post'
 	});
