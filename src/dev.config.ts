@@ -20,15 +20,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output, module } = config;
-	const { copyPublicAssets = true } = args;
 	const outputPath = path.join(output.path!, 'dev');
 	const publicDir = path.join(process.cwd(), 'public');
 	const publicDirExists = fs.existsSync(publicDir);
 
 	config.plugins = [
 		...plugins,
-		copyPublicAssets &&
-			publicDirExists &&
+		publicDirExists &&
 			new CopyWebpackPlugin([{ from: path.join(process.cwd(), 'public'), to: path.join(outputPath, 'public') }]),
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({

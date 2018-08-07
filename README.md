@@ -132,10 +132,6 @@ An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data)
 }
 ```
 
-#### `copyPublicAssets`: boolean
-
-A boolean flag that indicates whether the `public/` directory should be copied to the output directory (`dev` and `dist` modes only). If the `public/` directory exists, it must be a sibling to the `src/` directory. Note that files are copied as-is and neither processed nor hashed. Defaults to `true`.
-
 #### `features`: object
 
 A map of [`has`](https://github.com/dojo/has/) features to boolean flags that can be used when building in `dist` mode to remove unneeded imports or conditional branches. See the [`static-build-loader`](https://github.com/dojo/webpack-contrib/#static-build-loader) documentation for more information.
