@@ -19,6 +19,7 @@ const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
 const allPaths = [srcPath, testPath];
 const mainEntryPath = path.join(srcPath, 'main.ts');
+const indexHtmlPattern = /src\/index\.html$/;
 
 export const mainEntry = 'main';
 
@@ -128,6 +129,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
 	const features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
+	const publicPath = path.join(basePath, args.publicDirName || 'public');
+	const publicPathPattern = new RegExp(publicPath);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
 		(lazy, key) => {
 			lazy.push(...args.bundles[key]);
@@ -252,7 +255,24 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				})
 		]),
 		module: {
+			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
+			noParse: (file: string) => publicPathPattern.test(file),
 			rules: removeEmpty([
+				{
+					test: indexHtmlPattern,
+					use: {
+						loader: 'html-loader',
+						options: {
+							attrs: ['link:href', 'img:src', 'script:src']
+						}
+					}
+				},
+				{
+					test: /\.(css|js)$/,
+					exclude: publicPath,
+					issuer: indexHtmlPattern,
+					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
+				},
 				tsLint && {
 					test: /\.ts$/,
 					enforce: 'pre',
@@ -314,12 +334,21 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
-					loader: 'file-loader?hash=sha512&digest=hex&name=[hash:base64:8].[ext]'
+					exclude: publicPath,
+					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
 				{
 					test: /\.css$/,
 					exclude: [...allPaths, /\.m\.css$/],
-					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
+					oneOf: [
+						{ issuer: indexHtmlPattern, use: 'identity-loader' },
+						{
+							use: ExtractTextPlugin.extract({
+								fallback: ['style-loader'],
+								use: ['css-loader?sourceMap']
+							})
+						}
+					]
 				},
 				{
 					test: (path: string) => /\.m\.css$/.test(path) && existsSync(path + '.js'),
@@ -336,7 +365,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					include: allPaths,
 					test: /\.css$/,
 					exclude: /\.m\.css$/,
-					use: cssLoader
+					oneOf: [{ issuer: indexHtmlPattern, use: 'identity-loader' }, { use: cssLoader }]
 				},
 				{
 					include: allPaths,
