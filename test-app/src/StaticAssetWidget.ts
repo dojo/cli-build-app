@@ -4,7 +4,7 @@ import { v } from '@dojo/framework/widget-core/d';
 export default class PublicAssetWidget extends WidgetBase {
 	render() {
 		return v('img', {
-			src: 'public/dojo.svg'
+			src: '/assets/dojo.svg'
 		});
 	}
 }

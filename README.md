@@ -140,10 +140,6 @@ A map of [`has`](https://github.com/dojo/has/) features to boolean flags that ca
 
 The default locale for the application. When the application loads, the root locale is set to the user's locale if it supported (see below), or to the default `locale` as a fallback.
 
-#### `publicDirName`: string
-
-The name of an optional, top-level public directory that will be copied as-is (without file hashing) to the output directory. Must be a sibling to `src/`. Defaults to "public".
-
 #### `pwa`: object
 
 A parent map that houses settings specific to creating progressive web applications.

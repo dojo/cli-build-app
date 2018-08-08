@@ -25,13 +25,12 @@ function webpackConfig(args: any): webpack.Configuration {
 	const serviceWorker: ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output } = config;
 	const outputPath = path.join(output.path!, 'dist');
-	const publicDirName = args.publicDirName || 'public';
-	const publicDir = path.join(process.cwd(), publicDirName);
-	const publicDirExists = fs.existsSync(publicDir);
+	const assetsDir = path.join(process.cwd(), 'assets');
+	const assetsDirExists = fs.existsSync(assetsDir);
 
 	config.plugins = [
 		...plugins,
-		publicDirExists && new CopyWebpackPlugin([{ from: publicDir, to: path.join(outputPath, publicDirName) }]),
+		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
 		new ManifestPlugin(),
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
