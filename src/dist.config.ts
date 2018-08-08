@@ -1,6 +1,7 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 import webpack = require('webpack');
+import * as fs from 'fs';
 import * as path from 'path';
 import { deepAssign } from '@dojo/framework/core/lang';
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
@@ -10,6 +11,7 @@ import ServiceWorkerPlugin, {
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
 
@@ -22,9 +24,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output } = config;
+	const outputPath = path.join(output.path!, 'dist');
+	const assetsDir = path.join(process.cwd(), 'assets');
+	const assetsDirExists = fs.existsSync(assetsDir);
 
 	config.plugins = [
 		...plugins,
+		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
 		new ManifestPlugin(),
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
@@ -94,7 +100,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.output = {
 		...output,
-		path: path.join(output.path!, 'dist'),
+		path: outputPath,
 		chunkFilename: '[name].[chunkhash].bundle.js',
 		filename: '[name].[chunkhash].bundle.js'
 	};

@@ -1,6 +1,7 @@
 import baseConfigFactory, { mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as fs from 'fs';
 import * as path from 'path';
 import webpack = require('webpack');
 import { deepAssign } from '@dojo/framework/core/lang';
@@ -9,6 +10,7 @@ import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const WebpackPwaManifest = require('webpack-pwa-manifest');
@@ -18,9 +20,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output, module } = config;
+	const outputPath = path.join(output.path!, 'dev');
+	const assetsDir = path.join(process.cwd(), 'assets');
+	const assetsDirExists = fs.existsSync(assetsDir);
 
 	config.plugins = [
 		...plugins,
+		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
@@ -80,7 +86,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.output = {
 		...output,
-		path: path.join(output.path!, 'dev')
+		path: outputPath
 	};
 
 	config.devtool = 'inline-source-map';
