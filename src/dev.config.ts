@@ -21,13 +21,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output, module } = config;
 	const outputPath = path.join(output.path!, 'dev');
-	const publicDir = path.join(process.cwd(), 'public');
+	const publicDirName = args.publicDirName || 'public';
+	const publicDir = path.join(process.cwd(), publicDirName);
 	const publicDirExists = fs.existsSync(publicDir);
 
 	config.plugins = [
 		...plugins,
-		publicDirExists &&
-			new CopyWebpackPlugin([{ from: path.join(process.cwd(), 'public'), to: path.join(outputPath, 'public') }]),
+		publicDirExists && new CopyWebpackPlugin([{ from: publicDir, to: path.join(outputPath, publicDirName) }]),
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
