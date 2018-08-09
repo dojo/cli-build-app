@@ -340,7 +340,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{
 					include: allPaths,
-					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
+					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
 					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
 				{
