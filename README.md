@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/dojo/cli-build-app/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-build-app)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-build-app.svg)](https://badge.fury.io/js/%40dojo%2Fcli-build-app)
 
-The official CLI command for building Dojo 2 applications.
+The official CLI command for building Dojo applications.
 
 - [Usage](#usage)
 - [Features](#features)
@@ -33,7 +33,7 @@ npm install @dojo/cli-build-app
 
 ### Building
 
-There are three modes available to build a Dojo 2 application, `dist`, `dev` and `test`. The mode required can be passed using the `--mode` flag:
+There are three modes available to build a Dojo application, `dist`, `dev` and `test`. The mode required can be passed using the `--mode` flag:
 
 ```bash
 dojo build app --mode dist
@@ -161,7 +161,7 @@ For example:
 		"pwa": {
 			"manifest": {
 				"name": "Todo MVC",
-				"description": "A simple to-do application created with Dojo 2",
+				"description": "A simple to-do application created with Dojo",
 				"icons": [
 					{ "src": "./favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
 					{ "src": "./favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
@@ -269,7 +269,7 @@ Example:
 
 ## How do I contribute?
 
-We appreciate your interest! Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the Contributing Guidelines. This repository uses [prettier](https://prettier.io/) for code style and is configured with a pre-commit hook to automatically fix formatting issues on staged `.ts` files before performing the commit.
+We appreciate your interest! Please see the [Dojo Meta Repository](https://github.com/dojo/meta#readme) for the Contributing Guidelines. This repository uses [prettier](https://prettier.io/) for code style and is configured with a pre-commit hook to automatically fix formatting issues on staged `.ts` files before performing the commit.
 
 ### Installation
 
