@@ -268,18 +268,20 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					}
 				},
 				{
+					include: allPaths,
 					test: /\.(css|js)$/,
-					exclude: publicPath,
 					issuer: indexHtmlPattern,
 					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
 				tsLint && {
+					include: allPaths,
 					test: /\.ts$/,
 					enforce: 'pre',
 					loader: 'tslint-loader',
 					options: { configuration: tsLint, emitErrors: true, failOnHint: true }
 				},
 				{
+					include: allPaths,
 					test: /@dojo\/.*\.js$/,
 					enforce: 'pre',
 					loader: 'source-map-loader-cli',
@@ -331,36 +333,16 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						'umd-compat-loader'
 					])
 				},
-				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },
 				{
+					include: [/@dojo/, /globalize/],
+					test: new RegExp(`globalize(\\${path.sep}|$)`),
+					loader: 'imports-loader?define=>false'
+				},
+				{
+					include: allPaths,
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
-					exclude: publicPath,
 					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
-				{
-					test: /\.css$/,
-					exclude: [...allPaths, /\.m\.css$/],
-					oneOf: [
-						{ issuer: indexHtmlPattern, use: 'identity-loader' },
-						{
-							use: ExtractTextPlugin.extract({
-								fallback: ['style-loader'],
-								use: ['css-loader?sourceMap']
-							})
-						}
-					]
-				},
-				{
-					test: (path: string) => /\.m\.css$/.test(path) && existsSync(path + '.js'),
-					exclude: allPaths,
-					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
-				},
-				{
-					test: (path: string) => /\.m\.css$/.test(path) && !existsSync(path + '.js'),
-					exclude: allPaths,
-					use: postCssModuleLoader
-				},
-				{ test: /\.m\.css\.js$/, exclude: allPaths, use: ['json-css-module-loader'] },
 				{
 					include: allPaths,
 					test: /\.css$/,
