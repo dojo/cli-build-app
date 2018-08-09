@@ -15,7 +15,7 @@ import * as WebpackChunkHash from 'webpack-chunk-hash';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin-terser');
 
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
