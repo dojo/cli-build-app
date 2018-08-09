@@ -129,8 +129,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
 	const features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
-	const publicPath = path.join(basePath, args.publicDirName || 'public');
-	const publicPathPattern = new RegExp(publicPath);
+	const assetsDir = path.join(process.cwd(), 'assets');
+	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
 		(lazy, key) => {
 			lazy.push(...args.bundles[key]);
@@ -256,7 +256,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
-			noParse: (file: string) => publicPathPattern.test(file),
+			noParse: (file: string) => assetsDirPattern.test(file),
 			rules: removeEmpty([
 				{
 					test: indexHtmlPattern,
