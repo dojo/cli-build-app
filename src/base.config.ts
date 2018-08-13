@@ -29,12 +29,11 @@ export const packageName = packageJson.name || '';
 const tsLintPath = path.join(basePath, 'tslint.json');
 const tsLint = existsSync(tsLintPath) ? require(tsLintPath) : false;
 
-function getJsonpFunctionName(name: string) {
-	name = name
+function getLibraryName(name: string) {
+	return name
 		.replace(/[^a-z0-9_]/g, ' ')
 		.trim()
 		.replace(/\s+/g, '_');
-	return `dojoWebpackJsonp${name}`;
 }
 
 function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) {
@@ -219,10 +218,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
 			chunkFilename: '[name].js',
-			library: '[name]',
+			library: packageName ? getLibraryName(packageName) : '[name]',
 			umdNamedDefine: true,
 			filename: '[name].js',
-			jsonpFunction: getJsonpFunctionName(packageName),
+			jsonpFunction: `dojoWebpackJsonp${getLibraryName(packageName)}`,
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
