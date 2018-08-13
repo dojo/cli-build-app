@@ -19,6 +19,7 @@ const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
 const allPaths = [srcPath, testPath];
 const mainEntryPath = path.join(srcPath, 'main.ts');
+const indexHtmlPattern = /src\/index\.html$/;
 
 export const mainEntry = 'main';
 
@@ -127,6 +128,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
 	const features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
+	const assetsDir = path.join(process.cwd(), 'assets');
+	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
 		(lazy, key) => {
 			lazy.push(...args.bundles[key]);
@@ -251,14 +254,32 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				})
 		]),
 		module: {
+			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
+			noParse: (file: string) => assetsDirPattern.test(file),
 			rules: removeEmpty([
+				{
+					test: indexHtmlPattern,
+					use: {
+						loader: 'html-loader',
+						options: {
+							attrs: ['link:href', 'img:src', 'script:src']
+						}
+					}
+				},
+				{
+					test: /\.(css|js)$/,
+					issuer: indexHtmlPattern,
+					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
+				},
 				tsLint && {
+					include: allPaths,
 					test: /\.ts$/,
 					enforce: 'pre',
 					loader: 'tslint-loader',
 					options: { configuration: tsLint, emitErrors: true, failOnHint: true }
 				},
 				{
+					include: allPaths,
 					test: /@dojo\/.*\.(js|mjs)$/,
 					enforce: 'pre',
 					loader: 'source-map-loader-cli',
@@ -310,32 +331,21 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						'umd-compat-loader'
 					])
 				},
-				{ test: new RegExp(`globalize(\\${path.sep}|$)`), loader: 'imports-loader?define=>false' },
 				{
-					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2)$/i,
-					loader: 'file-loader?hash=sha512&digest=hex&name=[hash:base64:8].[ext]'
+					include: [/@dojo/, /globalize/],
+					test: new RegExp(`globalize(\\${path.sep}|$)`),
+					loader: 'imports-loader?define=>false'
 				},
 				{
-					test: /\.css$/,
-					exclude: [...allPaths, /\.m\.css$/],
-					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
+					include: allPaths,
+					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
+					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
-				{
-					test: (path: string) => /\.m\.css$/.test(path) && existsSync(path + '.js'),
-					exclude: allPaths,
-					use: ExtractTextPlugin.extract({ fallback: ['style-loader'], use: ['css-loader?sourceMap'] })
-				},
-				{
-					test: (path: string) => /\.m\.css$/.test(path) && !existsSync(path + '.js'),
-					exclude: allPaths,
-					use: postCssModuleLoader
-				},
-				{ test: /\.m\.css\.js$/, exclude: allPaths, use: ['json-css-module-loader'] },
 				{
 					include: allPaths,
 					test: /\.css$/,
 					exclude: /\.m\.css$/,
-					use: cssLoader
+					oneOf: [{ issuer: indexHtmlPattern, use: 'identity-loader' }, { use: cssLoader }]
 				},
 				{
 					include: allPaths,
