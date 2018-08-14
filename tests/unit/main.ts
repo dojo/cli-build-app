@@ -394,7 +394,10 @@ describe('command', () => {
 					assert.lengthOf(plugins, 2);
 					assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
 					assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
-					assert.sameMembers(entry.main, ['webpack-hot-middleware/client?timeout=20000&reload=true']);
+					assert.sameMembers(entry.main, [
+						'eventsource-polyfill',
+						'webpack-hot-middleware/client?timeout=20000&reload=true'
+					]);
 				});
 		});
 
