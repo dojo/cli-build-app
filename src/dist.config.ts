@@ -15,9 +15,11 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
 
+const BrotliPlugin = require('brotli-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
-const WebpackPwaManifest = require('webpack-pwa-manifest');
+const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin-terser');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
@@ -97,6 +99,18 @@ function webpackConfig(args: any): webpack.Configuration {
 		}
 		return plugin;
 	});
+
+	if (Array.isArray(args.compression)) {
+		const compressionPlugins: any = {
+			gzip: CompressionPlugin,
+			brotli: BrotliPlugin
+		};
+		args.compression.forEach((algorithm: 'brotli' | 'gzip') => {
+			const options = { algorithm, test: /\.(js|css|html|svg)$/ };
+			const Plugin = compressionPlugins[algorithm];
+			config.plugins.push(new Plugin(options));
+		});
+	}
 
 	config.output = {
 		...output,
