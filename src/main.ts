@@ -99,6 +99,7 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 	plugins.push(new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());
 	Object.keys(entry).forEach((name) => {
 		entry[name].unshift(`webpack-hot-middleware/client?timeout=${timeout}&reload=true`);
+		entry[name].unshift('eventsource-polyfill');
 	});
 
 	const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
