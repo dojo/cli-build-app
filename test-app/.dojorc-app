@@ -19,12 +19,6 @@
 		"build-time-render": {
 			"root": "app"
 		},
-		"pwa": {
-			"manifest": {
-				"name": "Test App",
-				"description": "A test application for @dojo/cli-build-app"
-			}
-		},
 		"externals": {
 			"dependencies": [ "foo" ]
 		}
