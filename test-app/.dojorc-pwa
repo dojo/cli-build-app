@@ -35,6 +35,9 @@
 		},
 		"build-time-render": {
 			"root": "app"
+		},
+		"externals": {
+			"dependencies": [ "foo" ]
 		}
 	}
 }
