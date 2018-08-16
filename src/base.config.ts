@@ -219,17 +219,19 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					for (let external of externals) {
 						const name = external && (typeof external === 'string' ? external : external.name);
 						if (name && new RegExp(`^${name}[!\/]?`).test(request)) {
-							return typeof external === 'string' ? request : `${external.type} ${request}`;
+							return typeof external === 'string'
+								? request
+								: {
+										amd: request,
+										commonjs: request,
+										commonjs2: request,
+										root: request
+								  };
 						}
 					}
 				}
 
-				const external = resolveExternal(externals);
-				if (external) {
-					return callback(null, `${external}`);
-				}
-
-				callback(null, undefined);
+				callback(null, resolveExternal(externals));
 			}
 		],
 		entry: {
