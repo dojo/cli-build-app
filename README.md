@@ -103,7 +103,7 @@ Useful for breaking an application into smaller bundles, the `bundles` option is
 
 Widget modules defined used with `w()` will be automatically converted to a lazily imported, local registry item in the parent widget. This provides a mechanism for declarative code splitting in your application.
 
-```
+```json
 {
 	"build-app": {
 		"bundles": {
@@ -120,7 +120,7 @@ Widget modules defined used with `w()` will be automatically converted to a lazi
 
 An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data) files. Used in conjunction with the `locale` and `supportedLocales` options (see below). If a path contains the string `{locale}`, that file will be loaded for each locale listed in the `locale` and `supportedLocales` properties. For example, with the following configuration the `numbers.json` file will be loaded for the "en", "es", and "fr" locales:
 
-```
+```json
 {
 	"build-app": {
 		"locale": "en",
@@ -135,6 +135,49 @@ An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data)
 #### `compression`: Array<'gzip' | 'brotli'>
 
 Options for compression when running in `dist` mode. Each array value represents a different algorithm, allowing both gzip and brotli builds to be output side-by-side.
+
+### `externals`: object
+
+Non-modular libraries or standalone applications that cannot be bundled normally can be included in a Dojo application by providing an implementation of `require` or `define` when needed, and some configuration in the project's `.dojorc` file.
+
+Configuration for external dependencies can be provided under the `externals` property of the `build-app` config. `externals` is an object with two allowed properties:
+
+* `outputPath`: An optional property specifying an output path to which files should be copied.
+
+* `dependencies`: A required array that defines which modules should be loaded via the external loader, and what files should be included in the build. Each entry can be one of two types:
+ * A string that indicates that this path, and any children of this path, should be loaded via the external loader.
+ * An object that provides additional configuration for dependencies that need to be copied into the built application. This object has the following properties:
+
+ | Property | Type | optional | Description |
+ | -------- | ---- | -------- | ----------- |
+ | `from` | `string` | false  | A path relative to the root of the project specifying the location of the files or folders to copy into the build application. |
+ | `to` | `string` | true | A path that replaces `from` as the location to copy this dependency to. By default, dependencies will be copied to `${externalsOutputPath}/${to}` or `${externalsOutputPath}/${from}` if `to` is not specified. If there are any `.` characters in the path and it is a directory, it needs to end with a forward slash. |
+ | `name` | `string` | true | Either the module id or the name of the global variable referenced in the application source. |
+ | `inject` | `string, string[], or boolean` | true | This property indicates that this dependency defines, or includes, scripts or stylesheets that should be loaded on the page. If `inject` is set to `true`, then the file at the location specified by `to` or `from` will be loaded on the page. If this dependency is a folder, then `inject` can be set to a string or array of strings to define one or more files to inject. Each path in `inject` should be relative to `${externalsOutputPath}/${to}` or `${externalsOutputPath}/${from}` depending on whether `to` was provided. |
+
+ As an example the following configuration will inject `src/legacy/layer.js` into the application page, inject the file that defines the `MyGlobal` global variable, declare that modules `a` and `b` are external and should be delegated to the external layer, and then copy the folder `node_modules/legacy-dep`, from which several files are injected. All of these files will be copied into the `externals` folder, which could be overridden by specifying the `outputPath` property in the `externals` configuration.
+
+```json
+"externals": {
+	"dependencies": [
+		"a",
+		"b",
+		{ "from": "node_modules/GlobalLibrary.js", "to": "GlobalLibrary.js", "name": "MyGlobal", "inject": true },
+		{ "from": "src/legacy/layer.js", "to": "legacy/layer.js", "inject": true },
+		{
+			"from": "node_modules/legacy-dep",
+			"to": "legacy-dep/",
+			"inject": [ "moduleA/layer.js", "moduleA/layer.css", "moduleB/layer.js" ]
+		}
+	]
+}
+```
+
+Types for any dependencies included in `externals` can be installed in `node_modules/@types`, like any other dependency.
+
+Because these files are external to the main build, no versioning or hashing will be performed on files in a production build, with the exception
+of the links to any `inject`ed assets. The `to` property can be used to specify a versioned directory to copy dependencies to in order to avoid different
+versions of files being cached.
 
 #### `features`: object
 
@@ -159,7 +202,7 @@ Specifies information for a [web app manifest](https://developer.mozilla.org/en-
 
 For example:
 
-```
+```json
 {
 	"build-app": {
 		"pwa": {
@@ -255,7 +298,7 @@ An array of supported locales beyond the default. When the application loads, th
 
 Example:
 
-```
+```json
 {
 	"build-app": {
 		"locale": "fa",
