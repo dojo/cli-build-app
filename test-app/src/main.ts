@@ -14,6 +14,7 @@ const btr = has('build-time-render');
 
 App().then(result => {
 	console.log(result());
+	console.log(require('foo/bar'));
 });
 let div = document.getElementById('div');
 if (!div) {
