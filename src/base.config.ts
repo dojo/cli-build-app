@@ -12,8 +12,8 @@ import * as ts from 'typescript';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
-const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
 const slash = require('slash');
+const WrapperPlugin = require('wrapper-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -37,6 +37,8 @@ function getLibraryName(name: string) {
 		.trim()
 		.replace(/\s+/g, '_');
 }
+
+const libraryName = packageName ? getLibraryName(packageName) : mainEntry;
 
 function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) {
 	const { bundles = {} } = options;
@@ -242,10 +244,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
 			chunkFilename: '[name].js',
-			library: packageName ? getLibraryName(packageName) : '[name]',
+			library: libraryName,
 			umdNamedDefine: true,
 			filename: '[name].js',
-			jsonpFunction: `dojoWebpackJsonp${getLibraryName(packageName)}`,
+			jsonpFunction: `dojoWebpackJsonp${libraryName}`,
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
@@ -257,7 +259,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
 			new CssModulePlugin(basePath),
-			new AutoRequireWebpackPlugin(mainEntry),
 			new webpack.BannerPlugin(banner),
 			new IgnorePlugin(/request\/providers\/node/),
 			new ExtractTextPlugin({
@@ -266,6 +267,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			}),
 			new webpack.NamedChunksPlugin(),
 			new webpack.NamedModulesPlugin(),
+			new WrapperPlugin({
+				test: /main.*(\.js$)/,
+				footer: `typeof define === 'function' && define.amd && require(['${libraryName}']);`
+			}),
 			args.locale &&
 				new I18nPlugin({
 					defaultLocale: args.locale,
