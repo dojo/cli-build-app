@@ -181,7 +181,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					ident: 'postcss',
 					plugins: [
 						require('postcss-import')(),
-						postcssPresetEnv({ browsers: ['last 2 versions', 'ie >= 10'] })
+						postcssPresetEnv({
+							browsers: ['last 2 versions', 'ie >= 10'],
+							grid: args.legacy
+						})
 					]
 				}
 			}
@@ -203,7 +206,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					ident: 'postcss',
 					plugins: [
 						require('postcss-import')(),
-						postcssPresetEnv({ browsers: ['last 2 versions', 'ie >= 10'] })
+						postcssPresetEnv({
+							browsers: ['last 2 versions', 'ie >= 10'],
+							grid: args.legacy
+						})
 					]
 				}
 			}
