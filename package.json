@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@dojo/cli": "~3.0.0",
-    "@dojo/scripts": "~3.0.1",
+    "@dojo/scripts": "~3.0.2",
     "@types/clean-webpack-plugin": "0.1.0",
     "@types/execa": "0.8.0",
     "@types/express": "4.11.0",
