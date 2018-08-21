@@ -10,6 +10,7 @@ import * as loaderUtils from 'loader-utils';
 import * as ts from 'typescript';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
+const postcssPresetEnv = require('postcss-preset-env');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const AutoRequireWebpackPlugin = require('auto-require-webpack-plugin');
 const slash = require('slash');
@@ -174,8 +175,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					ident: 'postcss',
 					plugins: [
 						require('postcss-import')(),
-						require('postcss-cssnext')({
-							features: { autoprefixer: { browsers: ['last 2 versions', 'ie >= 10'] } }
+						postcssPresetEnv({
+							browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
+							grid: args.legacy
 						})
 					]
 				}
@@ -198,8 +200,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					ident: 'postcss',
 					plugins: [
 						require('postcss-import')(),
-						require('postcss-cssnext')({
-							features: { autoprefixer: { browsers: ['last 2 versions', 'ie >= 10'] } }
+						postcssPresetEnv({
+							browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
+							grid: args.legacy
 						})
 					]
 				}
