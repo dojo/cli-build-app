@@ -6,6 +6,10 @@ import StaticAssetWidget from './StaticAssetWidget';
 
 export default class Projector extends ProjectorMixin(WidgetBase)<any> {
 	render() {
-		return v('div', [this.properties.render ? w(LazyWidget, {}) : null, w(StaticAssetWidget, {})]);
+		return v('div', [
+			this.properties.render ? w(LazyWidget, {}) : null,
+			w(StaticAssetWidget, {}),
+			v('a', { href: '' }, ['link'])
+		]);
 	}
 }
