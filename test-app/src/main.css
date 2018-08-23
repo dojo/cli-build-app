@@ -1,3 +1,40 @@
 .app {
 	background: purple;
 }
+
+a {
+	color: green;
+	&:hover {
+		color: pink;
+	}
+}
+
+.container {
+	display: grid;
+	grid-gap: 50px 100px;
+	grid-template:
+		"head head  head" 1fr
+		"nav  main  main" minmax(100px, 1fr)
+		"nav  foot  foot" 2fr /
+		1fr   100px 1fr;
+}
+
+.page__head {
+	grid-area: head;
+}
+.page__nav {
+	grid-area: nav;
+}
+.page__main {
+	grid-area: main;
+}
+.page__footer {
+	grid-area: foot;
+}
+
+.item {
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+

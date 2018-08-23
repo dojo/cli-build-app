@@ -161,6 +161,16 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		}
 	};
 
+	const postcssPresetConfig = {
+		browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
+		features: {
+			'nesting-rules': true
+		},
+		autoprefixer: {
+			grid: args.legacy
+		}
+	};
+
 	const postCssModuleLoader = ExtractTextPlugin.extract({
 		fallback: ['style-loader'],
 		use: [
@@ -179,13 +189,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [
-						require('postcss-import')(),
-						postcssPresetEnv({
-							browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
-							grid: args.legacy
-						})
-					]
+					plugins: [require('postcss-import')(), postcssPresetEnv(postcssPresetConfig)]
 				}
 			}
 		]
@@ -204,13 +208,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [
-						require('postcss-import')(),
-						postcssPresetEnv({
-							browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
-							grid: args.legacy
-						})
-					]
+					plugins: [require('postcss-import')(), postcssPresetEnv(postcssPresetConfig)]
 				}
 			}
 		]
