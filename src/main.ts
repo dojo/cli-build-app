@@ -190,6 +190,12 @@ const command: Command = {
 			type: 'number'
 		});
 
+		options('single-bundle', {
+			describe: 'Limits the built output to single bundle',
+			default: false,
+			type: 'boolean'
+		});
+
 		options('legacy', {
 			describe: 'build app with legacy browser support',
 			alias: 'l',

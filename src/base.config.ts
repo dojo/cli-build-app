@@ -144,11 +144,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 
 	const customTransformers: any[] = [];
 
-	if (lazyModules.length > 0) {
+	if (lazyModules.length > 0 && !args.singleBundle) {
 		customTransformers.push(registryTransformer(basePath, lazyModules));
 	}
 
-	if (!args.legacy) {
+	if (!args.legacy && !args.singleBundle) {
 		customTransformers.push(importTransformer(basePath, args.bundles));
 	}
 
@@ -261,6 +261,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
+			args.singleBundle &&
+				new webpack.optimize.LimitChunkCountPlugin({
+					maxChunks: 1
+				}),
 			new CssModulePlugin(basePath),
 			new webpack.BannerPlugin(banner),
 			new IgnorePlugin(/request\/providers\/node/),
