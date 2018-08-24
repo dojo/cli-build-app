@@ -190,9 +190,8 @@ const command: Command = {
 			type: 'number'
 		});
 
-		options('single-file', {
+		options('single-bundle', {
 			describe: 'Limits the built output to single bundle',
-			alias: 'f',
 			default: false,
 			type: 'boolean'
 		});

@@ -30,7 +30,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: args.singleFile ? ['main'] : ['runtime', 'main'],
+			chunks: args.singleBundle ? ['main'] : ['runtime', 'main'],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
@@ -43,7 +43,7 @@ function webpackConfig(args: any): webpack.Configuration {
 					: manifest.icons
 			}),
 		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
-		!args.singleFile &&
+		!args.singleBundle &&
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'runtime'
 			})
@@ -64,7 +64,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
-				entries: args.singleFile ? Object.keys(config.entry!) : ['runtime', ...Object.keys(config.entry!)],
+				entries: args.singleBundle ? Object.keys(config.entry!) : ['runtime', ...Object.keys(config.entry!)],
 				useManifest: true
 			})
 		);
