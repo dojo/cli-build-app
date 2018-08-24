@@ -36,7 +36,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		}),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: ['runtime', 'main'],
+			chunks: args.singleBundle ? ['main'] : ['runtime', 'main'],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
@@ -51,9 +51,10 @@ function webpackConfig(args: any): webpack.Configuration {
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
 		new WebpackChunkHash(),
 		new CleanWebpackPlugin(['dist'], { root: output.path, verbose: false }),
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'runtime'
-		}),
+		!args.singleBundle &&
+			new webpack.optimize.CommonsChunkPlugin({
+				name: 'runtime'
+			}),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"production"'
@@ -76,7 +77,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
-				entries: ['runtime', ...Object.keys(config.entry!)],
+				entries: args.singleBundle ? Object.keys(config.entry!) : ['runtime', ...Object.keys(config.entry!)],
 				useManifest: true
 			})
 		);
