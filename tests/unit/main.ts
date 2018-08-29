@@ -133,6 +133,18 @@ describe('command', () => {
 		});
 	});
 
+	it('mixes in features from command line', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main
+			.run(getMockConfiguration(), { mode: 'dist', feature: { foo: true }, features: { foo: false, bar: false } })
+			.then(() => {
+				assert.isTrue(mockDistConfig.called);
+				assert.deepEqual(mockDistConfig.firstCall.args, [
+					{ mode: 'dist', features: { foo: true, bar: false } }
+				]);
+			});
+	});
+
 	it('rejects if an error occurs', () => {
 		isError = true;
 		const main = mockModule.getModuleUnderTest().default;
