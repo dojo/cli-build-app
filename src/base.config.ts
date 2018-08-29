@@ -197,7 +197,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		features: {
 			'color-mod-function': true,
-			'nesting-rules': true
+			'nesting-rules': true,
+			...(args.legacy ? {} : { 'custom-properties': false })
 		},
 		autoprefixer: {
 			grid: args.legacy

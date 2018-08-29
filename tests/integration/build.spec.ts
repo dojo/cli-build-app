@@ -37,4 +37,24 @@ describe('build', () => {
 		testUrl('dev-pwa', false, true);
 		testUrl('dev-pwa-evergreen', false, true);
 	});
+
+	describe('custom css properties', () => {
+		it('transforms css vars for legacy builds', () => {
+			cy.request('/test-app/output/dev-app/main.css').then((response) => {
+				const css = response.body;
+
+				expect(css.match(/\scolor: blue;/)).not.to.equal(null);
+				expect(css).to.contain('color: var(--foreground-color);');
+			});
+		});
+
+		it('does not transform css vars for evergreen builds', () => {
+			cy.request('/test-app/output/dev-app-evergreen/main.css').then((response) => {
+				const css = response.body;
+
+				expect(css.match(/\scolor: blue;/)).to.equal(null);
+				expect(css).to.contain('color: var(--foreground-color);');
+			});
+		});
+	});
 });
