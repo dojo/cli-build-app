@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "install-build-app": "npm install --no-save ../dist/dojo-cli-build-app.tgz",
-    "build:dist": "dojo build --mode dist --legacy",
-    "build:dev": "dojo build --mode dev --legacy",
-    "build:dist:evergreen": "dojo build --mode dist",
-    "build:dev:evergreen": "dojo build --mode dev",
+    "build:dist": "dojo build --mode dist --legacy --feature env=prod",
+    "build:dev": "dojo build --mode dev --legacy --feature env=ci",
+    "build:dist:evergreen": "dojo build --mode dist --feature env=prod",
+    "build:dev:evergreen": "dojo build --mode dev --feature env=ci",
     "build:test": "dojo build --mode test"
   },
   "author": "",

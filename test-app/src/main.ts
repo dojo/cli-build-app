@@ -12,7 +12,7 @@ if (has('foo')) {
 
 const btr = has('build-time-render');
 
-App().then(result => {
+App().then((result) => {
 	console.log(result());
 	console.log(require('foo/bar'));
 });
@@ -27,6 +27,14 @@ if (btr) {
 
 if (process.env.NODE_ENV === 'production') {
 	div.setAttribute('nodeenv', 'production');
+}
+
+if (has('env') === 'prod') {
+	div.setAttribute('has-prod', 'prod');
+}
+
+if (has('env') === 'ci') {
+	div.setAttribute('has-ci', 'ci');
 }
 
 div.textContent = `Built with Build Time Render: ${!!div.getAttribute('hasBtr')}
