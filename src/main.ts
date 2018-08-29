@@ -201,17 +201,38 @@ const command: Command = {
 			default: false,
 			type: 'boolean'
 		});
+
+		options('feature', {
+			describe: 'List of features to include',
+			alias: 'f',
+			array: true,
+			coerce: (args: string[]) => {
+				return args.reduce(
+					(newArgs, arg) => {
+						const parts = arg.split('=');
+						if (parts.length === 1) {
+							newArgs[arg] = true;
+						} else if (parts.length === 2) {
+							newArgs[parts[0]] = parts[1];
+						}
+						return newArgs;
+					},
+					{} as any
+				);
+			}
+		});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
-		const rc = helper.configuration.get() || {};
 		let config: webpack.Configuration;
+		let { feature, ...remainingArgs } = args;
+		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
 		if (args.mode === 'dev') {
-			config = devConfigFactory({ ...rc, ...args });
+			config = devConfigFactory(remainingArgs);
 		} else if (args.mode === 'test') {
-			config = testConfigFactory({ ...rc, ...args });
+			config = testConfigFactory(remainingArgs);
 		} else {
-			config = distConfigFactory({ ...rc, ...args });
+			config = distConfigFactory(remainingArgs);
 		}
 
 		if (args.serve) {
