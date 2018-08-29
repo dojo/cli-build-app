@@ -99,7 +99,7 @@
   },
   "dependencies": {
     "@dojo/framework": "~3.0.0",
-    "@dojo/webpack-contrib": "~3.0.1",
+    "@dojo/webpack-contrib": "4.0.0-alpha.1",
     "brotli-webpack-plugin": "0.5.0",
     "chalk": "2.4.1",
     "clean-webpack-plugin": "0.1.17",
