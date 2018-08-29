@@ -4,6 +4,7 @@
 		"locale": "en",
 		"supportedLocales": [ "es" ],
 		"features": {
+			"env": "ci",
 			"foo": true,
 			"bar": false
 		},
