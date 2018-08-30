@@ -127,13 +127,20 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 }
 
 function serve(config: webpack.Configuration, args: any): Promise<void> {
-	const { sslKey, sslCert, sslPassphrase } = args;
+	let isHttps = false;
 
 	const app = express();
 
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();
 		app.use(express.static(outputDir));
+	}
+
+	const defaultKey = path.resolve('.cert', 'server.key');
+	const defaultCrt = path.resolve('.cert', 'server.crt');
+
+	if (fs.existsSync(defaultKey) && fs.existsSync(defaultCrt)) {
+		isHttps = true;
 	}
 
 	return Promise.resolve()
@@ -153,23 +160,12 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 		.then(() => {
 			return new Promise<void>((resolve, reject) => {
-				if (sslKey && !fs.existsSync(sslKey)) {
-					reject(new Error(`Cannot find SSL key file ${sslKey}`));
-					return;
-				}
-
-				if (sslCert && !fs.existsSync(sslCert)) {
-					reject(new Error(`Cannot find SSL certificate file ${sslCert}`));
-					return;
-				}
-
-				if (sslCert && sslKey) {
+				if (isHttps) {
 					https
 						.createServer(
 							{
-								key: fs.readFileSync(sslKey),
-								cert: fs.readFileSync(sslCert),
-								passphrase: sslPassphrase
+								key: fs.readFileSync(defaultKey),
+								cert: fs.readFileSync(defaultCrt)
 							},
 							app
 						)
@@ -254,18 +250,6 @@ const command: Command = {
 					{} as any
 				);
 			}
-		});
-
-		options('ssl-key', {
-			describe: 'Path to SSL certificate key to be used with https'
-		});
-
-		options('ssl-cert', {
-			describe: 'Path to SSL certificate file to be used with https'
-		});
-
-		options('ssl-passphrase', {
-			describe: 'SSL passphrase used to decrypt certificate'
 		});
 	},
 	run(helper: Helper, args: any) {

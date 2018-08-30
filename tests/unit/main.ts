@@ -441,41 +441,7 @@ describe('command', () => {
 		});
 
 		describe('https', () => {
-			it('errors if the specified key file cannot be found', () => {
-				const main = mockModule.getModuleUnderTest().default;
-
-				const existsStub = stub(fs, 'existsSync');
-				existsStub.returns(false);
-
-				return main
-					.run(getMockConfiguration(), { serve: true, sslKey: '/path/to/key' })
-					.then(() => {
-						throw new Error('should not resolve');
-					})
-					.catch((e: any) => {
-						existsStub.restore();
-						assert.strictEqual(e.message, 'Cannot find SSL key file /path/to/key');
-					});
-			});
-
-			it('errors if the specified cert file cannot be found', () => {
-				const main = mockModule.getModuleUnderTest().default;
-
-				const existsStub = stub(fs, 'existsSync');
-				existsStub.returns(false);
-
-				return main
-					.run(getMockConfiguration(), { serve: true, sslCert: '/path/to/key' })
-					.then(() => {
-						throw new Error('should not resolve');
-					})
-					.catch((e: any) => {
-						existsStub.restore();
-						assert.strictEqual(e.message, 'Cannot find SSL certificate file /path/to/key');
-					});
-			});
-
-			it('starts an https server if key and cert are specified', () => {
+			it('starts an https server if key and cert are available', () => {
 				const main = mockModule.getModuleUnderTest().default;
 
 				const listenStub = stub().callsFake((port: string, callback: Function) => {
@@ -493,17 +459,13 @@ describe('command', () => {
 
 				return main
 					.run(getMockConfiguration(), {
-						serve: true,
-						sslCert: '/path/to/key',
-						sslKey: '/path/to/key',
-						sslPassphrase: 'pass'
+						serve: true
 					})
 					.then(() => {
 						assert.isTrue(
 							createServerStub.calledWith({
 								cert: 'data',
-								key: 'data',
-								passphrase: 'pass'
+								key: 'data'
 							})
 						);
 						existsStub.restore();
@@ -534,10 +496,7 @@ describe('command', () => {
 
 				return main
 					.run(getMockConfiguration(), {
-						serve: true,
-						sslCert: '/path/to/key',
-						sslKey: '/path/to/key',
-						sslPassphrase: 'pass'
+						serve: true
 					})
 					.then(() => {
 						throw new Error('should not resolve');

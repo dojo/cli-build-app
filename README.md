@@ -64,12 +64,16 @@ A web server can be started with the `--serve` flag while running in `dev` or `d
 dojo build -s -p 3000
 ```
 
-By default, the files will be served via HTTP. HTTPS can be specified by adding the `--ssl-key`, `--ssl-cert` options (and optionally a `--ssl-passphrase`):
+By default, the files will be served via HTTP. HTTPS can be enabled by placing `server.crt` and `server.key` files in a `.cert` directory in the root of your project:
 
-```bash
-# build once and then serve the app via HTTPS
-dojo build -s --ssl-key=/path/to/key --ssl-cert=/path/to/cert --ssl-passphrase=secret
+```text
+|-- my-project
+    |-- .cert
+        |-- .server.crt
+        |-- .server.key
 ```
+
+When these files are detected, `dojo build -s` will automatically serve files via HTTPS.
 
 ### Watching
 
