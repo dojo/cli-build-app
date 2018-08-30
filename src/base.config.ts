@@ -183,7 +183,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [require('postcss-import')(), postcssPresetEnv(postcssPresetConfig)]
+					plugins: [
+						require('postcss-import')(),
+						postcssPresetEnv(postcssPresetConfig),
+						require('postcss-color-function')()
+					]
 				}
 			}
 		]
@@ -202,7 +206,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [require('postcss-import')(), postcssPresetEnv(postcssPresetConfig)]
+					plugins: [
+						require('postcss-import')(),
+						postcssPresetEnv(postcssPresetConfig),
+						require('postcss-color-function')()
+					]
 				}
 			}
 		]

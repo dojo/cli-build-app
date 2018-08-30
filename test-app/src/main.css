@@ -1,3 +1,7 @@
+:root {
+	--test: red;
+}
+
 .app {
 	background: purple;
 }
@@ -5,7 +9,10 @@
 a {
 	color: green;
 	&:hover {
-		color: pink;
+		color: color-mod(var(--test) alpha(80%));
+	}
+	&:focus {
+		color: color(var(--test) alpha(80%));
 	}
 }
 
