@@ -158,7 +158,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const postcssPresetConfig = {
 		browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
 		features: {
-			'nesting-rules': true
+			'nesting-rules': true,
+			'custom-properties': {
+				preserve: 'computed'
+			}
 		},
 		autoprefixer: {
 			grid: args.legacy
