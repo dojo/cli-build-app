@@ -4,6 +4,7 @@ import { join } from 'path';
 import { SinonStub, stub } from 'sinon';
 import chalk from 'chalk';
 import MockModule from '../support/MockModule';
+import * as fs from 'fs';
 
 let mockModule: MockModule;
 let mockLogger: any;
@@ -43,6 +44,7 @@ describe('command', () => {
 			'./dev.config',
 			'./dist.config',
 			'./test.config',
+			'https',
 			'express',
 			'log-update',
 			'ora',
@@ -436,6 +438,116 @@ describe('command', () => {
 						)
 					);
 				});
+		});
+
+		describe('https', () => {
+			it('errors if the specified key file cannot be found', () => {
+				const main = mockModule.getModuleUnderTest().default;
+
+				const existsStub = stub(fs, 'existsSync');
+				existsStub.returns(false);
+
+				return main
+					.run(getMockConfiguration(), { serve: true, sslKey: '/path/to/key' })
+					.then(() => {
+						throw new Error('should not resolve');
+					})
+					.catch((e: any) => {
+						existsStub.restore();
+						assert.strictEqual(e.message, 'Cannot find SSL key file /path/to/key');
+					});
+			});
+
+			it('errors if the specified cert file cannot be found', () => {
+				const main = mockModule.getModuleUnderTest().default;
+
+				const existsStub = stub(fs, 'existsSync');
+				existsStub.returns(false);
+
+				return main
+					.run(getMockConfiguration(), { serve: true, sslCert: '/path/to/key' })
+					.then(() => {
+						throw new Error('should not resolve');
+					})
+					.catch((e: any) => {
+						existsStub.restore();
+						assert.strictEqual(e.message, 'Cannot find SSL certificate file /path/to/key');
+					});
+			});
+
+			it('starts an https server if key and cert are specified', () => {
+				const main = mockModule.getModuleUnderTest().default;
+
+				const listenStub = stub().callsFake((port: string, callback: Function) => {
+					callback(false);
+				});
+				const createServerStub = mockModule.getMock('https').createServer;
+				createServerStub.returns({
+					listen: listenStub
+				});
+
+				const existsStub = stub(fs, 'existsSync');
+				existsStub.returns(true);
+				const readStub = stub(fs, 'readFileSync');
+				readStub.returns('data');
+
+				return main
+					.run(getMockConfiguration(), {
+						serve: true,
+						sslCert: '/path/to/key',
+						sslKey: '/path/to/key',
+						sslPassphrase: 'pass'
+					})
+					.then(() => {
+						assert.isTrue(
+							createServerStub.calledWith({
+								cert: 'data',
+								key: 'data',
+								passphrase: 'pass'
+							})
+						);
+						existsStub.restore();
+						readStub.restore();
+					})
+					.catch((e: any) => {
+						existsStub.restore();
+						readStub.restore();
+						throw e;
+					});
+			});
+
+			it('throws https server errors', () => {
+				const main = mockModule.getModuleUnderTest().default;
+
+				const listenStub = stub().callsFake((port: string, callback: Function) => {
+					callback('there is an error');
+				});
+				const createServerStub = mockModule.getMock('https').createServer;
+				createServerStub.returns({
+					listen: listenStub
+				});
+
+				const existsStub = stub(fs, 'existsSync');
+				existsStub.returns(true);
+				const readStub = stub(fs, 'readFileSync');
+				readStub.returns('data');
+
+				return main
+					.run(getMockConfiguration(), {
+						serve: true,
+						sslCert: '/path/to/key',
+						sslKey: '/path/to/key',
+						sslPassphrase: 'pass'
+					})
+					.then(() => {
+						throw new Error('should not resolve');
+					})
+					.catch((e: any) => {
+						existsStub.restore();
+						readStub.restore();
+						assert.strictEqual(e, 'there is an error');
+					});
+			});
 		});
 	});
 

@@ -5,6 +5,8 @@ import * as ora from 'ora';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import chalk from 'chalk';
+import * as fs from 'fs';
+import * as https from 'https';
 
 const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
@@ -125,6 +127,8 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 }
 
 function serve(config: webpack.Configuration, args: any): Promise<void> {
+	const { sslKey, sslCert, sslPassphrase } = args;
+
 	const app = express();
 
 	if (args.watch !== 'memory') {
@@ -149,13 +153,42 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 		.then(() => {
 			return new Promise<void>((resolve, reject) => {
-				app.listen(args.port, (error: Error) => {
-					if (error) {
-						reject(error);
-					} else {
-						resolve();
-					}
-				});
+				if (sslKey && !fs.existsSync(sslKey)) {
+					reject(new Error(`Cannot find SSL key file ${sslKey}`));
+					return;
+				}
+
+				if (sslCert && !fs.existsSync(sslCert)) {
+					reject(new Error(`Cannot find SSL certificate file ${sslCert}`));
+					return;
+				}
+
+				if (sslCert && sslKey) {
+					https
+						.createServer(
+							{
+								key: fs.readFileSync(sslKey),
+								cert: fs.readFileSync(sslCert),
+								passphrase: sslPassphrase
+							},
+							app
+						)
+						.listen(args.port, (error: Error) => {
+							if (error) {
+								reject(error);
+							} else {
+								resolve();
+							}
+						});
+				} else {
+					app.listen(args.port, (error: Error) => {
+						if (error) {
+							reject(error);
+						} else {
+							resolve();
+						}
+					});
+				}
 			});
 		});
 }
@@ -221,6 +254,18 @@ const command: Command = {
 					{} as any
 				);
 			}
+		});
+
+		options('ssl-key', {
+			describe: 'Path to SSL certificate key to be used with https'
+		});
+
+		options('ssl-cert', {
+			describe: 'Path to SSL certificate file to be used with https'
+		});
+
+		options('ssl-passphrase', {
+			describe: 'SSL passphrase used to decrypt certificate'
 		});
 	},
 	run(helper: Helper, args: any) {
