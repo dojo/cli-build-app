@@ -64,6 +64,17 @@ A web server can be started with the `--serve` flag while running in `dev` or `d
 dojo build -s -p 3000
 ```
 
+By default, the files will be served via HTTP. HTTPS can be enabled by placing `server.crt` and `server.key` files in a `.cert` directory in the root of your project:
+
+```text
+|-- my-project
+    |-- .cert
+        |-- .server.crt
+        |-- .server.key
+```
+
+When these files are detected, `dojo build -s` will automatically serve files via HTTPS.
+
 ### Watching
 
 Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
@@ -148,12 +159,12 @@ Configuration for external dependencies can be provided under the `externals` pr
  * A string that indicates that this path, and any children of this path, should be loaded via the external loader.
  * An object that provides additional configuration for dependencies that need to be copied into the built application. This object has the following properties:
 
- | Property | Type | optional | Description |
- | -------- | ---- | -------- | ----------- |
- | `from` | `string` | false  | A path relative to the root of the project specifying the location of the files or folders to copy into the build application. |
- | `to` | `string` | true | A path that replaces `from` as the location to copy this dependency to. By default, dependencies will be copied to `${externalsOutputPath}/${to}` or `${externalsOutputPath}/${from}` if `to` is not specified. If there are any `.` characters in the path and it is a directory, it needs to end with a forward slash. |
- | `name` | `string` | true | Either the module id or the name of the global variable referenced in the application source. |
- | `inject` | `string, string[], or boolean` | true | This property indicates that this dependency defines, or includes, scripts or stylesheets that should be loaded on the page. If `inject` is set to `true`, then the file at the location specified by `to` or `from` will be loaded on the page. If this dependency is a folder, then `inject` can be set to a string or array of strings to define one or more files to inject. Each path in `inject` should be relative to `${externalsOutputPath}/${to}` or `${externalsOutputPath}/${from}` depending on whether `to` was provided. |
+| Property | Type | optional | Description |
+| -------- | ---- | -------- | ----------- |
+| `from` | `string` | false  | A path relative to the root of the project specifying the location of the files or folders to copy into the build application. |
+| `to` | `string` | true | A path that replaces `from` as the location to copy this dependency to. By default, dependencies will be copied to `${externalsOutputPath}/${to}` or `${externalsOutputPath}/${from}` if `to` is not specified. If there are any `.` characters in the path and it is a directory, it needs to end with a forward slash. |
+| `name` | `string` | true | Either the module id or the name of the global variable referenced in the application source. |
+| `inject` | `string, string[], or boolean` | true | This property indicates that this dependency defines, or includes, scripts or stylesheets that should be loaded on the page. If `inject` is set to `true`, then the file at the location specified by `to` or `from` will be loaded on the page. If this dependency is a folder, then `inject` can be set to a string or array of strings to define one or more files to inject. Each path in `inject` should be relative to `${externalsOutputPath}/${to}` or `${externalsOutputPath}/${from}` depending on whether `to` was provided. |
 
  As an example the following configuration will inject `src/legacy/layer.js` into the application page, inject the file that defines the `MyGlobal` global variable, declare that modules `a` and `b` are external and should be delegated to the external layer, and then copy the folder `node_modules/legacy-dep`, from which several files are injected. All of these files will be copied into the `externals` folder, which could be overridden by specifying the `outputPath` property in the `externals` configuration.
 

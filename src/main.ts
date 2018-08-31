@@ -5,6 +5,8 @@ import * as ora from 'ora';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import chalk from 'chalk';
+import * as fs from 'fs';
+import * as https from 'https';
 
 const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
@@ -125,11 +127,20 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 }
 
 function serve(config: webpack.Configuration, args: any): Promise<void> {
+	let isHttps = false;
+
 	const app = express();
 
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();
 		app.use(express.static(outputDir));
+	}
+
+	const defaultKey = path.resolve('.cert', 'server.key');
+	const defaultCrt = path.resolve('.cert', 'server.crt');
+
+	if (fs.existsSync(defaultKey) && fs.existsSync(defaultCrt)) {
+		isHttps = true;
 	}
 
 	return Promise.resolve()
@@ -149,13 +160,31 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 		.then(() => {
 			return new Promise<void>((resolve, reject) => {
-				app.listen(args.port, (error: Error) => {
-					if (error) {
-						reject(error);
-					} else {
-						resolve();
-					}
-				});
+				if (isHttps) {
+					https
+						.createServer(
+							{
+								key: fs.readFileSync(defaultKey),
+								cert: fs.readFileSync(defaultCrt)
+							},
+							app
+						)
+						.listen(args.port, (error: Error) => {
+							if (error) {
+								reject(error);
+							} else {
+								resolve();
+							}
+						});
+				} else {
+					app.listen(args.port, (error: Error) => {
+						if (error) {
+							reject(error);
+						} else {
+							resolve();
+						}
+					});
+				}
 			});
 		});
 }

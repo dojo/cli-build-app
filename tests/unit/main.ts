@@ -4,6 +4,7 @@ import { join } from 'path';
 import { SinonStub, stub } from 'sinon';
 import chalk from 'chalk';
 import MockModule from '../support/MockModule';
+import * as fs from 'fs';
 
 let mockModule: MockModule;
 let mockLogger: any;
@@ -43,6 +44,7 @@ describe('command', () => {
 			'./dev.config',
 			'./dist.config',
 			'./test.config',
+			'https',
 			'express',
 			'log-update',
 			'ora',
@@ -436,6 +438,75 @@ describe('command', () => {
 						)
 					);
 				});
+		});
+
+		describe('https', () => {
+			it('starts an https server if key and cert are available', () => {
+				const main = mockModule.getModuleUnderTest().default;
+
+				const listenStub = stub().callsFake((port: string, callback: Function) => {
+					callback(false);
+				});
+				const createServerStub = mockModule.getMock('https').createServer;
+				createServerStub.returns({
+					listen: listenStub
+				});
+
+				const existsStub = stub(fs, 'existsSync');
+				existsStub.returns(true);
+				const readStub = stub(fs, 'readFileSync');
+				readStub.returns('data');
+
+				return main
+					.run(getMockConfiguration(), {
+						serve: true
+					})
+					.then(() => {
+						assert.isTrue(
+							createServerStub.calledWith({
+								cert: 'data',
+								key: 'data'
+							})
+						);
+						existsStub.restore();
+						readStub.restore();
+					})
+					.catch((e: any) => {
+						existsStub.restore();
+						readStub.restore();
+						throw e;
+					});
+			});
+
+			it('throws https server errors', () => {
+				const main = mockModule.getModuleUnderTest().default;
+
+				const listenStub = stub().callsFake((port: string, callback: Function) => {
+					callback('there is an error');
+				});
+				const createServerStub = mockModule.getMock('https').createServer;
+				createServerStub.returns({
+					listen: listenStub
+				});
+
+				const existsStub = stub(fs, 'existsSync');
+				existsStub.returns(true);
+				const readStub = stub(fs, 'readFileSync');
+				readStub.returns('data');
+
+				return main
+					.run(getMockConfiguration(), {
+						serve: true
+					})
+					.then(() => {
+						throw new Error('should not resolve');
+					})
+					.catch((e: any) => {
+						existsStub.restore();
+						readStub.restore();
+						assert.strictEqual(e, 'there is an error');
+					});
+			});
 		});
 	});
 
