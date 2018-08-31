@@ -75,6 +75,38 @@ By default, the files will be served via HTTP. HTTPS can be enabled by placing `
 
 When these files are detected, `dojo build -s` will automatically serve files via HTTPS.
 
+#### Proxy Configuration
+
+The development server can be configured to act as a simple proxy. Add a `proxy` section to your `.dojorc` containing the paths you want to proxy. The key of the object is the path you want to proxy and the value of the object is the proxy configuration.
+
+```json
+{
+    "build-app": {
+        "proxy": {
+            "/api": {
+                "target": "http://example.com",
+                "changeOrigin": true,
+                "pathRewrite": {
+                    "^/api": "/api/v1"
+                }
+            },
+            "/simple": "http://example.com"
+        }
+    }
+}
+```
+
+Proxy configuration can take the following options:
+
+| Property       | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| `target`       | The source URL to proxy from                                 |
+| `changeOrigin` | `true` to rewrite the origin header (required for named based virtual hosts) |
+| `ws`           | `true` to proxy WebSockets                                   |
+| `pathRewrite`  | key/value pairs of paths that will get rewritten during the proxy. The key is a regular expression to be matched, the value is the replacement. |
+
+Note: Setting the proxy configuration as a string is equivelant to `{ target: "string" }`.
+
 ### Watching
 
 Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).

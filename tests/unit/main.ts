@@ -45,6 +45,7 @@ describe('command', () => {
 			'./dist.config',
 			'./test.config',
 			'https',
+			'http-proxy-middleware',
 			'express',
 			'log-update',
 			'ora',
@@ -506,6 +507,29 @@ describe('command', () => {
 						readStub.restore();
 						assert.strictEqual(e, 'there is an error');
 					});
+			});
+		});
+
+		describe('proxy', () => {
+			it('enables proxy configurations', () => {
+				const proxyMock = mockModule.getMock('http-proxy-middleware');
+
+				const main = mockModule.getModuleUnderTest().default;
+
+				return main
+					.run(getMockConfiguration(), {
+						proxy: {
+							'/string': 'test',
+							'/options': {
+								target: 'options'
+							}
+						}
+					})
+					.then(() => {
+						assert.isTrue(proxyMock.calledWith('/string', { target: 'test' }));
+						assert.isTrue(proxyMock.calledWith('/options', { target: 'options' }));
+					})
+					.catch(() => {});
 			});
 		});
 	});

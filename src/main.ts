@@ -7,6 +7,7 @@ import * as webpack from 'webpack';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import * as https from 'https';
+import * as proxy from 'http-proxy-middleware';
 
 const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
@@ -134,6 +135,18 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();
 		app.use(express.static(outputDir));
+	}
+
+	if (args.proxy) {
+		Object.keys(args.proxy).forEach((context) => {
+			const options = args.proxy[context];
+
+			if (typeof options === 'string') {
+				app.use(proxy(context, { target: options }));
+			} else {
+				app.use(proxy(context, options));
+			}
+		});
 	}
 
 	const defaultKey = path.resolve('.cert', 'server.key');
