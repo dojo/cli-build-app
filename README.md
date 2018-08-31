@@ -121,7 +121,7 @@ dojo build -s -w=memory -m=dev
 
 ### Legacy Browser Support
 
-By default, the build will support the last two versions of the latest browsers. To Support IE 11, run the build with the `--legacy` (`-l`) flag.
+By default, the build will support the last two versions of the latest browsers. To support IE 11 include any necessary polyfills, such as the fetch API, and run the build with the `--legacy` (`-l`) flag.
 
 ### Eject
 
