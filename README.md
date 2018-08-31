@@ -75,6 +75,26 @@ By default, the files will be served via HTTP. HTTPS can be enabled by placing `
 
 When these files are detected, `dojo build -s` will automatically serve files via HTTPS.
 
+#### Proxy Configuration
+
+The development server can be configured to act as a simple proxy. Add a `proxy` section to your `.dojorc` containing the paths you want to proxy. The available options are described in [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware).
+
+```json
+{
+    "build-app": {
+        "proxy": {
+            "/api": "http://example.com",
+            "/ajax": {
+                "target": "http://example.com",
+                "changeOrigin": true
+            }
+        }
+    }
+}
+```
+
+
+
 ### Watching
 
 Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
