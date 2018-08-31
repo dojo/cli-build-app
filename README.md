@@ -77,23 +77,35 @@ When these files are detected, `dojo build -s` will automatically serve files vi
 
 #### Proxy Configuration
 
-The development server can be configured to act as a simple proxy. Add a `proxy` section to your `.dojorc` containing the paths you want to proxy. The available options are described in [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware).
+The development server can be configured to act as a simple proxy. Add a `proxy` section to your `.dojorc` containing the paths you want to proxy. The key of the object is the path you want to proxy and the value of the object is the proxy configuration.
 
 ```json
 {
     "build-app": {
         "proxy": {
-            "/api": "http://example.com",
-            "/ajax": {
+            "/api": {
                 "target": "http://example.com",
-                "changeOrigin": true
-            }
+                "changeOrigin": true,
+                "pathRewrite": {
+                    "^/api": "/api/v1"
+                }
+            },
+            "/simple": "http://example.com"
         }
     }
 }
 ```
 
+Proxy configuration can take the following options:
 
+| Property       | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| `target`       | The source URL to proxy from                                 |
+| `changeOrigin` | `true` to rewrite the origin header (required for named based virtual hosts) |
+| `ws`           | `true` to proxy WebSockets                                   |
+| `pathRewrite`  | key/value pairs of paths that will get rewritten during the proxy. The key is a regular expression to be matched, the value is the replacement. |
+
+Note: Setting the proxy configuration as a string is equivelant to `{ target: "string" }`.
 
 ### Watching
 
