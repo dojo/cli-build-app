@@ -8,6 +8,7 @@ import chalk from 'chalk';
 import * as fs from 'fs';
 import * as https from 'https';
 import * as proxy from 'http-proxy-middleware';
+import * as history from 'connect-history-api-fallback';
 
 const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
@@ -131,6 +132,8 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	let isHttps = false;
 
 	const app = express();
+
+	app.use(history());
 
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();

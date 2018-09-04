@@ -380,7 +380,7 @@ describe('command', () => {
 					watch: 'memory'
 				})
 				.then(() => {
-					assert.strictEqual(useStub.callCount, 1);
+					assert.strictEqual(useStub.callCount, 2);
 					assert.isTrue(
 						webpackMiddleware.calledWith(compiler, {
 							logLevel: 'silent',
