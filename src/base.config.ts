@@ -181,7 +181,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					modules: true,
 					sourceMap: true,
 					importLoaders: 1,
-					localIdentName: '[hash:base64:8]',
+					localIdentName: '[name]__[local]__[hash:base64:5]',
 					getLocalIdent
 				}
 			},
