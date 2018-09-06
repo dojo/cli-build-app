@@ -19,7 +19,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
-	const { plugins, output, module } = config;
+	const { plugins, output } = config;
 	const outputPath = path.join(output.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
@@ -69,21 +69,6 @@ function webpackConfig(args: any): webpack.Configuration {
 			})
 		);
 	}
-
-	module.rules = module.rules.map((rule) => {
-		if (Array.isArray(rule.use)) {
-			rule.use.forEach((loader: any) => {
-				if (typeof loader === 'string') {
-					return loader;
-				}
-				if (loader.loader === 'css-loader') {
-					loader.options.localIdentName = '[name]__[local]__[hash:base64:5]';
-					return loader;
-				}
-			});
-		}
-		return rule;
-	});
 
 	config.output = {
 		...output,
