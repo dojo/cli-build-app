@@ -8,6 +8,7 @@ import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRe
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
+import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -16,7 +17,6 @@ import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer-sunburst').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin-terser');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
@@ -37,7 +37,6 @@ function webpackConfig(args: any): webpack.Configuration {
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
 			openAnalyzer: false,
-			reportType: 'sunburst',
 			generateStatsFile: true,
 			reportFilename: '../info/report.html',
 			statsFilename: '../info/stats.json'
