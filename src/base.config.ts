@@ -131,7 +131,8 @@ function importTransformer(basePath: string, bundles: any = {}) {
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
-	const features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
+	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
+	features = { ...features, 'dojo-debug': false };
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
