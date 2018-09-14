@@ -3,7 +3,6 @@ import { WebAppManifest } from './interfaces';
 import webpack = require('webpack');
 import * as fs from 'fs';
 import * as path from 'path';
-import { deepAssign } from '@dojo/framework/core/lang';
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
@@ -71,7 +70,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	if (serviceWorker) {
 		const serviceWorkerOptions =
-			typeof serviceWorker === 'string' ? serviceWorker : deepAssign({ cachePrefix: packageName }, serviceWorker);
+			typeof serviceWorker === 'string' ? serviceWorker : { cachePrefix: packageName, ...serviceWorker };
 		config.plugins.push(new ServiceWorkerPlugin(serviceWorkerOptions));
 
 		if (typeof serviceWorker !== 'string') {
