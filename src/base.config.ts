@@ -141,14 +141,15 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		[] as string[]
 	);
+	const singleBundle = args.singleBundle || args.mode === 'unit' || args.mode === 'functional';
 
 	const customTransformers: any[] = [];
 
-	if (lazyModules.length > 0 && !args.singleBundle) {
+	if (lazyModules.length > 0 && !singleBundle) {
 		customTransformers.push(registryTransformer(basePath, lazyModules));
 	}
 
-	if (!args.legacy && !args.singleBundle) {
+	if (!args.legacy && !singleBundle) {
 		customTransformers.push(importTransformer(basePath, args.bundles));
 	}
 
@@ -261,7 +262,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
-			args.singleBundle &&
+			singleBundle &&
 				new webpack.optimize.LimitChunkCountPlugin({
 					maxChunks: 1
 				}),

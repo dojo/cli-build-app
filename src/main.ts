@@ -12,7 +12,8 @@ import * as history from 'connect-history-api-fallback';
 
 const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
-import testConfigFactory from './test.config';
+import unitConfigFactory from './unit.config';
+import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
@@ -214,7 +215,7 @@ const command: Command = {
 			describe: 'the output mode',
 			alias: 'm',
 			default: 'dist',
-			choices: ['dist', 'dev', 'test']
+			choices: ['dist', 'dev', 'unit', 'functional']
 		});
 
 		options('watch', {
@@ -275,8 +276,10 @@ const command: Command = {
 		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
 		if (args.mode === 'dev') {
 			config = devConfigFactory(remainingArgs);
-		} else if (args.mode === 'test') {
-			config = testConfigFactory(remainingArgs);
+		} else if (args.mode === 'unit') {
+			config = unitConfigFactory(remainingArgs);
+		} else if (args.mode === 'functional') {
+			config = functionalConfigFactory(remainingArgs);
 		} else {
 			config = distConfigFactory(remainingArgs);
 		}

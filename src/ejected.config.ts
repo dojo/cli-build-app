@@ -2,10 +2,11 @@ import * as webpack from 'webpack';
 
 import devConfigFactory from './dev.config';
 import distConfigFactory from './dist.config';
-import testConfigFactory from './test.config';
+import unitConfigFactory from './unit.config';
+import functionalConfigFactory from './functional.config';
 
 export interface EnvOptions {
-	mode?: 'dev' | 'dist' | 'test';
+	mode?: 'dev' | 'dist' | 'unit' | 'functional';
 }
 
 function webpackConfig(env: EnvOptions = {}): webpack.Configuration {
@@ -14,8 +15,10 @@ function webpackConfig(env: EnvOptions = {}): webpack.Configuration {
 	let config: webpack.Configuration;
 	if (mode === 'dev') {
 		config = devConfigFactory(rc);
-	} else if (mode === 'test') {
-		config = testConfigFactory(rc);
+	} else if (mode === 'unit') {
+		config = unitConfigFactory(rc);
+	} else if (mode === 'functional') {
+		config = functionalConfigFactory(rc);
 	} else {
 		config = distConfigFactory(rc);
 	}

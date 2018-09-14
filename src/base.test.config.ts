@@ -1,36 +1,10 @@
 import baseConfigFactory from './base.config';
-import * as path from 'path';
-import * as webpack from 'webpack';
-import * as globby from 'globby';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import { WebpackConfiguration } from './interfaces';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const basePath = process.cwd();
-
-function webpackConfig(args: any): webpack.Configuration {
+function webpackConfig(args: any): WebpackConfiguration {
 	const config = baseConfigFactory(args);
-	const { plugins, output, module } = config;
-	config.entry = () => {
-		const unit = globby
-			.sync([`${basePath}/tests/unit/**/*.ts`])
-			.map((filename: string) => filename.replace(/\.ts$/, ''));
-
-		const functional = globby
-			.sync([`${basePath}/tests/functional/**/*.ts`])
-			.map((filename: string) => filename.replace(/\.ts$/, ''));
-
-		const tests: any = {};
-
-		if (unit.length) {
-			tests.unit = unit;
-		}
-
-		if (functional.length) {
-			tests.functional = functional;
-		}
-
-		return tests;
-	};
+	const { plugins, module } = config;
 	const externals: any[] = (config.externals as any[]) || [];
 
 	const instrumenterOptions = args.legacy ? {} : { esModules: true };
@@ -41,8 +15,7 @@ function webpackConfig(args: any): webpack.Configuration {
 				(plugin as any).options = { ...(plugin as any).options, disable: true };
 			}
 			return plugin;
-		}),
-		new CleanWebpackPlugin(['test'], { root: output.path, verbose: false })
+		})
 	];
 
 	module.rules = module.rules.map((rule) => {
@@ -74,10 +47,6 @@ function webpackConfig(args: any): webpack.Configuration {
 	externals.push(/^intern/);
 	config.externals = externals;
 	config.devtool = 'inline-source-map';
-	config.output = {
-		...output,
-		path: path.join(output.path, 'test')
-	};
 	return config;
 }
 
