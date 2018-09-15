@@ -22,6 +22,8 @@ const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
 const webpackMiddleware = require('webpack-dev-middleware');
 
+const testModes = ['test', 'unit', 'functional'];
+
 function createCompiler(config: webpack.Configuration) {
 	const compiler = webpack(config);
 	fixMultipleWatchTrigger(compiler);
@@ -57,6 +59,11 @@ function build(config: webpack.Configuration, args: any) {
 					reject({});
 					return;
 				}
+			}
+			if (args.mode === 'test') {
+				console.warn(
+					'Mode `test` has been deprecated and will be removed in the next major release, please use `unit` or `functional` as required.'
+				);
 			}
 			resolve(args.serve || process.exit(0));
 		});
@@ -215,7 +222,7 @@ const command: Command = {
 			describe: 'the output mode',
 			alias: 'm',
 			default: 'dist',
-			choices: ['dist', 'dev', 'unit', 'functional']
+			choices: ['dist', 'dev', 'test', 'unit', 'functional']
 		});
 
 		options('watch', {
@@ -276,7 +283,7 @@ const command: Command = {
 		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
 		if (args.mode === 'dev') {
 			config = devConfigFactory(remainingArgs);
-		} else if (args.mode === 'unit') {
+		} else if (args.mode === 'unit' || args.mode === 'test') {
 			config = unitConfigFactory(remainingArgs);
 		} else if (args.mode === 'functional') {
 			config = functionalConfigFactory(remainingArgs);
@@ -285,8 +292,8 @@ const command: Command = {
 		}
 
 		if (args.serve) {
-			if (args.mode === 'test') {
-				return Promise.reject(new Error('Cannot use `--serve` with `--mode=test`'));
+			if (testModes.indexOf(args.mode) !== -1) {
+				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
 			}
 			return serve(config, args);
 		}
@@ -315,7 +322,7 @@ const command: Command = {
 			},
 			hints: [
 				`to build run ${chalk.underline(
-					'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|test}'
+					'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|unit|functional}'
 				)}`
 			],
 			npm: {
