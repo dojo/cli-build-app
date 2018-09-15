@@ -141,7 +141,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		[] as string[]
 	);
-	const singleBundle = args.singleBundle || args.mode === 'unit' || args.mode === 'functional';
+	const singleBundle =
+		args.singleBundle || args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 
 	const customTransformers: any[] = [];
 
