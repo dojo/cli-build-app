@@ -314,10 +314,12 @@ const command: Command = {
 				files: [
 					moveBuildOptions(`${this.group}-${this.name}`),
 					'./base.config.js',
+					'./base.test.config.js',
 					'./dev.config.js',
 					'./dist.config.js',
 					'./ejected.config.js',
-					'./test.config.js'
+					'./unit.config.js',
+					'./functional.config.js'
 				]
 			},
 			hints: [
