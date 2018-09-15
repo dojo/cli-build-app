@@ -39,7 +39,7 @@ There are three modes available to build a Dojo application, `dist`, `dev` and `
 dojo build app --mode dist
 ```
 
-The built application files are written to the `output/{mode selected}` directory
+The built application files are written to the `output/{dist/dev}` directory. The built test files are written to the `output/test/{unit|functionl}` directory.
 
 Note: `dist` is the default mode and so can be run without any arguments, `dojo build app`.
 
@@ -51,9 +51,13 @@ The `dist` mode creates a production-ready build.
 
 The `dev` mode creates an application build that has been optimized for debugging and development.
 
-#### Test mode
+#### Unit mode
 
-The `test` mode creates bundles that can be used to run the unit and functional tests of the application.
+The `unit` mode creates bundles that can be used to run the unit tests of the application.
+
+#### Functional mode
+
+The `functional` mode creates bundles that can be used to run the functional tests of the application.
 
 ### Serving the Application
 
@@ -126,14 +130,16 @@ Ejecting `@dojo/cli-build-app` will produce the following files under the `confi
 - `build-options.json`: the build-specific config options removed from the `.dojorc`
 - `ejected.config.js`: the root webpack config that passes the build options to the appropriate mode-specific config based on the `--env.mode` flag's value.
 - `base.config.js`: a common configuration used by the mode-specific configs.
+- `base.test.config.js`: a common configuration used by the unit and functional modes.
 - `dev.config.js`: the configuration used during development.
 - `dist.config.js`: the production configuration.
-- `test.config.js`: the configuration used when running tests.
+- `unit.config.js`: the configuration used when running unit tests.
+- `functional.config.js`: the configuration used when running functional tests.
 
 As already noted, the dojorc's `build-app` options are moved to `config/build-app/build-options.json` after ejecting. Further, the modes are specified using webpack's `env` flag (e.g., `--env.mode=dev`), defaulting to `dist`. You can run a build using webpack with:
 
 ```bash
-node_modules/.bin/webpack --config=config/build-app/ejected.config.js --env.mode={dev|dist|test}
+node_modules/.bin/webpack --config=config/build-app/ejected.config.js --env.mode={dev|dist|unit|functional}
 ```
 
 ### Configuration
