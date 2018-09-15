@@ -15,8 +15,8 @@ let mockUnitTestConfig: any;
 let mockFunctionalTestConfig: any;
 let isError: boolean;
 let stats: any;
-let consoleStub = stub(console, 'log');
-let consoleWarnStub = stub(console, 'warn');
+let consoleStub: any;
+let consoleWarnStub: any;
 let pluginStub: SinonStub;
 let runStub: SinonStub;
 let watchStub: SinonStub;
@@ -45,7 +45,8 @@ describe('command', () => {
 		mockModule.dependencies([
 			'./dev.config',
 			'./dist.config',
-			'./test.config',
+			'./unit.config',
+			'./functional.config',
 			'https',
 			'http-proxy-middleware',
 			'express',
@@ -85,6 +86,8 @@ describe('command', () => {
 		mockUnitTestConfig.returns('unit config');
 		mockFunctionalTestConfig.returns('functional config');
 		mockLogger = mockModule.getMock('./logger').default;
+		consoleWarnStub = stub(console, 'warn');
+		consoleStub = stub(console, 'log');
 	});
 
 	afterEach(() => {
@@ -103,7 +106,7 @@ describe('command', () => {
 				describe: 'the output mode',
 				alias: 'm',
 				default: 'dist',
-				choices: ['dist', 'dev', 'test']
+				choices: ['dist', 'dev', 'test', 'unit', 'functional']
 			})
 		);
 	});
@@ -148,7 +151,7 @@ describe('command', () => {
 			assert.isTrue(consoleWarnStub.calledOnce);
 			assert.isTrue(
 				consoleWarnStub.calledWith(
-					'Mode `test` has been deprecated and will be removed in the next major release, please use `unit` or `functional` as required.'
+					'Using `--mode=test` is deprecated and has only built the unit test bundle. This mode will be removed in the next major release, please use `unit` or `functional` explicitly instead.'
 				)
 			);
 		});
@@ -395,9 +398,9 @@ describe('command', () => {
 
 		it('limits --watch=memory to --mode=dev', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockConfiguration(), { serve: true, watch: 'memory' }).then(() => {
+			return main.run(getMockConfiguration(), { serve: false, watch: 'memory' }).then(() => {
 				assert.isTrue(
-					consoleWarnStub.calledWith('Memory watch requires `--mode=dev`. Using file watch instead...')
+					consoleWarnStub.calledWith('Memory watch requires the dev server. Using file watch instead...')
 				);
 			});
 		});
@@ -597,7 +600,7 @@ describe('command', () => {
 				},
 				hints: [
 					`to build run ${chalk.underline(
-						'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|test}'
+						'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|unit|functional}'
 					)}`
 				],
 				npm: {
