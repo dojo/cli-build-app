@@ -6,6 +6,7 @@ function testUrl(dir: string, isDist: boolean, isPwa: boolean) {
 Currently Rendered by BTR: false`
 	);
 	cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
+	cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');
 	cy.get('script[src^="lazy"]').should('exist');
 	cy.get('script[src^="src/Foo"]').should('exist');
 	cy.get('#div[nodeenv=production]').should(isDist ? 'exist' : 'not.exist');

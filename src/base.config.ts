@@ -128,6 +128,16 @@ function importTransformer(basePath: string, bundles: any = {}) {
 	};
 }
 
+interface CssStyle {
+	walkDecls(processor: (decl: { value: string }) => void): void;
+}
+
+function colorToColorMod(style: CssStyle) {
+	style.walkDecls((decl) => {
+		decl.value = decl.value.replace('color(', 'color-mod(');
+	});
+}
+
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
@@ -164,7 +174,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 
 	const postcssPresetConfig = {
 		browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
+		insertBefore: {
+			'color-mod-function': colorToColorMod
+		},
 		features: {
+			'color-mod-function': true,
 			'nesting-rules': true
 		},
 		autoprefixer: {
