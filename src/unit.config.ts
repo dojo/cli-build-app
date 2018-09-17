@@ -17,7 +17,7 @@ function webpackConfig(args: any): WebpackConfiguration {
 		const tests: any = {};
 
 		if (unit.length) {
-			tests.unit = unit;
+			tests.all = unit;
 		}
 
 		return tests;
