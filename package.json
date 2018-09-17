@@ -135,6 +135,7 @@
     "strip-ansi": "3.0.1",
     "style-loader": "0.19.0",
     "ts-loader": "3.1.1",
+    "ts-node": "7.0.1",
     "tslint": "5.8.0",
     "tslint-loader": "3.5.3",
     "typed-css-modules": "0.3.1",

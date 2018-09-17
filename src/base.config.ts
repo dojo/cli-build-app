@@ -9,6 +9,7 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { WebpackConfiguration } from './interfaces';
 import * as loaderUtils from 'loader-utils';
 import * as ts from 'typescript';
+import * as tsnode from 'ts-node';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
 const postcssPresetEnv = require('postcss-preset-env');
@@ -138,6 +139,19 @@ function colorToColorMod(style: CssStyle) {
 	});
 }
 
+function loadRoutingOutlets() {
+	let outlets: string[] = [];
+	const routesConfig = path.join(basePath, 'src', 'routes.ts');
+	try {
+		if (existsSync(routesConfig)) {
+			tsnode.register();
+			const routes: any[] = require(slash(routesConfig)).default;
+			return routes.map((route) => route.outlet);
+		}
+	} catch {}
+	return outlets;
+}
+
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
@@ -157,8 +171,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 
 	const customTransformers: any[] = [];
 
-	if (lazyModules.length > 0 && !singleBundle) {
-		customTransformers.push(registryTransformer(basePath, lazyModules));
+	const outlets = loadRoutingOutlets();
+
+	if ((lazyModules.length > 0 || outlets.length > 0) && !singleBundle) {
+		customTransformers.push(registryTransformer(basePath, lazyModules, false, outlets));
 	}
 
 	if (!args.legacy && !singleBundle) {

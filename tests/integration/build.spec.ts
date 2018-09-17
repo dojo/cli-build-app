@@ -9,6 +9,7 @@ Currently Rendered by BTR: false`
 	cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');
 	cy.get('script[src^="lazy"]').should('exist');
 	cy.get('script[src^="src/Foo"]').should('exist');
+	cy.get('script[src^="src/RoutedWidget"]').should('exist');
 	cy.get('#div[nodeenv=production]').should(isDist ? 'exist' : 'not.exist');
 	cy.get('#div[has-prod=prod]').should(isDist ? 'exist' : 'not.exist');
 	cy.get('#div[dojo-debug=true]').should(isDist ? 'not.exist' : 'exist');
