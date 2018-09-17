@@ -11,10 +11,12 @@ let mockLogger: any;
 let mockSpinner: any;
 let mockDevConfig: any;
 let mockDistConfig: any;
-let mockTestConfig: any;
+let mockUnitTestConfig: any;
+let mockFunctionalTestConfig: any;
 let isError: boolean;
 let stats: any;
-let consoleStub = stub(console, 'log');
+let consoleStub: any;
+let consoleWarnStub: any;
 let pluginStub: SinonStub;
 let runStub: SinonStub;
 let watchStub: SinonStub;
@@ -43,7 +45,8 @@ describe('command', () => {
 		mockModule.dependencies([
 			'./dev.config',
 			'./dist.config',
-			'./test.config',
+			'./unit.config',
+			'./functional.config',
 			'https',
 			'http-proxy-middleware',
 			'express',
@@ -76,16 +79,21 @@ describe('command', () => {
 		});
 		mockDevConfig = mockModule.getMock('./dev.config').default;
 		mockDistConfig = mockModule.getMock('./dist.config').default;
-		mockTestConfig = mockModule.getMock('./test.config').default;
+		mockUnitTestConfig = mockModule.getMock('./unit.config').default;
+		mockFunctionalTestConfig = mockModule.getMock('./functional.config').default;
 		mockDevConfig.returns('dev config');
 		mockDistConfig.returns('dist config');
-		mockTestConfig.returns('test config');
+		mockUnitTestConfig.returns('unit config');
+		mockFunctionalTestConfig.returns('functional config');
 		mockLogger = mockModule.getMock('./logger').default;
+		consoleWarnStub = stub(console, 'warn');
+		consoleStub = stub(console, 'log');
 	});
 
 	afterEach(() => {
 		mockModule.destroy();
 		consoleStub.restore();
+		consoleWarnStub.restore();
 		exitStub.restore();
 	});
 
@@ -98,7 +106,7 @@ describe('command', () => {
 				describe: 'the output mode',
 				alias: 'm',
 				default: 'dist',
-				choices: ['dist', 'dev', 'test']
+				choices: ['dist', 'dev', 'test', 'unit', 'functional']
 			})
 		);
 	});
@@ -119,19 +127,41 @@ describe('command', () => {
 		});
 	});
 
-	it('can run test mode', () => {
+	it('can run unit mode', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), { mode: 'unit' }).then(() => {
+			assert.isTrue(mockUnitTestConfig.called);
+			assert.isTrue(mockLogger.calledWith('stats', 'unit config'));
+		});
+	});
+
+	it('can run functional mode', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), { mode: 'functional' }).then(() => {
+			assert.isTrue(mockFunctionalTestConfig.called);
+			assert.isTrue(mockLogger.calledWith('stats', 'functional config'));
+		});
+	});
+
+	it('falls back to unit mode and logs a warning when depracated test mode is used', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockConfiguration(), { mode: 'test' }).then(() => {
-			assert.isTrue(mockTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', 'test config'));
+			assert.isTrue(mockUnitTestConfig.called);
+			assert.isTrue(mockLogger.calledWith('stats', 'unit config'));
+			assert.isTrue(consoleWarnStub.calledOnce);
+			assert.isTrue(
+				consoleWarnStub.calledWith(
+					'Using `--mode=test` is deprecated and has only built the unit test bundle. This mode will be removed in the next major release, please use `unit` or `functional` explicitly instead.'
+				)
+			);
 		});
 	});
 
 	it('logger not called if stats are not returned', () => {
 		stats = null;
 		const main = mockModule.getModuleUnderTest().default;
-		return main.run(getMockConfiguration(), { mode: 'test' }).then(() => {
-			assert.isTrue(mockTestConfig.called);
+		return main.run(getMockConfiguration(), { mode: 'unit' }).then(() => {
+			assert.isTrue(mockUnitTestConfig.called);
 			assert.isTrue(mockLogger.notCalled);
 		});
 	});
@@ -225,20 +255,11 @@ describe('command', () => {
 
 		it('warns when attempting memory watch without the dev server', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			stub(console, 'warn');
-			return main
-				.run(getMockConfiguration(), { watch: 'memory' })
-				.then(() => {
-					assert.isTrue(
-						(console as any).warn.calledWith(
-							'Memory watch requires the dev server. Using file watch instead...'
-						)
-					);
-					(console as any).warn.restore();
-				})
-				.catch(() => {
-					(console as any).warn.restore();
-				});
+			return main.run(getMockConfiguration(), { watch: 'memory' }).then(() => {
+				assert.isTrue(
+					consoleWarnStub.calledWith('Memory watch requires the dev server. Using file watch instead...')
+				);
+			});
 		});
 	});
 
@@ -290,6 +311,30 @@ describe('command', () => {
 				})
 				.catch((error: Error) => {
 					assert.strictEqual(error.message, 'Cannot use `--serve` with `--mode=test`');
+				});
+		});
+
+		it('should disallow serve in unit mode', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main
+				.run(getMockConfiguration(), { serve: true, mode: 'unit' })
+				.then(() => {
+					throw new Error('should not resolve');
+				})
+				.catch((error: Error) => {
+					assert.strictEqual(error.message, 'Cannot use `--serve` with `--mode=unit`');
+				});
+		});
+
+		it('should disallow serve in functional mode', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main
+				.run(getMockConfiguration(), { serve: true, mode: 'functional' })
+				.then(() => {
+					throw new Error('should not resolve');
+				})
+				.catch((error: Error) => {
+					assert.strictEqual(error.message, 'Cannot use `--serve` with `--mode=functional`');
 				});
 		});
 
@@ -353,20 +398,11 @@ describe('command', () => {
 
 		it('limits --watch=memory to --mode=dev', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			stub(console, 'warn');
-			return main
-				.run(getMockConfiguration(), { serve: true, watch: 'memory' })
-				.then(() => {
-					assert.isTrue(
-						(console as any).warn.calledWith(
-							'Memory watch requires `--mode=dev`. Using file watch instead...'
-						)
-					);
-					(console as any).warn.restore();
-				})
-				.catch(() => {
-					(console as any).warn.restore();
-				});
+			return main.run(getMockConfiguration(), { serve: false, watch: 'memory' }).then(() => {
+				assert.isTrue(
+					consoleWarnStub.calledWith('Memory watch requires the dev server. Using file watch instead...')
+				);
+			});
 		});
 
 		it('registers middleware with --watch=memory', () => {
@@ -556,15 +592,17 @@ describe('command', () => {
 					path: join(basePath, 'dist/dev/src'),
 					files: [
 						'./base.config.js',
+						'./base.test.config.js',
 						'./dev.config.js',
 						'./dist.config.js',
 						'./ejected.config.js',
-						'./test.config.js'
+						'./unit.config.js',
+						'./functional.config.js'
 					]
 				},
 				hints: [
 					`to build run ${chalk.underline(
-						'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|test}'
+						'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|unit|functional}'
 					)}`
 				],
 				npm: {

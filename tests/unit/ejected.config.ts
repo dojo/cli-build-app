@@ -7,14 +7,21 @@ const configJson: any = { bundles: {} };
 let mockModule: MockModule;
 let mockDevConfig: any;
 let mockDistConfig: any;
-let mockTestConfig: any;
+let mockUnitTestConfig: any;
+let mockFunctionalTestConfig: any;
 
 describe('ejected config', () => {
 	beforeEach(() => {
 		mockModule = new MockModule('../../src/ejected.config', require);
-		mockModule.dependencies(['./dev.config', './dist.config', './test.config', './build-options.json']);
+		mockModule.dependencies([
+			'./dev.config',
+			'./dist.config',
+			'./unit.config',
+			'./functional.config',
+			'./build-options.json'
+		]);
 
-		const configs = ['dev', 'dist', 'test'].map((name) => {
+		const configs = ['dev', 'dist', 'unit', 'functional'].map((name) => {
 			const config = mockModule.getMock(`./${name}.config`);
 			config.default = stub();
 			return config.default;
@@ -23,7 +30,8 @@ describe('ejected config', () => {
 		Object.assign(mockModule.getMock('./build-options.json'), configJson);
 		mockDevConfig = configs[0];
 		mockDistConfig = configs[1];
-		mockTestConfig = configs[2];
+		mockUnitTestConfig = configs[2];
+		mockFunctionalTestConfig = configs[3];
 	});
 
 	afterEach(() => {
@@ -44,10 +52,17 @@ describe('ejected config', () => {
 		assert.isTrue(mockDistConfig.calledWith(configJson));
 	});
 
-	it('can run test mode', () => {
+	it('can run unit mode', () => {
 		const config = mockModule.getModuleUnderTest();
-		config({ mode: 'test' });
-		assert.isTrue(mockTestConfig.calledOnce);
-		assert.isTrue(mockTestConfig.calledWith(configJson));
+		config({ mode: 'unit' });
+		assert.isTrue(mockUnitTestConfig.calledOnce);
+		assert.isTrue(mockUnitTestConfig.calledWith(configJson));
+	});
+
+	it('can run functional mode', () => {
+		const config = mockModule.getModuleUnderTest();
+		config({ mode: 'functional' });
+		assert.isTrue(mockFunctionalTestConfig.calledOnce);
+		assert.isTrue(mockFunctionalTestConfig.calledWith(configJson));
 	});
 });

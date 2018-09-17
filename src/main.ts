@@ -12,7 +12,8 @@ import * as history from 'connect-history-api-fallback';
 
 const pkgDir = require('pkg-dir');
 import devConfigFactory from './dev.config';
-import testConfigFactory from './test.config';
+import unitConfigFactory from './unit.config';
+import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
@@ -20,6 +21,8 @@ import { moveBuildOptions } from './util/eject';
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
 const webpackMiddleware = require('webpack-dev-middleware');
+
+const testModes = ['test', 'unit', 'functional'];
 
 function createCompiler(config: webpack.Configuration) {
 	const compiler = webpack(config);
@@ -56,6 +59,11 @@ function build(config: webpack.Configuration, args: any) {
 					reject({});
 					return;
 				}
+			}
+			if (args.mode === 'test') {
+				console.warn(
+					'Using `--mode=test` is deprecated and has only built the unit test bundle. This mode will be removed in the next major release, please use `unit` or `functional` explicitly instead.'
+				);
 			}
 			resolve(args.serve || process.exit(0));
 		});
@@ -214,7 +222,7 @@ const command: Command = {
 			describe: 'the output mode',
 			alias: 'm',
 			default: 'dist',
-			choices: ['dist', 'dev', 'test']
+			choices: ['dist', 'dev', 'test', 'unit', 'functional']
 		});
 
 		options('watch', {
@@ -275,15 +283,17 @@ const command: Command = {
 		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
 		if (args.mode === 'dev') {
 			config = devConfigFactory(remainingArgs);
-		} else if (args.mode === 'test') {
-			config = testConfigFactory(remainingArgs);
+		} else if (args.mode === 'unit' || args.mode === 'test') {
+			config = unitConfigFactory(remainingArgs);
+		} else if (args.mode === 'functional') {
+			config = functionalConfigFactory(remainingArgs);
 		} else {
 			config = distConfigFactory(remainingArgs);
 		}
 
 		if (args.serve) {
-			if (args.mode === 'test') {
-				return Promise.reject(new Error('Cannot use `--serve` with `--mode=test`'));
+			if (testModes.indexOf(args.mode) !== -1) {
+				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
 			}
 			return serve(config, args);
 		}
@@ -304,15 +314,17 @@ const command: Command = {
 				files: [
 					moveBuildOptions(`${this.group}-${this.name}`),
 					'./base.config.js',
+					'./base.test.config.js',
 					'./dev.config.js',
 					'./dist.config.js',
 					'./ejected.config.js',
-					'./test.config.js'
+					'./unit.config.js',
+					'./functional.config.js'
 				]
 			},
 			hints: [
 				`to build run ${chalk.underline(
-					'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|test}'
+					'./node_modules/.bin/webpack --config ./config/build-app/ejected.config.js --env.mode={dev|dist|unit|functional}'
 				)}`
 			],
 			npm: {
