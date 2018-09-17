@@ -5,4 +5,5 @@
 	width: 240px;
 	height: 100px;
 	color: var(--foreground-color);
+	background-color: color(black a(50%));
 }
