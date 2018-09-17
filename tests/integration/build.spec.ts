@@ -10,6 +10,7 @@ Currently Rendered by BTR: false`
 	cy.get('script[src^="src/Foo"]').should('exist');
 	cy.get('#div[nodeenv=production]').should(isDist ? 'exist' : 'not.exist');
 	cy.get('#div[has-prod=prod]').should(isDist ? 'exist' : 'not.exist');
+	cy.get('#div[dojo-debug=true]').should(isDist ? 'not.exist' : 'exist');
 	cy.get('#div[has-ci=ci]').should(isDist ? 'not.exist' : 'exist');
 
 	cy.get('meta[name="mobile-web-app-capable"]').should(isPwa ? 'exist' : 'not.exist');

@@ -29,6 +29,10 @@ if (process.env.NODE_ENV === 'production') {
 	div.setAttribute('nodeenv', 'production');
 }
 
+if (has('dojo-debug')) {
+	div.setAttribute('dojo-debug', 'true');
+}
+
 if (has('env') === 'prod') {
 	div.setAttribute('has-prod', 'prod');
 }

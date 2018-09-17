@@ -18,7 +18,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
-	const { plugins, output } = config;
+	const { plugins, output, module } = config;
 	const outputPath = path.join(output.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
@@ -47,6 +47,28 @@ function webpackConfig(args: any): webpack.Configuration {
 				name: 'runtime'
 			})
 	].filter((item) => item);
+
+	module.rules = module.rules.map((rule) => {
+		if (Array.isArray(rule.use)) {
+			rule.use = rule.use.map((loader: webpack.NewLoader | string) => {
+				if (typeof loader === 'string') {
+					return loader;
+				}
+				if (loader.loader === '@dojo/webpack-contrib/static-build-loader') {
+					if (loader.options) {
+						loader.options.features = { ...(loader.options.features || {}), 'dojo-debug': true };
+					}
+
+					return {
+						loader: loader.loader,
+						options: loader.options
+					};
+				}
+				return loader;
+			});
+		}
+		return rule;
+	});
 
 	if (serviceWorker) {
 		const serviceWorkerOptions =
