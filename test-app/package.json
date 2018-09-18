@@ -15,9 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@dojo/cli": "~3.0.0",
-    "@dojo/framework": "~3.0.0",
-    "intern": "~4.2.0",
-    "jsdom": "11.6.2",
+    "@dojo/framework": "next",
     "tslib": "~1.8.0",
     "typescript": "2.6.1"
   },

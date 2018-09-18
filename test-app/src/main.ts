@@ -1,8 +1,13 @@
 import has from '@dojo/framework/has/has';
+import renderer from '@dojo/framework/widget-core/vdom';
+import { w } from '@dojo/framework/widget-core/d';
+import Registry from '@dojo/framework/widget-core/Registry';
+import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
 import App from './App';
 import * as css from './app.m.css';
 import './Bar';
 import LazyApp from './LazyApp';
+import routes from './routes';
 
 '!has("bar")';
 
@@ -53,11 +58,12 @@ if (div.parentNode === null) {
 const appRoot = document.getElementById('app-root')!;
 console.log(appRoot);
 
-const projector = new LazyApp();
-projector.append(appRoot);
+const registry = new Registry();
+const router = registerRouterInjector(routes, registry);
 
 if (!btr) {
-	setTimeout(() => {
-		projector.setProperties({ render: true });
-	}, 2000);
+	router.setPath('/foo/bar');
 }
+
+const r = renderer(() => w(LazyApp, {}));
+r.mount({ domNode: appRoot, registry });
