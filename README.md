@@ -5,11 +5,12 @@
 [![codecov](https://codecov.io/gh/dojo/cli-build-app/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-build-app)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-build-app.svg)](https://badge.fury.io/js/%40dojo%2Fcli-build-app)
 
-The official CLI command for building Dojo applications.
+The official CLI command for building optimized Dojo applications.
 
 - [Usage](#usage)
 - [Features](#features)
   - [Building](#building)
+  - [Code Splitting By Route](#code-splitting-by-route)
   - [Serving](#serving-the-application)
   - [Watching](#watching)
   - [Eject](#eject)
@@ -58,6 +59,59 @@ The `unit` mode creates bundles that can be used to run the unit tests of the ap
 #### Functional mode
 
 The `functional` mode creates bundles that can be used to run the functional tests of the application.
+
+### Code Splitting By Route
+
+The build command will automatically code split your application based on it's dojo routing configuration.
+
+To enable the code automatic splitting by route:
+
+1) The dojo routing configuration needs to be the default export from a `routes.ts` module in the `src` directory.
+2) Widgets must by the default export of their module.
+3) When defining the `Outlet`, the `renderer` function must be defined inline.
+
+```ts
+// routes.ts
+export default [
+	{
+		path: 'foo',
+		outlet: 'foo',
+		children: [
+			{
+				path: 'bar',
+				outlet: 'bar'
+			}
+		]
+	},
+	{
+		path: 'bar',
+		outlet: 'bar'
+	}
+];
+```
+
+```ts
+// widget
+import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
+import { v, w } from '@dojo/framework/widget-core/d';
+import Outlet from '@dojo/framework/routing/Outlet';
+
+import FooWidget from './FooWidget';
+import BarWidget from './BarWidget';
+
+export default class App extends WidgetBase {
+	protected render() {
+		return v('div', [
+			w(Outlet, { id: 'foo', renderer: () => w(FooWidget, {})}),
+			w(Outlet, { id: 'bar', renderer: () => w(BarWidget, {})})
+		]);
+	}
+}
+```
+
+The output will result in a separate bundle for each of the application's top level routes. In this example, there will be a main application bundle and two further bundles for `src/FooWidget` and `src/BarWidget`.
+
+**Note:** The configuration can be further refined using the bundle configuration in the `.dojorc`, see [bundles configuration](#bundles:-object).
 
 ### Serving the Application
 
