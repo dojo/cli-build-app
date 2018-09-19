@@ -6,4 +6,5 @@
 	height: 100px;
 	color: var(--foreground-color);
 	background-color: color(black a(50%));
+	border-color: color(var(--another-color) a(20%));
 }

@@ -45,6 +45,9 @@ describe('build', () => {
 
 				expect(css.match(/\scolor: blue;/)).not.to.equal(null);
 				expect(css).to.contain('color: var(--foreground-color);');
+
+				expect(css.match(/\sborder-color: color(var(--another-color) a(20%));/)).to.equal(null);
+				expect(css).to.contain('border-color: rgba(255, 255, 0, 0.2)');
 			});
 		});
 

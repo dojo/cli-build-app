@@ -50,6 +50,7 @@ div.textContent = `Built with Build Time Render: ${!!div.getAttribute('hasBtr')}
 Currently Rendered by BTR: ${has('build-time-render')}`;
 
 div.classList.add(...css.root.split(' '));
+
 const root = document.getElementById('app');
 if (div.parentNode === null) {
 	root!.appendChild(div);
