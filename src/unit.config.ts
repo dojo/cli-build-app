@@ -1,8 +1,10 @@
 import baseTestConfigFactory from './base.test.config';
+import { libraryName } from './base.config';
 import * as path from 'path';
 import * as globby from 'globby';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import { WebpackConfiguration } from './interfaces';
+const WrapperPlugin = require('wrapper-webpack-plugin');
 
 const basePath = process.cwd();
 
@@ -24,7 +26,11 @@ function webpackConfig(args: any): WebpackConfiguration {
 	};
 	config.plugins = [
 		...plugins,
-		new CleanWebpackPlugin(['unit'], { root: path.join(output.path, 'test'), verbose: false })
+		new CleanWebpackPlugin(['unit'], { root: path.join(output.path, 'test'), verbose: false }),
+		new WrapperPlugin({
+			test: /(all.*(\.js$))/,
+			footer: `typeof define === 'function' && define.amd && define(['${libraryName}'], function() {});`
+		})
 	];
 	config.output = {
 		...output,
