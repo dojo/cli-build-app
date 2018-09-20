@@ -323,7 +323,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new webpack.NamedChunksPlugin(),
 			new webpack.NamedModulesPlugin(),
 			new WrapperPlugin({
-				test: /main.*(\.js$)/,
+				test: /(main.*(\.js$))|(all.*(\.js$))/,
 				footer: `typeof define === 'function' && define.amd && require(['${libraryName}']);`
 			}),
 			args.locale &&
