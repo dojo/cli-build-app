@@ -272,12 +272,14 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						if (name && new RegExp(`^${name}[!\/]?`).test(request)) {
 							return typeof external === 'string'
 								? request
-								: {
-										amd: request,
-										commonjs: request,
-										commonjs2: request,
-										root: request
-								  };
+								: external.type
+									? `${external.type} ${request}`
+									: {
+											amd: request,
+											commonjs: request,
+											commonjs2: request,
+											root: request
+									  };
 						}
 					}
 				}
