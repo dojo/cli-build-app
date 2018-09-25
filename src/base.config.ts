@@ -414,6 +414,25 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
 				{
+					test: /\.m\.css\.js$/,
+					exclude: allPaths,
+					use: ['json-css-module-loader']
+				},
+				{
+					test: /\.css$/,
+					exclude: allPaths,
+					use: ExtractTextPlugin.extract({
+						fallback: ['style-loader'],
+						use: {
+							loader: 'css-loader',
+							options: {
+								sourceMap: true,
+								importLoaders: 1
+							}
+						}
+					})
+				},
+				{
 					include: allPaths,
 					test: /\.css$/,
 					exclude: /\.m\.css$/,
