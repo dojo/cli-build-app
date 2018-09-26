@@ -21,7 +21,10 @@ const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
 const allPaths = [srcPath, testPath];
-const mainEntryPath = path.join(srcPath, 'main.ts');
+
+const isTsx = existsSync(path.join(srcPath, 'main.tsx'));
+const mainEntryPath = path.join(srcPath, isTsx ? 'main.tsx' : 'main.ts');
+const mainCssPath = path.join(srcPath, 'main.css');
 const indexHtmlPattern = /src\/index\.html$/;
 
 export const mainEntry = 'main';
@@ -273,7 +276,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		entry: {
 			[mainEntry]: removeEmpty([
 				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
-				path.join(srcPath, 'main.css'),
+				existsSync(mainCssPath) ? mainCssPath : null,
 				mainEntryPath
 			])
 		},
