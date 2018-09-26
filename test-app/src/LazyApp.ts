@@ -16,7 +16,8 @@ export default class Projector extends WidgetBase<any> {
 					return w(RoutedWidget, {});
 				}
 			}),
-			v('a', { href: '' }, ['link'])
+			v('a', { href: '' }, ['link']),
+			v('i', { classes: ['fab', 'fa-d-and-d'] })
 		]);
 	}
 }

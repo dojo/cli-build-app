@@ -16,8 +16,10 @@
   "dependencies": {
     "@dojo/cli": "~3.0.0",
     "@dojo/framework": "next",
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "tslib": "~1.8.0",
     "typescript": "2.6.1"
+
   },
   "devDependencies": {
     "shx": "0.2.2"
