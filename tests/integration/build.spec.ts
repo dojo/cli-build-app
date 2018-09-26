@@ -4,7 +4,7 @@ describe('build', () => {
 		cy.get('#div').should(
 			'contain',
 			`Built with Build Time Render: true
-	Currently Rendered by BTR: false`
+Currently Rendered by BTR: false`
 		);
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');

@@ -4,7 +4,7 @@ describe('relative-css-url', () => {
 		cy.get('#div').should(
 			'contain',
 			`Built with Build Time Render: true
-	Currently Rendered by BTR: false`
+Currently Rendered by BTR: false`
 		);
 		cy.get('i.fab').should('have.css', 'font-family', 'Font Awesome 5 Brands');
 	}
