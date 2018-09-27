@@ -367,7 +367,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					options: { configuration: tsLint, emitErrors: true, failOnHint: true }
 				},
 				{
-					include: allPaths,
 					test: /@dojo\/.*\.(js|mjs)$/,
 					enforce: 'pre',
 					loader: 'source-map-loader-cli',
