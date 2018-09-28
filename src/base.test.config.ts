@@ -1,6 +1,8 @@
-import baseConfigFactory from './base.config';
+import baseConfigFactory, { libraryName } from './base.config';
 import { WebpackConfiguration } from './interfaces';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+const WrapperPlugin = require('wrapper-webpack-plugin');
 
 function webpackConfig(args: any): WebpackConfiguration {
 	const config = baseConfigFactory(args);
@@ -15,6 +17,10 @@ function webpackConfig(args: any): WebpackConfiguration {
 				(plugin as any).options = { ...(plugin as any).options, disable: true };
 			}
 			return plugin;
+		}),
+		new WrapperPlugin({
+			test: /(all.*(\.js$))/,
+			footer: `typeof define === 'function' && define.amd && define(['${libraryName}'], function() {});`
 		})
 	];
 
