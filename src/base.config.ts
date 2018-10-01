@@ -188,6 +188,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					ident: 'postcss',
 					plugins: [
 						require('postcss-import')(),
+						require('postcss-url')({
+							url: 'rebase'
+						}),
 						postcssPresetEnv(postcssPresetConfig),
 						require('postcss-color-function')()
 					]
@@ -211,6 +214,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					ident: 'postcss',
 					plugins: [
 						require('postcss-import')(),
+						require('postcss-url')({
+							url: 'rebase'
+						}),
 						postcssPresetEnv(postcssPresetConfig),
 						require('postcss-color-function')()
 					]

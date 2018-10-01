@@ -5,6 +5,10 @@ import LazyWidget from './LazyWidget';
 
 export default class Projector extends ProjectorMixin(WidgetBase)<any> {
 	render() {
-		return v('div', [this.properties.render ? w(LazyWidget, {}) : null, v('a', { href: '' }, ['link'])]);
+		return v('div', [
+			this.properties.render ? w(LazyWidget, {}) : null,
+			v('a', { href: '' }, ['link']),
+			v('i', { classes: ['fab', 'fa-d-and-d'] })
+		]);
 	}
 }

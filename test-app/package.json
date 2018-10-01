@@ -16,6 +16,7 @@
   "dependencies": {
     "@dojo/cli": "~3.0.0",
     "@dojo/framework": "~3.0.0",
+    "@fortawesome/fontawesome-free": "5.3.1",
     "intern": "~4.2.0",
     "jsdom": "11.6.2",
     "tslib": "~1.8.0",
