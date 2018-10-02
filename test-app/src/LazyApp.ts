@@ -4,6 +4,9 @@ import Outlet from '@dojo/framework/routing/Outlet';
 import LazyWidget from './LazyWidget';
 import StaticAssetWidget from './StaticAssetWidget';
 import RoutedWidget from './RoutedWidget';
+import theme from '@dojo/themes/dojo';
+import Button from '@dojo/widgets/button';
+import Icon from '@dojo/widgets/icon';
 
 export default class Projector extends WidgetBase<any> {
 	render() {
@@ -17,7 +20,8 @@ export default class Projector extends WidgetBase<any> {
 				}
 			}),
 			v('a', { href: '' }, ['link']),
-			v('i', { classes: ['fab', 'fa-d-and-d'] })
+			v('i', { classes: ['fab', 'fa-d-and-d'] }),
+			v('div', { id: 'dojo-theme' }, [w(Button, { theme, popup: true }, [w(Icon, { theme, type: 'mailIcon' })])])
 		]);
 	}
 }
