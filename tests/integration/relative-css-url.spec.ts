@@ -7,6 +7,7 @@ describe('relative-css-url', () => {
 Currently Rendered by BTR: false`
 		);
 		cy.get('i.fab').should('have.css', 'font-family', '"Font Awesome 5 Brands"');
+		cy.get('#dojo-theme > button > span > i').should('have.css', 'font-family', 'dojo2BaseTheme');
 	}
 	it('dist', () => {
 		testUrl('dist-app');
