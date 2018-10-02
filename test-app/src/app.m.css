@@ -1,4 +1,4 @@
-@import '../external/test-theme/variables';
+@import '../external/test-theme/variables.css';
 
 .root {
 	composes: root from '../external/test-theme/theme.m.css';

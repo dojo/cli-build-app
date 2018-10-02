@@ -225,13 +225,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [
-						require('postcss-import')(),
-						require('postcss-url')({
-							url: 'rebase'
-						}),
-						postcssPresetEnv(postcssPresetConfig)
-					]
+					plugins: [postcssPresetEnv(postcssPresetConfig)]
 				}
 			}
 		]
@@ -250,13 +244,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [
-						require('postcss-import')(),
-						require('postcss-url')({
-							url: 'rebase'
-						}),
-						postcssPresetEnv(postcssPresetConfig)
-					]
+					plugins: [postcssPresetEnv(postcssPresetConfig)]
 				}
 			}
 		]

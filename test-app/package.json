@@ -16,6 +16,8 @@
   "dependencies": {
     "@dojo/cli": "~3.0.0",
     "@dojo/framework": "next",
+    "@dojo/widgets": "next",
+    "@dojo/themes": "next",
     "@fortawesome/fontawesome-free": "5.3.1",
     "tslib": "~1.8.0",
     "typescript": "2.6.1"
