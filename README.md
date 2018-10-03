@@ -62,7 +62,7 @@ The `functional` mode creates bundles that can be used to run the functional tes
 
 ### Code Splitting By Route
 
-The build command will automatically code split your application based on it's dojo routing configuration.
+The build command will automatically code split your application based on its dojo routing configuration.
 
 To enable the code automatic splitting by route:
 
