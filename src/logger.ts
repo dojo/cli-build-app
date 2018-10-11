@@ -10,7 +10,7 @@ import chalk from 'chalk';
 const pkgDir = require('pkg-dir');
 const columns = require('cli-columns');
 const stripAnsi = require('strip-ansi');
-const version = jsonFile.readFileSync(path.join(pkgDir.sync(), 'package.json')).version;
+const version = jsonFile.readFileSync(path.join(pkgDir.sync(__dirname), 'package.json')).version;
 
 export default function logger(stats: any, config: any, runningMessage: string = ''): boolean {
 	const assets = stats.assets
