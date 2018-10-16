@@ -333,7 +333,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new webpack.NamedModulesPlugin(),
 			new WrapperPlugin({
 				test: /(main.*(\.js$))/,
-				footer: `typeof define === 'function' && define.amd && require(['${libraryName}']);`
+				footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
 			}),
 			args.locale &&
 				new I18nPlugin({
