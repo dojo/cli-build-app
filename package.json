@@ -38,8 +38,6 @@
     "serve": "http-server -p 9999 -c-1 --silent",
     "test:ci": "run-p --race serve test",
     "test:cypress": "cypress run",
-    "me": "npm-run-all -s build:cjs -s dojo-package -s you",
-	"you": "run-p --race serve test:cypress",
     "test": "run-s build artifact:package artifact:install build intern artifact:build:* test:cypress",
     "uploadCoverage": "codecov --file=coverage/coverage.json",
     "watch:ts": "dojo-tsc-watcher -p tsconfig.json -- dojo-package",
