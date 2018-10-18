@@ -12,4 +12,5 @@
 
 .app {
 	border-color: var(--primary);
+	outline-color: color(var(--secondary) a(50%));
 }

@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import { existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
@@ -197,6 +197,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const postcssImportConfig = {
 		filter: (path: string) => {
 			return /.*variables(\.m)?\.css$/.test(path);
+		},
+		load: (filename: string, importOptions: any = {}) => {
+			return readFileSync(filename, 'utf8').replace('color(', 'color-mod(');
 		},
 		resolve: (id: string, basedir: string, importOptions: any = {}) => {
 			if (importOptions.filter) {
