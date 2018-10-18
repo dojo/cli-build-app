@@ -8,9 +8,12 @@ import theme from '@dojo/themes/dojo';
 import Button from '@dojo/widgets/button';
 import Icon from '@dojo/widgets/icon';
 
+import * as css from './app.m.css';
+
 export default class Projector extends WidgetBase<any> {
 	render() {
 		return v('div', [
+			v('span', { id: 'vars', classes: [css.app, css.root] }),
 			w(LazyWidget, {}),
 			w(StaticAssetWidget, {}),
 			w(Outlet, {

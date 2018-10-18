@@ -13,6 +13,7 @@ import * as tsnode from 'ts-node';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
 const postcssPresetEnv = require('postcss-preset-env');
+const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
@@ -193,6 +194,24 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		}
 	};
 
+	const postcssImportConfig = {
+		filter: (path: string) => {
+			return /.*variables(\.m)?\.css$/.test(path);
+		},
+		resolve: (id: string, basedir: string, importOptions: any = {}) => {
+			if (importOptions.filter) {
+				const result = importOptions.filter(id);
+				if (!result) {
+					return null;
+				}
+			}
+			if (id[0] === '~') {
+				return id.substr(1);
+			}
+			return id;
+		}
+	};
+
 	const postcssPresetConfig = {
 		browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
 		insertBefore: {
@@ -225,7 +244,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [postcssPresetEnv(postcssPresetConfig)]
+					plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 				}
 			}
 		]
@@ -244,7 +263,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				loader: 'postcss-loader?sourceMap',
 				options: {
 					ident: 'postcss',
-					plugins: [postcssPresetEnv(postcssPresetConfig)]
+					plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 				}
 			}
 		]
