@@ -37,4 +37,25 @@ Currently Rendered by BTR: false`
 		testUrl('dev-pwa', false, true);
 		testUrl('dev-pwa-evergreen', false, true);
 	});
+
+	describe('css variables', () => {
+		it('correctly inlines and resolves external variables for legacy builds', () => {
+			cy.request('/test-app/output/dev-app/main.css').then((response) => {
+				const css = response.body;
+				expect(css).to.contain('color: var(--foreground-color);');
+				expect(css).to.contain('color: blue;');
+				expect(css).to.contain('color: var(--primary);');
+				expect(css).to.contain('color: red;');
+			});
+		});
+		it('correctly inlines and resolves external variables for evergreen builds', () => {
+			cy.request('/test-app/output/dev-app-evergreen/main.css').then((response) => {
+				const css = response.body;
+				expect(css).to.contain('color: var(--foreground-color);');
+				expect(css).to.contain('color: blue;');
+				expect(css).to.contain('color: var(--primary);');
+				expect(css).to.contain('color: red;');
+			});
+		});
+	});
 });

@@ -1,9 +1,15 @@
 @import '../external/test-theme/variables.css';
+@import './variables.css';
+@import '~@dojo/themes/dojo/variables.css';
 
 .root {
 	composes: root from '../external/test-theme/theme.m.css';
 	width: 240px;
 	height: 100px;
 	color: var(--foreground-color);
-	background-color: color(black a(50%));
+	background-color: color(var(--dojo-black) a(50%));
+}
+
+.app {
+	border-color: var(--primary);
 }
