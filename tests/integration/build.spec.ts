@@ -8,6 +8,7 @@ Currently Rendered by BTR: false`
 		);
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');
+		cy.get('#vars').should('have.css', 'outline-color', 'rgba(255, 0, 0, 0.5)');
 		cy.get('script[src^="lazy"]').should('exist');
 		cy.get('script[src^="src/Foo"]').should('exist');
 		cy.get('script[src^="src/RoutedWidget"]').should('exist');
