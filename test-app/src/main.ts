@@ -8,6 +8,9 @@ import * as css from './app.m.css';
 import './Bar';
 import LazyApp from './LazyApp';
 import routes from './routes';
+import myTheme from './themes/test-app/theme';
+
+console.log(myTheme);
 
 '!has("bar")';
 

@@ -465,7 +465,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					oneOf: [{ issuer: indexHtmlPattern, use: 'identity-loader' }, { use: cssLoader }]
 				},
 				{
-					include: allPaths,
 					test: /\.m\.css$/,
 					use: postCssModuleLoader
 				}
