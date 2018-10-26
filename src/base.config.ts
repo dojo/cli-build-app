@@ -162,7 +162,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	};
 
 	const postcssPresetConfig = {
-		browsers: args.legacy ? ['last 2 versions', 'ie >= 11'] : ['last 2 versions'],
+		browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
 		features: {
 			'nesting-rules': true
 		},
