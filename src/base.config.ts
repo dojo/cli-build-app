@@ -110,7 +110,7 @@ function importTransformer(basePath: string, bundles: any = {}) {
 				let chunkName = slash(
 					resolvedFileName
 						.replace(basePath, '')
-						.replace('.ts', '')
+						.replace(/.ts(x)?$/, '')
 						.replace(/^(\/|\\)/, '')
 				);
 				Object.keys(bundles).some(function(name) {
