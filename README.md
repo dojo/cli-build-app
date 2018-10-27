@@ -177,6 +177,10 @@ dojo build -w
 dojo build -s -w=memory -m=dev
 ```
 
+### Legacy Browser Support
+
+By default, the build will support the last two versions of the latest browsers. To support IE 11 include any necessary polyfills, such as the fetch API, and run the build with the `--legacy` (`-l`) flag.
+
 ### Eject
 
 Ejecting `@dojo/cli-build-app` will produce the following files under the `config/build-app` directory:
