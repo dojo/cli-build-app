@@ -446,7 +446,12 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{
 					test: /\.css$/,
-					exclude: allPaths,
+					exclude: (path: string) => {
+						if (path.indexOf(srcPath) > -1 || path.indexOf(testPath) > -1) {
+							return true;
+						}
+						return /\.m\.css$/.test(path) && !/.*\@dojo\/widgets\/.*/.test(path);
+					},
 					use: ExtractTextPlugin.extract({
 						fallback: ['style-loader'],
 						use: {
@@ -465,6 +470,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					oneOf: [{ issuer: indexHtmlPattern, use: 'identity-loader' }, { use: cssLoader }]
 				},
 				{
+					exclude: /.*\@dojo\/widgets\/.*/,
 					test: /\.m\.css$/,
 					use: postCssModuleLoader
 				}
