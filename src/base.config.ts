@@ -26,7 +26,7 @@ const allPaths = [srcPath, testPath];
 const isTsx = existsSync(path.join(srcPath, 'main.tsx'));
 const mainEntryPath = path.join(srcPath, isTsx ? 'main.tsx' : 'main.ts');
 const mainCssPath = path.join(srcPath, 'main.css');
-const indexHtmlPattern = /src\/index\.html$/;
+const indexHtmlPattern = /src(\/|\\)index\.html$/;
 
 export const mainEntry = 'main';
 
@@ -279,7 +279,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				function resolveExternal(externals: (string | { name?: string; type?: string })[]): string | void {
 					for (let external of externals) {
 						const name = external && (typeof external === 'string' ? external : external.name);
-						if (name && new RegExp(`^${name}[!\/]?`).test(request)) {
+						if (name && new RegExp(`^${name}[!(\/|\\)]?`).test(request)) {
 							return typeof external === 'string'
 								? request
 								: external.type
@@ -379,7 +379,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					options: { configuration: tsLint, emitErrors: true, failOnHint: true }
 				},
 				{
-					test: /@dojo\/.*\.(js|mjs)$/,
+					test: /@dojo(\/|\\).*\.(js|mjs)$/,
 					enforce: 'pre',
 					loader: 'source-map-loader-cli',
 					options: { includeModulePaths: true }
