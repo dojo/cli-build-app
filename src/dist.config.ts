@@ -20,6 +20,13 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin-terser');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
+const banner = `
+[Dojo](https://dojo.io/)
+Copyright [JS Foundation](https://js.foundation/) & contributors
+[New BSD license](https://github.com/dojo/meta/blob/master/LICENSE)
+All rights reserved
+`;
+
 function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
@@ -55,6 +62,7 @@ function webpackConfig(args: any): webpack.Configuration {
 					: manifest.icons
 			}),
 		new UglifyJsPlugin({ sourceMap: true, cache: true }),
+		new webpack.BannerPlugin(banner),
 		new WebpackChunkHash(),
 		new CleanWebpackPlugin(['dist'], { root: output.path, verbose: false }),
 		!args.singleBundle &&

@@ -89,13 +89,6 @@ function getLocalIdent(
 
 const removeEmpty = (items: any[]) => items.filter((item) => item);
 
-const banner = `
-[Dojo](https://dojo.io/)
-Copyright [JS Foundation](https://js.foundation/) & contributors
-[New BSD license](https://github.com/dojo/meta/blob/master/LICENSE)
-All rights reserved
-`;
-
 function importTransformer(basePath: string, bundles: any = {}) {
 	return function(context: any) {
 		let resolvedModules: any;
@@ -170,8 +163,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		},
 		[] as string[]
 	);
-	const singleBundle =
-		args.singleBundle || args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
+	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
+	const singleBundle = args.singleBundle || isTest;
 
 	const customTransformers: any[] = [];
 
@@ -326,7 +319,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					maxChunks: 1
 				}),
 			new CssModulePlugin(basePath),
-			new webpack.BannerPlugin(banner),
 			new IgnorePlugin(/request\/providers\/node/),
 			new ExtractTextPlugin({
 				filename: 'main.css',
@@ -334,10 +326,11 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			}),
 			new webpack.NamedChunksPlugin(),
 			new webpack.NamedModulesPlugin(),
-			new WrapperPlugin({
-				test: /(main.*(\.js$))/,
-				footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
-			}),
+			(args.externals || isTest) &&
+				new WrapperPlugin({
+					test: /(main.*(\.js$))/,
+					footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
+				}),
 			args.locale &&
 				new I18nPlugin({
 					defaultLocale: args.locale,
