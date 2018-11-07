@@ -100,20 +100,23 @@ function importTransformer(basePath: string, bundles: any = {}) {
 		function visit(node: any): any {
 			if (node.kind === ts.SyntaxKind.CallExpression && node.expression.kind === ts.SyntaxKind.ImportKeyword) {
 				const moduleText = node.arguments[0].text;
-				const { resolvedFileName } = resolvedModules.get(moduleText);
-				let chunkName = slash(
-					resolvedFileName
-						.replace(basePath, '')
-						.replace(/.ts(x)?$/, '')
-						.replace(/^(\/|\\)/, '')
-				);
-				Object.keys(bundles).some(function(name) {
-					if (bundles[name].indexOf(slash(chunkName)) !== -1) {
-						chunkName = name;
-						return true;
-					}
-					return false;
-				});
+				let chunkName = '[request]';
+				if (moduleText) {
+					const { resolvedFileName } = resolvedModules.get(moduleText);
+					chunkName = slash(
+						resolvedFileName
+							.replace(basePath, '')
+							.replace(/.ts(x)?$/, '')
+							.replace(/^(\/|\\)/, '')
+					);
+					Object.keys(bundles).some(function(name) {
+						if (bundles[name].indexOf(slash(chunkName)) !== -1) {
+							chunkName = name;
+							return true;
+						}
+						return false;
+					});
+				}
 				node.arguments[0] = ts.addSyntheticLeadingComment(
 					node.arguments[0],
 					ts.SyntaxKind.MultiLineCommentTrivia,
