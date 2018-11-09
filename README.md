@@ -252,8 +252,8 @@ Configuration for external dependencies can be provided under the `externals` pr
 * `outputPath`: An optional property specifying an output path to which files should be copied.
 
 * `dependencies`: A required array that defines which modules should be loaded via the external loader, and what files should be included in the build. Each entry can be one of two types:
- * A string that indicates that this path, and any children of this path, should be loaded via the external loader.
- * An object that provides additional configuration for dependencies that need to be copied into the built application. This object has the following properties:
+	* A string that indicates that this path, and any children of this path, should be loaded via the external loader.
+	* An object that provides additional configuration for dependencies that need to be copied into the built application. This object has the following properties:
 
 | Property | Type | optional | Description |
 | -------- | ---- | -------- | ----------- |
