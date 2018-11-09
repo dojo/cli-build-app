@@ -428,27 +428,31 @@ We appreciate your interest! Please see the [Dojo Meta Repository](https://githu
 
 ### Installation
 
-To start working with this package, clone the repository and run `npm install`.
+To start working with this package, clone the repository and run:
 
-In order to build the project run `grunt dev` or `grunt dist`.
+```
+npm install
+```
+
+In order to build the project, you can run all the build steps via:
+
+```
+npm run build
+```
 
 ### Scripts
 
-#### test
+#### watch
 
-Builds a new test artifact from the repository source code and re-installs the `test-app` dependencies before running all unit and functional tests.
+Will run a watcher process which looks for changes in the source code TypeScript files and runs the build scripts to update the contents of the built files in dist with latest changes made.
 
-#### build-test-artifact
+#### clean
 
-Builds and packages `cli-build-app` as `dojo-cli-build-app.tgz` in the `dist` directory.
+Runs the clean up script which removes any built files like output, dist, coverage which get created on build and testing steps.
 
-#### generate-fixtures
+#### lint
 
-Re-generates the test fixtures in `test-app`. Assumes that the dependencies have been installed for the test app.
-
-#### prettier
-
-Runs [prettier](https://prettier.io/) on all `.ts` files in the `src` and `tests` directories, this will fix any detected code style violations.
+Runs the [ts-lint](https://palantir.github.io/tslint/) and [prettier](https://prettier.io/) on all `.ts` files in the `src` and `tests` directories.  ts-lint will ensure that all linting rules have been abided by and prettier will fix any detected code style violations in the code.
 
 ### Testing
 
@@ -461,8 +465,6 @@ The command is tested by running via the Dojo CLI and asserting the build output
 ```
 npm test
 ```
-
-Once the test artifact has been installed, if there have been no changes to the command code `grunt test` can be used to repeat the tests.
 
 ## Licensing information
 
