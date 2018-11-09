@@ -1,0 +1,283 @@
+{
+	"type": "object",
+	"properties": {
+		"bundles": {
+			"type": "object",
+			"patternProperties": {
+                "^.*$": {
+                    "type": "array"
+                }
+            }
+        },
+        "cldrPaths" : {
+            "type": "array",
+            "items": { "type": "string" }
+        },
+        "compression": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "brotli",
+                    "gzip"
+                ]
+            }
+        },
+        "externals" : {
+            "type": "object",
+            "properties" : {
+                "outputPath": {
+                    "type": "string"
+                },
+                "dependencies": {
+                    "type": "array",
+                    "items" : {
+                        "type": "object",
+                        "required": ["from"],
+                        "properties": {
+                            "from" : {
+                                "type": "string"
+                            },
+                            "to" : {
+                                "type": "string"
+                            },
+                            "name" : {
+                                "type": "string"
+                            },
+                            "inject" : {
+                                "type": ["string", "boolean", "array"]
+                            },
+                            "type": {
+                                "type" : "string",
+                                "enum": [
+                                    "root", "umd", "amd", "commonjs", "commonjs2"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "features": {
+            "type": "object",
+            "patternProperties": {
+                "^.*$": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "locale": {
+            "type": "string"
+        },
+        "pwa" : {
+            "type": "object",
+            "properties": {
+                "manifest" : {
+                    "type": "object",
+                    "properties": {
+                        "background_color": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "dir": {
+                            "type": "string",
+                            "enum": ["auto", "ltr", "rtl"]
+                        },
+                        "display": {
+                            "type": "string",
+                            "enum": ["browser", "fullscreen", "minimal-ui", "standalone"]
+                        },
+                        "icons": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": ["sizes", "src"],
+                                "properties": {
+                                    "sizes": {
+                                        "type": "string"
+                                    },
+                                    "src": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "lang": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }, 
+                        "orientation": {
+                            "type": "string",
+                            "enum": [
+                                "any",
+                                "landscape",
+                                "landscape-primary",
+                                "landscape-secondary",
+                                "natural",
+                                "portrait",
+                                "portrait-primary",
+                                "portrait-secondary"
+                            ]
+                        },                           
+                        "prefer_related_applications": {
+                            "type": "boolean"
+                        },
+                        "related_applications": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": ["platform"],
+                                "properties": {
+                                    "platform": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "scope": {
+                            "type": "string"
+                        },
+                        "short_name": {
+                            "type": "string"
+                        },
+                        "start_url": {
+                            "type": "string"
+                        },
+                        "theme_color": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "serviceWorker" : {
+                    "type": "object",
+                    "properties": {
+                        "bundles": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "cachePrefix": {
+                            "type": "string"
+                        },
+                        "clientsClaim": {
+                            "type": "boolean"
+                        },
+                        "excludesBundles": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "importScripts": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "precache": {
+                            "type": "object",
+                            "properties" : {
+                                "baseDir": {
+                                    "type": "string"
+                                },
+                                "ignore": {
+                                    "type": "array",
+                                    "items": { "type": "string" }
+                                },
+                                "include": {
+                                    "type": ["string", "array"]
+                                },
+                                "index": {
+                                    "type": "string"
+                                },
+                                "maxCacheSize": {
+                                    "type": "number"
+                                },
+                                "strict": {
+                                    "type": "boolean"
+                                },
+                                "symlinks": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "routes": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "urlPattern": {
+                                        "type": "string"
+                                    },
+                                    "strategy": {
+                                        "type": "string",
+                                        "enum": [
+                                            "networkFirst",
+                                            "cacheFirst",
+                                            "networkOnly",
+                                            "staleWhileRevalidate"
+                                        ]
+                                    },
+                                    "options": {
+                                        "type": "object",
+                                        "properties": {
+                                            "cacheName": {
+                                                "type": "string"
+                                            },
+                                            "cacheableResponse": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "statuses": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "header": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "expiration": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "maxEntries": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxAgeSeconds": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            },
+                                            "networkTimeoutSeconds": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "skipWaiting": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "build-time-render" : {
+                    "type": "object"
+                }
+            }
+        },
+        "supportedLocales": {
+            "type": "array",
+            "items": { "type": "string" }
+        }
+	}
+}

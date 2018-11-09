@@ -19,6 +19,7 @@ import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
+import { readFileSync } from 'fs';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
@@ -359,6 +360,18 @@ const command: Command = {
 				devDependencies: { ...buildNpmDependencies() }
 			}
 		};
+	},
+	validate(helper: Helper) {
+		if (command.group) {
+			return helper.validation.validate({
+				commandName: command.name,
+				commandGroup: command.group,
+				commandSchema: JSON.parse(readFileSync('schema.json').toString()),
+				commandConfig: helper.configuration.get(),
+				silentSuccess: true
+			});
+		}
+		return Promise.resolve(true);
 	}
 };
 export default command;
