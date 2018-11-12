@@ -4,6 +4,7 @@ import { join } from 'path';
 import { SinonStub, stub } from 'sinon';
 import chalk from 'chalk';
 import MockModule from '../support/MockModule';
+import { readFileSync, existsSync } from 'fs';
 
 let mockModule: MockModule;
 let mockLogger: any;
@@ -705,6 +706,18 @@ describe('command', () => {
 						`The dojorc schema for cli-build-app could not be read: ${readFileError}`
 					);
 				});
+		});
+	});
+
+	describe('schema', () => {
+		it('is well formed json', () => {
+			const path = join(__dirname, '../../src/schema.json');
+			const exists = existsSync(path);
+			assert.isTrue(exists, 'schema file should exist');
+			assert.doesNotThrow(() => {
+				const schema = readFileSync(path).toString();
+				JSON.parse(schema);
+			}, 'schema.json should be readable and valid JSON');
 		});
 	});
 });
