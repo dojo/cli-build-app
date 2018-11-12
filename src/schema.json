@@ -62,7 +62,7 @@
             "type": "object",
             "patternProperties": {
                 "^.*$": {
-                    "type": ["boolean", "string", "numberf"]
+                    "type": ["boolean", "string", "number"]
                 }
             }
         },
