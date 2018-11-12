@@ -443,7 +443,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						if (path.indexOf(srcPath) > -1 || path.indexOf(testPath) > -1) {
 							return true;
 						}
-						return /\.m\.css$/.test(path) && !/.*\/node_modules\/@dojo\/widgets\/.*/.test(path);
+						return (
+							/\.m\.css$/.test(path) &&
+							!/.*(\/|\\)node_modules(\/|\\)@dojo(\/|\\)widgets(\/|\\).*/.test(path)
+						);
 					},
 					use: ExtractTextPlugin.extract({
 						fallback: ['style-loader'],
@@ -463,7 +466,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					oneOf: [{ issuer: indexHtmlPattern, use: 'identity-loader' }, { use: cssLoader }]
 				},
 				{
-					exclude: /.*\/node_modules\/@dojo\/widgets\/.*/,
+					exclude: /.*(\/|\\)node_modules(\/|\\)@dojo(\/|\\)widgets(\/|\\).*/,
 					test: /\.m\.css$/,
 					use: postCssModuleLoader
 				}
