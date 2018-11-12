@@ -5,6 +5,7 @@ import { SinonStub, stub } from 'sinon';
 import chalk from 'chalk';
 import MockModule from '../support/MockModule';
 import { readFileSync, existsSync } from 'fs';
+import { Validator } from 'jsonschema';
 
 let mockModule: MockModule;
 let mockLogger: any;
@@ -725,14 +726,34 @@ describe('command', () => {
 	});
 
 	describe('schema', () => {
+		let path: string;
+
+		beforeEach(() => {
+			path = join(__dirname, '../../src/schema.json');
+		});
+
 		it('is well formed json', () => {
-			const path = join(__dirname, '../../src/schema.json');
 			const exists = existsSync(path);
 			assert.isTrue(exists, 'schema file should exist');
 			assert.doesNotThrow(() => {
 				const schema = readFileSync(path).toString();
 				JSON.parse(schema);
 			}, 'schema.json should be readable and valid JSON');
+		});
+
+		it('is a valid JSON Schema', () => {
+			const metaSchemaPath = join(__dirname, '../support', 'MetaSchema.json');
+			const schema = JSON.parse(readFileSync(path).toString());
+			const metaSchema = JSON.parse(readFileSync(metaSchemaPath).toString());
+
+			const validator = new Validator();
+			const result = validator.validate(schema, metaSchema);
+			const formattedErrors = result.errors.map((e) => e + '\n').toString();
+			assert.equal(
+				result.errors.length,
+				0,
+				`schema should have no errors when checked against metaschema but returned: \n ${formattedErrors}`
+			);
 		});
 	});
 });
