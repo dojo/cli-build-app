@@ -362,16 +362,19 @@ const command: Command = {
 		};
 	},
 	validate(helper: Helper) {
-		if (command.group) {
-			return helper.validation.validate({
-				commandName: command.name,
-				commandGroup: command.group,
-				commandSchema: JSON.parse(readFileSync('schema.json').toString()),
-				commandConfig: helper.configuration.get(),
-				silentSuccess: true
-			});
+		let schema;
+		try {
+			schema = JSON.parse(readFileSync(path.join(__dirname, 'schema.json')).toString());
+		} catch (error) {
+			return Promise.reject(Error('The dojorc schema for cli-build-app could not be read: ' + error));
 		}
-		return Promise.resolve(true);
+		return helper.validation.validate({
+			commandGroup: command.group as string,
+			commandName: command.name,
+			commandSchema: schema,
+			commandConfig: helper.configuration.get(),
+			silentSuccess: true
+		});
 	}
 };
 export default command;
