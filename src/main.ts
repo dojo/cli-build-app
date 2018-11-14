@@ -3,6 +3,7 @@ import * as express from 'express';
 import * as logUpdate from 'log-update';
 import * as ora from 'ora';
 import * as path from 'path';
+import * as url from 'url';
 import * as webpack from 'webpack';
 import chalk from 'chalk';
 import * as fs from 'fs';
@@ -141,7 +142,26 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 
 	const app = express();
 
-	app.use(history());
+	app.use(
+		history({
+			rewrites: [
+				{
+					from: /^.*\.(?!html).*$/,
+					to: (context: any) => {
+						const parsedUrl = url.parse(context.request.headers.referer);
+						const pathnames = parsedUrl && parsedUrl.pathname ? parsedUrl.pathname.split('/') : [];
+						const urlRewrite = pathnames.reduce((rewrite, segment) => {
+							if (!segment) {
+								return rewrite;
+							}
+							return rewrite.replace(`/${segment}`, '');
+						}, context.parsedUrl.pathname);
+						return urlRewrite;
+					}
+				}
+			]
+		})
+	);
 
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();
