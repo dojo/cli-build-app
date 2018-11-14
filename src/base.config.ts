@@ -328,7 +328,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new OptimizeCssAssetsPlugin({
 				cssProcessor: require('cssnano'),
 				cssProcessorPluginOptions: {
-					preset: ['default']
+					preset: ['default', { calc: false }]
 				}
 			}),
 			new webpack.NamedChunksPlugin(),
