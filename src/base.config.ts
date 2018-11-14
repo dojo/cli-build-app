@@ -17,6 +17,7 @@ const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -323,6 +324,12 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			new ExtractTextPlugin({
 				filename: 'main.css',
 				allChunks: true
+			}),
+			new OptimizeCssAssetsPlugin({
+				cssProcessor: require('cssnano'),
+				cssProcessorPluginOptions: {
+					preset: ['default', { calc: false }]
+				}
 			}),
 			new webpack.NamedChunksPlugin(),
 			new webpack.NamedModulesPlugin(),
