@@ -23,6 +23,7 @@
     "typescript": "2.6.1"
   },
   "devDependencies": {
+    "@dojo/webpack-contrib": "../deps/dojo-webpack-contrib-4.0.3.tgz",
     "shx": "0.2.2"
   }
 }

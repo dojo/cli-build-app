@@ -1,23 +1,24 @@
-import baseConfigFactory, { mainEntry, packageName } from './base.config';
-import { WebAppManifest } from './interfaces';
-import webpack = require('webpack');
-import * as fs from 'fs';
-import * as path from 'path';
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
+import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
-import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as ManifestPlugin from 'webpack-manifest-plugin';
+import * as fs from 'fs';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as path from 'path';
+import * as webpack from 'webpack';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
+import * as ManifestPlugin from 'webpack-manifest-plugin';
+import baseConfigFactory, { mainEntry, packageName } from './base.config';
+import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin-terser');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const banner = `
@@ -32,12 +33,33 @@ function webpackConfig(args: any): webpack.Configuration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output } = config;
-	const outputPath = path.join(output.path!, 'dist');
+	const outputPath = path.join(output!.path!, 'dist');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
 
+	config.mode = 'production';
+
+	config.optimization = {
+		...config.optimization,
+		minimizer: [
+			new TerserPlugin({ sourceMap: true, cache: true }),
+			new OptimizeCssAssetsPlugin({
+				cssProcessor: require('cssnano'),
+				cssProcessorPluginOptions: {
+					preset: ['default', { calc: false }]
+				}
+			})
+		]
+	};
+
+	if (!args.singleBundle) {
+		config.optimization.runtimeChunk = {
+			name: 'runtime'
+		};
+	}
+
 	config.plugins = [
-		...plugins,
+		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
 		new ManifestPlugin(),
 		new BundleAnalyzerPlugin({
@@ -61,19 +83,9 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
-		new UglifyJsPlugin({ sourceMap: true, cache: true }),
 		new webpack.BannerPlugin(banner),
 		new WebpackChunkHash(),
-		new CleanWebpackPlugin(['dist'], { root: output.path, verbose: false }),
-		!args.singleBundle &&
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'runtime'
-			}),
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: '"production"'
-			}
-		})
+		new CleanWebpackPlugin(['dist'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
 	if (serviceWorker) {
@@ -98,10 +110,9 @@ function webpackConfig(args: any): webpack.Configuration {
 	}
 
 	config.plugins = config.plugins.map((plugin) => {
-		if (plugin instanceof ExtractTextPlugin) {
-			return new ExtractTextPlugin({
-				filename: '[name].[contenthash].bundle.css',
-				allChunks: true
+		if (plugin instanceof MiniCssExtractPlugin) {
+			return new MiniCssExtractPlugin({
+				filename: '[name].[contenthash].bundle.css'
 			});
 		}
 		return plugin;
@@ -115,7 +126,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		args.compression.forEach((algorithm: 'brotli' | 'gzip') => {
 			const options = { algorithm, test: /\.(js|css|html|svg)$/ };
 			const Plugin = compressionPlugins[algorithm];
-			config.plugins.push(new Plugin(options));
+			config.plugins!.push(new Plugin(options));
 		});
 	}
 

@@ -35,11 +35,11 @@ function createCompiler(config: webpack.Configuration) {
 function createWatchCompiler(config: webpack.Configuration) {
 	const compiler = createCompiler(config);
 	const spinner = ora('building').start();
-	compiler.plugin('invalid', () => {
+	compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
 		logUpdate('');
 		spinner.start();
 	});
-	compiler.plugin('done', () => {
+	compiler.hooks.done.tap('@dojo/cli-build-app', () => {
 		spinner.stop();
 	});
 	return compiler;
@@ -56,7 +56,7 @@ function build(config: webpack.Configuration, args: any) {
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
-				const hasErrors = logger(stats.toJson(), config, runningMessage);
+				const hasErrors = logger(stats.toJson({ warningsFilter }), config, runningMessage);
 				if (hasErrors) {
 					reject({});
 					return;
@@ -98,7 +98,7 @@ function fileWatch(config: webpack.Configuration, args: any): Promise<void> {
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}` : 'watching...';
-				logger(stats.toJson(), config, runningMessage);
+				logger(stats.toJson({ warningsFilter }), config, runningMessage);
 			}
 			resolve();
 		});
@@ -119,8 +119,8 @@ function memoryWatch(config: webpack.Configuration, args: any, app: express.Appl
 	const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
 	const compiler = createWatchCompiler(config);
 
-	compiler.plugin('done', (stats) => {
-		logger(stats.toJson(), config, `Listening on port ${args.port}...`);
+	compiler.hooks.done.tap('@dojo/cli-build-app', (stats) => {
+		logger(stats.toJson({ warningsFilter }), config, `Listening on port ${args.port}...`);
 	});
 
 	app.use(
@@ -247,6 +247,10 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 				}
 			});
 		});
+}
+
+function warningsFilter(warning: string) {
+	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
 }
 
 const command: Command = {

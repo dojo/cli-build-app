@@ -1,10 +1,9 @@
+import * as webpack from 'webpack';
 import baseConfigFactory, { libraryName } from './base.config';
-import { WebpackConfiguration } from './interfaces';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const WrapperPlugin = require('wrapper-webpack-plugin');
 
-function webpackConfig(args: any): WebpackConfiguration {
+function webpackConfig(args: any): webpack.Configuration {
 	const config = baseConfigFactory(args);
 	const { plugins, module } = config;
 	const externals: any[] = (config.externals as any[]) || [];
@@ -12,43 +11,41 @@ function webpackConfig(args: any): WebpackConfiguration {
 	const instrumenterOptions = args.legacy ? {} : { esModules: true };
 
 	config.plugins = [
-		...plugins.map((plugin) => {
-			if (plugin instanceof ExtractTextPlugin && (plugin as any).filename === 'main.css') {
-				(plugin as any).options = { ...(plugin as any).options, disable: true };
-			}
-			return plugin;
-		}),
+		...plugins!,
 		new WrapperPlugin({
 			test: /(all.*(\.js$))/,
 			footer: `typeof define === 'function' && define.amd && define(['${libraryName}'], function() {});`
 		})
 	];
 
-	module.rules = module.rules.map((rule) => {
-		if (Array.isArray(rule.use)) {
-			rule.use = rule.use.map((loader) => {
-				if (typeof loader === 'string') {
+	if (module) {
+		module.rules = module.rules.map((rule) => {
+			if (Array.isArray(rule.use)) {
+				rule.use = rule.use.map((loader) => {
+					if (typeof loader === 'string') {
+						return loader;
+					}
+					const { loader: loaderName } = loader as webpack.RuleSetLoader;
+					if (loaderName === 'umd-compat-loader') {
+						return {
+							loader: loaderName,
+							options: {}
+						};
+					}
 					return loader;
-				}
-				if (loader.loader === 'umd-compat-loader') {
-					return {
-						loader: loader.loader,
-						options: {}
-					};
-				}
-				return loader;
-			});
-		}
-		return rule;
-	});
-	module.rules.push({
-		test: /src[\\\/].*\.ts(x)?$/,
-		use: {
-			loader: 'istanbul-instrumenter-loader',
-			options: instrumenterOptions
-		},
-		enforce: 'post'
-	});
+				});
+			}
+			return rule;
+		});
+		module.rules.push({
+			test: /src[\\\/].*\.ts(x)?$/,
+			use: {
+				loader: 'istanbul-instrumenter-loader',
+				options: instrumenterOptions
+			},
+			enforce: 'post'
+		});
+	}
 
 	externals.push(/^intern/);
 	config.externals = externals;

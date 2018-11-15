@@ -1,13 +1,5 @@
 import * as webpack from 'webpack';
 
-export interface Output extends webpack.Output {
-	path: string;
-}
-
-export interface Module extends webpack.NewModule {
-	rules: webpack.NewUseRule[];
-}
-
 export interface ServiceWorkerOptions {
 	importScripts?: string[];
 	routes?: ServiceWorkerRoute[];
@@ -50,12 +42,6 @@ export type ServiceWorkerStrategy =
 	| 'networkFirst'
 	| 'networkOnly'
 	| 'staleWhileRevalidate';
-
-export interface WebpackConfiguration extends webpack.Configuration {
-	plugins: webpack.Plugin[];
-	output: Output;
-	module: Module;
-}
 
 export interface WebAppIcon {
 	sizes: string;

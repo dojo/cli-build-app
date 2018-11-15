@@ -1,23 +1,21 @@
-import * as webpack from 'webpack';
-import * as path from 'path';
-import { readFileSync, existsSync } from 'fs';
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
-import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { WebpackConfiguration } from './interfaces';
-import * as loaderUtils from 'loader-utils';
-import * as ts from 'typescript';
-import * as tsnode from 'ts-node';
+import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
+import { readFileSync, existsSync } from 'fs';
+import * as loaderUtils from 'loader-utils';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as path from 'path';
+import * as tsnode from 'ts-node';
+import * as ts from 'typescript';
+import * as webpack from 'webpack';
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -75,11 +73,8 @@ function getLocalIdent(
 	options: any
 ) {
 	if (!options.context) {
-		if (loaderContext.options && typeof loaderContext.options.context === 'string') {
-			options.context = loaderContext.options.context;
-		} else {
-			options.context = loaderContext.context;
-		}
+		const { context, rootContext } = loaderContext;
+		options.context = typeof rootContext === 'string' ? rootContext : context;
 	}
 	const request = slash(path.relative(options.context, loaderContext.resourcePath));
 	options.content = `${options.hashPrefix}${request}+${localName}`;
@@ -153,7 +148,7 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
-export default function webpackConfigFactory(args: any): WebpackConfiguration {
+export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
 	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
@@ -226,50 +221,48 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		}
 	};
 
-	const postCssModuleLoader = ExtractTextPlugin.extract({
-		fallback: ['style-loader'],
-		use: [
-			'@dojo/webpack-contrib/css-module-decorator-loader',
-			{
-				loader: 'css-loader',
-				options: {
-					modules: true,
-					sourceMap: true,
-					importLoaders: 1,
-					localIdentName: '[name]__[local]__[hash:base64:5]',
-					getLocalIdent
-				}
-			},
-			{
-				loader: 'postcss-loader?sourceMap',
-				options: {
-					ident: 'postcss',
-					plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
-				}
+	const postCssModuleLoader = [
+		MiniCssExtractPlugin.loader,
+		'@dojo/webpack-contrib/css-module-decorator-loader',
+		{
+			loader: 'css-loader',
+			options: {
+				modules: true,
+				sourceMap: true,
+				importLoaders: 1,
+				localIdentName: '[name]__[local]__[hash:base64:5]',
+				getLocalIdent
 			}
-		]
-	});
-	const cssLoader = ExtractTextPlugin.extract({
-		fallback: ['style-loader'],
-		use: [
-			{
-				loader: 'css-loader',
-				options: {
-					sourceMap: true,
-					importLoaders: 1
-				}
-			},
-			{
-				loader: 'postcss-loader?sourceMap',
-				options: {
-					ident: 'postcss',
-					plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
-				}
+		},
+		{
+			loader: 'postcss-loader?sourceMap',
+			options: {
+				ident: 'postcss',
+				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 			}
-		]
-	});
+		}
+	];
+
+	const cssLoader = [
+		MiniCssExtractPlugin.loader,
+		{
+			loader: 'css-loader',
+			options: {
+				sourceMap: true,
+				importLoaders: 1
+			}
+		},
+		{
+			loader: 'postcss-loader?sourceMap',
+			options: {
+				ident: 'postcss',
+				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
+			}
+		}
+	];
 
 	const config: webpack.Configuration = {
+		mode: 'development',
 		externals: [
 			function(context, request, callback) {
 				const externals = (args.externals && args.externals.dependencies) || [];
@@ -315,6 +308,19 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions
 		},
+		optimization: {
+			splitChunks: {
+				cacheGroups: {
+					default: false,
+					main: {
+						chunks: 'initial',
+						minChunks: 1,
+						name: 'main',
+						reuseExistingChunk: true
+					}
+				}
+			}
+		},
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
@@ -324,18 +330,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				}),
 			new CssModulePlugin(basePath),
 			new IgnorePlugin(/request\/providers\/node/),
-			new ExtractTextPlugin({
-				filename: 'main.css',
-				allChunks: true
+			new MiniCssExtractPlugin({
+				filename: '[name].css'
 			}),
-			new OptimizeCssAssetsPlugin({
-				cssProcessor: require('cssnano'),
-				cssProcessorPluginOptions: {
-					preset: ['default', { calc: false }]
-				}
-			}),
-			new webpack.NamedChunksPlugin(),
-			new webpack.NamedModulesPlugin(),
 			(args.externals || isTest) &&
 				new WrapperPlugin({
 					test: /(main.*(\.js$))/,
@@ -416,6 +413,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				},
 				{
 					test: /\.mjs?$/,
+					// We cannot trust that all `mjs` modules use the correct import format for all dependencies
+					// (e.g., do not use `import from` for cjs modules). Setting the type to `javascript/auto` allows
+					// incorrect imports to continue working.
+					type: 'javascript/auto',
 					use: removeEmpty([
 						features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
@@ -458,16 +459,16 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 							!/.*(\/|\\)node_modules(\/|\\)@dojo(\/|\\)widgets(\/|\\).*/.test(path)
 						);
 					},
-					use: ExtractTextPlugin.extract({
-						fallback: ['style-loader'],
-						use: {
+					use: [
+						MiniCssExtractPlugin.loader,
+						{
 							loader: 'css-loader',
 							options: {
 								sourceMap: true,
 								importLoaders: 1
 							}
 						}
-					})
+					]
 				},
 				{
 					include: allPaths,
@@ -484,5 +485,5 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 		}
 	};
 
-	return config as WebpackConfiguration;
+	return config as webpack.Configuration;
 }
