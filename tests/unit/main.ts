@@ -45,18 +45,19 @@ describe('command', () => {
 		mockModule.dependencies([
 			'./dev.config',
 			'./dist.config',
-			'./unit.config',
 			'./functional.config',
-			'https',
-			'http-proxy-middleware',
+			'./logger',
+			'./unit.config',
+			'connect-history-api-fallback',
 			'express',
+			'http-proxy-middleware',
+			'https',
 			'log-update',
 			'ora',
 			'webpack',
-			'webpack-mild-compile',
 			'webpack-dev-middleware',
 			'webpack-hot-middleware',
-			'./logger'
+			'webpack-mild-compile'
 		]);
 		pluginStub = stub().callsFake((name: string, callback: Function) => {
 			callback();
@@ -394,6 +395,68 @@ describe('command', () => {
 					assert.deepEqual(e, {});
 				}
 			);
+		});
+
+		it('rewrites nested routes', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+				const mockHistory = mockModule.getMock('connect-history-api-fallback');
+				const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
+				const urlRewrite = rewriter({
+					parsedUrl: {
+						pathname: '/nested/main.js'
+					},
+					request: {
+						url: '/nested/main.js',
+						headers: {
+							host: 'localhost:9999',
+							referer: 'http://localhost:9999/nested/route'
+						}
+					}
+				});
+				assert.strictEqual(urlRewrite, '/main.js');
+			});
+		});
+
+		it('does not rewrite routes when there is no referer', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+				const mockHistory = mockModule.getMock('connect-history-api-fallback');
+				const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
+				const urlRewrite = rewriter({
+					parsedUrl: {
+						pathname: '/main.js'
+					},
+					request: {
+						url: '/main.js',
+						headers: {
+							host: 'localhost:9999'
+						}
+					}
+				});
+				assert.strictEqual(urlRewrite, '/main.js');
+			});
+		});
+
+		it('does not rewrite self-referential routes like service worker files', () => {
+			const main = mockModule.getModuleUnderTest().default;
+			return main.run(getMockConfiguration(), { serve: true }).then(() => {
+				const mockHistory = mockModule.getMock('connect-history-api-fallback');
+				const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
+				const urlRewrite = rewriter({
+					parsedUrl: {
+						pathname: '/service-worker.js'
+					},
+					request: {
+						url: '/service-worker.js',
+						headers: {
+							host: 'localhost:9999',
+							referer: 'http://localhost:9999/service-worker.js'
+						}
+					}
+				});
+				assert.strictEqual(urlRewrite, '/service-worker.js');
+			});
 		});
 
 		it('limits --watch=memory to --mode=dev', () => {
