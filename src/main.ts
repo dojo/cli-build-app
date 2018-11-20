@@ -150,7 +150,7 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 					to: (context: any) => {
 						const { host, referer } = context.request.headers;
 						const { url: originalUrl } = context.request;
-						if (!referer || referer.endsWith(path.join(host, originalUrl))) {
+						if (!referer || referer.endsWith(host + originalUrl)) {
 							return originalUrl;
 						}
 						const parsedUrl = url.parse(referer);
