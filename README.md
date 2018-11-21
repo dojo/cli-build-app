@@ -250,7 +250,7 @@ An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data)
 
 #### `compression`: Array<'gzip' | 'brotli'>
 
-Options for compression when running in `dist` mode. Each array value represents a different algorithm, allowing both gzip and brotli builds to be output side-by-side.
+Options for compression when running in `dist` mode. Each array value represents a different algorithm, allowing both gzip and brotli builds to be output side-by-side. When used in conjunction with the `--serve` flag (in `dist` mode _without_ memory watch), the compressed files will be served, with brotli preferred over gzip when available.
 
 ### `externals`: object
 
