@@ -148,7 +148,12 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 				{
 					from: /^.*\.(?!html).*$/,
 					to: (context: any) => {
-						const parsedUrl = url.parse(context.request.headers.referer);
+						const { host, referer } = context.request.headers;
+						const { url: originalUrl } = context.request;
+						if (!referer || referer.endsWith(host + originalUrl)) {
+							return originalUrl;
+						}
+						const parsedUrl = url.parse(referer);
 						const pathnames = parsedUrl && parsedUrl.pathname ? parsedUrl.pathname.split('/') : [];
 						const urlRewrite = pathnames.reduce((rewrite, segment) => {
 							if (!segment) {
