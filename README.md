@@ -10,6 +10,7 @@ The official CLI command for building optimized Dojo applications.
 - [Usage](#usage)
 - [Features](#features)
   - [Building](#building)
+  - [Asset Management](#asset-management)
   - [Code Splitting By Route](#code-splitting-by-route)
   - [Serving](#serving-the-application)
   - [Watching](#watching)
@@ -59,6 +60,14 @@ The `unit` mode creates bundles that can be used to run the unit tests of the ap
 #### Functional mode
 
 The `functional` mode creates bundles that can be used to run the functional tests of the application.
+
+### Asset Management
+
+While most assets will be `import`ed by modules in the `src/` directory and therefore handled by the main build pipeline, it is often necessary to serve static assets or include assets in the HTML file itself (e.g., the favicon).
+
+Static assets can be added to an `assets/` directory at the project root. At build time, these assets are copied as-is without file hashing to `output/{mode}/assets`, and can be accessed using the absolute `/assets/` path. For example, if users need access to a static terms of service document named `terms.pdf`, that file would added to `assets/terms.pdf` and accessed via the URL `/assets/terms.pdf`.
+
+The build also parses `src/index.html` for CSS, JavaScript, and image assets, hashing them and including them in the `output/{mode}/` directory. For example, it is common for applications to display a favicon in the URL bar. If the favicon is named `favicon.ico`, it can be added to the `src/` directory and included in `src/index.html` with `<link rel="icon" href="favicon.ico">`. The build will then hash the file and copy it to `output/{mode}/favicon.[hash].ico`.
 
 ### Code Splitting By Route
 
