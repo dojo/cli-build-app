@@ -26,10 +26,12 @@ const allPaths = [srcPath, testPath];
 
 const isTsx = existsSync(path.join(srcPath, 'main.tsx'));
 const mainEntryPath = path.join(srcPath, isTsx ? 'main.tsx' : 'main.ts');
+const bootstrapEntryPath = path.join(__dirname, 'bootstrap.js');
 const mainCssPath = path.join(srcPath, 'main.css');
 const indexHtmlPattern = /src(\/|\\)index\.html$/;
 
 export const mainEntry = 'main';
+export const bootstrapEntry = 'bootstrap';
 
 const packageJsonPath = path.join(basePath, 'package.json');
 const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
@@ -169,6 +171,25 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	);
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest;
+	let entry: any;
+	if (singleBundle) {
+		entry = {
+			[mainEntry]: removeEmpty([
+				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				existsSync(mainCssPath) ? mainCssPath : null,
+				mainEntryPath
+			])
+		};
+	} else {
+		features = { ...features, 'build-elide': true };
+		entry = {
+			[bootstrapEntry]: removeEmpty([
+				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				existsSync(mainCssPath) ? mainCssPath : null,
+				bootstrapEntryPath
+			])
+		};
+	}
 
 	const customTransformers: any[] = [];
 
@@ -294,13 +315,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				callback(null, resolveExternal(externals));
 			}
 		],
-		entry: {
-			[mainEntry]: removeEmpty([
-				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
-				existsSync(mainCssPath) ? mainCssPath : null,
-				mainEntryPath
-			])
-		},
+		entry,
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
 			chunkFilename: '[name].js',
@@ -354,6 +369,10 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					dependencies: args.externals.dependencies,
 					hash: true,
 					outputPath: args.externals.outputPath
+				}),
+			!singleBundle &&
+				new webpack.DefinePlugin({
+					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
 				})
 		]),
 		module: {

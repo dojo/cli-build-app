@@ -29,7 +29,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: args.singleBundle ? ['main'] : ['runtime', 'main'],
+			chunks: args.singleBundle ? ['main'] : ['runtime', 'bootstrap'],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
