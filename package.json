@@ -22,7 +22,7 @@
     "artifact:install": "cd test-app && shx rm -rf node_modules && npm i && npm run install-build-app",
     "artifact:package": "cd dist && npm pack -q ./release && shx mv dojo-cli-build-app-* dojo-cli-build-app.tgz && cd ..",
     "build:static:dev": "cpx \"{src,tests}/**/*.{d.ts,html,md,json,js,css}\" dist/dev",
-    "build:static:release": "cpx \"src/**/*.{d.ts,json}\" dist/release",
+    "build:static:release": "cpx \"src/**/*.{d.ts,json}\" dist/release && cpx \"src/bootstrap.js\" dist/release",
     "build:cjs": "tsc",
     "build": "npm-run-all -p build:** -s dojo-package",
     "clean": "rimraf dist coverage output test-app/output test-app/node_modules",

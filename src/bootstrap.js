@@ -1,21 +1,32 @@
-import has from '@dojo/framework/has/has';
+import has, { add, exists } from '@dojo/framework/has/has';
 import global from '@dojo/framework/shim/global';
 
-const modules = [];
+if (!exists('build-time-render')) {
+	add('build-time-render', false, false);
+}
+
+if (global.__public_path__) {
+	// @ts-ignore
+	__webpack_public_path__ = `${window.location.origin}${global.__public_path__}`;
+	add('public-path', global.__public_path__, true);
+}
+
+var modules = [];
 
 if (!has('dom-intersection-observer')) {
-	modules.push(import(/* webpackChunkName: "IntersectionObserver" */ 'intersection-observer'));
+	modules.push(import(/* webpackChunkName: "platform/IntersectionObserver" */ '@dojo/framework/shim/IntersectionObserver'));
 }
 
 if (!has('dom-webanimation')) {
-	modules.push(import(/* webpackChunkName: "WebAnimations" */ 'web-animations-js/web-animations-next-lite.min'));
+	modules.push(import(/* webpackChunkName: "platform/WebAnimations" */ '@dojo/framework/shim/WebAnimations'));
 }
 
 if (!has('dom-resize-observer')) {
-	const resizePromise = import(/* webpackChunkName: "ResizeObserver" */ 'resize-observer-polyfill').then((module) => {
-		global.ResizeObserver = module.default;
-	});
-	modules.push(resizePromise);
+	modules.push(import(/* webpackChunkName: "platform/ResizeObserver" */ '@dojo/framework/shim/ResizeObserver'));
+}
+
+if (!has('dom-pointer-events')) {
+	modules.push(import(/* webpackChunkName: "platform/pointerEvents" */ '@dojo/framework/shim/pointerEvents'));
 }
 
 Promise.all(modules).then(() => {
