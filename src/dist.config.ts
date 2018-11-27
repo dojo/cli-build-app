@@ -1,4 +1,4 @@
-import baseConfigFactory, { mainEntry, packageName } from './base.config';
+import baseConfigFactory, { packageName, bootstrapEntry, mainEntry } from './base.config';
 import { WebAppManifest } from './interfaces';
 import webpack = require('webpack');
 import * as fs from 'fs';
@@ -83,7 +83,9 @@ function webpackConfig(args: any): webpack.Configuration {
 
 		if (typeof serviceWorker !== 'string') {
 			const entry = config.entry as any;
-			entry[mainEntry].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
+			entry[args.singleBundle ? mainEntry : bootstrapEntry].push(
+				'@dojo/webpack-contrib/service-worker-plugin/service-worker-entry'
+			);
 		}
 	}
 
