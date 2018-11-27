@@ -158,7 +158,7 @@ function loadRoutingOutlets() {
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
-	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
+	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
@@ -174,20 +174,12 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	let entry: any;
 	if (singleBundle) {
 		entry = {
-			[mainEntry]: removeEmpty([
-				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
-				existsSync(mainCssPath) ? mainCssPath : null,
-				mainEntryPath
-			])
+			[mainEntry]: removeEmpty([existsSync(mainCssPath) ? mainCssPath : null, mainEntryPath])
 		};
 	} else {
 		features = { ...features, 'build-elide': true };
 		entry = {
-			[bootstrapEntry]: removeEmpty([
-				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
-				existsSync(mainCssPath) ? mainCssPath : null,
-				bootstrapEntryPath
-			])
+			[bootstrapEntry]: removeEmpty([existsSync(mainCssPath) ? mainCssPath : null, bootstrapEntryPath])
 		};
 	}
 
@@ -350,7 +342,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				}
 			}),
 			new webpack.NamedChunksPlugin(),
-			new webpack.NamedModulesPlugin(),
 			(args.externals || isTest) &&
 				new WrapperPlugin({
 					test: /(main.*(\.js$))/,
@@ -373,6 +364,25 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			!singleBundle &&
 				new webpack.DefinePlugin({
 					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
+				}),
+			!singleBundle &&
+				new webpack.NormalModuleReplacementPlugin(/@dojo\/framework\/shim/, (resource: any) => {
+					if (
+						resource.resourceResolveData &&
+						/@dojo\/cli-build-app\/bootstrap\.js/.test(resource.resourceResolveData.context.issuer)
+					) {
+						const parts = resource.request.split('!');
+						const newRequest = parts
+							.filter(
+								(part: string) => !/@dojo\/webpack-contrib\/static-build-loader\/index\.js/.test(part)
+							)
+							.join('!');
+						resource.loaders = resource.loaders.filter(
+							(loader: any) =>
+								!/@dojo\/webpack-contrib\/static-build-loader\/index\.js/.test(loader.loader)
+						);
+						resource.request = newRequest;
+					}
 				})
 		]),
 		module: {
