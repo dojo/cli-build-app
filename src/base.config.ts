@@ -387,7 +387,15 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				test: /(bootstrap.*(\.js$))/,
 				header: () => {
 					if (Object.keys(shimHasFlags).length > 0) {
-						return `window.DojoHasEnvironment = { staticFeatures: ${JSON.stringify(shimHasFlags)} };`;
+						return `var shimFeatures = ${JSON.stringify(shimHasFlags)};
+var DojoHasEnvironment = window.DojoHasEnvironment || {};
+var staticFeatures = DojoHasEnvironment.staticFeatures;
+if (staticFeatures) {
+	Object.keys(staticFeatures).forEach(function (key) {
+		shimFeatures[key] = staticFeatures[key];
+	});
+}
+window.DojoHasEnvironment = { staticFeatures: shimFeatures };`;
 					}
 					return '';
 				}
