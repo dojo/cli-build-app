@@ -155,6 +155,42 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
+const shimHasFlags: { [index: string]: true } = {
+	'dom-webanimation': true,
+	'dom-intersection-observer': true,
+	'dom-resize-observer': true
+};
+
+class HasDojoShimPlugin {
+	apply(compiler: webpack.Compiler) {
+		compiler.plugin('compilation', (compilation: any) => {
+			compilation.plugin('seal', function() {
+				Object.keys(compilation._modules).forEach((key) => {
+					const module = compilation._modules[key];
+					if (
+						module.issuer &&
+						!/@dojo(\/|\\)cli-build-app(\/|\\)bootstrap.js$/.test(module.issuer.userRequest)
+					) {
+						if (/@dojo(\/|\\)framework(\/|\\)shim(\/|\\)WebAnimations\.(m)?js$/.test(module.userRequest)) {
+							delete shimHasFlags['dom-webanimation'];
+						}
+						if (
+							/@dojo(\/|\\)framework(\/|\\)shim(\/|\\)IntersectionObserver\.(m)?js$/.test(
+								module.userRequest
+							)
+						) {
+							delete shimHasFlags['dom-intersection-observer'];
+						}
+						if (/@dojo(\/|\\)framework(\/|\\)shim(\/|\\)ResizeObserver\.(m)?js$/.test(module.userRequest)) {
+							delete shimHasFlags['dom-resize-observer'];
+						}
+					}
+				});
+			});
+		});
+	}
+}
+
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
@@ -347,6 +383,15 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					test: /(main.*(\.js$))/,
 					footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
 				}),
+			new WrapperPlugin({
+				test: /(bootstrap.*(\.js$))/,
+				header: () => {
+					if (Object.keys(shimHasFlags).length > 0) {
+						return `window.DojoHasEnvironment = { staticFeatures: ${JSON.stringify(shimHasFlags)} };`;
+					}
+					return '';
+				}
+			}),
 			args.locale &&
 				new I18nPlugin({
 					defaultLocale: args.locale,
@@ -383,7 +428,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 						);
 						resource.request = newRequest;
 					}
-				})
+				}),
+			new HasDojoShimPlugin()
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
