@@ -155,6 +155,10 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
+const bootstrapPattern = new RegExp(`build-app${path.sep}bootstrap\.js`);
+const staticLoaderPattern = new RegExp(
+	`@dojo${path.sep}webpack-contrib${path.sep}static-build-loader${path.sep}index\.js`
+);
 const shimModulePath = `@dojo${path.sep}framework${path.sep}shim`;
 const shimModules: { [index: string]: RegExp } = {
 	'dom-webanimation': new RegExp(`${shimModulePath}${path.sep}WebAnimations\\.(m)?js$`),
@@ -179,7 +183,7 @@ class HasDojoShimPlugin {
 				Object.keys(compilation._modules).forEach((key) => {
 					const module = compilation._modules[key];
 					let shimKeyFound: string | undefined = undefined;
-					if (module.issuer && !/bootstrap.js$/.test(module.issuer.userRequest)) {
+					if (module.issuer && !bootstrapPattern.test(module.issuer.userRequest)) {
 						const shimKeys = Object.keys(shimModules);
 						for (let i = 0; i < shimKeys.length; i++) {
 							const shimKey = shimKeys[i];
@@ -427,20 +431,15 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
 				}),
 			!singleBundle &&
-				new webpack.NormalModuleReplacementPlugin(/@dojo\/framework\/shim/, (resource: any) => {
+				new webpack.NormalModuleReplacementPlugin(new RegExp(shimModulePath), (resource: any) => {
 					if (
 						resource.resourceResolveData &&
-						/\/bootstrap\.js/.test(resource.resourceResolveData.context.issuer)
+						bootstrapPattern.test(resource.resourceResolveData.context.issuer)
 					) {
 						const parts = resource.request.split('!');
-						const newRequest = parts
-							.filter(
-								(part: string) => !/@dojo\/webpack-contrib\/static-build-loader\/index\.js/.test(part)
-							)
-							.join('!');
+						const newRequest = parts.filter((part: string) => !staticLoaderPattern.test(part)).join('!');
 						resource.loaders = resource.loaders.filter(
-							(loader: any) =>
-								!/@dojo\/webpack-contrib\/static-build-loader\/index\.js/.test(loader.loader)
+							(loader: any) => !staticLoaderPattern.test(loader.loader)
 						);
 						resource.request = newRequest;
 					}
