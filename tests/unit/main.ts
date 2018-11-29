@@ -50,6 +50,7 @@ describe('command', () => {
 			'./unit.config',
 			'connect-history-api-fallback',
 			'express',
+			'express-static-gzip',
 			'http-proxy-middleware',
 			'https',
 			'log-update',
@@ -538,6 +539,73 @@ describe('command', () => {
 						)
 					);
 				});
+		});
+
+		it('serves compressed files in dist mode', () => {
+			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
+			const main = mockModule.getModuleUnderTest().default;
+			const outputDir = '/output/dist';
+			const rc = {
+				mode: 'dist',
+				compression: ['gzip'],
+				serve: true
+			};
+			output.path = outputDir;
+			return main.run(getMockConfiguration(), rc).then(() => {
+				assert.isTrue(
+					expressStaticGzip.calledWith(outputDir, {
+						enableBrotli: false,
+						orderPreference: undefined
+					})
+				);
+			});
+		});
+
+		it('does not serve compressed files in dev mode', () => {
+			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
+			const main = mockModule.getModuleUnderTest().default;
+			const rc = {
+				mode: 'dev',
+				compression: ['gzip'],
+				serve: true
+			};
+			return main.run(getMockConfiguration(), rc).then(() => {
+				assert.isFalse(expressStaticGzip.called);
+			});
+		});
+
+		it('does not serve compressed files with memory watch', () => {
+			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
+			const main = mockModule.getModuleUnderTest().default;
+			const rc = {
+				mode: 'dist',
+				compression: ['gzip'],
+				serve: true,
+				watch: 'memory'
+			};
+			return main.run(getMockConfiguration(), rc).then(() => {
+				assert.isFalse(expressStaticGzip.called);
+			});
+		});
+
+		it('favors brotli over gzip', () => {
+			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
+			const main = mockModule.getModuleUnderTest().default;
+			const outputDir = '/output/dist';
+			const rc = {
+				mode: 'dist',
+				compression: ['gzip', 'brotli'],
+				serve: true
+			};
+			output.path = outputDir;
+			return main.run(getMockConfiguration(), rc).then(() => {
+				assert.isTrue(
+					expressStaticGzip.calledWith(outputDir, {
+						enableBrotli: true,
+						orderPreference: ['br']
+					})
+				);
+			});
 		});
 
 		describe('https', () => {

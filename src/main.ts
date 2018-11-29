@@ -12,6 +12,7 @@ import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 
 const pkgDir = require('pkg-dir');
+const expressStaticGzip = require('express-static-gzip');
 import devConfigFactory from './dev.config';
 import unitConfigFactory from './unit.config';
 import functionalConfigFactory from './functional.config';
@@ -170,7 +171,17 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 
 	if (args.watch !== 'memory') {
 		const outputDir = (config.output && config.output.path) || process.cwd();
-		app.use(express.static(outputDir));
+		if (args.mode === 'dist' && Array.isArray(args.compression)) {
+			const useBrotli = args.compression.includes('brotli');
+			app.use(
+				expressStaticGzip(outputDir, {
+					enableBrotli: useBrotli,
+					orderPreference: useBrotli ? ['br'] : undefined
+				})
+			);
+		} else {
+			app.use(express.static(outputDir));
+		}
 	}
 
 	if (args.proxy) {
