@@ -66,7 +66,7 @@ function build(config: webpack.Configuration, args: any) {
 					'Using `--mode=test` is deprecated and has only built the unit test bundle. This mode will be removed in the next major release, please use `unit` or `functional` explicitly instead.'
 				);
 			}
-			resolve(args.serve || process.exit(0));
+			resolve(args.serve);
 		});
 	});
 }
