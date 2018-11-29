@@ -160,40 +160,39 @@ const staticLoaderPattern = new RegExp(
 	`@dojo${path.sep}webpack-contrib${path.sep}static-build-loader${path.sep}index\.js`
 );
 const shimModulePath = `@dojo${path.sep}framework${path.sep}shim`;
-const shimModules: { [index: string]: RegExp } = {
-	'dom-webanimation': new RegExp(`${shimModulePath}${path.sep}WebAnimations\\.(m)?js$`),
-	'dom-intersection-observer': new RegExp(`${shimModulePath}${path.sep}IntersectionObserver\\.(m)?js$`),
-	'dom-resize-observer': new RegExp(`${shimModulePath}${path.sep}ResizeObserver\\.(m)?js$`)
-};
-
-function getShimHasFlags() {
-	return Object.keys(shimModules).reduce(
-		(flags, flag) => {
-			flags[flag] = true;
-			return flags;
-		},
-		{} as any
-	);
-}
+const shimModules = ['WebAnimations', 'IntersectionObserver', 'ResizeObserver'];
+const shimHasFlags = shimModules.reduce(
+	(flags, flag) => {
+		flags[flag.toLowerCase()] = false;
+		return flags;
+	},
+	{} as any
+);
 
 class HasDojoShimPlugin {
+	private _moduleMap: [string, RegExp][];
+	constructor() {
+		this._moduleMap = shimModules.map((module) => {
+			return [module, new RegExp(`${shimModulePath}${path.sep}${module}\\.(m)?js$`)] as [string, RegExp];
+		});
+	}
 	apply(compiler: webpack.Compiler) {
 		compiler.plugin('compilation', (compilation: any) => {
-			compilation.plugin('seal', function() {
+			compilation.plugin('seal', () => {
 				Object.keys(compilation._modules).forEach((key) => {
 					const module = compilation._modules[key];
-					let shimKeyFound: string | undefined = undefined;
+					let shimKeyFoundIndex = -1;
 					if (module.issuer && !bootstrapPattern.test(module.issuer.userRequest)) {
-						const shimKeys = Object.keys(shimModules);
-						for (let i = 0; i < shimKeys.length; i++) {
-							const shimKey = shimKeys[i];
-							if (shimModules[shimKey].test(module.userRequest)) {
-								shimKeyFound = shimKey;
+						for (let i = 0; i < this._moduleMap.length; i++) {
+							const [shimModule, pattern] = this._moduleMap[i];
+							if (pattern.test(module.userRequest)) {
+								shimHasFlags[shimModule.toLowerCase()] = true;
+								shimKeyFoundIndex = i;
 								break;
 							}
 						}
-						if (shimKeyFound) {
-							delete shimModules[shimKeyFound];
+						if (shimKeyFoundIndex !== -1) {
+							this._moduleMap.splice(shimKeyFoundIndex, 1);
 						}
 					}
 				});
@@ -205,17 +204,13 @@ class HasDojoShimPlugin {
 const hasFlagsHeaderPlugin = new WrapperPlugin({
 	test: /(bootstrap.*(\.js$))/,
 	header: () => {
-		const shimHasFlags = getShimHasFlags();
-		if (Object.keys(shimHasFlags).length > 0) {
-			return `var shimFeatures = ${JSON.stringify(shimHasFlags)};
+		return `var shimFeatures = ${JSON.stringify(shimHasFlags)};
 if (window.DojoHasEnvironment && window.DojoHasEnvironment.staticFeatures) {
-Object.keys(window.DojoHasEnvironment.staticFeatures).forEach(function (key) {
-shimFeatures[key] = window.DojoHasEnvironment.staticFeatures[key];
-});
+	Object.keys(window.DojoHasEnvironment.staticFeatures).forEach(function (key) {
+		shimFeatures[key] = window.DojoHasEnvironment.staticFeatures[key];
+	});
 }
 window.DojoHasEnvironment = { staticFeatures: shimFeatures };`;
-		}
-		return '';
 	}
 });
 
