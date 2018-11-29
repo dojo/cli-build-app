@@ -1,4 +1,4 @@
-import has, { exists, add } from '@dojo/framework/has/has';
+import has from '@dojo/framework/has/has';
 import renderer from '@dojo/framework/widget-core/vdom';
 import { w } from '@dojo/framework/widget-core/d';
 import Registry from '@dojo/framework/widget-core/Registry';
@@ -11,10 +11,6 @@ import routes from './routes';
 import myTheme from './themes/test-app/theme';
 
 console.log(myTheme);
-
-if (!exists('public-path')) {
-	add('public-path', undefined);
-}
 
 '!has("bar")';
 
