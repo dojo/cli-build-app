@@ -29,7 +29,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: args.singleBundle ? ['main'] : ['runtime', 'bootstrap'],
+			chunks: args.singleBundle ? ['main'] : ['bootstrap'],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
@@ -41,11 +41,7 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
-		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
-		!args.singleBundle &&
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'runtime'
-			})
+		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false })
 	].filter((item) => item);
 
 	module.rules = module.rules.map((rule) => {
@@ -87,7 +83,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
-				entries: args.singleBundle ? Object.keys(config.entry!) : ['runtime', ...Object.keys(config.entry!)],
+				entries: Object.keys(config.entry!),
 				useManifest: true
 			})
 		);
