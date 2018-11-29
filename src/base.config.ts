@@ -155,11 +155,22 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
-const shimHasFlags: { [index: string]: true } = {
-	'dom-webanimation': true,
-	'dom-intersection-observer': true,
-	'dom-resize-observer': true
+const shimModulePath = `@dojo${path.sep}framework${path.sep}shim`;
+const shimModules: { [index: string]: RegExp } = {
+	'dom-webanimation': new RegExp(`${shimModulePath}${path.sep}WebAnimations\\.(m)?js$`),
+	'dom-intersection-observer': new RegExp(`${shimModulePath}${path.sep}IntersectionObserver\\.(m)?js$`),
+	'dom-resize-observer': new RegExp(`${shimModulePath}${path.sep}ResizeObserver\\.(m)?js$`)
 };
+
+function getShimHasFlags() {
+	return Object.keys(shimModules).reduce(
+		(flags, flag) => {
+			flags[flag] = true;
+			return flags;
+		},
+		{} as any
+	);
+}
 
 class HasDojoShimPlugin {
 	apply(compiler: webpack.Compiler) {
@@ -167,22 +178,18 @@ class HasDojoShimPlugin {
 			compilation.plugin('seal', function() {
 				Object.keys(compilation._modules).forEach((key) => {
 					const module = compilation._modules[key];
-					if (
-						module.issuer &&
-						!/@dojo(\/|\\)cli-build-app(\/|\\)bootstrap.js$/.test(module.issuer.userRequest)
-					) {
-						if (/@dojo(\/|\\)framework(\/|\\)shim(\/|\\)WebAnimations\.(m)?js$/.test(module.userRequest)) {
-							delete shimHasFlags['dom-webanimation'];
+					let shimKeyFound: string | undefined = undefined;
+					if (module.issuer && !/bootstrap.js$/.test(module.issuer.userRequest)) {
+						const shimKeys = Object.keys(shimModules);
+						for (let i = 0; i < shimKeys.length; i++) {
+							const shimKey = shimKeys[i];
+							if (shimModules[shimKey].test(module.userRequest)) {
+								shimKeyFound = shimKey;
+								break;
+							}
 						}
-						if (
-							/@dojo(\/|\\)framework(\/|\\)shim(\/|\\)IntersectionObserver\.(m)?js$/.test(
-								module.userRequest
-							)
-						) {
-							delete shimHasFlags['dom-intersection-observer'];
-						}
-						if (/@dojo(\/|\\)framework(\/|\\)shim(\/|\\)ResizeObserver\.(m)?js$/.test(module.userRequest)) {
-							delete shimHasFlags['dom-resize-observer'];
+						if (shimKeyFound) {
+							delete shimModules[shimKeyFound];
 						}
 					}
 				});
@@ -190,6 +197,23 @@ class HasDojoShimPlugin {
 		});
 	}
 }
+
+const hasFlagsHeaderPlugin = new WrapperPlugin({
+	test: /(bootstrap.*(\.js$))/,
+	header: () => {
+		const shimHasFlags = getShimHasFlags();
+		if (Object.keys(shimHasFlags).length > 0) {
+			return `var shimFeatures = ${JSON.stringify(shimHasFlags)};
+if (window.DojoHasEnvironment && window.DojoHasEnvironment.staticFeatures) {
+Object.keys(window.DojoHasEnvironment.staticFeatures).forEach(function (key) {
+shimFeatures[key] = window.DojoHasEnvironment.staticFeatures[key];
+});
+}
+window.DojoHasEnvironment = { staticFeatures: shimFeatures };`;
+		}
+		return '';
+	}
+});
 
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
@@ -383,21 +407,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					test: /(main.*(\.js$))/,
 					footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
 				}),
-			new WrapperPlugin({
-				test: /(bootstrap.*(\.js$))/,
-				header: () => {
-					if (Object.keys(shimHasFlags).length > 0) {
-						return `var shimFeatures = ${JSON.stringify(shimHasFlags)};
-if (window.DojoHasEnvironment && window.DojoHasEnvironment.staticFeatures) {
-	Object.keys(window.DojoHasEnvironment.staticFeatures).forEach(function (key) {
-		shimFeatures[key] = window.DojoHasEnvironment.staticFeatures[key];
-	});
-}
-window.DojoHasEnvironment = { staticFeatures: shimFeatures };`;
-					}
-					return '';
-				}
-			}),
+			hasFlagsHeaderPlugin,
 			args.locale &&
 				new I18nPlugin({
 					defaultLocale: args.locale,
