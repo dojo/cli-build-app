@@ -338,6 +338,7 @@ const command: Command = {
 				path: __dirname,
 				files: [
 					moveBuildOptions(`${this.group}-${this.name}`),
+					'./bootstrap.js',
 					'./base.config.js',
 					'./base.test.config.js',
 					'./dev.config.js',
