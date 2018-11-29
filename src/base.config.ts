@@ -430,7 +430,7 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				new webpack.NormalModuleReplacementPlugin(/@dojo\/framework\/shim/, (resource: any) => {
 					if (
 						resource.resourceResolveData &&
-						/@dojo\/cli-build-app\/bootstrap\.js/.test(resource.resourceResolveData.context.issuer)
+						/\/bootstrap\.js/.test(resource.resourceResolveData.context.issuer)
 					) {
 						const parts = resource.request.split('!');
 						const newRequest = parts
