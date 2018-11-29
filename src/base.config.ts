@@ -388,11 +388,9 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 				header: () => {
 					if (Object.keys(shimHasFlags).length > 0) {
 						return `var shimFeatures = ${JSON.stringify(shimHasFlags)};
-var DojoHasEnvironment = window.DojoHasEnvironment || {};
-var staticFeatures = DojoHasEnvironment.staticFeatures;
-if (staticFeatures) {
-	Object.keys(staticFeatures).forEach(function (key) {
-		shimFeatures[key] = staticFeatures[key];
+if (window.DojoHasEnvironment && window.DojoHasEnvironment.staticFeatures) {
+	Object.keys(window.DojoHasEnvironment.staticFeatures).forEach(function (key) {
+		shimFeatures[key] = window.DojoHasEnvironment.staticFeatures[key];
 	});
 }
 window.DojoHasEnvironment = { staticFeatures: shimFeatures };`;
