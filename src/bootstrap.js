@@ -13,15 +13,15 @@ if (global.__public_path__) {
 
 var modules = [];
 
-if (has('intersectionobserver') && !has('dom-intersection-observer')) {
+if (has('shim-intersectionobserver') && !has('dom-intersection-observer')) {
 	modules.push(import(/* webpackChunkName: "platform/IntersectionObserver" */ '@dojo/framework/shim/IntersectionObserver'));
 }
 
-if (has('webanimations') && !has('dom-webanimation')) {
+if (has('shim-webanimations') && !has('dom-webanimation')) {
 	modules.push(import(/* webpackChunkName: "platform/WebAnimations" */ '@dojo/framework/shim/WebAnimations'));
 }
 
-if (has('resizeobserver') && !has('dom-resize-observer')) {
+if (has('shim-resizeobserver') && !has('dom-resize-observer')) {
 	modules.push(import(/* webpackChunkName: "platform/ResizeObserver" */ '@dojo/framework/shim/ResizeObserver'));
 }
 

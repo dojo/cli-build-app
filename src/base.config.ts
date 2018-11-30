@@ -163,7 +163,7 @@ const shimModulePath = `@dojo${path.sep}framework${path.sep}shim`;
 const shimModules = ['WebAnimations', 'IntersectionObserver', 'ResizeObserver'];
 const shimHasFlags = shimModules.reduce(
 	(flags, flag) => {
-		flags[flag.toLowerCase()] = false;
+		flags[`shim-${flag.toLowerCase()}`] = false;
 		return flags;
 	},
 	{} as any
@@ -186,7 +186,7 @@ class HasDojoShimPlugin {
 						for (let i = 0; i < this._moduleMap.length; i++) {
 							const [shimModule, pattern] = this._moduleMap[i];
 							if (pattern.test(module.userRequest)) {
-								shimHasFlags[shimModule.toLowerCase()] = true;
+								shimHasFlags[`shim-${shimModule.toLowerCase()}`] = true;
 								shimKeyFoundIndex = i;
 								break;
 							}
