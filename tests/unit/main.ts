@@ -13,11 +13,13 @@ let mockDevConfig: any;
 let mockDistConfig: any;
 let mockUnitTestConfig: any;
 let mockFunctionalTestConfig: any;
+let compiler: any;
 let isError: boolean;
 let stats: any;
 let consoleStub: any;
 let consoleWarnStub: any;
-let pluginStub: SinonStub;
+let doneHookStub: SinonStub;
+let invalidHookStub: SinonStub;
 let runStub: SinonStub;
 let watchStub: SinonStub;
 let exitStub: SinonStub;
@@ -37,9 +39,7 @@ describe('command', () => {
 		exitStub = stub(process, 'exit');
 		isError = false;
 		stats = {
-			toJson() {
-				return 'stats';
-			}
+			toJson: stub().returns('stats')
 		};
 		mockModule = new MockModule('../../src/main', require);
 		mockModule.dependencies([
@@ -60,9 +60,8 @@ describe('command', () => {
 			'webpack-hot-middleware',
 			'webpack-mild-compile'
 		]);
-		pluginStub = stub().callsFake((name: string, callback: Function) => {
-			callback();
-		});
+		invalidHookStub = stub().callsFake((name: string, callback: Function) => callback());
+		doneHookStub = stub().callsFake((name: string, callback: Function) => callback(stats));
 		runStub = stub().callsFake((callback: Function) => {
 			callback(isError, stats);
 		});
@@ -74,11 +73,15 @@ describe('command', () => {
 			stop: stub().returnsThis()
 		};
 		mockModule.getMock('ora').ctor.returns(mockSpinner);
-		mockModule.getMock('webpack').ctor.returns({
-			plugin: pluginStub,
+		compiler = {
+			hooks: {
+				done: { tap: doneHookStub },
+				invalid: { tap: invalidHookStub }
+			},
 			run: runStub,
 			watch: watchStub
-		});
+		};
+		mockModule.getMock('webpack').ctor.returns(compiler);
 		mockDevConfig = mockModule.getMock('./dev.config').default;
 		mockDistConfig = mockModule.getMock('./dist.config').default;
 		mockUnitTestConfig = mockModule.getMock('./unit.config').default;
@@ -168,6 +171,17 @@ describe('command', () => {
 		});
 	});
 
+	it('filters CSS module order warnings from the logger', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockConfiguration(), { mode: 'unit' }).then(() => {
+			const [{ warningsFilter }] = stats.toJson.firstCall.args;
+			assert.isTrue(warningsFilter('[mini-css-extract-plugin]\nConflicting order between'));
+			assert.isFalse(warningsFilter('[mini-css-extract-plugin]'));
+			assert.isFalse(warningsFilter(''));
+			assert.isFalse(warningsFilter('some other warning'));
+		});
+	});
+
 	it('mixes in features from command line', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main
@@ -245,10 +259,8 @@ describe('command', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			const filename = '/changed/file.ts';
 
-			pluginStub.callsFake((name: string, callback: Function) => {
-				const value = name === 'invalid' ? filename : stats;
-				callback(value);
-			});
+			doneHookStub.callsFake((name: string, callback: Function) => callback(stats));
+			invalidHookStub.callsFake((name: string, callback: Function) => callback(filename));
 
 			return main.run(getMockConfiguration(), { watch: true }).then(() => {
 				assert.isTrue(mockLogger.calledWith('stats', 'dist config', 'watching...'));
@@ -268,10 +280,8 @@ describe('command', () => {
 	describe('serve option', () => {
 		const entry = { main: [] };
 		const watchOptions = {};
-		let compiler: any;
 		let listenStub: SinonStub;
 		let output: any;
-		let pluginStub: SinonStub;
 		let plugins: any[];
 		let useStub: SinonStub;
 		let webpack: any;
@@ -287,14 +297,10 @@ describe('command', () => {
 			webpack.HotModuleReplacementPlugin = stub();
 			webpack.NoEmitOnErrorsPlugin = stub();
 
-			pluginStub = stub();
 			useStub = stub();
 			listenStub = stub().callsFake((port: string, callback: Function) => {
 				callback(false);
 			});
-
-			compiler = { plugin: pluginStub, run: runStub, watch: watchStub };
-			mockModule.getMock('webpack').ctor.returns(compiler);
 
 			const expressMock = mockModule.getMock('express').ctor;
 			expressMock.static = stub();
@@ -519,7 +525,7 @@ describe('command', () => {
 		it('provides custom logging with --watch=memory', () => {
 			const main = mockModule.getModuleUnderTest().default;
 
-			pluginStub.callsFake((name: string, callback: Function) => {
+			doneHookStub.callsFake((name: string, callback: Function) => {
 				callback(stats);
 			});
 

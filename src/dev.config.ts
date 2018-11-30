@@ -19,12 +19,19 @@ function webpackConfig(args: any): webpack.Configuration {
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output, module } = config;
-	const outputPath = path.join(output.path!, 'dev');
+	const outputPath = path.join(output!.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
 
+	if (!args.singleBundle) {
+		config.optimization = {
+			...config.optimization,
+			runtimeChunk: { name: 'runtime' }
+		};
+	}
+
 	config.plugins = [
-		...plugins,
+		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
@@ -41,34 +48,33 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
-		new CleanWebpackPlugin(['dev'], { root: output.path, verbose: false }),
-		!args.singleBundle &&
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'runtime'
-			})
+		new CleanWebpackPlugin(['dev'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
-	module.rules = module.rules.map((rule) => {
-		if (Array.isArray(rule.use)) {
-			rule.use = rule.use.map((loader: webpack.NewLoader | string) => {
-				if (typeof loader === 'string') {
-					return loader;
-				}
-				if (loader.loader === '@dojo/webpack-contrib/static-build-loader') {
-					if (loader.options) {
-						loader.options.features = { ...(loader.options.features || {}), 'dojo-debug': true };
+	if (module) {
+		module.rules = module.rules.map((rule) => {
+			if (Array.isArray(rule.use)) {
+				rule.use = rule.use.map((loader) => {
+					if (typeof loader === 'string') {
+						return loader;
 					}
+					const { loader: loaderName, options } = loader as webpack.RuleSetLoader;
+					if (loaderName === '@dojo/webpack-contrib/static-build-loader') {
+						if (typeof options === 'object') {
+							options.features = { ...(options.features || {}), 'dojo-debug': true };
+						}
 
-					return {
-						loader: loader.loader,
-						options: loader.options
-					};
-				}
-				return loader;
-			});
-		}
-		return rule;
-	});
+						return {
+							loader: loaderName,
+							options
+						};
+					}
+					return loader;
+				});
+			}
+			return rule;
+		});
+	}
 
 	if (serviceWorker) {
 		const serviceWorkerOptions =
