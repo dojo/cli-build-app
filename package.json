@@ -58,7 +58,6 @@
     "arrowParens": "always"
   },
   "devDependencies": {
-    "@dojo/webpack-contrib": "./deps/dojo-webpack-contrib-5.0.0.tgz",
     "@dojo/cli": "^4.0.0",
     "@dojo/scripts": "~3.0.1",
     "@types/clean-webpack-plugin": "0.1.2",
@@ -101,6 +100,7 @@
     "sinon": "~4.5.0"
   },
   "dependencies": {
+    "@dojo/webpack-contrib": "next",
     "brotli-webpack-plugin": "1.0.0",
     "chalk": "2.4.1",
     "clean-webpack-plugin": "1.0.0",
