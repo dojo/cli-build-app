@@ -1,5 +1,6 @@
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
+import BootstrapPlugin from '@dojo/webpack-contrib/bootstrap-plugin/BootstrapPlugin';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
@@ -28,6 +29,7 @@ const mainCssPath = path.join(srcPath, 'main.css');
 const indexHtmlPattern = /src(\/|\\)index\.html$/;
 
 export const mainEntry = 'main';
+export const bootstrapEntry = 'bootstrap';
 
 const packageJsonPath = path.join(basePath, 'package.json');
 const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
@@ -151,7 +153,7 @@ function loadRoutingOutlets() {
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
-	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('chrome') };
+	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
@@ -164,6 +166,25 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	);
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest;
+	let entry: any;
+	if (singleBundle) {
+		entry = {
+			[mainEntry]: removeEmpty([
+				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				existsSync(mainCssPath) ? mainCssPath : null,
+				mainEntryPath
+			])
+		};
+	} else {
+		features = { ...features, 'build-elide': true };
+		entry = {
+			[bootstrapEntry]: removeEmpty([
+				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				existsSync(mainCssPath) ? mainCssPath : null,
+				'@dojo/webpack-contrib/bootstrap-plugin/bootstrap'
+			])
+		};
+	}
 
 	const customTransformers: any[] = [];
 
@@ -287,13 +308,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				callback(null, resolveExternal(externals));
 			}
 		],
-		entry: {
-			[mainEntry]: removeEmpty([
-				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
-				existsSync(mainCssPath) ? mainCssPath : null,
-				mainEntryPath
-			])
-		},
+		entry,
 		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
 		output: {
 			chunkFilename: '[name].js',
@@ -311,11 +326,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		optimization: {
 			splitChunks: {
 				cacheGroups: {
+					vendors: false,
 					default: false,
 					main: {
 						chunks: 'initial',
 						minChunks: 1,
-						name: 'main',
+						name: singleBundle ? mainEntry : bootstrapEntry,
 						reuseExistingChunk: true
 					}
 				}
@@ -351,6 +367,28 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					dependencies: args.externals.dependencies,
 					hash: true,
 					outputPath: args.externals.outputPath
+				}),
+			!singleBundle &&
+				new webpack.DefinePlugin({
+					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
+				}),
+			!singleBundle &&
+				new BootstrapPlugin({
+					entryPath: mainEntryPath,
+					shimModules: [
+						{
+							module: '@dojo/framework/shim/IntersectionObserver',
+							has: 'intersection-observer'
+						},
+						{
+							module: '@dojo/framework/shim/ResizeObserver',
+							has: 'resize-observer'
+						},
+						{
+							module: '@dojo/framework/shim/WebAnimations',
+							has: 'web-animations'
+						}
+					]
 				})
 		]),
 		module: {

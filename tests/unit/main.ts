@@ -728,6 +728,7 @@ describe('command', () => {
 				copy: {
 					path: join(basePath, 'dist/dev/src'),
 					files: [
+						'./bootstrap.js',
 						'./base.config.js',
 						'./base.test.config.js',
 						'./dev.config.js',
