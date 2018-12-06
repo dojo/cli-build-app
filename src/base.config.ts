@@ -17,6 +17,7 @@ const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -149,6 +150,44 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
+const PROCESSORS = {
+	postcssFilterPlugins: false,
+	postcssDiscardComments: false,
+	postcssMinifyGradients: false,
+	postcssReduceInitial: false,
+	postcssSvgo: false,
+	reduceDisplayValues: false,
+	postcssReduceTransforms: false,
+	autoprefixer: false,
+	postcssZindex: false,
+	postcssConvertValues: false,
+	reduceTimingFunctions: false,
+	postcssCalc: false,
+	postcssColormin: false,
+	postcssOrderedValues: false,
+	postcssMinifySelectors: false,
+	postcssMinifyParams: false,
+	postcssNormalizeCharset: false,
+	postcssDiscardOverridden: false,
+	normalizeString: false,
+	normalizeUnicode: false,
+	postcssMinifyFontValues: false,
+	postcssDiscardUnused: false,
+	postcssNormalizeUrl: false,
+	functionOptimiser: false,
+	filterOptimiser: false,
+	reduceBackgroundRepeat: false,
+	reducePositions: false,
+	core: false,
+	postcssMergeIdents: false,
+	postcssReduceIdents: false,
+	postcssMergeLonghand: false,
+	postcssMergeRules: false,
+	postcssDiscardEmpty: false,
+	postcssUniqueSelectors: false,
+	styleCache: false
+};
+
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
@@ -221,6 +260,24 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			grid: args.legacy
 		}
 	};
+
+	const optimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
+		cssProcessor: require('cssnano'),
+		cssProcessorOptions: {
+			map: {
+				inline: args.mode === 'dist' ? false : true
+			},
+			...PROCESSORS
+		}
+	});
+
+	const {
+		lastCallInstance: { options }
+	} = optimizeCssAssetsPlugin;
+	options.assetProcessors = options.assetProcessors.map((processor: any) => {
+		processor.phase = 'compilation.optimize-assets';
+		return processor;
+	});
 
 	const postCssModuleLoader = ExtractTextPlugin.extract({
 		fallback: ['style-loader'],
@@ -344,7 +401,8 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					dependencies: args.externals.dependencies,
 					hash: true,
 					outputPath: args.externals.outputPath
-				})
+				}),
+			optimizeCssAssetsPlugin
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
