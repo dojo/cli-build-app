@@ -12,6 +12,8 @@ import * as ts from 'typescript';
 import * as tsnode from 'ts-node';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
+const postCssDiscardDuplicates = require('postcss-discard-duplicates');
+const cssnano = require('cssnano');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
@@ -150,44 +152,6 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
-const PROCESSORS = {
-	postcssFilterPlugins: false,
-	postcssDiscardComments: false,
-	postcssMinifyGradients: false,
-	postcssReduceInitial: false,
-	postcssSvgo: false,
-	reduceDisplayValues: false,
-	postcssReduceTransforms: false,
-	autoprefixer: false,
-	postcssZindex: false,
-	postcssConvertValues: false,
-	reduceTimingFunctions: false,
-	postcssCalc: false,
-	postcssColormin: false,
-	postcssOrderedValues: false,
-	postcssMinifySelectors: false,
-	postcssMinifyParams: false,
-	postcssNormalizeCharset: false,
-	postcssDiscardOverridden: false,
-	normalizeString: false,
-	normalizeUnicode: false,
-	postcssMinifyFontValues: false,
-	postcssDiscardUnused: false,
-	postcssNormalizeUrl: false,
-	functionOptimiser: false,
-	filterOptimiser: false,
-	reduceBackgroundRepeat: false,
-	reducePositions: false,
-	core: false,
-	postcssMergeIdents: false,
-	postcssReduceIdents: false,
-	postcssMergeLonghand: false,
-	postcssMergeRules: false,
-	postcssDiscardEmpty: false,
-	postcssUniqueSelectors: false,
-	styleCache: false
-};
-
 export default function webpackConfigFactory(args: any): WebpackConfiguration {
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
@@ -260,24 +224,6 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 			grid: args.legacy
 		}
 	};
-
-	const optimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
-		cssProcessor: require('cssnano'),
-		cssProcessorOptions: {
-			map: {
-				inline: args.mode === 'dist' ? false : true
-			},
-			...PROCESSORS
-		}
-	});
-
-	const {
-		lastCallInstance: { options }
-	} = optimizeCssAssetsPlugin;
-	options.assetProcessors = options.assetProcessors.map((processor: any) => {
-		processor.phase = 'compilation.optimize-assets';
-		return processor;
-	});
 
 	const postCssModuleLoader = ExtractTextPlugin.extract({
 		fallback: ['style-loader'],
@@ -402,7 +348,22 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					hash: true,
 					outputPath: args.externals.outputPath
 				}),
-			optimizeCssAssetsPlugin
+			new OptimizeCssAssetsPlugin({
+				cssProcessor: {
+					process: (css: any, processOptions: any) => {
+						return cssnano.process(css, processOptions, {
+							preset: {
+								plugins: [postCssDiscardDuplicates]
+							}
+						});
+					}
+				},
+				cssProcessorOptions: {
+					map: {
+						inline: args.mode === 'dist' ? false : true
+					}
+				}
+			})
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
