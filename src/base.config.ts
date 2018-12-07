@@ -12,11 +12,14 @@ import * as ts from 'typescript';
 import * as tsnode from 'ts-node';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 
+const postCssDiscardDuplicates = require('postcss-discard-duplicates');
+const cssnano = require('cssnano');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -344,7 +347,23 @@ export default function webpackConfigFactory(args: any): WebpackConfiguration {
 					dependencies: args.externals.dependencies,
 					hash: true,
 					outputPath: args.externals.outputPath
-				})
+				}),
+			new OptimizeCssAssetsPlugin({
+				cssProcessor: {
+					process: (css: any, processOptions: any) => {
+						return cssnano.process(css, processOptions, {
+							preset: {
+								plugins: [postCssDiscardDuplicates]
+							}
+						});
+					}
+				},
+				cssProcessorOptions: {
+					map: {
+						inline: args.mode === 'dist' ? false : true
+					}
+				}
+			})
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
