@@ -1,4 +1,4 @@
-import baseConfigFactory, { mainEntry, packageName } from './base.config';
+import baseConfigFactory, { bootstrapEntry, mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as fs from 'fs';
@@ -22,13 +22,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = path.join(output!.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
-
-	if (!args.singleBundle) {
-		config.optimization = {
-			...config.optimization,
-			runtimeChunk: { name: 'runtime' }
-		};
-	}
+	const entryName = args.singleBundle ? mainEntry : bootstrapEntry;
 
 	config.plugins = [
 		...plugins!,
@@ -36,7 +30,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: args.singleBundle ? ['main'] : ['runtime', 'main'],
+			chunks: [entryName],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
@@ -83,7 +77,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 		if (typeof serviceWorker !== 'string') {
 			const entry = config.entry as any;
-			entry[mainEntry].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
+			entry[entryName].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
 		}
 	}
 
@@ -91,7 +85,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
-				entries: args.singleBundle ? Object.keys(config.entry!) : ['runtime', ...Object.keys(config.entry!)],
+				entries: Object.keys(config.entry!),
 				useManifest: true
 			})
 		);

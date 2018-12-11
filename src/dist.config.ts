@@ -12,7 +12,7 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
-import baseConfigFactory, { mainEntry, packageName } from './base.config';
+import baseConfigFactory, { bootstrapEntry, mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
@@ -36,6 +36,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = path.join(output!.path!, 'dist');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
+	const entryName = args.singleBundle ? mainEntry : bootstrapEntry;
 
 	config.mode = 'production';
 
@@ -52,12 +53,6 @@ function webpackConfig(args: any): webpack.Configuration {
 		]
 	};
 
-	if (!args.singleBundle) {
-		config.optimization.runtimeChunk = {
-			name: 'runtime'
-		};
-	}
-
 	config.plugins = [
 		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
@@ -71,7 +66,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		}),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: args.singleBundle ? ['main'] : ['runtime', 'main'],
+			chunks: [entryName],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
@@ -95,7 +90,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 		if (typeof serviceWorker !== 'string') {
 			const entry = config.entry as any;
-			entry[mainEntry].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
+			entry[entryName].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
 		}
 	}
 
@@ -103,7 +98,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
-				entries: args.singleBundle ? Object.keys(config.entry!) : ['runtime', ...Object.keys(config.entry!)],
+				entries: Object.keys(config.entry!),
 				useManifest: true
 			})
 		);
