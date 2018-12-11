@@ -36,7 +36,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = path.join(output!.path!, 'dist');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
-	const entry = args.singleBundle ? mainEntry : bootstrapEntry;
+	const entryName = args.singleBundle ? mainEntry : bootstrapEntry;
 
 	config.mode = 'production';
 
@@ -66,7 +66,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		}),
 		new HtmlWebpackPlugin({
 			inject: true,
-			chunks: [entry],
+			chunks: [entryName],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
 			template: 'src/index.html'
 		}),
@@ -90,7 +90,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 		if (typeof serviceWorker !== 'string') {
 			const entry = config.entry as any;
-			entry[entry].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
+			entry[entryName].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
 		}
 	}
 
