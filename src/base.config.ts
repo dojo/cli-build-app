@@ -170,7 +170,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	if (singleBundle) {
 		entry = {
 			[mainEntry]: removeEmpty([
-				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
+				'@dojo/webpack-contrib/bootstrap-plugin/sync',
 				existsSync(mainCssPath) ? mainCssPath : null,
 				mainEntryPath
 			])
@@ -179,9 +179,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		features = { ...features, 'build-elide': true };
 		entry = {
 			[bootstrapEntry]: removeEmpty([
-				'@dojo/webpack-contrib/build-time-render/hasBuildTimeRender',
 				existsSync(mainCssPath) ? mainCssPath : null,
-				'@dojo/webpack-contrib/bootstrap-plugin/bootstrap'
+				'@dojo/webpack-contrib/bootstrap-plugin/async'
 			])
 		};
 	}
