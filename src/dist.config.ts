@@ -29,6 +29,7 @@ All rights reserved
 `;
 
 function webpackConfig(args: any): webpack.Configuration {
+	const basePath = process.cwd();
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
@@ -99,7 +100,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			new BuildTimeRender({
 				...args['build-time-render'],
 				entries: Object.keys(config.entry!),
-				useManifest: true
+				basePath
 			})
 		);
 	}

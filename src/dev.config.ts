@@ -15,6 +15,7 @@ import * as ManifestPlugin from 'webpack-manifest-plugin';
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 function webpackConfig(args: any): webpack.Configuration {
+	const basePath = process.cwd();
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
@@ -86,7 +87,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			new BuildTimeRender({
 				...args['build-time-render'],
 				entries: Object.keys(config.entry!),
-				useManifest: true
+				basePath
 			})
 		);
 	}
@@ -96,7 +97,6 @@ function webpackConfig(args: any): webpack.Configuration {
 		path: outputPath
 	};
 
-	config.devtool = 'inline-source-map';
 	return config;
 }
 
