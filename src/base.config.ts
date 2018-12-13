@@ -142,7 +142,6 @@ function loadRoutingOutlets() {
 	const routesConfig = path.join(basePath, 'src', 'routes.ts');
 	try {
 		if (existsSync(routesConfig)) {
-			tsnode.register();
 			const routes: any[] = require(slash(routesConfig)).default;
 			return routes.map((route) => route.outlet);
 		}
@@ -151,6 +150,7 @@ function loadRoutingOutlets() {
 }
 
 export default function webpackConfigFactory(args: any): webpack.Configuration {
+	tsnode.register();
 	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
 	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };

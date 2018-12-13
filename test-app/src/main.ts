@@ -9,6 +9,7 @@ import './Bar';
 import LazyApp from './LazyApp';
 import routes from './routes';
 import myTheme from './themes/test-app/theme';
+import test from './test.build';
 
 console.log(myTheme);
 
@@ -17,6 +18,8 @@ console.log(myTheme);
 if (has('foo')) {
 	console.log('foo');
 }
+
+const root = document.getElementById('app');
 
 const btr = has('build-time-render');
 
@@ -30,7 +33,18 @@ if (!div) {
 	div.id = 'div';
 }
 if (btr) {
+	test('./src/foo.txt').then((result: string) => {
+		const nodeBtr = document.createElement('div');
+		nodeBtr.id = 'nodeBtr';
+		nodeBtr.innerHTML = result;
+		root!.appendChild(nodeBtr);
+	});
 	div.setAttribute('hasBtr', 'true');
+} else {
+	const nodeBtrCache = document.createElement('div');
+	nodeBtrCache.id = 'nodeBtrCache';
+	nodeBtrCache.innerHTML = test('./src/foo.txt');
+	root!.appendChild(nodeBtrCache);
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -53,7 +67,6 @@ div.textContent = `Built with Build Time Render: ${!!div.getAttribute('hasBtr')}
 Currently Rendered by BTR: ${has('build-time-render')}`;
 
 div.classList.add(...css.root.split(' '));
-const root = document.getElementById('app');
 if (div.parentNode === null) {
 	root!.appendChild(div);
 }
