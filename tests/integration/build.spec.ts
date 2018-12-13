@@ -23,6 +23,9 @@ Currently Rendered by BTR: false`
 		cy.get('meta[name="apple-mobile-web-app-title"]').should(isPwa ? 'exist' : 'not.exist');
 		cy.get('meta[name="apple-mobile-web-app-status-bar-style"]').should(isPwa ? 'exist' : 'not.exist');
 		cy.get('link[rel="apple-touch-icon"]').should('have.length', isPwa ? 2 : 0);
+
+		cy.get('#nodeBtr').should('contain', 'hello from a text file');
+		cy.get('#nodeBtrCache').should('contain', 'hello from a text file');
 	}
 
 	it('dist', () => {
