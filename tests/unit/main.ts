@@ -266,15 +266,6 @@ describe('command', () => {
 				assert.isTrue(mockLogger.calledWith('stats', 'dist config', 'watching...'));
 			});
 		});
-
-		it('warns when attempting memory watch without the dev server', () => {
-			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockConfiguration(), { watch: 'memory' }).then(() => {
-				assert.isTrue(
-					consoleWarnStub.calledWith('Memory watch requires the dev server. Using file watch instead...')
-				);
-			});
-		});
 	});
 
 	describe('serve option', () => {
@@ -466,35 +457,17 @@ describe('command', () => {
 			});
 		});
 
-		it('limits --watch=memory to --mode=dev', () => {
+		it('registers middleware', () => {
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockConfiguration(), { serve: false, watch: 'memory' }).then(() => {
-				assert.isTrue(
-					consoleWarnStub.calledWith('Memory watch requires the dev server. Using file watch instead...')
-				);
-			});
-		});
-
-		it('registers middleware with --watch=memory', () => {
-			const main = mockModule.getModuleUnderTest().default;
-			const webpackMiddleware = mockModule.getMock('webpack-dev-middleware').ctor;
 			const hotMiddleware = mockModule.getMock('webpack-hot-middleware').ctor;
 			return main
 				.run(getMockConfiguration(), {
 					mode: 'dev',
 					serve: true,
-					watch: 'memory'
+					watch: true
 				})
 				.then(() => {
-					assert.strictEqual(useStub.callCount, 2);
-					assert.isTrue(
-						webpackMiddleware.calledWith(compiler, {
-							logLevel: 'silent',
-							noInfo: true,
-							publicPath: '/',
-							watchOptions
-						})
-					);
+					assert.strictEqual(useStub.callCount, 4);
 					assert.isTrue(
 						hotMiddleware.calledWith(compiler, {
 							heartbeat: 10000
@@ -503,47 +476,19 @@ describe('command', () => {
 				});
 		});
 
-		it('enables hot module replacement with --watch=memory', () => {
+		it('enables hot module replacement watch', () => {
 			const main = mockModule.getModuleUnderTest().default;
 			return main
 				.run(getMockConfiguration(), {
 					mode: 'dev',
 					serve: true,
-					watch: 'memory'
+					watch: true
 				})
 				.then(() => {
 					assert.lengthOf(plugins, 2);
 					assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
 					assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
-					assert.sameMembers(entry.main, [
-						'eventsource-polyfill',
-						'webpack-hot-middleware/client?timeout=20000&reload=true'
-					]);
-				});
-		});
-
-		it('provides custom logging with --watch=memory', () => {
-			const main = mockModule.getModuleUnderTest().default;
-
-			doneHookStub.callsFake((name: string, callback: Function) => {
-				callback(stats);
-			});
-
-			return main
-				.run(getMockConfiguration(), {
-					mode: 'dev',
-					port: 3000,
-					serve: true,
-					watch: 'memory'
-				})
-				.then(() => {
-					assert.isTrue(
-						mockLogger.calledWith(
-							'stats',
-							{ entry, output, plugins, watchOptions },
-							'Listening on port 3000...'
-						)
-					);
+					assert.sameMembers(entry.main, ['eventsource-polyfill']);
 				});
 		});
 
@@ -574,20 +519,6 @@ describe('command', () => {
 				mode: 'dev',
 				compression: ['gzip'],
 				serve: true
-			};
-			return main.run(getMockConfiguration(), rc).then(() => {
-				assert.isFalse(expressStaticGzip.called);
-			});
-		});
-
-		it('does not serve compressed files with memory watch', () => {
-			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
-			const main = mockModule.getModuleUnderTest().default;
-			const rc = {
-				mode: 'dist',
-				compression: ['gzip'],
-				serve: true,
-				watch: 'memory'
 			};
 			return main.run(getMockConfiguration(), rc).then(() => {
 				assert.isFalse(expressStaticGzip.called);

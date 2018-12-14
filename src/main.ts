@@ -22,7 +22,7 @@ import { moveBuildOptions } from './util/eject';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
-const webpackMiddleware = require('webpack-dev-middleware');
+const connectInject = require('connect-inject');
 
 const testModes = ['test', 'unit', 'functional'];
 
@@ -87,8 +87,21 @@ function buildNpmDependencies(): any {
 	}
 }
 
-function fileWatch(config: webpack.Configuration, args: any): Promise<void> {
-	const compiler = createWatchCompiler(config);
+function fileWatch(config: webpack.Configuration, args: any, app?: express.Application): Promise<void> {
+	let compiler: webpack.Compiler;
+	if (args.serve && app) {
+		const entry = config.entry as any;
+		const plugins = config.plugins as webpack.Plugin[];
+		const timeout = 20 * 1000;
+		plugins.push(new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());
+		Object.keys(entry).forEach((name) => {
+			entry[name].unshift('eventsource-polyfill');
+		});
+		compiler = createWatchCompiler(config);
+		app.use(hotMiddleware(compiler, { heartbeat: timeout / 2 }));
+	} else {
+		compiler = createWatchCompiler(config);
+	}
 
 	return new Promise<void>((resolve, reject) => {
 		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
@@ -105,43 +118,24 @@ function fileWatch(config: webpack.Configuration, args: any): Promise<void> {
 	});
 }
 
-function memoryWatch(config: webpack.Configuration, args: any, app: express.Application): Promise<void> {
-	const entry = config.entry as any;
-	const plugins = config.plugins as webpack.Plugin[];
-	const timeout = 20 * 1000;
-
-	plugins.push(new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());
-	Object.keys(entry).forEach((name) => {
-		entry[name].unshift(`webpack-hot-middleware/client?timeout=${timeout}&reload=true`);
-		entry[name].unshift('eventsource-polyfill');
-	});
-
-	const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
-	const compiler = createWatchCompiler(config);
-
-	compiler.hooks.done.tap('@dojo/cli-build-app', (stats) => {
-		logger(stats.toJson({ warningsFilter }), config, `Listening on port ${args.port}...`);
-	});
-
-	app.use(
-		webpackMiddleware(compiler, {
-			logLevel: 'silent',
-			noInfo: true,
-			publicPath: '/',
-			watchOptions
-		}),
-		hotMiddleware(compiler, {
-			heartbeat: timeout / 2
-		})
-	);
-
-	return Promise.resolve();
-}
-
 function serve(config: webpack.Configuration, args: any): Promise<void> {
 	let isHttps = false;
 
 	const app = express();
+	app.use(
+		connectInject({
+			rules: [
+				{
+					match: /<body>/,
+					snippet:
+						"<script>window.DojoHasEnvironment = { staticFeatures: { 'build-serve': true } };</script>",
+					fn: (match: string, snippet: string) => {
+						return snippet + match;
+					}
+				}
+			]
+		})
+	);
 
 	app.use(
 		history({
@@ -169,19 +163,17 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 	);
 
-	if (args.watch !== 'memory') {
-		const outputDir = (config.output && config.output.path) || process.cwd();
-		if (args.mode === 'dist' && Array.isArray(args.compression)) {
-			const useBrotli = args.compression.includes('brotli');
-			app.use(
-				expressStaticGzip(outputDir, {
-					enableBrotli: useBrotli,
-					orderPreference: useBrotli ? ['br'] : undefined
-				})
-			);
-		} else {
-			app.use(express.static(outputDir));
-		}
+	const outputDir = (config.output && config.output.path) || process.cwd();
+	if (args.mode === 'dist' && Array.isArray(args.compression)) {
+		const useBrotli = args.compression.includes('brotli');
+		app.use(
+			expressStaticGzip(outputDir, {
+				enableBrotli: useBrotli,
+				orderPreference: useBrotli ? ['br'] : undefined
+			})
+		);
+	} else {
+		app.use(express.static(outputDir));
 	}
 
 	if (args.proxy) {
@@ -205,15 +197,8 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 
 	return Promise.resolve()
 		.then(() => {
-			if (args.watch === 'memory' && args.mode === 'dev') {
-				return memoryWatch(config, args, app);
-			}
-
 			if (args.watch) {
-				if (args.watch === 'memory') {
-					console.warn('Memory watch requires `--mode=dev`. Using file watch instead...');
-				}
-				return fileWatch(config, args);
+				return fileWatch(config, args, app);
 			}
 
 			return build(config, args);
@@ -266,7 +251,7 @@ const command: Command = {
 		});
 
 		options('watch', {
-			describe: 'watch for file changes: "memory" (dev mode only) or "file" (all modes; default)',
+			describe: 'watch for file changes',
 			alias: 'w'
 		});
 
@@ -339,9 +324,6 @@ const command: Command = {
 		}
 
 		if (args.watch) {
-			if (args.watch === 'memory') {
-				console.warn('Memory watch requires the dev server. Using file watch instead...');
-			}
 			return fileWatch(config, args);
 		}
 
