@@ -11,12 +11,14 @@ import * as path from 'path';
 import * as tsnode from 'ts-node';
 import * as ts from 'typescript';
 import * as webpack from 'webpack';
+import * as cssnano from 'cssnano';
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -371,6 +373,17 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				new webpack.DefinePlugin({
 					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
 				}),
+			new OptimizeCssAssetsPlugin({
+				cssProcessor: cssnano,
+				cssProcessorOptions: {
+					map: {
+						inline: false
+					}
+				},
+				cssProcessorPluginOptions: {
+					preset: ['default', { calc: false }]
+				}
+			}),
 			!singleBundle &&
 				new BootstrapPlugin({
 					entryPath: mainEntryPath,

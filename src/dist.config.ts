@@ -17,7 +17,6 @@ import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
@@ -43,15 +42,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.optimization = {
 		...config.optimization,
-		minimizer: [
-			new TerserPlugin({ sourceMap: true, cache: true }),
-			new OptimizeCssAssetsPlugin({
-				cssProcessor: require('cssnano'),
-				cssProcessorPluginOptions: {
-					preset: ['default', { calc: false }]
-				}
-			})
-		]
+		minimizer: [new TerserPlugin({ sourceMap: true, cache: true })]
 	};
 
 	config.plugins = [
