@@ -145,7 +145,6 @@
     "umd-compat-loader": "2.1.1",
     "webpack": "4.25.1",
     "webpack-chunk-hash": "0.6.0",
-    "webpack-dev-middleware": "3.4.0",
     "webpack-hot-middleware": "2.24.3",
     "webpack-manifest-plugin": "2.0.4",
     "webpack-mild-compile": "3.3.1",
