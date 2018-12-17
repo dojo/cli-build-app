@@ -6,6 +6,7 @@ import chalk from 'chalk';
 import MockModule from '../support/MockModule';
 import { readFileSync, existsSync } from 'fs';
 import { Validator } from 'jsonschema';
+import { Helper } from '@dojo/cli/interfaces';
 
 let mockModule: MockModule;
 let mockLogger: any;
@@ -25,15 +26,18 @@ let runStub: SinonStub;
 let watchStub: SinonStub;
 let exitStub: SinonStub;
 
-function getMockHelper(config: any = {}) {
+function getMockHelper(config: any = {}): Partial<Helper> {
 	return {
 		configuration: {
 			get() {
 				return { ...config };
+			},
+			set() {
+				return {};
 			}
 		},
 		validation: {
-			validate: () => true
+			validate: () => Promise.resolve(true)
 		}
 	};
 }
@@ -680,17 +684,23 @@ describe('command', () => {
 			mockModule.getMock('path').join = stub().returns('schema.json');
 		});
 
-		it('validate is called and reads the schema file', () => {
+		it('validate is called and reads the schema file', async () => {
 			const readFileSyncStub = mockModule.getMock('fs').readFileSync;
 			const main = mockModule.getModuleUnderTest().default;
-			const valid: boolean = main.validate(getMockHelper());
-			assert.isTrue(valid);
-			assert.equal(readFileSyncStub.callCount, 1, 'readFileSync should only be called once');
-			assert.equal(
-				readFileSyncStub.getCall(0).args[0],
-				'schema.json',
-				'validate should be called with schema.json as schema'
-			);
+			const result = main.validate(getMockHelper());
+			result
+				.then((valid: boolean) => {
+					assert.isTrue(valid);
+					assert.equal(readFileSyncStub.callCount, 1, 'readFileSync should only be called once');
+					assert.equal(
+						readFileSyncStub.getCall(0).args[0],
+						'schema.json',
+						'validate should be called with schema.json as schema'
+					);
+				})
+				.catch((error: Error) => {
+					throw new Error('validation should not throw an error');
+				});
 		});
 
 		it('throw an error if schema.json is not found', async () => {
