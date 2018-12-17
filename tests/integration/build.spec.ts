@@ -49,7 +49,7 @@ Currently Rendered by BTR: false`
 				expect(css).to.contain('color:var(--foreground-color);');
 				expect(css).to.contain('color:#00f;');
 				expect(css).to.contain('color:var(--primary);');
-				expect(css).to.contain('color:;');
+				expect(css).to.contain('color:red;');
 			});
 		});
 		it('correctly inlines and resolves external variables for evergreen builds', () => {
