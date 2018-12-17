@@ -95,7 +95,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		}
 	}
 
-	if (args.watch !== 'memory' && args['build-time-render']) {
+	if (args['build-time-render']) {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
