@@ -19,6 +19,7 @@ const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
@@ -168,6 +169,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	);
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest;
+	const watch = args.watch;
 	let entry: any;
 	if (singleBundle) {
 		entry = {
@@ -401,6 +403,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 							has: 'web-animations'
 						}
 					]
+				}),
+			watch &&
+				new ExtraWatchWebpackPlugin({
+					files: ['!(output|.*)/**']
 				})
 		]),
 		module: {
@@ -417,7 +423,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					}
 				},
 				{
-					test: /\.(css|js)$/,
+					test: /\.(css|js)/,
 					issuer: indexHtmlPattern,
 					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
