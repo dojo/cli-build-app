@@ -423,7 +423,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					}
 				},
 				{
-					test: /\.(css|js)/,
+					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
 					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
