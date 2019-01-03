@@ -406,7 +406,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				}),
 			watch &&
 				new ExtraWatchWebpackPlugin({
-					files: ['!(output|.*)/**']
+					files: ['!(output|.*}|node_modules)/**']
 				})
 		]),
 		module: {
