@@ -93,7 +93,7 @@ function fileWatch(config: webpack.Configuration, args: any, app?: express.Appli
 		const entry = config.entry as any;
 		const plugins = config.plugins as webpack.Plugin[];
 		const timeout = 20 * 1000;
-		plugins.push(new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());
+		plugins.push(new webpack.NoEmitOnErrorsPlugin());
 		Object.keys(entry).forEach((name) => {
 			entry[name].unshift('eventsource-polyfill');
 		});

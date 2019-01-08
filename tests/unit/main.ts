@@ -285,7 +285,6 @@ describe('command', () => {
 			mockDevConfig.returns({ entry, output, plugins, watchOptions });
 			mockDistConfig.returns({ entry, output, plugins, watchOptions });
 
-			webpack.HotModuleReplacementPlugin = stub();
 			webpack.NoEmitOnErrorsPlugin = stub();
 
 			useStub = stub();
@@ -485,8 +484,7 @@ describe('command', () => {
 					watch: true
 				})
 				.then(() => {
-					assert.lengthOf(plugins, 2);
-					assert.isTrue(webpack.HotModuleReplacementPlugin.calledWithNew());
+					assert.lengthOf(plugins, 1);
 					assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
 					assert.sameMembers(entry.main, ['eventsource-polyfill']);
 				});
