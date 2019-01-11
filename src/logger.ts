@@ -17,8 +17,8 @@ export default function logger(stats: any, config: any, runningMessage: string =
 	const assets = Object.keys(manifestContent).map((item) => {
 		const assetName = manifestContent[item];
 		const filePath = path.join(config.output.path, assetName);
-		const stats = fs.statSync(filePath);
-		const size = stats.size;
+		const fileStats = fs.statSync(filePath);
+		const size = (fileStats.size / 1000).toFixed(2);
 		const assetInfo = `${assetName} ${chalk.yellow(`(${size}kb)`)}`;
 		const content = fs.readFileSync(filePath, 'utf8');
 		const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
