@@ -13,7 +13,7 @@ const stripAnsi = require('strip-ansi');
 const version = jsonFile.readFileSync(path.join(pkgDir.sync(__dirname), 'package.json')).version;
 
 export default function logger(stats: any, config: any, runningMessage: string = ''): boolean {
-	const manifestContent = JSON.parse(fs.readFileSync(config.output.path, 'utf8'));
+	const manifestContent = JSON.parse(fs.readFileSync(path.join(config.output.path, 'manifest.json'), 'utf8'));
 	const assets = Object.keys(manifestContent).map((item) => {
 		const assetName = manifestContent[item];
 		const filePath = path.join(config.output.path, assetName);
