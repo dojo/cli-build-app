@@ -44,11 +44,7 @@ function assertOutput(isServing = false) {
 		runningMessage
 	);
 
-	let assetOne = `assetOne.js ${chalk.yellow('(1.00kb)')}`;
-	if (!isServing) {
-		assetOne += ` / ${chalk.blue('(0.04kb gz)')}`;
-	}
-
+	let assetOne = `assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`;
 	let signOff = chalk.green('The build completed successfully.');
 	if (runningMessage) {
 		signOff += `\n\n${runningMessage}`;
@@ -70,6 +66,7 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__d
 ${signOff}
 	`;
 	const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+	console.log(mockedLogUpdate.firstCall.args[0]);
 	assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 	assert.isFalse(hasErrors);
 }
@@ -153,8 +150,8 @@ ${chalk.yellow('chunks:')}
 ${columns(['chunkOne'])}
 ${chalk.yellow('assets:')}
 ${columns([
-			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
-			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
+			`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`,
+			`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`
 		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
