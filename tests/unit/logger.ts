@@ -12,7 +12,7 @@ const columns = require('cli-columns');
 
 let mockModule: MockModule;
 
-function assertOutput(isServing = false) {
+function assertOutput(isServing = false, hasManifest = true) {
 	const logger = mockModule.getModuleUnderTest().default;
 	const runningMessage = isServing ? 'running...' : undefined;
 	const hasErrors = logger(
@@ -44,14 +44,17 @@ function assertOutput(isServing = false) {
 		runningMessage
 	);
 
-	let assetOne = `assetOne.js ${chalk.yellow('(1.00kb)')}`;
-	if (!isServing) {
-		assetOne += ` / ${chalk.blue('(0.04kb gz)')}`;
-	}
-
+	let assetOne = `assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`;
 	let signOff = chalk.green('The build completed successfully.');
 	if (runningMessage) {
 		signOff += `\n\n${runningMessage}`;
+	}
+	let chunksAndAssets = '';
+	if (hasManifest) {
+		chunksAndAssets = `${chalk.yellow('chunks:')}
+${columns(['chunkOne'])}
+${chalk.yellow('assets:')}
+${columns([assetOne, assetOne])}`;
 	}
 
 	const expectedLog = `
@@ -61,10 +64,7 @@ ${logSymbols.success} hash: hash
 ${logSymbols.error} errors: 0
 ${logSymbols.warning} warnings: 0
 ${''}${''}
-${chalk.yellow('chunks:')}
-${columns(['chunkOne'])}
-${chalk.yellow('assets:')}
-${columns([assetOne, assetOne])}
+${chunksAndAssets}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
 ${signOff}
@@ -96,8 +96,12 @@ describe('logger', () => {
 	});
 
 	it('logging output while serving', () => {
-		sinon.stub(fs, 'existsSync').returns(false);
 		assertOutput(true);
+	});
+
+	it('logging output without manifest', () => {
+		sinon.stub(fs, 'existsSync').returns(false);
+		assertOutput(false, false);
 	});
 
 	it('logging output with errors', () => {
@@ -153,8 +157,8 @@ ${chalk.yellow('chunks:')}
 ${columns(['chunkOne'])}
 ${chalk.yellow('assets:')}
 ${columns([
-			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`,
-			`assetOne.js ${chalk.yellow('(1.00kb)')} / ${chalk.blue('(0.04kb gz)')}`
+			`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`,
+			`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`
 		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
