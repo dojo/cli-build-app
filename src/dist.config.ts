@@ -60,7 +60,8 @@ function webpackConfig(args: any): webpack.Configuration {
 			inject: true,
 			chunks: [entryName],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
-			template: 'src/index.html'
+			template: 'src/index.html',
+			cache: false
 		}),
 		manifest &&
 			new WebpackPwaManifest({
