@@ -73,7 +73,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			}),
 		new webpack.BannerPlugin(banner),
 		new WebpackChunkHash(),
-		new CleanWebpackPlugin(['dist'], { root: output!.path, verbose: false })
+		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
 	if (serviceWorker) {
