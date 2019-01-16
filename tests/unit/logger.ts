@@ -12,7 +12,7 @@ const columns = require('cli-columns');
 
 let mockModule: MockModule;
 
-function assertOutput(isServing = false) {
+function assertOutput(isServing = false, hasManifest = true) {
 	const logger = mockModule.getModuleUnderTest().default;
 	const runningMessage = isServing ? 'running...' : undefined;
 	const hasErrors = logger(
@@ -49,6 +49,13 @@ function assertOutput(isServing = false) {
 	if (runningMessage) {
 		signOff += `\n\n${runningMessage}`;
 	}
+	let chunksAndAssets = '';
+	if (hasManifest) {
+		chunksAndAssets = `${chalk.yellow('chunks:')}
+${columns(['chunkOne'])}
+${chalk.yellow('assets:')}
+${columns([assetOne, assetOne])}`;
+	}
 
 	const expectedLog = `
 ${logSymbols.info} cli-build-app: 9.9.9
@@ -57,16 +64,12 @@ ${logSymbols.success} hash: hash
 ${logSymbols.error} errors: 0
 ${logSymbols.warning} warnings: 0
 ${''}${''}
-${chalk.yellow('chunks:')}
-${columns(['chunkOne'])}
-${chalk.yellow('assets:')}
-${columns([assetOne, assetOne])}
+${chunksAndAssets}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
 ${signOff}
 	`;
 	const mockedLogUpdate = mockModule.getMock('log-update').ctor;
-	console.log(mockedLogUpdate.firstCall.args[0]);
 	assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 	assert.isFalse(hasErrors);
 }
@@ -93,8 +96,12 @@ describe('logger', () => {
 	});
 
 	it('logging output while serving', () => {
-		sinon.stub(fs, 'existsSync').returns(false);
 		assertOutput(true);
+	});
+
+	it('logging output without manifest', () => {
+		sinon.stub(fs, 'existsSync').returns(false);
+		assertOutput(false, false);
 	});
 
 	it('logging output with errors', () => {
