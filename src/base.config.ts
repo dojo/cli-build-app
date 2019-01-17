@@ -401,6 +401,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						{
 							module: '@dojo/framework/shim/WebAnimations',
 							has: 'web-animations'
+						},
+						{
+							module: '@dojo/framework/shim/fetch',
+							has: 'build-fetch'
 						}
 					]
 				}),
