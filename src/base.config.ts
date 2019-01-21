@@ -1,5 +1,4 @@
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
-import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import BootstrapPlugin from '@dojo/webpack-contrib/bootstrap-plugin/BootstrapPlugin';
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
@@ -363,13 +362,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					supportedLocales: args.supportedLocales,
 					cldrPaths: args.cldrPaths,
 					target: mainEntryPath
-				}),
-			args.externals &&
-				args.externals.dependencies &&
-				new ExternalLoaderPlugin({
-					dependencies: args.externals.dependencies,
-					hash: true,
-					outputPath: args.externals.outputPath
 				}),
 			!singleBundle &&
 				new webpack.DefinePlugin({
