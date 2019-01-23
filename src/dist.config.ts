@@ -1,4 +1,5 @@
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
+import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
@@ -63,6 +64,13 @@ function webpackConfig(args: any): webpack.Configuration {
 			template: 'src/index.html',
 			cache: false
 		}),
+		args.externals &&
+			args.externals.dependencies &&
+			new ExternalLoaderPlugin({
+				dependencies: args.externals.dependencies,
+				hash: true,
+				outputPath: args.externals.outputPath
+			}),
 		manifest &&
 			new WebpackPwaManifest({
 				...manifest,

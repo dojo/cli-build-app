@@ -1,5 +1,6 @@
 import * as webpack from 'webpack';
 import baseConfigFactory, { libraryName } from './base.config';
+import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 
 const WrapperPlugin = require('wrapper-webpack-plugin');
 
@@ -12,6 +13,13 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.plugins = [
 		...plugins!,
+		args.externals &&
+			args.externals.dependencies &&
+			new ExternalLoaderPlugin({
+				dependencies: args.externals.dependencies,
+				hash: true,
+				outputPath: args.externals.outputPath
+			}),
 		new WrapperPlugin({
 			test: /(all.*(\.js$))/,
 			footer: `typeof define === 'function' && define.amd && define(['${libraryName}'], function() {});`
