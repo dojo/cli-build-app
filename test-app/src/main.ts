@@ -9,7 +9,7 @@ import './Bar';
 import LazyApp from './LazyApp';
 import routes from './routes';
 import myTheme from './themes/test-app/theme';
-import test from './test.build';
+import test from './test.block';
 
 console.log(myTheme);
 
