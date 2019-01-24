@@ -45,6 +45,20 @@ function createWatchCompiler(config: webpack.Configuration) {
 	return compiler;
 }
 
+function serveStatic(app: express.Application, outputDir: string, mode: string, compression?: string[]) {
+	if (mode === 'dist' && Array.isArray(compression)) {
+		const useBrotli = compression.indexOf('brotli') > -1;
+		app.use(
+			expressStaticGzip(outputDir, {
+				enableBrotli: useBrotli,
+				orderPreference: useBrotli ? ['br'] : undefined
+			})
+		);
+	} else {
+		app.use(express.static(outputDir));
+	}
+}
+
 function build(config: webpack.Configuration, args: any) {
 	const compiler = createCompiler(config);
 	const spinner = ora('building').start();
@@ -137,6 +151,9 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 	);
 
+	const outputDir = (config.output && config.output.path) || process.cwd();
+	serveStatic(app, outputDir, args.mode, args.compression);
+
 	app.use(
 		history({
 			rewrites: [
@@ -163,18 +180,7 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 	);
 
-	const outputDir = (config.output && config.output.path) || process.cwd();
-	if (args.mode === 'dist' && Array.isArray(args.compression)) {
-		const useBrotli = args.compression.includes('brotli');
-		app.use(
-			expressStaticGzip(outputDir, {
-				enableBrotli: useBrotli,
-				orderPreference: useBrotli ? ['br'] : undefined
-			})
-		);
-	} else {
-		app.use(express.static(outputDir));
-	}
+	serveStatic(app, outputDir, args.mode, args.compression);
 
 	if (args.proxy) {
 		Object.keys(args.proxy).forEach((context) => {
