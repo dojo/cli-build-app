@@ -52,7 +52,7 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
-		new CleanWebpackPlugin(['dev'], { root: output!.path, verbose: false })
+		new CleanWebpackPlugin(['dev', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
 	if (module) {
