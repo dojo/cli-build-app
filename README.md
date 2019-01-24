@@ -69,20 +69,7 @@ The `functional` mode creates bundles that can be used to run the functional tes
 
 ### Polyfills
 
-The build command conditionally loads a selection of supported polyfills based on your applications usage and the users browsers capabilities.
-
-Supported Polyfills:
-
-1) [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-1) [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
-1) [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
-1) [WebAnimations](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API)
-
-To leverage conditional polyfills, import the appropriate shim modules and use them within your application.
-
-```ts
-import ResizeObserver from '@dojo/framework/shim/ResizeObserver';
-```
+The build command conditionally loads polyfills from `@dojo/framework/shim` based on your applications usage and the users browsers capabilities.
 
 #### Legacy Browser Support
 
