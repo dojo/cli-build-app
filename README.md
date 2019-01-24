@@ -390,7 +390,7 @@ Generates a fully-functional service worker that is activated on startup, comple
 Renders the application to HTML during the build and in-lines the critical CSS. This allows the application to effectively render static HTML pages and provide some advantages of SSR (server side rendering) such as performance, SEO etc without the complexities of running a server to support full SSR.
 
  * root (required) : The `id` of the root DOM node that application `merge` onto.
- * paths (optional): An array of hash routes to render the application for during the build, for more complex routes an object can be provided with a basic "matcher" (regular expression) that is used to match against the applications route on page load.
+ * paths (optional): An array of routes to render the application for during the build, for more complex routes an object can be provided with a basic "matcher" (regular expression) that is used to match against the applications route on page load.
 
  Build time rendering supports applications that use either the `@dojo/framework/routing/history/HashHistory` and `@dojo/framework/routing/history/StateHistory` history managers. If your application uses the `HashHistory` ensure that all `paths` are prefixed with a `#` character.
 
