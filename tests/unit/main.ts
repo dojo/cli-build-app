@@ -5,7 +5,7 @@ import { SinonStub, stub } from 'sinon';
 import chalk from 'chalk';
 import MockModule from '../support/MockModule';
 import { readFileSync, existsSync } from 'fs';
-import { Validator } from 'jsonschema';
+import Ajv = require('ajv');
 import { Helper } from '@dojo/cli/interfaces';
 
 let mockModule: MockModule;
@@ -752,18 +752,13 @@ describe('command', () => {
 		});
 
 		it('is a valid JSON Schema', () => {
-			const metaSchemaPath = join(__dirname, '../support', 'MetaSchema.json');
 			const schema = JSON.parse(readFileSync(path).toString());
-			const metaSchema = JSON.parse(readFileSync(metaSchemaPath).toString());
 
-			const validator = new Validator();
-			const result = validator.validate(schema, metaSchema);
-			const formattedErrors = result.errors.map((e) => e + '\n').toString();
-			assert.equal(
-				result.errors.length,
-				0,
-				`schema should have no errors when checked against metaschema but returned: \n ${formattedErrors}`
-			);
+			const ajv = new Ajv({ allErrors: true, verbose: true });
+			const validate = ajv.compile(schema);
+			validate({});
+
+			assert.equal(validate.errors, null, `schema should have no errors`);
 		});
 	});
 });
