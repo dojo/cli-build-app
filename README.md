@@ -51,7 +51,7 @@ The `dist` mode creates a production-ready build.
 
 ##### Bundle Analyzer
 
-When building your application in `dist` mode, the build process will generate a webpack bundle analyzer that can be used to inspect the content of your applications bundles. The webpack bundle analyzer is outputted to the `output/info/analyzer` directory of your project. To view the analyzer open the `index.html` file contained in this directory.
+When building your application in `dist` mode, the build process will generate a webpack bundle analyzer that can be used to inspect the content of your application's bundles. The webpack bundle analyzer is outputted to the `output/info/analyzer` directory of your project. To view the analyzer, open the `index.html` file contained in this directory.
 
 ![webpack bundle analyzer](https://raw.githubusercontent.com/dojo/cli-build-app/master/imgs/bundle-analyzer.gif)
 
@@ -69,11 +69,11 @@ The `functional` mode creates bundles that can be used to run the functional tes
 
 ### Polyfills
 
-The build command conditionally loads polyfills from `@dojo/framework/shim` based on your applications usage and the users browsers capabilities.
+The build command conditionally loads polyfills from `@dojo/framework/shim` based on your application's usage and the user's browser capabilities.
 
 #### Legacy Browser Support
 
-By default, the build will support the last two versions of the latest browsers. To support IE 11 run the build with the `--legacy` (`-l`) flag.
+By default, the build will support the last two versions of the latest browsers. To support IE 11, run the build with the `--legacy` (`-l`) flag.
 
 ### Asset Management
 
@@ -390,9 +390,9 @@ Generates a fully-functional service worker that is activated on startup, comple
 Renders the application to HTML during the build and in-lines the critical CSS. This allows the application to effectively render static HTML pages and provide some advantages of SSR (server side rendering) such as performance, SEO etc without the complexities of running a server to support full SSR.
 
  * root (required) : The `id` of the root DOM node that application `merge` onto.
- * paths (optional): An array of routes to render the application for during the build, for more complex routes an object can be provided with a basic "matcher" (regular expression) that is used to match against the applications route on page load.
+ * paths (optional): An array of routes for rendering the application during the build; for more complex routes an object can be provided with a basic "matcher" (regular expression) that gets used to match against the application's route on page load.
 
- Build time rendering supports applications that use either the `@dojo/framework/routing/history/HashHistory` and `@dojo/framework/routing/history/StateHistory` history managers. If your application uses the `HashHistory` ensure that all `paths` are prefixed with a `#` character.
+ Build time rendering supports applications that use either the `@dojo/framework/routing/history/HashHistory` or `@dojo/framework/routing/history/StateHistory` history managers. If your application uses the `HashHistory`, ensure that all `paths` are prefixed with a `#` character.
 
 ```json
 {
@@ -421,7 +421,7 @@ if (!has('build-time-render')) {
 }
 ```
 
-**Note:** The `index.html` of your application needs to contain a DOM node with the `id` specified as the `root` in the configuration. This DOM node needs to be used when mounting the renderer for application:
+**Note:** The `index.html` of your application needs to contain a DOM node with the `id` specified as the `root` in the configuration. This DOM node needs to be used when mounting the `renderer` for application:
 
 ```ts
 const r = renderer(() => w(YourAppWidget, {}));
