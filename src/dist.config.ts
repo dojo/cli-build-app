@@ -12,7 +12,6 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
-import * as ManifestPlugin from 'webpack-manifest-plugin';
 import baseConfigFactory, { bootstrapEntry, mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 
@@ -49,7 +48,6 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.plugins = [
 		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
-		new ManifestPlugin(),
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
 			openAnalyzer: false,

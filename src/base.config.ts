@@ -11,6 +11,7 @@ import * as tsnode from 'ts-node';
 import * as ts from 'typescript';
 import * as webpack from 'webpack';
 import * as cssnano from 'cssnano';
+import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
@@ -87,7 +88,7 @@ function getLocalIdent(
 	return hash.replace(new RegExp('[^a-zA-Z0-9\\-_\u00A0-\uFFFF]', 'g'), '-').replace(/^((-?[0-9])|--)/, '_$1');
 }
 
-const removeEmpty = (items: any[]) => items.filter((item) => item);
+export const removeEmpty = (items: any[]) => items.filter((item) => item);
 
 function importTransformer(basePath: string, bundles: any = {}) {
 	return function(context: any) {
@@ -403,7 +404,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			watch &&
 				new ExtraWatchWebpackPlugin({
 					files: ['!(output|.*|node_modules)/**']
-				})
+				}),
+			new ManifestPlugin()
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
