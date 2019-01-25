@@ -1,5 +1,5 @@
 import * as webpack from 'webpack';
-import baseConfigFactory, { libraryName } from './base.config';
+import baseConfigFactory, { libraryName, removeEmpty } from './base.config';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 
 const WrapperPlugin = require('wrapper-webpack-plugin');
@@ -11,7 +11,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	const instrumenterOptions = args.legacy ? {} : { esModules: true };
 
-	config.plugins = [
+	config.plugins = removeEmpty([
 		...plugins!,
 		args.externals &&
 			args.externals.dependencies &&
@@ -24,7 +24,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			test: /(all.*(\.js$))/,
 			footer: `typeof define === 'function' && define.amd && define(['${libraryName}'], function() {});`
 		})
-	];
+	]);
 
 	if (module) {
 		module.rules = module.rules.map((rule) => {

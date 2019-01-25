@@ -11,7 +11,6 @@ import ServiceWorkerPlugin, {
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
@@ -29,7 +28,6 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.plugins = [
 		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
-		new ManifestPlugin(),
 		new HtmlWebpackPlugin({
 			inject: true,
 			chunks: [entryName],
