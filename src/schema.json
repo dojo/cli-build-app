@@ -1,6 +1,78 @@
 {
+    "definitions": {
+        "mode": {
+            "type": "string",
+            "enum": [
+                "brotli",
+                "gzip"
+            ]
+        },
+        "watch": {
+            "type": "string",
+            "enum": [
+                "memory",
+                "file"
+            ]
+        },
+        "serve": {
+            "type": "boolean"
+        },
+        "port": {
+            "type": "number"
+        },
+        "legacy": {
+            "type": "boolean"
+        },
+        "feature": {
+            "type": "object",
+            "patternProperties": {
+                "^.*$": {
+                    "type": ["boolean", "string", "number"]
+                }
+            }
+        }
+    },
 	"type": "object",
 	"properties": {
+        "mode": {
+            "$ref": "#/definitions/mode" 
+        },
+        "m": {
+            "$ref": "#/definitions/mode" 
+        },
+        "watch": {
+            "$ref": "#/definitions/watch" 
+        },
+        "w": {
+            "$ref": "#/definitions/watch" 
+        },
+        "serve" : {
+            "$ref": "#/definitions/serve" 
+        },
+        "s": {
+            "$ref": "#/definitions/serve" 
+        },
+        "port" : {
+            "$ref": "#/definitions/port" 
+        },
+        "p": {
+            "$ref": "#/definitions/port" 
+        },
+        "legacy": {
+            "$ref": "#/definitions/legacy" 
+        },
+        "l": {
+            "$ref": "#/definitions/legacy" 
+        },
+        "feature": {
+            "$ref": "#/definitions/feature" 
+        },
+        "f": {
+            "$ref": "#/definitions/feature" 
+        },
+        "single-bundle": {
+            "type": "boolean"
+        },
 		"bundles": {
 			"type": "object",
 			"patternProperties": {
@@ -59,12 +131,7 @@
             }
         },
         "features": {
-            "type": "object",
-            "patternProperties": {
-                "^.*$": {
-                    "type": ["boolean", "string", "number"]
-                }
-            }
+            "$ref": "#/definitions/feature"
         },
         "locale": {
             "type": "string"
