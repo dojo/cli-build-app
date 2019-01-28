@@ -45,9 +45,15 @@ The built application files are written to the `output/{dist/dev}` directory. Th
 
 Note: `dist` is the default mode and so can be run without any arguments, `dojo build app`.
 
-#### Dist Mode
+#### Dist Mode (default)
 
 The `dist` mode creates a production-ready build.
+
+##### Bundle Analyzer
+
+When building your application in `dist` mode, the build process will generate a webpack bundle analyzer that can be used to inspect the content of your application's bundles. The webpack bundle analyzer is outputted to the `output/info/analyzer` directory of your project. To view the analyzer, open the `index.html` file contained in this directory.
+
+![webpack bundle analyzer](https://raw.githubusercontent.com/dojo/cli-build-app/master/imgs/bundle-analyzer.gif)
 
 #### Dev mode
 
@@ -60,6 +66,14 @@ The `unit` mode creates bundles that can be used to run the unit tests of the ap
 #### Functional mode
 
 The `functional` mode creates bundles that can be used to run the functional tests of the application.
+
+### Polyfills
+
+The build command conditionally loads polyfills from `@dojo/framework/shim` based on your application's usage and the user's browser capabilities.
+
+#### Legacy Browser Support
+
+By default, the build will support the last two versions of the latest browsers. To support IE 11, run the build with the `--legacy` (`-l`) flag.
 
 ### Asset Management
 
@@ -185,10 +199,6 @@ dojo build -w
 # build to an in-memory file system with HMR
 dojo build -s -w=memory -m=dev
 ```
-
-### Legacy Browser Support
-
-By default, the build will support the last two versions of the latest browsers. To support IE 11 include any necessary polyfills, such as the fetch API, and run the build with the `--legacy` (`-l`) flag.
 
 ### Eject
 
@@ -375,12 +385,14 @@ Generates a fully-functional service worker that is activated on startup, comple
 }
 ```
 
-#### `build-time-render`: object
+#### `build-time-render`(BTR): object
 
 Renders the application to HTML during the build and in-lines the critical CSS. This allows the application to effectively render static HTML pages and provide some advantages of SSR (server side rendering) such as performance, SEO etc without the complexities of running a server to support full SSR.
 
  * root (required) : The `id` of the root DOM node that application `merge` onto.
- * paths (optional): An array of hash routes to render the application for during the build, for more complex routes an object can be provided with a basic "matcher" (regular expression) that is used to match against the applications route on page load. *Only supports hash routing.*
+ * paths (optional): An array of routes for rendering the application during the build; for more complex routes an object can be provided with a basic "matcher" (regular expression) that gets used to match against the application's route on page load.
+
+ Build time rendering supports applications that use either the `@dojo/framework/routing/history/HashHistory` or `@dojo/framework/routing/history/StateHistory` history managers. If your application uses the `HashHistory`, ensure that all `paths` are prefixed with a `#` character.
 
 ```json
 {
@@ -399,6 +411,8 @@ Renders the application to HTML during the build and in-lines the critical CSS. 
 }
 ```
 
+BTR generates a screenshot for each of the paths rendered during the build in the `output/info/screenshots` directory of your project.
+
 Build time rendering exposes a `has` flag `build-time-render` that can be used to skip functionality that cannot be executed at build time, for example fetching external data.
 
 ```ts
@@ -407,7 +421,12 @@ if (!has('build-time-render')) {
 }
 ```
 
-**Note:** The application needs to use the `merge` API from `Projector`
+**Note:** The `index.html` of your application needs to contain a DOM node with the `id` specified as the `root` in the configuration. This DOM node needs to be used when mounting the `renderer` for application:
+
+```ts
+const r = renderer(() => w(YourAppWidget, {}));
+r.mount({ domNode: document.getElementById('app')! });
+```
 
 #### `supportedLocales`: string[]
 
