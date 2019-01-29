@@ -98,6 +98,7 @@
         },
         "externals" : {
             "type": "object",
+            "additionalProperties": false,
             "properties" : {
                 "outputPath": {
                     "type": "string"
@@ -139,9 +140,11 @@
         },
         "pwa" : {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "manifest" : {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "background_color": {
                             "type": "string"
@@ -231,6 +234,7 @@
                 },
                 "serviceWorker" : {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "bundles": {
                             "type": "array",
@@ -281,6 +285,7 @@
                             "type": "array",
                             "items": {
                                 "type": "object",
+                                "additionalProperties": false,
                                 "properties": {
                                     "urlPattern": {
                                         "type": "string"
@@ -296,12 +301,14 @@
                                     },
                                     "options": {
                                         "type": "object",
+                                        "additionalProperties": false,
                                         "properties": {
                                             "cacheName": {
                                                 "type": "string"
                                             },
                                             "cacheableResponse": {
                                                 "type": "object",
+                                                "additionalProperties": false,
                                                 "properties": {
                                                     "statuses": {
                                                         "type": "array",
@@ -316,6 +323,7 @@
                                             },
                                             "expiration": {
                                                 "type": "object",
+                                                "additionalProperties": false,
                                                 "properties": {
                                                     "maxEntries": {
                                                         "type": "number"
@@ -339,7 +347,20 @@
                     }
                 },
                 "build-time-render" : {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "root": {
+                            "type": "string"
+                        },
+                        "paths": {
+                            "type": "array",
+                            "items": {
+                                "type": ["string", "object"]
+                            }
+                        }
+                    },
+                    "required": ["root"]
                 }
             }
         },
