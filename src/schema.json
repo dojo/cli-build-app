@@ -32,7 +32,8 @@
             }
         }
     },
-	"type": "object",
+    "type": "object",
+    "additionalProperties": false,
 	"properties": {
         "mode": {
             "$ref": "#/definitions/mode" 
