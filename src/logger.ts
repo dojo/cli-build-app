@@ -42,16 +42,18 @@ export default function logger(stats: any, config: any, runningMessage: string =
 	if (stats.warnings.length) {
 		signOff = chalk.yellow('The build completed with warnings.');
 		warnings = `
-${chalk.yellow('warnings:')}
-${chalk.gray(stats.warnings.map((warning: string) => stripAnsi(warning)))}
+${chalk.yellow('warnings:')}${chalk.gray(
+			stats.warnings.reduce((warnings: string, warning: string) => `${warnings}\n${stripAnsi(warning)}`, '')
+		)}
 `;
 	}
 
 	if (stats.errors.length) {
 		signOff = chalk.red('The build completed with errors.');
 		errors = `
-${chalk.yellow('errors:')}
-${chalk.red(stats.errors.map((error: string) => stripAnsi(error)))}
+${chalk.yellow('errors:')}${chalk.red(
+			stats.errors.reduce((errors: string, error: string) => `${errors}\n${stripAnsi(error)}`, '')
+		)}
 `;
 	}
 
