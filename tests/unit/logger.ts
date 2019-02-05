@@ -7,7 +7,6 @@ import chalk from 'chalk';
 import * as sinon from 'sinon';
 import MockModule from '../support/MockModule';
 
-const stripAnsi = require('strip-ansi');
 const columns = require('cli-columns');
 
 let mockModule: MockModule;
@@ -105,8 +104,8 @@ describe('logger', () => {
 	});
 
 	it('logging output with errors', () => {
-		const errors: any = ['error'];
-		const warnings: any = ['warning'];
+		const errors: any = ['error', 'otherError'];
+		const warnings: any = ['warning', 'otherWarning'];
 		const logger = mockModule.getModuleUnderTest().default;
 		const hasErrors = logger(
 			{
@@ -137,21 +136,19 @@ describe('logger', () => {
 		);
 
 		const expectedErrors = `
-${chalk.yellow('errors:')}
-${chalk.red(errors.map((error: string) => stripAnsi(error)))}
+${chalk.yellow('errors:')}${chalk.red('\nerror\notherError')}
 `;
 
 		const expectedWarnings = `
-${chalk.yellow('warnings:')}
-${chalk.gray(warnings.map((warning: string) => stripAnsi(warning)))}
+${chalk.yellow('warnings:')}${chalk.gray('\nwarning\notherWarning')}
 `;
 
 		const expectedLog = `
 ${logSymbols.info} cli-build-app: 9.9.9
 ${logSymbols.info} typescript: 1.1.1
 ${logSymbols.success} hash: hash
-${logSymbols.error} errors: 1
-${logSymbols.warning} warnings: 1
+${logSymbols.error} errors: 2
+${logSymbols.warning} warnings: 2
 ${expectedErrors}${expectedWarnings}
 ${chalk.yellow('chunks:')}
 ${columns(['chunkOne'])}
@@ -165,6 +162,7 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__d
 ${chalk.red('The build completed with errors.')}
 	`;
 		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+		assert.strictEqual(mockedLogUpdate.firstCall.args[0], expectedLog);
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 		assert.isTrue(hasErrors);
 	});
