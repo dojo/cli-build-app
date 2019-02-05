@@ -14,10 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli": "^4.0.0",
-    "@dojo/framework": "next",
-    "@dojo/widgets": "^4.0.1",
-    "@dojo/themes": "^4.0.1",
+    "@dojo/cli": "^5.0.0",
+    "@dojo/framework": "^5.0.0",
+    "@dojo/widgets": "^5.0.0",
+    "@dojo/themes": "^5.0.0",
     "@fortawesome/fontawesome-free": "5.3.1",
     "tslib": "~1.8.0",
     "typescript": "2.6.1"
