@@ -327,6 +327,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			extensions
 		},
 		optimization: {
+			noEmitOnErrors: false,
 			splitChunks: {
 				cacheGroups: {
 					vendors: false,
