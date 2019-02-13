@@ -484,8 +484,6 @@ describe('command', () => {
 					watch: true
 				})
 				.then(() => {
-					assert.lengthOf(plugins, 1);
-					assert.isTrue(webpack.NoEmitOnErrorsPlugin.calledWithNew());
 					assert.sameMembers(entry.main, ['eventsource-polyfill']);
 				});
 		});
