@@ -136,7 +136,7 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	const app = express();
 	app.use(function(req, res, next) {
 		const { pathname } = url.parse(req.url);
-		if (pathname && !pathname.match(/\..*$/) && pathname !== '/__webpack_hmr') {
+		if (req.is('html') && pathname && !pathname.match(/\..*$/)) {
 			req.url = `${req.url}/`;
 		}
 		next();
