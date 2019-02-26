@@ -10,6 +10,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const config = baseTestConfigFactory(args);
 	const { output, plugins } = config;
 	const outputPath = output!.path as string;
+	config.target = 'node';
 	config.entry = () => {
 		const functional = globby
 			.sync([`${basePath}/tests/functional/**/*.ts`])
