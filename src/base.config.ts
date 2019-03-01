@@ -21,6 +21,9 @@ const WrapperPlugin = require('wrapper-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 
+const stylelint = require('stylelint');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+
 const basePath = process.cwd();
 const srcPath = path.join(basePath, 'src');
 const testPath = path.join(basePath, 'tests');
@@ -344,6 +347,29 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
+			new StyleLintPlugin({
+				config: {
+					rules: {
+						'selector-max-type': [0, { ignoreTypes: '.' }],
+						'selector-max-universal': [0]
+					}
+				},
+				emitErrors: false,
+				formatter: (results: any) => {
+					return stylelint.formatters
+						.string(results)
+						.replace(/selector-max-type|selector-max-universal/g, 'css-modules')
+						.replace(
+							/to have no more than (\d*) type selectors/g,
+							'to not contain element selectors due to unsafe isolation'
+						)
+						.replace(
+							/to have no more than (\d*) universal selectors/g,
+							'to not contain universal (*) selectors due to unsafe isolation'
+						);
+				},
+				files: ['**/*.m.css']
+			}),
 			singleBundle &&
 				new webpack.optimize.LimitChunkCountPlugin({
 					maxChunks: 1
