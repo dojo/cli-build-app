@@ -11,6 +11,7 @@ import * as tsnode from 'ts-node';
 import * as ts from 'typescript';
 import * as webpack from 'webpack';
 import * as cssnano from 'cssnano';
+import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const postcssPresetEnv = require('postcss-preset-env');
@@ -62,7 +63,8 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 				const filePath = path.relative(basePath, path.join(context, module));
 				let chunkName = slash(filePath);
 				Object.keys(bundles).some((name) => {
-					if (bundles[name].indexOf(slash(filePath)) > -1) {
+					const result = bundles[name].some((bundlePattern) => minimatch(slash(filePath), bundlePattern));
+					if (result) {
 						chunkName = name;
 						return true;
 					}
@@ -93,7 +95,7 @@ function getLocalIdent(
 
 export const removeEmpty = (items: any[]) => items.filter((item) => item);
 
-function importTransformer(basePath: string, bundles: any = {}) {
+function importTransformer(basePath: string, bundles: { [key: string]: string[] } = {}) {
 	return function(context: any) {
 		let resolvedModules: any;
 		return function(file: any) {
@@ -113,7 +115,8 @@ function importTransformer(basePath: string, bundles: any = {}) {
 							.replace(/^(\/|\\)/, '')
 					);
 					Object.keys(bundles).some(function(name) {
-						if (bundles[name].indexOf(slash(chunkName)) !== -1) {
+						const result = bundles[name].some((bundlePattern) => minimatch(chunkName, bundlePattern));
+						if (result) {
 							chunkName = name;
 							return true;
 						}
