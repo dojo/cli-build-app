@@ -259,6 +259,8 @@ The bundles configuration supports globs for matching against modules, this can 
 }
 ```
 
+**Note:** The precedence for bundle configuration is 1) An exact match wins against a glob match 2) Order based with the last config winning.
+
 #### `cldrPaths`: string[]
 
 An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data) files. Used in conjunction with the `locale` and `supportedLocales` options (see below). If a path contains the string `{locale}`, that file will be loaded for each locale listed in the `locale` and `supportedLocales` properties. For example, with the following configuration the `numbers.json` file will be loaded for the "en", "es", and "fr" locales:
