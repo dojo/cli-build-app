@@ -166,4 +166,59 @@ ${chalk.red('The build completed with errors.')}
 		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 		assert.isTrue(hasErrors);
 	});
+
+	it('should skip assets that do not exist', () => {
+		const logger = mockModule.getModuleUnderTest().default;
+		const hasErrors = logger(
+			{
+				hash: 'hash',
+				assets: [
+					{
+						name: 'assetOne.js',
+						size: 1000
+					},
+					{
+						name: 'assetTwo.js',
+						size: 1000
+					}
+				],
+				chunks: [
+					{
+						names: ['chunkOne']
+					}
+				],
+				errors: [],
+				warnings: []
+			},
+			{
+				output: {
+					path: path.join(__dirname, '..', 'fixtures', 'missing-assets')
+				}
+			}
+		);
+
+		const expectedLog = `
+${logSymbols.info} cli-build-app: 9.9.9
+${logSymbols.info} typescript: 1.1.1
+${logSymbols.success} hash: hash
+${logSymbols.error} errors: 0
+${logSymbols.warning} warnings: 0
+${''}${''}
+${chalk.yellow('chunks:')}
+${columns(['chunkOne'])}
+${chalk.yellow('assets:')}
+${columns([`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`])}
+${chalk.yellow(
+			`output at: ${chalk.cyan(
+				chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures', 'missing-assets')}`)
+			)}`
+		)}
+
+${chalk.green('The build completed successfully.')}
+	`;
+		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+		assert.strictEqual(mockedLogUpdate.firstCall.args[0], expectedLog);
+		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
+		assert.isFalse(hasErrors);
+	});
 });
