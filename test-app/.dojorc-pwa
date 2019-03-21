@@ -8,12 +8,15 @@
 			"bar": false
 		},
 		"bundles": {
+			"ignored": [
+				"src/Bar"
+			],
+			"lazy": [
+				"**/LazyWidget"
+			],
 			"widgets": [
 				"src/Bar",
 				"src/Baz"
-			],
-			"lazy": [
-				"src/LazyWidget"
 			]
 		},
 		"pwa": {
