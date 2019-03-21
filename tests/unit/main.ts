@@ -466,7 +466,7 @@ describe('command', () => {
 					watch: true
 				})
 				.then(() => {
-					assert.strictEqual(useStub.callCount, 6);
+					assert.strictEqual(useStub.callCount, 8);
 					assert.isTrue(
 						hotMiddleware.calledWith(compiler, {
 							heartbeat: 10000

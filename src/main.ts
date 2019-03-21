@@ -8,6 +8,7 @@ import * as webpack from 'webpack';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import * as https from 'https';
+import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 
@@ -55,6 +56,7 @@ function serveStatic(app: express.Application, outputDir: string, mode: string, 
 			})
 		);
 	} else {
+		app.use(expressCompression());
 		app.use(express.static(outputDir));
 	}
 }
