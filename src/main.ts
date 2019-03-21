@@ -134,6 +134,13 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	let isHttps = false;
 
 	const app = express();
+	app.use(function(req, res, next) {
+		const { pathname } = url.parse(req.url);
+		if (req.accepts('html') && pathname && !pathname.match(/\..*$/)) {
+			req.url = `${req.url}/`;
+		}
+		next();
+	});
 	app.use(
 		connectInject({
 			rules: [
