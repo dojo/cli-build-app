@@ -13,7 +13,7 @@
 				"src/Bar"
 			],
 			"lazy": [
-				"**/LazyWidget"
+				"src/LazyWidget"
 			],
 			"widgets": [
 				"src/Bar",
