@@ -9,12 +9,15 @@
 			"bar": false
 		},
 		"bundles": {
-			"widgets": [
-				"src/Bar",
-				"src/Baz"
+			"ignored": [
+				"src/Bar"
 			],
 			"lazy": [
 				"src/LazyWidget"
+			],
+			"widgets": [
+				"src/Bar",
+				"src/Baz"
 			]
 		},
 		"build-time-render": {

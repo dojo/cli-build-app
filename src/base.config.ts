@@ -11,6 +11,7 @@ import * as tsnode from 'ts-node';
 import * as ts from 'typescript';
 import * as webpack from 'webpack';
 import * as cssnano from 'cssnano';
+import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const postcssPresetEnv = require('postcss-preset-env');
@@ -53,6 +54,28 @@ function getLibraryName(name: string) {
 
 export const libraryName = packageName ? getLibraryName(packageName) : mainEntry;
 
+function matchesBundle(bundles: { [key: string]: string[] }, chunkName: string, glob = false) {
+	let updatedChunkName = '';
+	Object.keys(bundles)
+		.reverse()
+		.some(function(key) {
+			const bundleModules = bundles[key];
+			let result = false;
+			if (glob) {
+				result = bundleModules.some((bundlePattern) => minimatch(chunkName, bundlePattern));
+			} else {
+				result = bundleModules.indexOf(chunkName) > -1;
+			}
+
+			if (result) {
+				updatedChunkName = key;
+				return true;
+			}
+			return false;
+		});
+	return updatedChunkName;
+}
+
 function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) {
 	const { bundles = {} } = options;
 	return {
@@ -61,13 +84,8 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 			imports(module: string, context: string) {
 				const filePath = path.relative(basePath, path.join(context, module));
 				let chunkName = slash(filePath);
-				Object.keys(bundles).some((name) => {
-					if (bundles[name].indexOf(slash(filePath)) > -1) {
-						chunkName = name;
-						return true;
-					}
-					return false;
-				});
+				const updateChunkName = matchesBundle(bundles, chunkName) || matchesBundle(bundles, chunkName, true);
+				chunkName = updateChunkName || chunkName;
 				return `@dojo/webpack-contrib/promise-loader?global,${chunkName}!${module}`;
 			}
 		}
@@ -93,7 +111,7 @@ function getLocalIdent(
 
 export const removeEmpty = (items: any[]) => items.filter((item) => item);
 
-function importTransformer(basePath: string, bundles: any = {}) {
+function importTransformer(basePath: string, bundles: { [key: string]: string[] } = {}) {
 	return function(context: any) {
 		let resolvedModules: any;
 		return function(file: any) {
@@ -112,13 +130,9 @@ function importTransformer(basePath: string, bundles: any = {}) {
 							.replace(/.ts(x)?$/, '')
 							.replace(/^(\/|\\)/, '')
 					);
-					Object.keys(bundles).some(function(name) {
-						if (bundles[name].indexOf(slash(chunkName)) !== -1) {
-							chunkName = name;
-							return true;
-						}
-						return false;
-					});
+					const updateChunkName =
+						matchesBundle(bundles, chunkName) || matchesBundle(bundles, chunkName, true);
+					chunkName = updateChunkName || chunkName;
 				}
 				node.arguments[0] = ts.addSyntheticLeadingComment(
 					node.arguments[0],
