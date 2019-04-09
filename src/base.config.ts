@@ -191,6 +191,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	if (singleBundle) {
 		entry = {
 			[mainEntry]: removeEmpty([
+				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/sync',
 				existsSync(mainCssPath) ? mainCssPath : null,
 				mainEntryPath
