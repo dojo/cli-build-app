@@ -187,6 +187,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest;
 	const watch = args.watch;
+	const watchExtraFiles = Array.isArray(args.watchExtraFiles) ? args.watchExtraFiles : [];
 	let entry: any;
 	if (singleBundle) {
 		entry = {
@@ -445,8 +446,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					]
 				}),
 			watch &&
+				watchExtraFiles.length &&
 				new ExtraWatchWebpackPlugin({
-					files: ['!(output|.*|node_modules)/**']
+					files: watchExtraFiles
 				}),
 			new ManifestPlugin()
 		]),
