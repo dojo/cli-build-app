@@ -79,7 +79,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			}),
 		new webpack.BannerPlugin({
 			banner,
-			test: /^.*(?<!\.css)$/i
+			test: /^(.(?!.*\.css$))*$/i
 		}),
 		new WebpackChunkHash(),
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
