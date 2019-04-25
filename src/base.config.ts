@@ -189,6 +189,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const watch = args.watch;
 	const watchExtraFiles = Array.isArray(args.watchExtraFiles) ? args.watchExtraFiles : [];
 	let entry: any;
+	if (!isTest) {
+		features = { ...features, test: false };
+	}
 	if (singleBundle) {
 		entry = {
 			[mainEntry]: removeEmpty([
