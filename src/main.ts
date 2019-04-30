@@ -285,6 +285,13 @@ const command: Command = {
 			type: 'boolean'
 		});
 
+		options('omit-hash', {
+			describe: 'Omits hashes from output file names in dist mode',
+			defaultDescription: '(always false for dev builds)',
+			default: false,
+			type: 'boolean'
+		});
+
 		options('legacy', {
 			describe: 'build app with legacy browser support',
 			alias: 'l',

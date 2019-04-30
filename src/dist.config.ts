@@ -106,7 +106,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.plugins = config.plugins.map((plugin) => {
 		if (plugin instanceof MiniCssExtractPlugin) {
 			return new MiniCssExtractPlugin({
-				filename: '[name].[contenthash].bundle.css'
+				filename: args.omitHash ? '[name].bundle.css' : '[name].[contenthash].bundle.css'
 			});
 		}
 		return plugin;
@@ -127,8 +127,8 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.output = {
 		...output,
 		path: outputPath,
-		chunkFilename: '[name].[chunkhash].bundle.js',
-		filename: '[name].[chunkhash].bundle.js'
+		chunkFilename: args.omitHash ? '[name].bundle.js' : '[name].[chunkhash].bundle.js',
+		filename: args.omitHash ? '[name].bundle.js' : '[name].[chunkhash].bundle.js'
 	};
 
 	return config;
