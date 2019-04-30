@@ -127,7 +127,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.output = {
 		...output,
 		path: outputPath,
-		chunkFilename: '[name].[chunkhash].bundle.js',
+		chunkFilename: args.omitHash ? '[name].bundle.js' : '[name].[chunkhash].bundle.js',
 		filename: args.omitHash ? '[name].bundle.js' : '[name].[chunkhash].bundle.js'
 	};
 
