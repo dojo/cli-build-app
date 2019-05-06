@@ -77,7 +77,10 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
-		new webpack.BannerPlugin(banner),
+		new webpack.BannerPlugin({
+			banner,
+			test: /^.*\.js$/i
+		}),
 		new WebpackChunkHash(),
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
