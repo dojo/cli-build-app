@@ -1,6 +1,6 @@
 describe('relative-css-url', () => {
 	function testUrl(dir: string) {
-		cy.visit(`/test-app/output/${dir}`);
+		cy.visit(`/test-app/output/${dir}/`);
 		cy.get('#div').should(
 			'contain',
 			`Built with Build Time Render: true

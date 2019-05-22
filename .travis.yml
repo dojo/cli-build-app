@@ -7,7 +7,7 @@ addons:
 before_install:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 node_js:
-- '6'
+- '10'
 env:
   global:
   - SAUCE_USERNAME: dojo2-ts-ci
