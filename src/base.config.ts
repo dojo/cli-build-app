@@ -335,7 +335,15 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			}
 		],
 		entry,
-		node: { dgram: 'empty', net: 'empty', tls: 'empty', fs: 'empty' },
+		node: {
+			dgram: 'empty',
+			net: 'empty',
+			tls: 'empty',
+			fs: 'empty',
+			process: false,
+			Buffer: false,
+			setImmediate: false
+		},
 		output: {
 			chunkFilename: '[name].js',
 			library: libraryName,
