@@ -1,6 +1,6 @@
 describe('build', () => {
 	function testUrl(dir: string, isDist: boolean, isPwa: boolean) {
-		cy.visit(`/test-app/output/${dir}`);
+		cy.visit(`/test-app/output/${dir}/`);
 		cy.get('#div').should(
 			'contain',
 			`Built with Build Time Render: true
