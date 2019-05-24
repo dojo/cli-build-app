@@ -67,6 +67,7 @@
     "@types/cssnano": "4.0.0",
     "@types/execa": "0.8.0",
     "@types/express": "4.11.0",
+    "@types/express-serve-static-core": "4.16.4",
     "@types/globby": "6.1.0",
     "@types/gzip-size": "4.0.0",
     "@types/html-webpack-plugin": "3.2.0",
@@ -103,7 +104,7 @@
     "sinon": "~4.5.0"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "^5.0.2",
+    "@dojo/webpack-contrib": "6.0.0-alpha.2",
     "brotli-webpack-plugin": "1.0.0",
     "chalk": "2.4.1",
     "clean-webpack-plugin": "1.0.0",
