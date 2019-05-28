@@ -56,7 +56,6 @@ function serveStatic(app: express.Application, outputDir: string, mode: string, 
 			})
 		);
 	} else {
-		app.use(expressCompression());
 		app.use(express.static(outputDir));
 	}
 }
@@ -143,6 +142,11 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		}
 		next();
 	});
+
+	const outputDir = (config.output && config.output.path) || process.cwd();
+	if (args.mode !== 'dist' || !Array.isArray(args.compression)) {
+		app.use(expressCompression());
+	}
 	app.use(
 		connectInject({
 			rules: [
@@ -157,8 +161,6 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 			]
 		})
 	);
-
-	const outputDir = (config.output && config.output.path) || process.cwd();
 	serveStatic(app, outputDir, args.mode, args.compression);
 
 	app.use(
