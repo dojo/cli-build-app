@@ -42,6 +42,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.optimization = {
 		...config.optimization,
+		namedChunks: true,
 		minimizer: [new TerserPlugin({ sourceMap: true, cache: true })],
 		flagIncludedChunks: false
 	};
