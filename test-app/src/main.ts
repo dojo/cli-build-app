@@ -1,17 +1,13 @@
-import has from '@dojo/framework/has/has';
-import renderer from '@dojo/framework/widget-core/vdom';
-import { w } from '@dojo/framework/widget-core/d';
-import Registry from '@dojo/framework/widget-core/Registry';
+import has from '@dojo/framework/core/has';
+import renderer, { w } from '@dojo/framework/core/vdom';
+import Registry from '@dojo/framework/core/Registry';
 import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
 import App from './App';
 import * as css from './app.m.css';
 import './Bar';
 import LazyApp from './LazyApp';
 import routes from './routes';
-import myTheme from './themes/test-app/theme';
 import test from './test.block';
-
-console.log(myTheme);
 
 '!has("bar")';
 
