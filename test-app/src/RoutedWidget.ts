@@ -1,7 +1,7 @@
-import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
+import WidgetBase from '@dojo/framework/core/WidgetBase';
 import ChildRoutedWidget from './ChildRoutedWidget';
 import Outlet from '@dojo/framework/routing/Outlet';
-import { w } from '@dojo/framework/widget-core/d';
+import { w } from '@dojo/framework/core/vdom';
 
 export default class RoutedWidget extends WidgetBase {
 	protected render() {

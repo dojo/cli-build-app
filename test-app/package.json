@@ -15,12 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "@dojo/cli": "^5.0.0",
-    "@dojo/framework": "^5.0.0",
-    "@dojo/widgets": "^5.0.0",
-    "@dojo/themes": "^5.0.0",
+    "@dojo/framework": "6.0.0-alpha.2",
     "@fortawesome/fontawesome-free": "5.3.1",
-    "tslib": "~1.8.0",
-    "typescript": "2.6.1"
+    "tslib": "~1.9.1",
+    "typescript": "~3.4.5"
   },
   "devDependencies": {
     "shx": "0.2.2"

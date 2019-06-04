@@ -1,3 +1,3 @@
-import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
+import WidgetBase from '@dojo/framework/core/WidgetBase';
 
 export default class ChildRoutedWidget extends WidgetBase {}
