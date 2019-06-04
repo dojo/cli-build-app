@@ -39,7 +39,9 @@ if (btr) {
 } else {
 	const nodeBtrCache = document.createElement('div');
 	nodeBtrCache.id = 'nodeBtrCache';
-	nodeBtrCache.innerHTML = test('./src/foo.txt');
+	test('./src/foo.txt').then((result: string) => {
+		nodeBtrCache.innerHTML = result;
+	});
 	root!.appendChild(nodeBtrCache);
 }
 
