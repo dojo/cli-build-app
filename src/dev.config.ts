@@ -15,6 +15,9 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 function webpackConfig(args: any): webpack.Configuration {
+	const isExperimentalSpeed = !!args.experimental.speed;
+	const singleBundle = args.singleBundle || isExperimentalSpeed;
+
 	const basePath = process.cwd();
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
@@ -23,7 +26,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = path.join(output!.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
-	const entryName = args.singleBundle ? mainEntry : bootstrapEntry;
+	const entryName = singleBundle ? mainEntry : bootstrapEntry;
 
 	config.plugins = [
 		...plugins!,
