@@ -170,7 +170,7 @@ function loadRoutingOutlets() {
 
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register();
-	const isExperimentalSpeed = !!args.experimental.speed && args.dev;
+	const isExperimentalSpeed = !!args.experimental.speed && args.mode === 'dev';
 	const isLegacy = args.legacy && !isExperimentalSpeed;
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest || isExperimentalSpeed;
