@@ -16,7 +16,6 @@ import * as ManifestPlugin from 'webpack-manifest-plugin';
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -171,10 +170,16 @@ function loadRoutingOutlets() {
 
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register();
-	const extensions = args.legacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
-	const compilerOptions = args.legacy ? {} : { target: 'es6', module: 'esnext' };
-	let features = args.legacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
+	const isExperimentalSpeed = !!args.experimental.speed && args.mode === 'dev';
+	const isLegacy = args.legacy && !isExperimentalSpeed;
+	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
+	const singleBundle = args.singleBundle || isTest || isExperimentalSpeed;
+	const watch = args.watch;
+	const extensions = isLegacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
+	const compilerOptions = isLegacy ? {} : { target: 'es6', module: 'esnext' };
+	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
+
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
@@ -184,9 +189,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		},
 		[] as string[]
 	);
-	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
-	const singleBundle = args.singleBundle || isTest;
-	const watch = args.watch;
 	const watchExtraFiles = Array.isArray(args.watchExtraFiles) ? args.watchExtraFiles : [];
 	let entry: any;
 	if (!isTest) {
@@ -220,13 +222,14 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		customTransformers.push(registryTransformer(basePath, lazyModules, false, outlets));
 	}
 
-	if (!args.legacy && !singleBundle) {
+	if (!isLegacy && !singleBundle) {
 		customTransformers.push(importTransformer(basePath, args.bundles));
 	}
 
 	const tsLoaderOptions: any = {
 		onlyCompileBundledFiles: true,
 		instance: 'dojo',
+		transpileOnly: isExperimentalSpeed,
 		compilerOptions,
 		getCustomTransformers() {
 			return { before: customTransformers };
@@ -255,7 +258,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	};
 
 	const postcssPresetConfig = {
-		browsers: args.legacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
+		browsers: isLegacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
 		insertBefore: {
 			'color-mod-function': colorToColorMod
 		},
@@ -264,7 +267,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			'nesting-rules': true
 		},
 		autoprefixer: {
-			grid: args.legacy
+			grid: isLegacy
 		}
 	};
 
@@ -280,13 +283,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				localIdentName: '[name]__[local]__[hash:base64:5]',
 				getLocalIdent
 			}
-		},
-		{
-			loader: 'postcss-loader?sourceMap',
-			options: {
-				ident: 'postcss',
-				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
-			}
 		}
 	];
 
@@ -298,15 +294,25 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				sourceMap: true,
 				importLoaders: 1
 			}
-		},
-		{
+		}
+	];
+
+	if (!isExperimentalSpeed) {
+		postCssModuleLoader.push({
 			loader: 'postcss-loader?sourceMap',
 			options: {
 				ident: 'postcss',
 				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 			}
-		}
-	];
+		});
+		cssLoader.push({
+			loader: 'postcss-loader?sourceMap',
+			options: {
+				ident: 'postcss',
+				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
+			}
+		});
+	}
 
 	const config: webpack.Configuration = {
 		mode: 'development',
@@ -403,7 +409,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					maxChunks: 1
 				}),
 			new CssModulePlugin(basePath),
-			new IgnorePlugin(/request\/providers\/node/),
 			new MiniCssExtractPlugin({
 				filename: '[name].css'
 			}),
@@ -423,17 +428,18 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				new webpack.DefinePlugin({
 					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
 				}),
-			new OptimizeCssAssetsPlugin({
-				cssProcessor: cssnano,
-				cssProcessorOptions: {
-					map: {
-						inline: false
+			!isExperimentalSpeed &&
+				new OptimizeCssAssetsPlugin({
+					cssProcessor: cssnano,
+					cssProcessorOptions: {
+						map: {
+							inline: false
+						}
+					},
+					cssProcessorPluginOptions: {
+						preset: ['default', { calc: false }]
 					}
-				},
-				cssProcessorPluginOptions: {
-					preset: ['default', { calc: false }]
-				}
-			}),
+				}),
 			!singleBundle &&
 				new BootstrapPlugin({
 					entryPath: mainEntryPath,
@@ -514,7 +520,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 							loader: '@dojo/webpack-contrib/static-build-loader',
 							options: { features }
 						},
-						args.legacy && getUMDCompatLoader({ bundles: args.bundles }),
+						isLegacy && getUMDCompatLoader({ bundles: args.bundles }),
 						{
 							loader: 'ts-loader',
 							options: tsLoaderOptions
