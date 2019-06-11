@@ -284,13 +284,13 @@ const command: Command = {
 		});
 
 		options('single-bundle', {
-			describe: 'Limits the built output to single bundle',
+			describe: 'limits the built output to a single bundle',
 			default: false,
 			type: 'boolean'
 		});
 
 		options('omit-hash', {
-			describe: 'Omits hashes from output file names in dist mode',
+			describe: 'omits hashes from output file names in dist mode',
 			defaultDescription: '(always false for dev builds)',
 			default: false,
 			type: 'boolean'
@@ -304,7 +304,7 @@ const command: Command = {
 		});
 
 		options('feature', {
-			describe: 'List of features to include',
+			describe: 'list of has() features to include',
 			alias: 'f',
 			array: true,
 			coerce: (args: string[]) => {
@@ -328,6 +328,8 @@ const command: Command = {
 		let config: webpack.Configuration;
 		let { feature, ...remainingArgs } = args;
 		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
+		args.experimental = args.experimental || {};
+
 		if (args.mode === 'dev') {
 			config = devConfigFactory(remainingArgs);
 		} else if (args.mode === 'unit' || args.mode === 'test') {
