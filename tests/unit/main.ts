@@ -189,7 +189,7 @@ describe('command', () => {
 			.then(() => {
 				assert.isTrue(mockDistConfig.called);
 				assert.deepEqual(mockDistConfig.firstCall.args, [
-					{ mode: 'dist', features: { foo: true, bar: false } }
+					{ experimental: {}, mode: 'dist', features: { foo: true, bar: false } }
 				]);
 			});
 	});
