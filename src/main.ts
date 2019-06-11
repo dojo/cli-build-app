@@ -326,9 +326,9 @@ const command: Command = {
 	run(helper: Helper, args: any) {
 		console.log = () => {};
 		let config: webpack.Configuration;
+		args.experimental = args.experimental || {};
 		let { feature, ...remainingArgs } = args;
 		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
-		args.experimental = args.experimental || {};
 
 		if (args.mode === 'dev') {
 			config = devConfigFactory(remainingArgs);
