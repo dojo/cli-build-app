@@ -176,7 +176,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const singleBundle = args.singleBundle || isTest || isExperimentalSpeed;
 	const watch = args.watch;
 	const extensions = isLegacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
-	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext' };
+	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
 
