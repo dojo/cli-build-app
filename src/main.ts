@@ -105,11 +105,7 @@ function buildNpmDependencies(): any {
 function fileWatch(config: webpack.Configuration, args: any, app?: express.Application): Promise<void> {
 	let compiler: webpack.Compiler;
 	if (args.serve && app) {
-		const entry = config.entry as any;
 		const timeout = 20 * 1000;
-		Object.keys(entry).forEach((name) => {
-			entry[name].unshift('eventsource-polyfill');
-		});
 		compiler = createWatchCompiler(config);
 		app.use(hotMiddleware(compiler, { heartbeat: timeout / 2 }));
 	} else {
