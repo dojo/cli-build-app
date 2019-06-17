@@ -475,19 +475,6 @@ describe('command', () => {
 				});
 		});
 
-		it('enables hot module replacement watch', () => {
-			const main = mockModule.getModuleUnderTest().default;
-			return main
-				.run(getMockConfiguration(), {
-					mode: 'dev',
-					serve: true,
-					watch: true
-				})
-				.then(() => {
-					assert.sameMembers(entry.main, ['eventsource-polyfill']);
-				});
-		});
-
 		it('serves compressed files in dist mode', () => {
 			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
 			const main = mockModule.getModuleUnderTest().default;
