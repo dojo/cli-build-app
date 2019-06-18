@@ -1,6 +1,6 @@
 {
   "name": "@dojo/cli-build-app",
-  "version": "6.0.0-alpha.2a",
+  "version": "6.0.0-pre",
   "description": "CLI command to build Dojo applications",
   "engines": {
     "npm": ">=3.0.0"
