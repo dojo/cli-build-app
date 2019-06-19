@@ -365,18 +365,39 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		},
 		optimization: {
 			noEmitOnErrors: false,
-			splitChunks: {
-				cacheGroups: {
-					vendors: false,
-					default: false,
-					main: {
-						chunks: 'initial',
-						minChunks: 1,
-						name: singleBundle ? mainEntry : bootstrapEntry,
-						reuseExistingChunk: true
-					}
-				}
-			}
+			splitChunks: singleBundle
+				? {}
+				: {
+						cacheGroups: {
+							default: false,
+							vendors: false,
+							main: {
+								chunks: 'all',
+								minChunks: 1,
+								name: exports.mainEntry,
+								reuseExistingChunk: true,
+								test: (module: any, chunks: any) => {
+									if (chunks.length === 1 && chunks[0].name === 'main') {
+										return true;
+									}
+									if (
+										chunks.some((chunk: any) => chunk.name && chunk.name.indexOf('runtime/') > -1)
+									) {
+										return false;
+									}
+									if (
+										chunks.some((chunk: any) => chunk.name && chunk.name.indexOf('bootstrap') > -1)
+									) {
+										return false;
+									}
+									if (chunks.length > 1) {
+										return true;
+									}
+									return false;
+								}
+							}
+						}
+				  }
 		},
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
