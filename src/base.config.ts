@@ -197,6 +197,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	if (singleBundle) {
 		entry = {
 			[mainEntry]: removeEmpty([
+				'@dojo/framework/core/features',
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/sync',
 				existsSync(mainCssPath) ? mainCssPath : null,
@@ -208,6 +209,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		entry = {
 			[bootstrapEntry]: removeEmpty([
 				existsSync(mainCssPath) ? mainCssPath : null,
+				'@dojo/framework/core/features',
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/async'
 			])
