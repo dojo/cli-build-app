@@ -12,7 +12,7 @@ const columns = require('cli-columns');
 const stripAnsi = require('strip-ansi');
 const version = jsonFile.readFileSync(path.join(pkgDir.sync(__dirname), 'package.json')).version;
 
-export default function logger(stats: any, config: any, runningMessage: string = ''): boolean {
+export default function logger(stats: any, config: any, runningMessage: string = '', args: any = {}): boolean {
 	const manifestPath = path.join(config.output.path, 'manifest.json');
 	let assets: undefined | string[];
 	let chunks: undefined | string[];
@@ -22,12 +22,16 @@ export default function logger(stats: any, config: any, runningMessage: string =
 			const assetName = manifestContent[item];
 			const filePath = path.join(config.output.path, assetName);
 			if (fs.existsSync(filePath)) {
-				const fileStats = fs.statSync(filePath);
-				const size = (fileStats.size / 1000).toFixed(2);
-				const assetInfo = `${assetName} ${chalk.yellow(`(${size}kb)`)}`;
-				const content = fs.readFileSync(filePath, 'utf8');
-				const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
-				return `${assetInfo} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
+				if (args.mode === 'dev' || args.mode === 'test') {
+					return `${assetName}`;
+				} else {
+					const fileStats = fs.statSync(filePath);
+					const size = (fileStats.size / 1000).toFixed(2);
+					const assetInfo = `${assetName} ${chalk.yellow(`(${size}kb)`)}`;
+					const content = fs.readFileSync(filePath, 'utf8');
+					const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
+					return `${assetInfo} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
+				}
 			}
 			return '';
 		});
