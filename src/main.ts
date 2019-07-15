@@ -71,7 +71,7 @@ function build(config: webpack.Configuration, args: any) {
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
-				const hasErrors = logger(stats.toJson({ warningsFilter }), config, runningMessage);
+				const hasErrors = logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
 				if (hasErrors) {
 					reject({});
 					return;
@@ -120,7 +120,7 @@ function fileWatch(config: webpack.Configuration, args: any, app?: express.Appli
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}` : 'watching...';
-				logger(stats.toJson({ warningsFilter }), config, runningMessage);
+				logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
 			}
 			resolve();
 		});
