@@ -406,18 +406,14 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				config: {
 					rules: {
 						'selector-max-type': [0, { ignoreTypes: '.' }],
-						'selector-max-universal': [0],
-						'selector-pseudo-class-blacklist': ['/-child$/']
+						'selector-max-universal': [0]
 					}
 				},
 				emitErrors: false,
 				formatter: (results: any) => {
 					return stylelint.formatters
 						.string(results)
-						.replace(
-							/selector-max-type|selector-max-universal|selector-pseudo-class-blacklist/g,
-							'css-modules'
-						)
+						.replace(/selector-max-type|selector-max-universal/g, 'css-modules')
 						.replace(
 							/to have no more than (\d*) type selectors/g,
 							'to not contain element selectors due to unsafe isolation'
