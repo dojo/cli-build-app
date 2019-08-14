@@ -1,4 +1,4 @@
-import baseConfigFactory, { bootstrapEntry, mainEntry, packageName } from './base.config';
+import baseConfigFactory, { bootstrapEntry, mainEntry } from './base.config';
 import { WebAppManifest } from './interfaces';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as fs from 'fs';
@@ -6,9 +6,6 @@ import * as path from 'path';
 import webpack = require('webpack');
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
-import ServiceWorkerPlugin, {
-	ServiceWorkerOptions
-} from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 
@@ -17,11 +14,11 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 function webpackConfig(args: any): webpack.Configuration {
 	const isExperimentalSpeed = !!args.experimental.speed;
 	const singleBundle = args.singleBundle || isExperimentalSpeed;
+	const base = args.base || '/';
 
 	const basePath = process.cwd();
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
-	const serviceWorker: string | ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output, module } = config;
 	const outputPath = path.join(output!.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
@@ -32,6 +29,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
 		new HtmlWebpackPlugin({
+			base,
 			inject: true,
 			chunks: [entryName],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
@@ -81,23 +79,13 @@ function webpackConfig(args: any): webpack.Configuration {
 		});
 	}
 
-	if (serviceWorker) {
-		const serviceWorkerOptions =
-			typeof serviceWorker === 'string' ? serviceWorker : { cachePrefix: packageName, ...serviceWorker };
-		config.plugins.push(new ServiceWorkerPlugin(serviceWorkerOptions));
-
-		if (typeof serviceWorker !== 'string') {
-			const entry = config.entry as any;
-			entry[entryName].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
-		}
-	}
-
 	if (args['build-time-render']) {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
 				entries: Object.keys(config.entry!),
-				basePath
+				basePath,
+				baseUrl: base
 			})
 		);
 	}

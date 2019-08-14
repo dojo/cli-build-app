@@ -3,9 +3,13 @@ import BootstrapPlugin from '@dojo/webpack-contrib/bootstrap-plugin/BootstrapPlu
 import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
+import ServiceWorkerPlugin, {
+	ServiceWorkerOptions
+} from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import { readFileSync, existsSync } from 'fs';
 import * as loaderUtils from 'loader-utils';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import * as tsnode from 'ts-node';
 import * as ts from 'typescript';
@@ -168,18 +172,45 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
+class InsertScriptPlugin {
+	private _scripts: string[] = [];
+	constructor(scripts: string[]) {
+		this._scripts = scripts;
+	}
+
+	apply(compiler: any) {
+		compiler.hooks.compilation.tap('InsertScriptPlugin', (compilation: any) => {
+			(HtmlWebpackPlugin as any)
+				.getHooks(compilation)
+				.beforeEmit.tapAsync('InsertScriptPlugin', (data: any, cb: Function) => {
+					this._scripts.forEach((script) => {
+						data.html = data.html.replace('</head>', `${script}</head>`);
+					});
+					cb(null, data);
+				});
+		});
+	}
+}
+
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register();
 	const isLegacy = args.legacy;
 	const isExperimentalSpeed = !!args.experimental.speed && args.mode === 'dev' && !isLegacy;
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest || isExperimentalSpeed;
+	const base = args.base || '/';
 	const watch = args.watch;
 	const extensions = isLegacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
-
+	let serviceWorkerOptions: ServiceWorkerOptions | undefined;
+	if (args.pwa && args.pwa.serviceWorker) {
+		serviceWorkerOptions =
+			typeof args.pwa.serviceWorker === 'string'
+				? args.pwa.serviceWorker
+				: { cachePrefix: packageName, ...args.pwa.serviceWorker };
+	}
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
@@ -488,7 +519,19 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				new ExtraWatchWebpackPlugin({
 					files: watchExtraFiles
 				}),
-			new ManifestPlugin()
+			new ManifestPlugin(),
+			new InsertScriptPlugin([`<script>window.__app_base__ = '${base}'</script>`]),
+			serviceWorkerOptions && new ServiceWorkerPlugin(serviceWorkerOptions),
+			serviceWorkerOptions &&
+				new InsertScriptPlugin([
+					`<script>
+	if ('serviceWorker' in window.navigator) {
+		window.addEventListener('load', function() {
+			window.navigator.serviceWorker.register('service-worker.js');
+		});
+	}
+</script>`
+				])
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
