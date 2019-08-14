@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@dojo/cli": "./dojo-cli-6.0.0-alpha.1.tgz",
+    "@dojo/webpack-contrib": "./dojo-webpack-contrib-6.0.0-alpha.11.tgz",
     "@dojo/framework": "6.0.0-alpha.16",
     "@fortawesome/fontawesome-free": "5.3.1",
     "tslib": "~1.9.1",
