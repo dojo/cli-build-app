@@ -1,0 +1,33 @@
+{
+	"build-app": {
+		"base": "/test-app/output/dev-app/",
+		"mode": "dev",
+		"legacy": true,
+		"compression": [ "gzip", "brotli" ],
+		"locale": "en",
+		"supportedLocales": [ "es" ],
+		"features": {
+			"env": "ci",
+			"foo": true,
+			"bar": false
+		},
+		"bundles": {
+			"ignored": [
+				"src/Bar"
+			],
+			"lazy": [
+				"src/LazyWidget"
+			],
+			"widgets": [
+				"src/Bar",
+				"src/Baz"
+			]
+		},
+		"build-time-render": {
+			"root": "app"
+		},
+		"externals": {
+			"dependencies": [ "foo" ]
+		}
+	}
+}

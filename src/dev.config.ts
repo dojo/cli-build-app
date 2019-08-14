@@ -1,6 +1,9 @@
-import baseConfigFactory, { bootstrapEntry, mainEntry } from './base.config';
+import baseConfigFactory, { bootstrapEntry, mainEntry, packageName, InsertScriptPlugin } from './base.config';
 import { WebAppManifest } from './interfaces';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import ServiceWorkerPlugin, {
+	ServiceWorkerOptions
+} from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import * as fs from 'fs';
 import * as path from 'path';
 import webpack = require('webpack');
@@ -24,6 +27,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
 	const entryName = singleBundle ? mainEntry : bootstrapEntry;
+	let serviceWorkerOptions: ServiceWorkerOptions | undefined;
+	if (args.pwa && args.pwa.serviceWorker) {
+		serviceWorkerOptions =
+			typeof args.pwa.serviceWorker === 'string'
+				? args.pwa.serviceWorker
+				: { cachePrefix: packageName, ...args.pwa.serviceWorker };
+	}
 
 	config.plugins = [
 		...plugins!,
@@ -50,6 +60,22 @@ function webpackConfig(args: any): webpack.Configuration {
 				icons: Array.isArray(manifest.icons)
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
+			}),
+		new InsertScriptPlugin([
+			{ content: `<base href="${base}">`, type: 'prepend' },
+			{ content: `<script>window.__app_base__ = '${base}'</script>`, type: 'append' }
+		]),
+		serviceWorkerOptions && new ServiceWorkerPlugin(serviceWorkerOptions),
+		serviceWorkerOptions &&
+			new InsertScriptPlugin({
+				content: `<script>
+	if ('serviceWorker' in window.navigator) {
+		window.addEventListener('load', function() {
+			window.navigator.serviceWorker.register('service-worker.js');
+		});
+	}
+</script>`,
+				type: 'append'
 			}),
 		new CleanWebpackPlugin(['dev', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);

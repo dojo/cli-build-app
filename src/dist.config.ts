@@ -1,6 +1,9 @@
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
+import ServiceWorkerPlugin, {
+	ServiceWorkerOptions
+} from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as fs from 'fs';
@@ -9,7 +12,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
-import baseConfigFactory, { bootstrapEntry, mainEntry } from './base.config';
+import baseConfigFactory, { bootstrapEntry, mainEntry, InsertScriptPlugin, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
@@ -34,6 +37,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
 	const entryName = args.singleBundle ? mainEntry : bootstrapEntry;
+	let serviceWorkerOptions: ServiceWorkerOptions | undefined;
+	if (args.pwa && args.pwa.serviceWorker) {
+		serviceWorkerOptions =
+			typeof args.pwa.serviceWorker === 'string'
+				? args.pwa.serviceWorker
+				: { cachePrefix: packageName, ...args.pwa.serviceWorker };
+	}
 
 	config.mode = 'production';
 
@@ -76,6 +86,22 @@ function webpackConfig(args: any): webpack.Configuration {
 				icons: Array.isArray(manifest.icons)
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
+			}),
+		new InsertScriptPlugin([
+			{ content: `<base href="${base}">`, type: 'prepend' },
+			{ content: `<script>window.__app_base__ = '${base}'</script>`, type: 'append' }
+		]),
+		serviceWorkerOptions && new ServiceWorkerPlugin(serviceWorkerOptions),
+		serviceWorkerOptions &&
+			new InsertScriptPlugin({
+				content: `<script>
+		if ('serviceWorker' in window.navigator) {
+			window.addEventListener('load', function() {
+				window.navigator.serviceWorker.register('service-worker.js');
+			});
+		}
+	</script>`,
+				type: 'append'
 			}),
 		new webpack.BannerPlugin({
 			banner,

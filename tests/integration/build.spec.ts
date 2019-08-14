@@ -30,18 +30,34 @@ Currently Rendered by BTR: false`
 		cy.get('#nodeBtrCache').should('contain', 'hello from a text file');
 	}
 
-	it('dist', () => {
-		testUrl('dist-app', true, false);
-		testUrl('dist-app-evergreen', true, false);
-		testUrl('dist-pwa', true, true);
-		testUrl('dist-pwa-evergreen', true, true);
+	describe('dist', () => {
+		it('dist-app', () => {
+			testUrl('dist-app', true, false);
+		});
+		it('dist-app-evergreen', () => {
+			testUrl('dist-app-evergreen', true, false);
+		});
+		it('dist-pwa', () => {
+			testUrl('dist-pwa', true, true);
+		});
+		it('dist-pwa-evergreen', () => {
+			testUrl('dist-pwa-evergreen', true, true);
+		});
 	});
 
-	it('dev', () => {
-		testUrl('dev-app', false, false);
-		testUrl('dev-app-evergreen', false, false);
-		testUrl('dev-pwa', false, true);
-		testUrl('dev-pwa-evergreen', false, true);
+	describe('dev', () => {
+		it('dev-app', () => {
+			testUrl('dev-app', false, false);
+		});
+		it('dev-app-evergreen', () => {
+			testUrl('dev-app-evergreen', false, false);
+		});
+		it('dev-pwa', () => {
+			testUrl('dev-pwa', false, true);
+		});
+		it('dev-app', () => {
+			testUrl('dev-pwa-evergreen', false, true);
+		});
 	});
 
 	describe('css variables', () => {

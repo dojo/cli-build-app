@@ -1,9 +1,11 @@
 {
 	"build-app": {
+		"base": "/test-app/output/dist-pwa/",
+		"legacy": true,
 		"locale": "en",
 		"supportedLocales": [ "es" ],
 		"features": {
-			"env": "ci",
+			"env": "prod",
 			"foo": true,
 			"bar": false
 		},
