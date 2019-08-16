@@ -1,0 +1,31 @@
+{
+	"build-app": {
+		"base": "/test-app/output/dist-app-evergreen/",
+		"compression": [ "gzip", "brotli" ],
+		"locale": "en",
+		"supportedLocales": [ "es" ],
+		"features": {
+			"env": "prod",
+			"foo": true,
+			"bar": false
+		},
+		"bundles": {
+			"ignored": [
+				"src/Bar"
+			],
+			"lazy": [
+				"src/LazyWidget"
+			],
+			"widgets": [
+				"src/Bar",
+				"src/Baz"
+			]
+		},
+		"build-time-render": {
+			"root": "app"
+		},
+		"externals": {
+			"dependencies": [ "foo" ]
+		}
+	}
+}

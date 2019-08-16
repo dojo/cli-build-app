@@ -168,6 +168,37 @@ function loadRoutingOutlets() {
 	return outlets;
 }
 
+export interface InsertScriptPluginOptions {
+	content: string;
+	type: 'append' | 'prepend';
+}
+
+export class InsertScriptPlugin {
+	private _options: InsertScriptPluginOptions[] = [];
+	constructor(options: InsertScriptPluginOptions | InsertScriptPluginOptions[]) {
+		options = Array.isArray(options) ? options : [options];
+		this._options = options;
+	}
+
+	apply(compiler: any) {
+		compiler.hooks.compilation.tap('InsertScriptPlugin', (compilation: any) => {
+			compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(
+				'InsertScriptPlugin',
+				(data: any, cb: Function) => {
+					this._options.forEach(({ content, type }) => {
+						if (type === 'append') {
+							data.html = data.html.replace('</head>', `${content}</head>`);
+						} else if (type === 'prepend') {
+							data.html = data.html.replace('<head>', `<head>${content}`);
+						}
+					});
+					cb(null, data);
+				}
+			);
+		});
+	}
+}
+
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register();
 	const isLegacy = args.legacy;
@@ -179,7 +210,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
-
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(

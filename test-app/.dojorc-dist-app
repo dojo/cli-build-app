@@ -1,10 +1,12 @@
 {
 	"build-app": {
+		"base": "/test-app/output/dist-app/",
+		"legacy": true,
 		"compression": [ "gzip", "brotli" ],
 		"locale": "en",
 		"supportedLocales": [ "es" ],
 		"features": {
-			"env": "ci",
+			"env": "prod",
 			"foo": true,
 			"bar": false
 		},

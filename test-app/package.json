@@ -5,17 +5,21 @@
   "main": "index.js",
   "scripts": {
     "install-build-app": "npm install --no-save ../dist/dojo-cli-build-app.tgz",
-    "build:dist": "dojo build --mode dist --legacy --feature env=prod",
-    "build:dev": "dojo build --mode dev --legacy",
-    "build:dist:evergreen": "dojo build --mode dist --feature env=prod",
-    "build:dev:evergreen": "dojo build --mode dev",
+    "build:dist": "dojo build --config .dojorc-dist-app",
+    "build:dev": "dojo build --config .dojorc-dev-app",
+    "build:dist:evergreen": "dojo build --config .dojorc-dist-app-evergreen",
+    "build:dev:evergreen": "dojo build --config .dojorc-dev-app-evergreen",
+    "build:dist:pwa": "dojo build --config .dojorc-dist-pwa",
+    "build:dev:pwa": "dojo build --config .dojorc-dev-pwa",
+    "build:dist:pwa:evergreen": "dojo build --config .dojorc-dist-pwa-evergreen",
+    "build:dev:pwa:evergreen": "dojo build --config .dojorc-dev-pwa-evergreen",
     "build:test": "dojo build --mode test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli": "^5.0.0",
-    "@dojo/framework": "6.0.0-alpha.7",
+    "@dojo/cli": "6.0.0-alpha.2",
+    "@dojo/framework": "6.0.0-alpha.18",
     "@fortawesome/fontawesome-free": "5.3.1",
     "tslib": "~1.9.1",
     "typescript": "~3.4.5"

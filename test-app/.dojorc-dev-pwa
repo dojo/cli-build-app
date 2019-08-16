@@ -1,0 +1,50 @@
+{
+	"build-app": {
+		"base": "/test-app/output/dev-pwa/",
+		"mode": "dev",
+		"legacy": true,
+		"locale": "en",
+		"supportedLocales": [ "es" ],
+		"features": {
+			"env": "ci",
+			"foo": true,
+			"bar": false
+		},
+		"bundles": {
+			"ignored": [
+				"src/Bar"
+			],
+			"lazy": [
+				"src/LazyWidget"
+			],
+			"widgets": [
+				"src/Bar",
+				"src/Baz"
+			]
+		},
+		"pwa": {
+			"manifest": {
+				"name": "Test App",
+				"description": "A test application for @dojo/cli-build-app",
+				"icons": [
+					{ "src": "./icon-16x16.png", "sizes": "16x16", "type": "image/png" },
+					{ "src": "./icon-32x32.png", "sizes": "32x32", "type": "image/png" }
+				]
+			},
+			"serviceWorker": {
+				"clientsClaim": true,
+				"excludeBundles": [ "src/LazyWidget" ],
+				"routes": [
+					{ "urlPattern": "\\.(jpg|png|gif|svg)$", "strategy": "cacheFirst", "expiration": { "maxEntries": 25 } },
+					{ "urlPattern": "/api", "strategy": "networkFirst" }
+				]
+			}
+		},
+		"build-time-render": {
+			"root": "app"
+		},
+		"externals": {
+			"dependencies": [ "foo" ]
+		}
+	}
+}

@@ -12,7 +12,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as WebpackChunkHash from 'webpack-chunk-hash';
-import baseConfigFactory, { bootstrapEntry, mainEntry, packageName } from './base.config';
+import baseConfigFactory, { bootstrapEntry, mainEntry, InsertScriptPlugin, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
@@ -29,14 +29,21 @@ All rights reserved
 
 function webpackConfig(args: any): webpack.Configuration {
 	const basePath = process.cwd();
+	const base = args.base || '/';
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
-	const serviceWorker: ServiceWorkerOptions = args.pwa && args.pwa.serviceWorker;
 	const { plugins, output } = config;
 	const outputPath = path.join(output!.path!, 'dist');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
 	const entryName = args.singleBundle ? mainEntry : bootstrapEntry;
+	let serviceWorkerOptions: ServiceWorkerOptions | undefined;
+	if (args.pwa && args.pwa.serviceWorker) {
+		serviceWorkerOptions =
+			typeof args.pwa.serviceWorker === 'string'
+				? args.pwa.serviceWorker
+				: { cachePrefix: packageName, ...args.pwa.serviceWorker };
+	}
 
 	config.mode = 'production';
 
@@ -58,6 +65,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			statsFilename: '../info/stats.json'
 		}),
 		new HtmlWebpackPlugin({
+			base,
 			inject: true,
 			chunks: [entryName],
 			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
@@ -79,6 +87,22 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
+		new InsertScriptPlugin([
+			{ content: `<base href="${base}">`, type: 'prepend' },
+			{ content: `<script>window.__app_base__ = '${base}'</script>`, type: 'append' }
+		]),
+		serviceWorkerOptions && new ServiceWorkerPlugin(serviceWorkerOptions),
+		serviceWorkerOptions &&
+			new InsertScriptPlugin({
+				content: `<script>
+		if ('serviceWorker' in window.navigator) {
+			window.addEventListener('load', function() {
+				window.navigator.serviceWorker.register('service-worker.js');
+			});
+		}
+	</script>`,
+				type: 'append'
+			}),
 		new webpack.BannerPlugin({
 			banner,
 			test: /^.*\.js$/i
@@ -87,23 +111,13 @@ function webpackConfig(args: any): webpack.Configuration {
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
-	if (serviceWorker) {
-		const serviceWorkerOptions =
-			typeof serviceWorker === 'string' ? serviceWorker : { cachePrefix: packageName, ...serviceWorker };
-		config.plugins.push(new ServiceWorkerPlugin(serviceWorkerOptions));
-
-		if (typeof serviceWorker !== 'string') {
-			const entry = config.entry as any;
-			entry[entryName].push('@dojo/webpack-contrib/service-worker-plugin/service-worker-entry');
-		}
-	}
-
 	if (args['build-time-render']) {
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
 				entries: Object.keys(config.entry!),
-				basePath
+				basePath,
+				baseUrl: base
 			})
 		);
 	}
