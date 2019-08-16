@@ -58,9 +58,9 @@
     "arrowParens": "always"
   },
   "devDependencies": {
-    "@dojo/cli": "6.0.0-alpha.1",
+    "@dojo/cli": "6.0.0-alpha.2",
     "@dojo/scripts": "~4.0.2",
-    "@dojo/webpack-contrib": "./dojo-webpack-contrib-6.0.0-alpha.11.tgz",
+    "@dojo/webpack-contrib": "6.0.0-alpha.12",
     "@types/clean-webpack-plugin": "0.1.2",
     "@types/compression": "0.0.36",
     "@types/connect-history-api-fallback": "1.3.1",
