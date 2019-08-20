@@ -58,7 +58,7 @@
     "arrowParens": "always"
   },
   "devDependencies": {
-    "@dojo/cli": "6.0.0-alpha.2",
+    "@dojo/cli": "6.0.0-rc.1",
     "@dojo/scripts": "~4.0.2",
     "@types/clean-webpack-plugin": "0.1.2",
     "@types/compression": "0.0.36",
@@ -105,7 +105,7 @@
     "sinon": "~4.5.0"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "6.0.0-alpha.12",
+    "@dojo/webpack-contrib": "6.0.0-rc.1",
     "brotli-webpack-plugin": "1.0.0",
     "caniuse-lite": "1.0.30000973",
     "chalk": "2.4.1",
