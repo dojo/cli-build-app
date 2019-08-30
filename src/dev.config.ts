@@ -17,7 +17,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 function webpackConfig(args: any): webpack.Configuration {
 	const isExperimentalSpeed = !!args.experimental.speed;
 	const singleBundle = args.singleBundle || isExperimentalSpeed;
-	const base = args.base || '/';
+	const base = (args.base || '').replace(/(?<!\/)$/, '/');
 
 	const basePath = process.cwd();
 	const config = baseConfigFactory(args);

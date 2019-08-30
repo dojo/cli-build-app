@@ -29,7 +29,7 @@ All rights reserved
 
 function webpackConfig(args: any): webpack.Configuration {
 	const basePath = process.cwd();
-	const base = args.base || '/';
+	const base = (args.base || '').replace(/(?<!\/)$/, '/');
 	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const { plugins, output } = config;
