@@ -11,7 +11,6 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
-import * as WebpackChunkHash from 'webpack-chunk-hash';
 import baseConfigFactory, { bootstrapEntry, mainEntry, packageName } from './base.config';
 import { WebAppManifest } from './interfaces';
 
@@ -79,7 +78,6 @@ function webpackConfig(args: any): webpack.Configuration {
 					: manifest.icons
 			}),
 		new webpack.BannerPlugin(banner),
-		new WebpackChunkHash(),
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
