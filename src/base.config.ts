@@ -253,7 +253,14 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	}
 
 	const chunkCount = lazyModules.length + outlets.length;
-	const chunkPercentageThreshold = chunkCount > 0 ? 40 : 0;
+	let chunkPercentageThreshold = 0;
+	if (chunkCount >= 10) {
+		chunkPercentageThreshold = 25;
+	} else if (chunkCount >= 5) {
+		chunkPercentageThreshold = 30;
+	} else if (chunkCount > 0) {
+		chunkPercentageThreshold = 40;
+	}
 
 	if (!isLegacy && !singleBundle) {
 		customTransformers.push(importTransformer(basePath, args.bundles));
