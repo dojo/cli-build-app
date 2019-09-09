@@ -1,4 +1,4 @@
-import has from '@dojo/framework/core/has';
+import has, { add } from '@dojo/framework/core/has';
 import renderer, { w } from '@dojo/framework/core/vdom';
 import Registry from '@dojo/framework/core/Registry';
 import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
@@ -14,6 +14,9 @@ import test from './test.block';
 if (has('foo')) {
 	console.log('foo');
 }
+
+add('foo', () => false);
+add('bar', () => false);
 
 const root = document.getElementById('app');
 

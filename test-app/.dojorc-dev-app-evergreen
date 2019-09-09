@@ -10,6 +10,7 @@
 			"foo": true,
 			"bar": false
 		},
+		"staticOnly": [ "bar" ],
 		"bundles": {
 			"ignored": [
 				"src/Bar"
