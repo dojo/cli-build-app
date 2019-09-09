@@ -617,12 +617,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				{
 					test: /\.css$/,
-					exclude: (path: string) => {
-						if (path.indexOf(srcPath) > -1 || path.indexOf(testPath) > -1) {
-							return true;
-						}
-						return /\.m\.css$/.test(path) && !/.*(\/|\\)node_modules(\/|\\).*/.test(path);
-					},
+					include: /.*(\/|\\)node_modules(\/|\\).*/,
 					use: [
 						MiniCssExtractPlugin.loader,
 						{
