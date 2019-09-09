@@ -621,10 +621,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						if (path.indexOf(srcPath) > -1 || path.indexOf(testPath) > -1) {
 							return true;
 						}
-						return (
-							/\.m\.css$/.test(path) &&
-							!/.*(\/|\\)node_modules(\/|\\)@dojo(\/|\\)widgets(\/|\\).*/.test(path)
-						);
+						return /\.m\.css$/.test(path) && !/.*(\/|\\)node_modules(\/|\\).*/.test(path);
 					},
 					use: [
 						MiniCssExtractPlugin.loader,
@@ -644,7 +641,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					oneOf: [{ issuer: indexHtmlPattern, use: 'identity-loader' }, { use: cssLoader }]
 				},
 				{
-					exclude: /.*(\/|\\)node_modules(\/|\\)@dojo(\/|\\)widgets(\/|\\).*/,
+					include: allPaths,
 					test: /\.m\.css$/,
 					use: postCssModuleLoader
 				}
