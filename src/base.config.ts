@@ -252,6 +252,16 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		customTransformers.push(registryTransformer(basePath, lazyModules, false, outlets));
 	}
 
+	const chunkCount = lazyModules.length + outlets.length;
+	let chunkPercentageThreshold = 0;
+	if (chunkCount >= 10) {
+		chunkPercentageThreshold = 25;
+	} else if (chunkCount >= 5) {
+		chunkPercentageThreshold = 30;
+	} else if (chunkCount > 0) {
+		chunkPercentageThreshold = 40;
+	}
+
 	if (!isLegacy && !singleBundle) {
 		customTransformers.push(importTransformer(basePath, args.bundles));
 	}
@@ -420,7 +430,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 									) {
 										return false;
 									}
-									if (chunks.length > 1) {
+									const chunkPercentage = chunkCount
+										? Math.floor((chunks.length / chunkCount) * 100)
+										: 0;
+									if (
+										chunkPercentage ? chunkPercentage > chunkPercentageThreshold : chunks.length > 2
+									) {
 										return true;
 									}
 									return false;
