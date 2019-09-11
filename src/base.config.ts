@@ -297,7 +297,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	const miniCssExtractLoader = {
+	const miniCssExtractLoader: any = {
 		loader: MiniCssExtractPlugin.loader,
 		options: {
 			publicPath: args.base === undefined ? '/' : args.base
