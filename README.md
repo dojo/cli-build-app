@@ -35,7 +35,7 @@ npm install @dojo/cli-build-app
 
 ### Building
 
-There are three modes available to build a Dojo application, `dist`, `dev` and `test`. The mode required can be passed using the `--mode` flag:
+There are four modes available to build a Dojo application, `dist`, `dev`, `unit`, and `functional`. The mode required can be passed using the `--mode` flag:
 
 ```bash
 dojo build app --mode dist
