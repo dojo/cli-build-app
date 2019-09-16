@@ -15,7 +15,8 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 function webpackConfig(args: any): webpack.Configuration {
-	const isExperimentalSpeed = !!args.experimental.speed;
+	const experimental = args.experimental || {};
+	const isExperimentalSpeed = !!experimental.speed;
 	const singleBundle = args.singleBundle || isExperimentalSpeed;
 	const base = args.base || '/';
 
