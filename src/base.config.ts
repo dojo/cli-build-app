@@ -312,8 +312,17 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
+	const miniCssExtractLoader: any = {
+		loader: MiniCssExtractPlugin.loader,
+		options: {
+			publicPath: (resourcePath: any, context: any) => {
+				return path.relative(path.dirname(resourcePath), context) + '/';
+			}
+		}
+	};
+
 	const postCssModuleLoader = [
-		MiniCssExtractPlugin.loader,
+		miniCssExtractLoader,
 		'@dojo/webpack-contrib/css-module-decorator-loader',
 		{
 			loader: 'css-loader',
@@ -328,7 +337,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	];
 
 	const cssLoader = [
-		MiniCssExtractPlugin.loader,
+		miniCssExtractLoader,
 		{
 			loader: 'css-loader',
 			options: {
@@ -635,7 +644,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					test: /\.css$/,
 					include: /.*(\/|\\)node_modules(\/|\\).*/,
 					use: [
-						MiniCssExtractPlugin.loader,
+						miniCssExtractLoader,
 						{
 							loader: 'css-loader',
 							options: {
