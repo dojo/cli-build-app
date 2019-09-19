@@ -298,13 +298,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	const miniCssExtractLoader: any = {
-		loader: MiniCssExtractPlugin.loader,
-		options: {
-			publicPath: args.base === undefined ? '/' : args.base
-		}
-	};
-
 	const postcssPresetConfig = {
 		browsers: isLegacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
 		insertBefore: {
@@ -320,7 +313,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	};
 
 	const postCssModuleLoader = [
-		miniCssExtractLoader,
+		MiniCssExtractPlugin.loader,
 		'@dojo/webpack-contrib/css-module-decorator-loader',
 		{
 			loader: 'css-loader',
@@ -335,7 +328,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	];
 
 	const cssLoader = [
-		miniCssExtractLoader,
+		MiniCssExtractPlugin.loader,
 		{
 			loader: 'css-loader',
 			options: {
@@ -642,7 +635,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					test: /\.css$/,
 					include: /.*(\/|\\)node_modules(\/|\\).*/,
 					use: [
-						miniCssExtractLoader,
+						MiniCssExtractPlugin.loader,
 						{
 							loader: 'css-loader',
 							options: {
