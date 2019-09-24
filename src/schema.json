@@ -367,6 +367,32 @@
 		"supportedLocales": {
 			"type": "array",
 			"items": { "type": "string" }
+		},
+		"proxy": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": ["object", "string"],
+					"properties": {
+						"target": {
+							"type": "string"
+						},
+						"changeOrigin": {
+							"type": "boolean"
+						},
+						"ws": {
+							"type": "boolean"
+						},
+						"pathRewrite": {
+							"patternProperties": {
+								"^.*$": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
