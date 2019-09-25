@@ -3,8 +3,10 @@
 		"mode": {
 			"type": "string",
 			"enum": [
-				"brotli",
-				"gzip"
+				"dist",
+				"dev",
+				"unit",
+				"functional"
 			]
 		},
 		"watch": {
@@ -85,6 +87,35 @@
 		"cldrPaths" : {
 			"type": "array",
 			"items": { "type": "string" }
+		},
+		"base" : {
+			"type": "string"
+		},
+		"build-time-render": {
+			"additionalProperties": false,
+			"properties": {
+				"root": {
+					"type": "string"
+				},
+				"paths": {
+					"type": "array",
+					"items": {
+						"type": ["object", "string"],
+						"required": ["path", "match"],
+						"properties": {
+							"path" : {
+								"type": "string"
+							},
+							"match" : {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
 		},
 		"compression": {
 			"type": "array",
@@ -246,7 +277,7 @@
 						"clientsClaim": {
 							"type": "boolean"
 						},
-						"excludesBundles": {
+						"excludeBundles": {
 							"type": "array",
 							"items": { "type": "string" }
 						},
@@ -287,6 +318,9 @@
 								"type": "object",
 								"additionalProperties": false,
 								"properties": {
+									"cacheName": {
+										"type": "string"
+									},
 									"urlPattern": {
 										"type": "string"
 									},
@@ -299,41 +333,14 @@
 											"staleWhileRevalidate"
 										]
 									},
-									"options": {
+									"expiration": {
 										"type": "object",
 										"additionalProperties": false,
 										"properties": {
-											"cacheName": {
-												"type": "string"
+											"maxEntries": {
+												"type": "number"
 											},
-											"cacheableResponse": {
-												"type": "object",
-												"additionalProperties": false,
-												"properties": {
-													"statuses": {
-														"type": "array",
-														"items": {
-															"type": "number"
-														}
-													},
-													"header": {
-														"type": "object"
-													}
-												}
-											},
-											"expiration": {
-												"type": "object",
-												"additionalProperties": false,
-												"properties": {
-													"maxEntries": {
-														"type": "number"
-													},
-													"maxAgeSeconds": {
-														"type": "number"
-													}
-												}
-											},
-											"networkTimeoutSeconds": {
+											"maxAgeSeconds": {
 												"type": "number"
 											}
 										}
