@@ -10,11 +10,7 @@
 			]
 		},
 		"watch": {
-			"type": "string",
-			"enum": [
-				"memory",
-				"file"
-			]
+			"type": "boolean"
 		},
 		"serve": {
 			"type": "boolean"
@@ -32,48 +28,11 @@
 					"type": ["boolean", "string", "number"]
 				}
 			}
-		}
-	},
-	"type": "object",
-	"additionalProperties": false,
-	"properties": {
-		"mode": {
-			"$ref": "#/definitions/mode"
-		},
-		"m": {
-			"$ref": "#/definitions/mode"
-		},
-		"watch": {
-			"$ref": "#/definitions/watch"
-		},
-		"w": {
-			"$ref": "#/definitions/watch"
-		},
-		"serve" : {
-			"$ref": "#/definitions/serve"
-		},
-		"s": {
-			"$ref": "#/definitions/serve"
-		},
-		"port" : {
-			"$ref": "#/definitions/port"
-		},
-		"p": {
-			"$ref": "#/definitions/port"
-		},
-		"legacy": {
-			"$ref": "#/definitions/legacy"
-		},
-		"l": {
-			"$ref": "#/definitions/legacy"
-		},
-		"feature": {
-			"$ref": "#/definitions/feature"
-		},
-		"f": {
-			"$ref": "#/definitions/feature"
 		},
 		"single-bundle": {
+			"type": "boolean"
+		},
+		"omit-hash": {
 			"type": "boolean"
 		},
 		"bundles": {
@@ -400,6 +359,85 @@
 					}
 				}
 			}
+		}
+	},
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"mode": {
+			"$ref": "#/definitions/mode"
+		},
+		"m": {
+			"$ref": "#/definitions/mode"
+		},
+		"watch": {
+			"$ref": "#/definitions/watch"
+		},
+		"w": {
+			"$ref": "#/definitions/watch"
+		},
+		"serve" : {
+			"$ref": "#/definitions/serve"
+		},
+		"s": {
+			"$ref": "#/definitions/serve"
+		},
+		"port" : {
+			"$ref": "#/definitions/port"
+		},
+		"p": {
+			"$ref": "#/definitions/port"
+		},
+		"legacy": {
+			"$ref": "#/definitions/legacy"
+		},
+		"l": {
+			"$ref": "#/definitions/legacy"
+		},
+		"feature": {
+			"$ref": "#/definitions/feature"
+		},
+		"f": {
+			"$ref": "#/definitions/feature"
+		},
+		"single-bundle": {
+			"$ref": "#/definitions/single-bundle"
+		},
+		"omit-hash": {
+			"$ref": "#/definitions/omit-hash"
+		},
+		"bundles": {
+			"$ref": "#/definitions/bundles"
+		},
+		"cldrPaths" : {
+			"$ref": "#/definitions/cldrPaths"
+		},
+		"base" : {
+			"$ref": "#/definitions/base"
+		},
+		"build-time-render": {
+			"$ref": "#/definitions/build-time-render"
+		},
+		"compression": {
+			"$ref": "#/definitions/compression"
+		},
+		"externals" : {
+			"$ref": "#/definitions/externals"
+		},
+		"features": {
+			"$ref": "#/definitions/feature"
+		},
+		"locale": {
+			"$ref": "#/definitions/locale"
+		},
+		"pwa" : {
+			"$ref": "#/definitions/pwa"
+		},
+		"supportedLocales": {
+			"$ref": "#/definitions/supportedLocales"
+		},
+		"proxy": {
+			"$ref": "#/definitions/proxy"
 		}
 	}
 }
