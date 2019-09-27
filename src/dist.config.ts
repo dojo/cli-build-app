@@ -11,7 +11,13 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
-import baseConfigFactory, { bootstrapEntry, mainEntry, InsertScriptPlugin, packageName, libraryName } from './base.config';
+import baseConfigFactory, {
+	bootstrapEntry,
+	mainEntry,
+	InsertScriptPlugin,
+	packageName,
+	libraryName
+} from './base.config';
 import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
@@ -86,14 +92,17 @@ function webpackConfig(args: any): webpack.Configuration {
 					? manifest.icons.map((icon) => ({ ...icon, ios: true }))
 					: manifest.icons
 			}),
-			new InsertScriptPlugin([
-				{ content: `<base href="${base}">`, type: 'prepend' },
-				{ content: `<script>
+		new InsertScriptPlugin([
+			{ content: `<base href="${base}">`, type: 'prepend' },
+			{
+				content: `<script>
 	if (!window['${libraryName}']) {
 		window['${libraryName}'] = {}
 	}
-	window['${libraryName}'].base = '${base}'</script>`, type: 'append' }
-			]),
+	window['${libraryName}'].base = '${base}'</script>`,
+				type: 'append'
+			}
+		]),
 		serviceWorkerOptions && new ServiceWorkerPlugin(serviceWorkerOptions),
 		serviceWorkerOptions &&
 			new InsertScriptPlugin({
