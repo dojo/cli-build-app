@@ -4,7 +4,6 @@ import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 import { readFileSync, existsSync } from 'fs';
-import * as loaderUtils from 'loader-utils';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as tsnode from 'ts-node';
