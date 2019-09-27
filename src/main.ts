@@ -300,7 +300,7 @@ const command: Command = {
 			type: 'boolean'
 		});
 
-		options('feature', {
+		options('features', {
 			describe: 'list of has() features to include',
 			alias: 'f',
 			array: true,
@@ -324,17 +324,15 @@ const command: Command = {
 		console.log = () => {};
 		let config: webpack.Configuration;
 		args.experimental = args.experimental || {};
-		let { feature, ...remainingArgs } = args;
-		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
 
 		if (args.mode === 'dev') {
-			config = devConfigFactory(remainingArgs);
+			config = devConfigFactory(args);
 		} else if (args.mode === 'unit' || args.mode === 'test') {
-			config = unitConfigFactory(remainingArgs);
+			config = unitConfigFactory(args);
 		} else if (args.mode === 'functional') {
-			config = functionalConfigFactory(remainingArgs);
+			config = functionalConfigFactory(args);
 		} else {
-			config = distConfigFactory(remainingArgs);
+			config = distConfigFactory(args);
 		}
 
 		if (args.serve) {

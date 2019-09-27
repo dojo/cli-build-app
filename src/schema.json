@@ -21,7 +21,7 @@
 		"legacy": {
 			"type": "boolean"
 		},
-		"feature": {
+		"features": {
 			"type": "object",
 			"patternProperties": {
 				"^.*$": {
@@ -121,9 +121,6 @@
 					}
 				}
 			}
-		},
-		"features": {
-			"$ref": "#/definitions/feature"
 		},
 		"locale": {
 			"type": "string"
@@ -394,11 +391,11 @@
 		"l": {
 			"$ref": "#/definitions/legacy"
 		},
-		"feature": {
-			"$ref": "#/definitions/feature"
+		"features": {
+			"$ref": "#/definitions/features"
 		},
 		"f": {
-			"$ref": "#/definitions/feature"
+			"$ref": "#/definitions/features"
 		},
 		"single-bundle": {
 			"$ref": "#/definitions/single-bundle"
@@ -423,9 +420,6 @@
 		},
 		"externals" : {
 			"$ref": "#/definitions/externals"
-		},
-		"features": {
-			"$ref": "#/definitions/feature"
 		},
 		"locale": {
 			"$ref": "#/definitions/locale"
