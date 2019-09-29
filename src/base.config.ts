@@ -4,7 +4,6 @@ import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 import { readFileSync, existsSync } from 'fs';
-import * as loaderUtils from 'loader-utils';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as tsnode from 'ts-node';
@@ -20,6 +19,7 @@ const slash = require('slash');
 const WrapperPlugin = require('wrapper-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
+const createHash = require('webpack/lib/util/createHash');
 
 const stylelint = require('stylelint');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -49,6 +49,13 @@ function getLibraryName(name: string) {
 		.replace(/[^a-z0-9_]/g, ' ')
 		.trim()
 		.replace(/\s+/g, '_');
+}
+
+function hash(content: string): string {
+	return createHash('md4')
+		.update(content)
+		.digest('hex')
+		.substr(0, 6);
 }
 
 export const libraryName = packageName ? getLibraryName(packageName) : mainEntry;
@@ -89,23 +96,6 @@ function getUMDCompatLoader(options: { bundles?: { [key: string]: string[] } }) 
 			}
 		}
 	};
-}
-
-function getLocalIdent(
-	loaderContext: webpack.loader.LoaderContext,
-	localIdentName: string,
-	localName: string,
-	options: any
-) {
-	if (!options.context) {
-		const { context, rootContext } = loaderContext;
-		options.context = typeof rootContext === 'string' ? rootContext : context;
-	}
-	const request = slash(path.relative(options.context, loaderContext.resourcePath));
-	options.content = `${options.hashPrefix}${request}+${localName}`;
-	localIdentName = localIdentName.replace(/\[local\]/gi, localName);
-	const hash = loaderUtils.interpolateName(loaderContext, localIdentName, options);
-	return hash.replace(new RegExp('[^a-zA-Z0-9\\-_\u00A0-\uFFFF]', 'g'), '-').replace(/^((-?[0-9])|--)/, '_$1');
 }
 
 export const removeEmpty = (items: any[]) => items.filter((item) => item);
@@ -321,8 +311,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				modules: true,
 				sourceMap: true,
 				importLoaders: 1,
-				localIdentName: '[name]__[local]__[hash:base64:5]',
-				getLocalIdent
+				localIdentName: `[name]__[local]__${hash(libraryName)}[hash:base64:5]`
 			}
 		}
 	];
