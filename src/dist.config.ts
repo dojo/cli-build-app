@@ -11,7 +11,13 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
-import baseConfigFactory, { bootstrapEntry, mainEntry, InsertScriptPlugin, packageName } from './base.config';
+import baseConfigFactory, {
+	bootstrapEntry,
+	mainEntry,
+	InsertScriptPlugin,
+	packageName,
+	libraryName
+} from './base.config';
 import { WebAppManifest } from './interfaces';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
@@ -88,7 +94,14 @@ function webpackConfig(args: any): webpack.Configuration {
 			}),
 		new InsertScriptPlugin([
 			{ content: `<base href="${base}">`, type: 'prepend' },
-			{ content: `<script>window.__app_base__ = '${base}'</script>`, type: 'append' }
+			{
+				content: `<script>
+	if (!window['${libraryName}']) {
+		window['${libraryName}'] = {}
+	}
+	window['${libraryName}'].base = '${base}'</script>`,
+				type: 'append'
+			}
 		]),
 		serviceWorkerOptions && new ServiceWorkerPlugin(serviceWorkerOptions),
 		serviceWorkerOptions &&
@@ -115,7 +128,8 @@ function webpackConfig(args: any): webpack.Configuration {
 				...args['build-time-render'],
 				entries: Object.keys(config.entry!),
 				basePath,
-				baseUrl: base
+				baseUrl: base,
+				scope: libraryName
 			})
 		);
 	}

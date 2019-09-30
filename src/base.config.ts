@@ -482,7 +482,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				}),
 			!singleBundle &&
 				new webpack.DefinePlugin({
-					__MAIN_ENTRY: JSON.stringify(mainEntryPath)
+					__MAIN_ENTRY: JSON.stringify(mainEntryPath),
+					__DOJO_SCOPE: `'${libraryName}'`
 				}),
 			!isExperimentalSpeed &&
 				new OptimizeCssAssetsPlugin({
