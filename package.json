@@ -149,6 +149,7 @@
     "terser-webpack-plugin": "1.1.0",
     "ts-loader": "5.3.0",
     "ts-node": "7.0.1",
+    "tsconfig-paths-webpack-plugin": "3.2.0",
     "tslint": "5.8.0",
     "tslint-loader": "3.5.4",
     "typed-css-modules": "0.3.1",
