@@ -191,7 +191,7 @@ export class InsertScriptPlugin {
 }
 
 export default function webpackConfigFactory(args: any): webpack.Configuration {
-	tsnode.register();
+	tsnode.register({ transpileOnly: true });
 	const isLegacy = args.legacy;
 	const experimental = args.experimental || {};
 	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev' && !isLegacy;
@@ -389,6 +389,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			jsonpFunction: `dojoWebpackJsonp${libraryName}`,
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
+		},
+		resolveLoader: {
+			modules: [path.resolve(__dirname, 'node_modules'), 'node_modules']
 		},
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
