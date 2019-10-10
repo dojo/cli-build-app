@@ -390,6 +390,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
+		resolveLoader: {
+			modules: [path.resolve(__dirname, 'node_modules'), 'node_modules']
+		},
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
 			extensions,
