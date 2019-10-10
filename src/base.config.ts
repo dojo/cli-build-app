@@ -20,6 +20,7 @@ const WrapperPlugin = require('wrapper-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const createHash = require('webpack/lib/util/createHash');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const stylelint = require('stylelint');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -391,7 +392,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		},
 		resolve: {
 			modules: [basePath, path.join(basePath, 'node_modules')],
-			extensions
+			extensions,
+			plugins: [new TsconfigPathsPlugin({ configFile: path.join(basePath, 'tsconfig.json') })]
 		},
 		optimization: {
 			noEmitOnErrors: false,
