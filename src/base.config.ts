@@ -463,6 +463,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 							'to not contain universal (*) selectors due to unsafe isolation'
 						);
 				},
+				context: srcPath,
 				files: ['**/*.m.css']
 			}),
 			singleBundle &&
