@@ -486,11 +486,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					cldrPaths: args.cldrPaths,
 					target: mainEntryPath
 				}),
-			!singleBundle &&
-				new webpack.DefinePlugin({
-					__MAIN_ENTRY: JSON.stringify(mainEntryPath),
-					__DOJO_SCOPE: `'${libraryName}'`
-				}),
+			new webpack.DefinePlugin({
+				__MAIN_ENTRY: JSON.stringify(mainEntryPath),
+				__DOJO_SCOPE: `'${libraryName}'`
+			}),
 			!isExperimentalSpeed &&
 				new OptimizeCssAssetsPlugin({
 					cssProcessor: cssnano,
