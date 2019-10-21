@@ -73,6 +73,12 @@
 							}
 						}
 					}
+				},
+				"static": {
+					"type": "boolean"
+				},
+				"puppeteerOptions": {
+					"type": "object"
 				}
 			}
 		},
@@ -154,7 +160,10 @@
 								"required": ["sizes", "src"],
 								"properties": {
 									"sizes": {
-										"type": "string"
+										"type": ["string", "array"],
+										"items": {
+											"type": "integer"
+										}
 									},
 									"src": {
 										"type": "string"
