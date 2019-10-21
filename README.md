@@ -471,7 +471,7 @@ Example:
 
 ## How do I contribute?
 
-We appreciate your interest! Please see the [Dojo Meta Repository](https://github.com/dojo/meta#readme) for the Contributing Guidelines. This repository uses [prettier](https://prettier.io/) for code style and is configured with a pre-commit hook to automatically fix formatting issues on staged `.ts` files before performing the commit.
+We appreciate your interest! Please see the [Dojo Meta Repository](https://github.com/dojo/meta#readme) for the Contributing Guidelines. This repository uses [prettier](https://prettier.io/) for code style and is configured with a pre-commit hook to automatically fix formatting issues on staged `.ts` files before performing the commit. If you are changing the `.dojorc` configuration behaviour for `build-app`, please make sure to update the `schema.json` (a [JSON Schema](https://json-schema.org/) description which is used to validate the `build-app` configuration) to match the changes. 
 
 ### Installation
 
