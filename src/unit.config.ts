@@ -12,7 +12,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = output!.path as string;
 	config.entry = () => {
 		const unit = globby
-			.sync([`${basePath}/tests/unit/**/*.ts`])
+			.sync([`${basePath}/tests/unit/**/*.ts`, `${basePath}/src/**/*.spec.{ts,tsx}`])
 			.map((filename: string) => filename.replace(/\.ts$/, ''));
 
 		const tests: any = {};

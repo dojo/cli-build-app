@@ -13,7 +13,7 @@
     "build:dev:pwa": "dojo build --dojorc .dojorc-dev-pwa",
     "build:dist:pwa:evergreen": "dojo build --dojorc .dojorc-dist-pwa-evergreen",
     "build:dev:pwa:evergreen": "dojo build --dojorc .dojorc-dev-pwa-evergreen",
-    "build:test": "dojo build --mode test"
+    "build:test": "dojo build --mode unit"
   },
   "author": "",
   "license": "ISC",
