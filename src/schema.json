@@ -79,6 +79,15 @@
 				},
 				"puppeteerOptions": {
 					"type": "object"
+				},
+				"renderer": {
+					"type": "string",
+					"enum": [
+						"jsdom", "puppeteer"
+					]
+				},
+				"discoverPaths": {
+					"type": "boolean"
 				}
 			}
 		},
