@@ -1,0 +1,439 @@
+{
+	"definitions": {
+		"mode": {
+			"type": "string",
+			"enum": [
+				"dist",
+				"dev",
+				"unit",
+				"functional"
+			]
+		},
+		"watch": {
+			"type": "boolean"
+		},
+		"serve": {
+			"type": "boolean"
+		},
+		"port": {
+			"type": "number"
+		},
+		"legacy": {
+			"type": "boolean"
+		},
+		"features": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": ["boolean", "string", "number"]
+				}
+			}
+		},
+		"single-bundle": {
+			"type": "boolean"
+		},
+		"omit-hash": {
+			"type": "boolean"
+		},
+		"bundles": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": "array"
+				}
+			}
+		},
+		"cldrPaths" : {
+			"type": "array",
+			"items": { "type": "string" }
+		},
+		"base" : {
+			"type": "string"
+		},
+		"build-time-render": {
+			"additionalProperties": false,
+			"properties": {
+				"root": {
+					"type": "string"
+				},
+				"paths": {
+					"type": "array",
+					"items": {
+						"type": ["object", "string"],
+						"required": ["path", "match"],
+						"properties": {
+							"path" : {
+								"type": "string"
+							},
+							"match" : {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"static": {
+					"type": "boolean"
+				},
+				"puppeteerOptions": {
+					"type": "object"
+				},
+				"renderer": {
+					"type": "string",
+					"enum": [
+						"jsdom", "puppeteer"
+					]
+				},
+				"discoverPaths": {
+					"type": "boolean"
+				}
+			}
+		},
+		"compression": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"brotli",
+					"gzip"
+				]
+			}
+		},
+		"externals" : {
+			"type": "object",
+			"additionalProperties": false,
+			"properties" : {
+				"outputPath": {
+					"type": "string"
+				},
+				"dependencies": {
+					"type": "array",
+					"items" : {
+						"type": ["object", "string"],
+						"required": ["from"],
+						"properties": {
+							"from" : {
+								"type": "string"
+							},
+							"to" : {
+								"type": "string"
+							},
+							"name" : {
+								"type": "string"
+							},
+							"inject" : {
+								"type": ["string", "boolean", "array"]
+							},
+							"type": {
+								"type" : "string",
+								"enum": [
+									"root", "umd", "amd", "commonjs", "commonjs2"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"locale": {
+			"type": "string"
+		},
+		"pwa" : {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"manifest" : {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"background_color": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"dir": {
+							"type": "string",
+							"enum": ["auto", "ltr", "rtl"]
+						},
+						"display": {
+							"type": "string",
+							"enum": ["browser", "fullscreen", "minimal-ui", "standalone"]
+						},
+						"icons": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"required": ["sizes", "src"],
+								"properties": {
+									"sizes": {
+										"type": ["string", "array"],
+										"items": {
+											"type": "integer"
+										}
+									},
+									"src": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"lang": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"orientation": {
+							"type": "string",
+							"enum": [
+								"any",
+								"landscape",
+								"landscape-primary",
+								"landscape-secondary",
+								"natural",
+								"portrait",
+								"portrait-primary",
+								"portrait-secondary"
+							]
+						},
+						"prefer_related_applications": {
+							"type": "boolean"
+						},
+						"related_applications": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"required": ["platform"],
+								"properties": {
+									"platform": {
+										"type": "string"
+									},
+									"url": {
+										"type": "string"
+									},
+									"id": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"scope": {
+							"type": "string"
+						},
+						"short_name": {
+							"type": "string"
+						},
+						"start_url": {
+							"type": "string"
+						},
+						"theme_color": {
+							"type": "string"
+						}
+					}
+				},
+				"serviceWorker" : {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"bundles": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"cachePrefix": {
+							"type": "string"
+						},
+						"clientsClaim": {
+							"type": "boolean"
+						},
+						"excludeBundles": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"importScripts": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"precache": {
+							"type": "object",
+							"properties" : {
+								"baseDir": {
+									"type": "string"
+								},
+								"ignore": {
+									"type": "array",
+									"items": { "type": "string" }
+								},
+								"include": {
+									"type": ["string", "array"]
+								},
+								"index": {
+									"type": "string"
+								},
+								"maxCacheSize": {
+									"type": "number"
+								},
+								"strict": {
+									"type": "boolean"
+								},
+								"symlinks": {
+									"type": "boolean"
+								}
+							}
+						},
+						"routes": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"additionalProperties": false,
+								"properties": {
+									"cacheName": {
+										"type": "string"
+									},
+									"urlPattern": {
+										"type": "string"
+									},
+									"strategy": {
+										"type": "string",
+										"enum": [
+											"networkFirst",
+											"cacheFirst",
+											"networkOnly",
+											"staleWhileRevalidate"
+										]
+									},
+									"expiration": {
+										"type": "object",
+										"additionalProperties": false,
+										"properties": {
+											"maxEntries": {
+												"type": "number"
+											},
+											"maxAgeSeconds": {
+												"type": "number"
+											}
+										}
+									}
+								}
+							}
+						},
+						"skipWaiting": {
+							"type": "boolean"
+						}
+					}
+				}
+			}
+		},
+		"supportedLocales": {
+			"type": "array",
+			"items": { "type": "string" }
+		},
+		"proxy": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": ["object", "string"],
+					"properties": {
+						"target": {
+							"type": "string"
+						},
+						"changeOrigin": {
+							"type": "boolean"
+						},
+						"ws": {
+							"type": "boolean"
+						},
+						"pathRewrite": {
+							"patternProperties": {
+								"^.*$": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"mode": {
+			"$ref": "#/definitions/mode"
+		},
+		"m": {
+			"$ref": "#/definitions/mode"
+		},
+		"watch": {
+			"$ref": "#/definitions/watch"
+		},
+		"w": {
+			"$ref": "#/definitions/watch"
+		},
+		"serve" : {
+			"$ref": "#/definitions/serve"
+		},
+		"s": {
+			"$ref": "#/definitions/serve"
+		},
+		"port" : {
+			"$ref": "#/definitions/port"
+		},
+		"p": {
+			"$ref": "#/definitions/port"
+		},
+		"legacy": {
+			"$ref": "#/definitions/legacy"
+		},
+		"l": {
+			"$ref": "#/definitions/legacy"
+		},
+		"features": {
+			"$ref": "#/definitions/features"
+		},
+		"f": {
+			"$ref": "#/definitions/features"
+		},
+		"single-bundle": {
+			"$ref": "#/definitions/single-bundle"
+		},
+		"omit-hash": {
+			"$ref": "#/definitions/omit-hash"
+		},
+		"bundles": {
+			"$ref": "#/definitions/bundles"
+		},
+		"cldrPaths" : {
+			"$ref": "#/definitions/cldrPaths"
+		},
+		"base" : {
+			"$ref": "#/definitions/base"
+		},
+		"build-time-render": {
+			"$ref": "#/definitions/build-time-render"
+		},
+		"compression": {
+			"$ref": "#/definitions/compression"
+		},
+		"externals" : {
+			"$ref": "#/definitions/externals"
+		},
+		"locale": {
+			"$ref": "#/definitions/locale"
+		},
+		"pwa" : {
+			"$ref": "#/definitions/pwa"
+		},
+		"supportedLocales": {
+			"$ref": "#/definitions/supportedLocales"
+		},
+		"proxy": {
+			"$ref": "#/definitions/proxy"
+		}
+	}
+}

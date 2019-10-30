@@ -20,6 +20,7 @@ import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
+import { readFileSync } from 'fs';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
@@ -299,7 +300,7 @@ const command: Command = {
 			type: 'boolean'
 		});
 
-		options('feature', {
+		options('features', {
 			describe: 'list of has() features to include',
 			alias: 'f',
 			array: true,
@@ -323,17 +324,15 @@ const command: Command = {
 		console.log = () => {};
 		let config: webpack.Configuration;
 		args.experimental = args.experimental || {};
-		let { feature, ...remainingArgs } = args;
-		remainingArgs = { ...remainingArgs, features: { ...remainingArgs.features, ...feature } };
 
 		if (args.mode === 'dev') {
-			config = devConfigFactory(remainingArgs);
+			config = devConfigFactory(args);
 		} else if (args.mode === 'unit' || args.mode === 'test') {
-			config = unitConfigFactory(remainingArgs);
+			config = unitConfigFactory(args);
 		} else if (args.mode === 'functional') {
-			config = functionalConfigFactory(remainingArgs);
+			config = functionalConfigFactory(args);
 		} else {
-			config = distConfigFactory(remainingArgs);
+			config = distConfigFactory(args);
 		}
 
 		if (args.serve) {
@@ -373,6 +372,21 @@ const command: Command = {
 				devDependencies: { ...buildNpmDependencies() }
 			}
 		};
+	},
+	validate(helper: Helper) {
+		let schema;
+		try {
+			schema = JSON.parse(readFileSync(path.join(__dirname, 'schema.json')).toString());
+		} catch (error) {
+			return Promise.reject(Error('The dojorc schema for cli-build-app could not be read: ' + error));
+		}
+		return helper.validation.validate({
+			commandGroup: command.group as string,
+			commandName: command.name,
+			commandSchema: schema,
+			commandConfig: helper.configuration.get(),
+			silentSuccess: true
+		});
 	}
 };
 export default command;
