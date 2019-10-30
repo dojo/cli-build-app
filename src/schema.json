@@ -326,22 +326,6 @@
 							"type": "boolean"
 						}
 					}
-				},
-				"build-time-render" : {
-					"type": "object",
-					"additionalProperties": false,
-					"properties": {
-						"root": {
-							"type": "string"
-						},
-						"paths": {
-							"type": "array",
-							"items": {
-								"type": ["string", "object"]
-							}
-						}
-					},
-					"required": ["root"]
 				}
 			}
 		},
