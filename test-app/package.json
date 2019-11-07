@@ -18,8 +18,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dojo/cli": "^6.0.0",
-    "@dojo/framework": "7.0.0-alpha.1",
+    "@dojo/cli": "7.0.0-alpha.1",
+    "@dojo/framework": "7.0.0-alpha.2",
     "@fortawesome/fontawesome-free": "5.3.1",
     "tslib": "~1.9.1",
     "typescript": "~3.4.5"
