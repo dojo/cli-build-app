@@ -51,6 +51,7 @@ function webpackConfig(args: any): webpack.Configuration {
 				loader: 'istanbul-instrumenter-loader',
 				options: instrumenterOptions
 			},
+			exclude: /\.spec\.ts(x)?$/,
 			enforce: 'post'
 		});
 	}
