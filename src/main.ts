@@ -319,11 +319,6 @@ const command: Command = {
 				);
 			}
 		});
-
-		options('staticOnly', {
-			describe: 'subset of has() feature keys from --features that should only be resolved statically',
-			array: true
-		});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};

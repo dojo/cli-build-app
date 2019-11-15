@@ -83,14 +83,10 @@ Currently Rendered by BTR: false`
 
 	describe('static only features', () => {
 		it('ignores add calls for static only features', () => {
-			cy.request('/test-app/output/dev-app-evergreen/main.js').then((response) => {
+			cy.request('/test-app/output/dev-app-evergreen/bootstrap.js').then((response) => {
 				const js = response.body;
-				expect(js).to.contain(
-					'Object(_dojo_framework_core_has__WEBPACK_IMPORTED_MODULE_0__["add"])(\'foo\', true);'
-				);
-				expect(js).to.contain(
-					'Object(_dojo_framework_core_has__WEBPACK_IMPORTED_MODULE_0__["add"])(\'bar\', () => false);'
-				);
+
+				expect(js).to.contain("add('build-elide', false);");
 			});
 		});
 	});
