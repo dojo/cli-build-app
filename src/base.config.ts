@@ -383,7 +383,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		},
 		output: {
 			chunkFilename: '[name].js',
-			library: libraryName,
+			library: `lib_${libraryName}`,
 			umdNamedDefine: true,
 			filename: '[name].js',
 			jsonpFunction: `dojoWebpackJsonp${libraryName}`,
