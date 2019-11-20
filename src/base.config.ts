@@ -202,6 +202,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = { ...features, 'dojo-debug': false };
+	const staticOnly = [];
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
 	const lazyModules = Object.keys(args.bundles || {}).reduce(
@@ -227,6 +228,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		};
 	} else {
 		features = { ...features, 'build-elide': true };
+		staticOnly.push('build-elide');
 		entry = {
 			[bootstrapEntry]: removeEmpty([
 				existsSync(mainCssPath) ? mainCssPath : null,
@@ -580,7 +582,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					use: removeEmpty([
 						features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
-							options: { features }
+							options: { features, staticOnly }
 						},
 						isLegacy && getUMDCompatLoader({ bundles: args.bundles }),
 						{
@@ -598,7 +600,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					use: removeEmpty([
 						features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
-							options: { features }
+							options: { features, staticOnly }
 						}
 					])
 				},
@@ -607,7 +609,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					use: removeEmpty([
 						features && {
 							loader: '@dojo/webpack-contrib/static-build-loader',
-							options: { features }
+							options: { features, staticOnly }
 						},
 						'umd-compat-loader'
 					])
