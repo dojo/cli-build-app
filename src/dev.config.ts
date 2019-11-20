@@ -123,6 +123,7 @@ window['${libraryName}'].base = '${base}'</script>`,
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
+				sync: singleBundle,
 				entries: Object.keys(config.entry!),
 				basePath,
 				baseUrl: base,

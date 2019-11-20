@@ -50,6 +50,14 @@
 		"base" : {
 			"type": "string"
 		},
+		"experimental": {
+			"additionalProperties": false,
+			"properties": {
+				"speed": {
+					"type": "boolean"
+				}
+			}
+		},
 		"build-time-render": {
 			"additionalProperties": false,
 			"properties": {
@@ -87,6 +95,9 @@
 					]
 				},
 				"discoverPaths": {
+					"type": "boolean"
+				},
+				"writeHtml": {
 					"type": "boolean"
 				}
 			}

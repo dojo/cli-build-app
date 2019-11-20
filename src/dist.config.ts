@@ -127,6 +127,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			new BuildTimeRender({
 				...args['build-time-render'],
 				entries: Object.keys(config.entry!),
+				sync: args.singleBundle,
 				basePath,
 				baseUrl: base,
 				scope: libraryName
