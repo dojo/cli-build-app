@@ -445,6 +445,9 @@
 		},
 		"proxy": {
 			"$ref": "#/definitions/proxy"
+		},
+		"experimental": {
+			"$ref": "#/definitions/experimental"
 		}
 	}
 }
