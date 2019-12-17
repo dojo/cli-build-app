@@ -574,7 +574,11 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					include: allPaths,
 					test: /\.m\.css$/,
 					enforce: 'pre',
-					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=css'
+					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=css',
+					options: {
+						type: 'css',
+						sourceFilesPattern: new RegExp('src[\\/].*.m.css$')
+					}
 				},
 				{
 					include: allPaths,
