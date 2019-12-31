@@ -13,14 +13,16 @@ const stripAnsi = require('strip-ansi');
 const version = jsonFile.readFileSync(path.join(pkgDir.sync(__dirname), 'package.json')).version;
 
 export default function logger(stats: any, config: any, runningMessage: string = '', args: any = {}): boolean {
-	const manifestPath = path.join(config.output.path, 'manifest.json');
+	const singleConfig = Array.isArray(config) ? config[0] : config;
+	const outputPath = singleConfig.output.path;
+	const manifestPath = path.join(outputPath, 'manifest.json');
 	let assets: undefined | string[];
 	let chunks: undefined | string[];
 	if (fs.existsSync(manifestPath)) {
-		const manifestContent = JSON.parse(fs.readFileSync(path.join(config.output.path, 'manifest.json'), 'utf8'));
+		const manifestContent = JSON.parse(fs.readFileSync(path.join(outputPath, 'manifest.json'), 'utf8'));
 		assets = Object.keys(manifestContent).map((item) => {
 			const assetName = manifestContent[item];
-			const filePath = path.join(config.output.path, assetName);
+			const filePath = path.join(outputPath, assetName);
 			if (fs.existsSync(filePath)) {
 				if (args.mode === 'dev' || args.mode === 'test') {
 					return `${assetName}`;
@@ -36,9 +38,10 @@ export default function logger(stats: any, config: any, runningMessage: string =
 			return '';
 		});
 
-		chunks = stats.chunks.map((chunk: any) => {
-			return `${chunk.names[0]}`;
-		});
+		chunks = (Array.isArray(config)
+			? stats.children.reduce((chunks: any[], current: any) => [...chunks, ...current.chunks], [])
+			: stats.chunks
+		).map((chunk: any) => `${chunk.names[0]}`);
 	}
 
 	let errors = '';
@@ -87,7 +90,7 @@ ${logSymbols.error} errors: ${stats.errors.length}
 ${logSymbols.warning} warnings: ${stats.warnings.length}
 ${errors}${warnings}
 ${chunkAndAssetLog}
-${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${config.output.path}`))}`)}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${outputPath}`))}`)}
 
 ${signOff}
 	`);
