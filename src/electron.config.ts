@@ -13,6 +13,7 @@ const mainPath = path.join(srcPath, 'main.electron.ts');
 
 function webpackConfig(args: any): webpack.Configuration {
 	const experimental = args.experimental || {};
+	const electron = args.electron || {};
 	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev';
 	const baseOutputPath = path.resolve('./output');
 	const outputPath = path.join(baseOutputPath, args.mode);
@@ -37,8 +38,8 @@ function webpackConfig(args: any): webpack.Configuration {
 		plugins: [
 			new ElectronPlugin({
 				electron: {
-					browser: args.electron.browser || {},
-					packaging: args.electron.packaging || {}
+					browser: electron.browser || {},
+					packaging: electron.packaging || {}
 				},
 				dist: args.mode === 'dist',
 				watch: !!args.watch,
