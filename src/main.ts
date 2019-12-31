@@ -18,24 +18,18 @@ import devConfigFactory from './dev.config';
 import unitConfigFactory from './unit.config';
 import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
+import electronConfigFactory from './electron.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
 import { readFileSync } from 'fs';
 
-const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
 const connectInject = require('connect-inject');
 
 const testModes = ['test', 'unit', 'functional'];
 
-function createCompiler(config: webpack.Configuration) {
-	const compiler = webpack(config);
-	fixMultipleWatchTrigger(compiler);
-	return compiler;
-}
-
 function createWatchCompiler(config: webpack.Configuration) {
-	const compiler = createCompiler(config);
+	const compiler = webpack(config);
 	const spinner = ora('building').start();
 	compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
 		logUpdate('');
@@ -69,7 +63,7 @@ function serveStatic(
 }
 
 function build(config: webpack.Configuration, args: any) {
-	const compiler = createCompiler(config);
+	const compiler = webpack(config);
 	const spinner = ora('building').start();
 	return new Promise<void>((resolve, reject) => {
 		compiler.run((err, stats) => {
@@ -273,6 +267,13 @@ const command: Command = {
 			choices: ['dist', 'dev', 'test', 'unit', 'functional']
 		});
 
+		options('target', {
+			describe: 'the target',
+			alias: 't',
+			default: 'web',
+			choices: ['web', 'electron']
+		});
+
 		options('watch', {
 			describe: 'watch for file changes',
 			alias: 'w'
@@ -333,7 +334,7 @@ const command: Command = {
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
-		let config: webpack.Configuration;
+		let config: webpack.Configuration | webpack.Configuration[];
 		args.experimental = args.experimental || {};
 
 		if (args.mode === 'dev') {
@@ -346,18 +347,22 @@ const command: Command = {
 			config = distConfigFactory(args);
 		}
 
+		if (args.target === 'electron') {
+			config = [config, electronConfigFactory(args)];
+		}
+
 		if (args.serve) {
 			if (testModes.indexOf(args.mode) !== -1) {
 				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
 			}
-			return serve(config, args);
+			return serve(config as any, args);
 		}
 
 		if (args.watch) {
-			return fileWatch(config, args);
+			return fileWatch(config as any, args);
 		}
 
-		return build(config, args);
+		return build(config as any, args);
 	},
 	eject(helper: Helper): EjectOutput {
 		return {
