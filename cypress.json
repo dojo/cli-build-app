@@ -7,5 +7,8 @@
   "videosFolder": "output/tests/videos",
   "supportFile": false,
   "pluginsFile": false,
+  "defaultCommandTimeout": 10000,
+  "pageLoadTimeout": 10000,
+  "responseTimeout": 10000,
   "chromeWebSecurity": false
 }
