@@ -47,17 +47,24 @@ function createWatchCompiler(config: webpack.Configuration) {
 	return compiler;
 }
 
-function serveStatic(app: express.Application, outputDir: string, mode: string, compression?: string[]) {
+function serveStatic(
+	app: express.Application,
+	outputDir: string,
+	mode: string,
+	compression?: string[],
+	base: string = '/'
+) {
 	if (mode === 'dist' && Array.isArray(compression)) {
 		const useBrotli = compression.indexOf('brotli') > -1;
 		app.use(
+			base,
 			expressStaticGzip(outputDir, {
 				enableBrotli: useBrotli,
 				orderPreference: useBrotli ? ['br'] : undefined
 			})
 		);
 	} else {
-		app.use(express.static(outputDir));
+		app.use(base, express.static(outputDir));
 	}
 }
 
@@ -105,10 +112,11 @@ function buildNpmDependencies(): any {
 
 function fileWatch(config: webpack.Configuration, args: any, app?: express.Application): Promise<void> {
 	let compiler: webpack.Compiler;
+	const base = args.base || '/';
 	if (args.serve && app) {
 		const timeout = 20 * 1000;
 		compiler = createWatchCompiler(config);
-		app.use(hotMiddleware(compiler, { heartbeat: timeout / 2 }));
+		app.use(base, hotMiddleware(compiler, { heartbeat: timeout / 2 }));
 	} else {
 		compiler = createWatchCompiler(config);
 	}
@@ -130,9 +138,10 @@ function fileWatch(config: webpack.Configuration, args: any, app?: express.Appli
 
 function serve(config: webpack.Configuration, args: any): Promise<void> {
 	let isHttps = false;
+	const base = args.base || '/';
 
 	const app = express();
-	app.use(function(req, res, next) {
+	app.use(base, function(req, res, next) {
 		const { pathname } = url.parse(req.url);
 		if (req.accepts('html') && pathname && !pathname.match(/\..*$/)) {
 			req.url = `${req.url}/`;
@@ -142,9 +151,10 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 
 	const outputDir = (config.output && config.output.path) || process.cwd();
 	if (args.mode !== 'dist' || !Array.isArray(args.compression)) {
-		app.use(expressCompression());
+		app.use(base, expressCompression());
 	}
 	app.use(
+		base,
 		connectInject({
 			rules: [
 				{
@@ -158,9 +168,10 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 			]
 		})
 	);
-	serveStatic(app, outputDir, args.mode, args.compression);
+	serveStatic(app, outputDir, args.mode, args.compression, base);
 
 	app.use(
+		base,
 		history({
 			rewrites: [
 				{
@@ -186,16 +197,16 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		})
 	);
 
-	serveStatic(app, outputDir, args.mode, args.compression);
+	serveStatic(app, outputDir, args.mode, args.compression, base);
 
 	if (args.proxy) {
 		Object.keys(args.proxy).forEach((context) => {
 			const options = args.proxy[context];
 
 			if (typeof options === 'string') {
-				app.use(proxy(context, { target: options }));
+				app.use(base, proxy(context, { target: options }));
 			} else {
-				app.use(proxy(context, options));
+				app.use(base, proxy(context, options));
 			}
 		});
 	}
