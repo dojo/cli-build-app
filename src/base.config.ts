@@ -523,6 +523,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						{
 							module: '@dojo/framework/shim/fetch',
 							has: 'build-fetch'
+						},
+						{
+							module: '@dojo/framework/shim/inert',
+							has: 'inert'
 						}
 					]
 				}),
