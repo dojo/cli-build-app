@@ -28,14 +28,14 @@ const connectInject = require('connect-inject');
 
 const testModes = ['test', 'unit', 'functional'];
 
-function createWatchCompiler(config: webpack.Configuration) {
-	const compiler = webpack(config);
+function createWatchCompiler(configs: webpack.Configuration[]) {
+	const compiler = webpack(configs);
 	const spinner = ora('building').start();
-	compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
+	(compiler as any).hooks.invalid.tap('@dojo/cli-build-app', () => {
 		logUpdate('');
 		spinner.start();
 	});
-	compiler.hooks.done.tap('@dojo/cli-build-app', () => {
+	(compiler as any).hooks.done.tap('@dojo/cli-build-app', () => {
 		spinner.stop();
 	});
 	return compiler;
@@ -62,7 +62,7 @@ function serveStatic(
 	}
 }
 
-function build(config: webpack.Configuration, args: any) {
+function build(config: webpack.Configuration[], args: any) {
 	const compiler = webpack(config);
 	const spinner = ora('building').start();
 	return new Promise<void>((resolve, reject) => {
@@ -104,33 +104,35 @@ function buildNpmDependencies(): any {
 	}
 }
 
-function fileWatch(config: webpack.Configuration, args: any, app?: express.Application): Promise<void> {
-	let compiler: webpack.Compiler;
+function fileWatch(configs: webpack.Configuration[], args: any, app?: express.Application): Promise<void> {
+	const [mainConfig] = configs;
+	let compiler: webpack.MultiCompiler;
 	const base = args.base || '/';
 	if (args.serve && app) {
 		const timeout = 20 * 1000;
-		compiler = createWatchCompiler(config);
+		compiler = createWatchCompiler(configs);
 		app.use(base, hotMiddleware(compiler, { heartbeat: timeout / 2 }));
 	} else {
-		compiler = createWatchCompiler(config);
+		compiler = createWatchCompiler(configs);
 	}
 
 	return new Promise<void>((resolve, reject) => {
-		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
+		const watchOptions = mainConfig.watchOptions as webpack.Compiler.WatchOptions;
 		compiler.watch(watchOptions, (err, stats) => {
 			if (err) {
 				reject(err);
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}` : 'watching...';
-				logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
+				logger(stats.toJson({ warningsFilter }), configs, runningMessage, args);
 			}
 			resolve();
 		});
 	});
 }
 
-function serve(config: webpack.Configuration, args: any): Promise<void> {
+function serve(configs: webpack.Configuration[], args: any): Promise<void> {
+	const [mainConfig] = configs;
 	let isHttps = false;
 	const base = args.base || '/';
 
@@ -143,7 +145,7 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		next();
 	});
 
-	const outputDir = (config.output && config.output.path) || process.cwd();
+	const outputDir = (mainConfig.output && mainConfig.output.path) || process.cwd();
 	if (args.mode !== 'dist' || !Array.isArray(args.compression)) {
 		app.use(base, expressCompression());
 	}
@@ -215,10 +217,10 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	return Promise.resolve()
 		.then(() => {
 			if (args.watch) {
-				return fileWatch(config, args, app);
+				return fileWatch(configs, args, app);
 			}
 
-			return build(config, args);
+			return build(configs, args);
 		})
 		.then(() => {
 			return new Promise<void>((resolve, reject) => {
@@ -334,35 +336,35 @@ const command: Command = {
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
-		let config: webpack.Configuration | webpack.Configuration[];
+		let configs: webpack.Configuration[] = [];
 		args.experimental = args.experimental || {};
 
 		if (args.mode === 'dev') {
-			config = devConfigFactory(args);
+			configs.push(devConfigFactory(args));
 		} else if (args.mode === 'unit' || args.mode === 'test') {
-			config = unitConfigFactory(args);
+			configs.push(unitConfigFactory(args));
 		} else if (args.mode === 'functional') {
-			config = functionalConfigFactory(args);
+			configs.push(functionalConfigFactory(args));
 		} else {
-			config = distConfigFactory(args);
+			configs.push(distConfigFactory(args));
 		}
 
 		if (args.target === 'electron') {
-			config = [config, electronConfigFactory(args)];
+			configs.push(electronConfigFactory(args));
 		}
 
 		if (args.serve) {
 			if (testModes.indexOf(args.mode) !== -1) {
 				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
 			}
-			return serve(config as any, args);
+			return serve(configs, args);
 		}
 
 		if (args.watch) {
-			return fileWatch(config as any, args);
+			return fileWatch(configs, args);
 		}
 
-		return build(config as any, args);
+		return build(configs, args);
 	},
 	eject(helper: Helper): EjectOutput {
 		return {
