@@ -19,9 +19,10 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = path.join(baseOutputPath, args.mode);
 
 	return {
+		name: 'electron',
 		entry: {
 			'main.electron': removeEmpty([
-				'@dojo/webpack-contrib/electron-plugin/ElectronPlugin',
+				'@dojo/webpack-contrib/electron-plugin/bootstrap',
 				fs.existsSync(mainPath) ? mainPath : null
 			])
 		},
@@ -33,8 +34,10 @@ function webpackConfig(args: any): webpack.Configuration {
 			extensions,
 			plugins: [new TsconfigPathsPlugin({ configFile: path.join(basePath, 'tsconfig.json') })]
 		},
+		mode: args.mode === 'dev' ? 'development' : 'production',
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
+		target: 'electron-main',
 		plugins: [
 			new ElectronPlugin({
 				electron: {
