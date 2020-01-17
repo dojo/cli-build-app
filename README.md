@@ -190,14 +190,14 @@ Note: Setting the proxy configuration as a string is equivelant to `{ target: "s
 
 ### Watching
 
-Building with the `--watch` option observes the file system for changes, and recompiles to the appropriate `output/{dist|dev|test}` directory, depending on the current `--mode`. When used in the conjunction with the `--serve` option and `--mode=dev`, `--watch=memory` can be specified to enable automatic browser updates and hot module replacement (HMR).
+Building with the `--watch` option observes the file system for changes and when with the development server (`--serve`) will automatically reload you browser.
 
 ```bash
-# start a file-based watch
-dojo build -w
+# start a build with watch
+dojo build --mode=dev --watch
 
-# build to an in-memory file system with HMR
-dojo build -s -w=memory -m=dev
+# start a build using the development server and live reload
+dojo build --mode=dev --serve --watch
 ```
 
 ### Eject
