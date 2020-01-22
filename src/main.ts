@@ -11,9 +11,11 @@ import * as https from 'https';
 import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
+import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 
 const pkgDir = require('pkg-dir');
 const expressStaticGzip = require('express-static-gzip');
+import { libraryName } from './base.config';
 import devConfigFactory from './dev.config';
 import unitConfigFactory from './unit.config';
 import functionalConfigFactory from './functional.config';
@@ -27,6 +29,8 @@ const hotMiddleware = require('webpack-hot-middleware');
 const connectInject = require('connect-inject');
 
 const testModes = ['test', 'unit', 'functional'];
+
+const btrPages = new Set<string>();
 
 function createCompiler(config: webpack.Configuration) {
 	const compiler = webpack(config);
@@ -150,6 +154,31 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	});
 
 	const outputDir = (config.output && config.output.path) || process.cwd();
+	const jsonpName = (config.output && config.output.jsonpFunction) || 'unknown';
+	const btrOptions = args['build-time-render'] || {};
+
+	if (args.watch && btrOptions.static) {
+		app.use(base, (req, _, next) => {
+			const { pathname: originalPath } = url.parse(req.url);
+			if (req.accepts('html') && originalPath && !originalPath.match(/\..*$/) && !btrPages.has(originalPath)) {
+				const path = originalPath.replace(/^\//, '').replace(/\/$/, '');
+				const btr = new BuildTimeRender({
+					...args['build-time-render'],
+					scope: libraryName,
+					baseUrl: args.base || '/',
+					discoverPaths: false,
+					basePath: process.cwd(),
+					entries: Object.keys(config.entry!)
+				});
+
+				btrPages.add(originalPath);
+				btr.runSinglePath(next, path, outputDir, jsonpName);
+			} else {
+				next();
+			}
+		});
+	}
+
 	if (args.mode !== 'dist' || !Array.isArray(args.compression)) {
 		app.use(base, expressCompression());
 	}

@@ -122,15 +122,17 @@ function webpackConfig(args: any): webpack.Configuration {
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
+	const btrOptions = args['build-time-render'] || {};
 	if (args['build-time-render']) {
 		config.plugins.push(
 			new BuildTimeRender({
-				...args['build-time-render'],
+				...btrOptions,
 				entries: Object.keys(config.entry!),
 				sync: args.singleBundle,
 				basePath,
 				baseUrl: base,
-				scope: libraryName
+				scope: libraryName,
+				watch: Boolean(args.watch && args.serve && btrOptions.static)
 			})
 		);
 	}

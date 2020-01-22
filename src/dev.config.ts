@@ -119,15 +119,17 @@ window['${libraryName}'].base = '${base}'</script>`,
 		});
 	}
 
+	const btrOptions = args['build-time-render'] || {};
 	if (args['build-time-render']) {
 		config.plugins.push(
 			new BuildTimeRender({
-				...args['build-time-render'],
+				...btrOptions,
 				sync: singleBundle,
 				entries: Object.keys(config.entry!),
 				basePath,
 				baseUrl: base,
-				scope: libraryName
+				scope: libraryName,
+				watch: Boolean(args.watch && args.serve && btrOptions.static)
 			})
 		);
 	}
