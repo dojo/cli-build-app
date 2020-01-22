@@ -11,7 +11,7 @@ import * as https from 'https';
 import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
-import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
+import BuildTimeRender, { BuildTimeRenderArguments } from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 
 const pkgDir = require('pkg-dir');
 const expressStaticGzip = require('express-static-gzip');
@@ -155,9 +155,23 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 
 	const outputDir = (config.output && config.output.path) || process.cwd();
 	const jsonpName = (config.output && config.output.jsonpFunction) || 'unknown';
-	const btrOptions = args['build-time-render'] || {};
+	const btrOptions: BuildTimeRenderArguments = args['build-time-render'];
 
-	if (args.watch && btrOptions.static) {
+	let isStaticBtr = btrOptions.static;
+	if (btrOptions) {
+		const paths = btrOptions.paths || [];
+		isStaticBtr = btrOptions.static;
+		if (isStaticBtr === true) {
+			for (let i = 0; i < paths.length; i++) {
+				const path = paths[i];
+				if (typeof path === 'object' && path.static === false) {
+					isStaticBtr = false;
+					break;
+				}
+			}
+		}
+
+	if (args.watch && isStaticBtr) {
 		app.use(base, (req, _, next) => {
 			const { pathname: originalPath } = url.parse(req.url);
 			if (req.accepts('html') && originalPath && !originalPath.match(/\..*$/) && !btrPages.has(originalPath)) {

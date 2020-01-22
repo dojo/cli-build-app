@@ -1,4 +1,4 @@
-import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
+import BuildTimeRender, { BuildTimeRenderArguments } from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
 import ServiceWorkerPlugin, {
@@ -122,8 +122,19 @@ function webpackConfig(args: any): webpack.Configuration {
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
-	const btrOptions = args['build-time-render'] || {};
+	const btrOptions: BuildTimeRenderArguments = args['build-time-render'];
 	if (args['build-time-render']) {
+		const paths = btrOptions.paths || [];
+		let isStatic = btrOptions.static;
+		if (isStatic === true) {
+			for (let i = 0; i < paths.length; i++) {
+				const path = paths[i];
+				if (typeof path === 'object' && path.static === false) {
+					isStatic = false;
+					break;
+				}
+			}
+		}
 		config.plugins.push(
 			new BuildTimeRender({
 				...btrOptions,

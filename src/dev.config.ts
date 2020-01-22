@@ -13,7 +13,7 @@ import ServiceWorkerPlugin, {
 import * as fs from 'fs';
 import * as path from 'path';
 import webpack = require('webpack');
-import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
+import BuildTimeRender, { BuildTimeRenderArguments } from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -119,8 +119,20 @@ window['${libraryName}'].base = '${base}'</script>`,
 		});
 	}
 
-	const btrOptions = args['build-time-render'] || {};
+	const btrOptions: BuildTimeRenderArguments = args['build-time-render'];
 	if (args['build-time-render']) {
+		const paths = btrOptions.paths || [];
+		let isStatic = btrOptions.static;
+		if (isStatic === true) {
+			for (let i = 0; i < paths.length; i++) {
+				const path = paths[i];
+				if (typeof path === 'object' && path.static === false) {
+					isStatic = false;
+					break;
+				}
+			}
+		}
+		
 		config.plugins.push(
 			new BuildTimeRender({
 				...btrOptions,
@@ -129,7 +141,7 @@ window['${libraryName}'].base = '${base}'</script>`,
 				basePath,
 				baseUrl: base,
 				scope: libraryName,
-				watch: Boolean(args.watch && args.serve && btrOptions.static)
+				watch: Boolean(args.watch && args.serve && isStatic)
 			})
 		);
 	}
