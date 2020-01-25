@@ -1,6 +1,6 @@
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import BootstrapPlugin from '@dojo/webpack-contrib/bootstrap-plugin/BootstrapPlugin';
-import I18nPlugin from '@dojo/webpack-contrib/i18n-plugin/I18nPlugin';
+const CldrPlugin = require('@dojo/webpack-contrib/cldr/Plugin').default;
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 import { readFileSync, existsSync } from 'fs';
@@ -209,7 +209,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const extensions = isLegacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
-	features = { ...features, 'dojo-debug': false };
+	features = { ...features, 'dojo-debug': false, 'cldr-elide': true };
 	const staticOnly = [];
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);
@@ -489,13 +489,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					test: singleBundle ? new RegExp(`${mainEntry}.*(\.js$)`) : new RegExp(`${bootstrapEntry}.*(\.js$)`),
 					footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
 				}),
-			args.locale &&
-				new I18nPlugin({
-					defaultLocale: args.locale,
-					supportedLocales: args.supportedLocales,
-					cldrPaths: args.cldrPaths,
-					target: mainEntryPath
-				}),
+			args.locale && new CldrPlugin(),
 			new webpack.DefinePlugin({
 				__MAIN_ENTRY: JSON.stringify(mainEntryPath),
 				__DOJO_SCOPE: `'${libraryName}'`
@@ -577,6 +571,18 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					loader: 'source-map-loader-cli',
 					options: { includeModulePaths: true }
 				},
+				args.locale &&
+					singleBundle && {
+						include: /cldr\/bootstrapSync\.js/,
+						loader: '@dojo/webpack-contrib/cldr/loader',
+						options: { locale: args.locale, supportedLocales: args.supportedLocales, sync: true }
+					},
+				args.locale &&
+					!singleBundle && {
+						include: /cldr\/bootstrap\.js/,
+						loader: '@dojo/webpack-contrib/cldr/loader',
+						options: { locale: args.locale, supportedLocales: args.supportedLocales, sync: false }
+					},
 				{
 					include: allPaths,
 					test: /\.ts(x)?$/,
