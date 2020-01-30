@@ -453,6 +453,9 @@
 		},
 		"experimental": {
 			"$ref": "#/definitions/experimental"
+		},
+		"watchExtraFiles": {
+			"$ref": "#/definitions/watchExtraFiles"
 		}
 	}
 }
