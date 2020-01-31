@@ -557,7 +557,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				tsLint && {
 					include: allPaths,
-					test: /\.ts$/,
+					test: /\.(ts|tsx)$/,
 					enforce: 'pre',
 					loader: 'tslint-loader',
 					options: { configuration: tsLint, emitErrors: true, failOnHint: true }
