@@ -12,6 +12,11 @@
 		"watch": {
 			"type": "boolean"
 		},
+		"watchExtraFiles": {
+			"type": "array",
+			"items": { "type": "string" },
+			"description": "A collection of globs to be watched for changes"
+		},
 		"serve": {
 			"type": "boolean"
 		},
@@ -448,6 +453,9 @@
 		},
 		"experimental": {
 			"$ref": "#/definitions/experimental"
+		},
+		"watchExtraFiles": {
+			"$ref": "#/definitions/watchExtraFiles"
 		}
 	}
 }

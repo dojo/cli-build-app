@@ -23,6 +23,9 @@
 				"src/Baz"
 			]
 		},
+		"watchExtraFiles": [
+			".dojorc*"
+		],
 		"build-time-render": {
 			"root": "app"
 		},
