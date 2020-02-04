@@ -218,6 +218,10 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		isHttps = true;
 	}
 
+	if (testModes.indexOf(args.mode) === -1 || process.env.NODE_ENV === 'production') {
+		console.warn('The serve option is not intended to be used to serve applications in production.');
+	}
+
 	return Promise.resolve()
 		.then(() => {
 			if (args.watch) {
