@@ -74,9 +74,6 @@
 			"properties": {
 				"browser": {
 					"type": "object"
-				},
-				"packaging": {
-					"type": "object"
 				}
 			}
 		},
