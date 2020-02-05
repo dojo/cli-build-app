@@ -41,15 +41,11 @@ function webpackConfig(args: any): webpack.Configuration {
 		plugins: [
 			new ElectronPlugin({
 				electron: {
-					browser: electron.browser || {},
-					packaging: electron.packaging || {}
+					browser: electron.browser || {}
 				},
-				dist: args.mode === 'dist',
 				watch: !!args.watch,
 				serve: !!args.serve,
-				port: args.port,
-				basePath,
-				outputPath
+				port: args.port
 			})
 		],
 		module: {
