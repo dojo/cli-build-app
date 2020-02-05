@@ -128,7 +128,11 @@ function fileWatch(config: webpack.Configuration, args: any, app?: express.Appli
 				reject(err);
 			}
 			if (stats) {
-				const runningMessage = args.serve ? `Listening on port ${args.port}` : 'watching...';
+				const runningMessage = args.serve
+					? `Listening on port ${
+							args.port
+					  }\nPlease note the serve option is not intended to be used to serve applications in production.`
+					: 'watching...';
 				logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
 			}
 			resolve();
