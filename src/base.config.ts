@@ -45,12 +45,13 @@ export const packageName = packageJson.name || '';
 
 const tsLintPath = path.join(basePath, 'tslint.json');
 const tsLint = existsSync(tsLintPath) ? require(tsLintPath) : false;
-const tsLintExcludes =
-	(tsLint &&
-		tsLint.linterOptions &&
-		tsLint.linterOptions.exclude &&
-		globby.sync(tsLint.linterOptions.exclude).map((file) => path.resolve(file))) ||
-	[];
+
+function getTsLintExclusions() {
+	if (tsLint && tsLint.linterOptions && tsLint.linterOptions.exclude) {
+		return globby.sync(tsLint.linterOptions.exclude).map((file) => path.resolve(file));
+	}
+	return [];
+}
 
 function getLibraryName(name: string) {
 	return name
@@ -568,7 +569,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					enforce: 'pre',
 					loader: 'tslint-loader',
 					options: { configuration: tsLint, emitErrors: true, failOnHint: true },
-					exclude: tsLintExcludes
+					exclude: getTsLintExclusions()
 				},
 				{
 					test: /@dojo(\/|\\).*\.(js|mjs)$/,
