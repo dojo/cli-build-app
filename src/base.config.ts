@@ -12,6 +12,7 @@ import * as webpack from 'webpack';
 import * as cssnano from 'cssnano';
 import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
+import * as globby from 'globby';
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
@@ -44,6 +45,12 @@ export const packageName = packageJson.name || '';
 
 const tsLintPath = path.join(basePath, 'tslint.json');
 const tsLint = existsSync(tsLintPath) ? require(tsLintPath) : false;
+const tsLintExcludes =
+	(tsLint &&
+		tsLint.linterOptions &&
+		tsLint.linterOptions.exclude &&
+		globby.sync(tsLint.linterOptions.exclude).map((file) => path.resolve(file))) ||
+	[];
 
 function getLibraryName(name: string) {
 	return name
@@ -560,7 +567,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					test: /\.(ts|tsx)$/,
 					enforce: 'pre',
 					loader: 'tslint-loader',
-					options: { configuration: tsLint, emitErrors: true, failOnHint: true }
+					options: { configuration: tsLint, emitErrors: true, failOnHint: true },
+					exclude: tsLintExcludes
 				},
 				{
 					test: /@dojo(\/|\\).*\.(js|mjs)$/,

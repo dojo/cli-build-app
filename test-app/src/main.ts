@@ -5,6 +5,7 @@ import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
 import App from './App';
 import * as css from './app.m.css';
 import './Bar';
+import './tslintTest';
 import LazyApp from './LazyApp';
 import routes from './routes';
 import test from './test.block';
