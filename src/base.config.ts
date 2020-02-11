@@ -1,6 +1,6 @@
 import CssModulePlugin from '@dojo/webpack-contrib/css-module-plugin/CssModulePlugin';
 import BootstrapPlugin from '@dojo/webpack-contrib/bootstrap-plugin/BootstrapPlugin';
-const CldrPlugin = require('@dojo/webpack-contrib/cldr/Plugin').default;
+import CldrPlugin from '@dojo/webpack-contrib/cldr/Plugin';
 import registryTransformer from '@dojo/webpack-contrib/registry-transformer';
 import getFeatures from '@dojo/webpack-contrib/static-build-loader/getFeatures';
 import { readFileSync, existsSync } from 'fs';
