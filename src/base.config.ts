@@ -573,13 +573,13 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				args.locale &&
 					singleBundle && {
-						include: /cldr\/bootstrapSync\.js/,
+						include: /cldr(\/|\\)bootstrapSync\.js/,
 						loader: '@dojo/webpack-contrib/cldr/loader',
 						options: { locale: args.locale, supportedLocales: args.supportedLocales, sync: true }
 					},
 				args.locale &&
 					!singleBundle && {
-						include: /cldr\/bootstrap\.js/,
+						include: /cldr(\/|\\)bootstrap\.js/,
 						loader: '@dojo/webpack-contrib/cldr/loader',
 						options: { locale: args.locale, supportedLocales: args.supportedLocales, sync: false }
 					},
