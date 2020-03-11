@@ -278,27 +278,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	const postcssImportConfig = {
-		filter: (path: string) => {
-			return /.*variables(\.m)?\.css$/.test(path);
-		},
-		load: (filename: string, importOptions: any = {}) => {
-			return readFileSync(filename, 'utf8').replace('color(', 'color-mod(');
-		},
-		resolve: (id: string, basedir: string, importOptions: any = {}) => {
-			if (importOptions.filter) {
-				const result = importOptions.filter(id);
-				if (!result) {
-					return null;
-				}
-			}
-			if (id[0] === '~') {
-				return id.substr(1);
-			}
-			return id;
-		}
-	};
-
 	const postcssPresetConfig = {
 		browsers: isLegacy ? ['last 2 versions', 'ie >= 10'] : ['last 2 versions'],
 		insertBefore: {
@@ -343,14 +322,14 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			loader: 'postcss-loader?sourceMap',
 			options: {
 				ident: 'postcss',
-				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
+				plugins: [postcssPresetEnv(postcssPresetConfig)]
 			}
 		});
 		cssLoader.push({
 			loader: 'postcss-loader?sourceMap',
 			options: {
 				ident: 'postcss',
-				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
+				plugins: [postcssPresetEnv(postcssPresetConfig)]
 			}
 		});
 	}

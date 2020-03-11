@@ -60,27 +60,6 @@ Currently Rendered by BTR: false`
 		});
 	});
 
-	describe('css variables', () => {
-		it('correctly inlines and resolves external variables for legacy builds', () => {
-			cy.request('/test-app/output/dev-app/main.css').then((response) => {
-				const css = response.body;
-				expect(css).to.contain('color:var(--foreground-color);');
-				expect(css).to.contain('color:#00f;');
-				expect(css).to.contain('color:var(--primary);');
-				expect(css).to.contain('color:red;');
-			});
-		});
-		it('correctly inlines and resolves external variables for evergreen builds', () => {
-			cy.request('/test-app/output/dev-app-evergreen/main.css').then((response) => {
-				const css = response.body;
-				expect(css).to.contain('color:var(--foreground-color);');
-				expect(css).to.contain('color:#00f;');
-				expect(css).to.contain('color:var(--primary);');
-				expect(css).to.contain('color:red;');
-			});
-		});
-	});
-
 	describe('static only features', () => {
 		it('ignores add calls for static only features', () => {
 			cy.request('/test-app/output/dev-app-evergreen/bootstrap.js').then((response) => {
