@@ -228,6 +228,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	if (singleBundle) {
 		entry = {
 			[mainEntry]: removeEmpty([
+				isLegacy && 'ie11-custom-properties',
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/sync',
 				existsSync(mainCssPath) ? mainCssPath : null,
@@ -239,6 +240,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		staticOnly.push('build-elide');
 		entry = {
 			[bootstrapEntry]: removeEmpty([
+				isLegacy && 'ie11-custom-properties',
 				existsSync(mainCssPath) ? mainCssPath : null,
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/async'
