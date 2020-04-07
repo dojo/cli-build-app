@@ -159,7 +159,7 @@ function loadRoutes() {
 	let routes: string[] = [];
 	const routesConfig = path.join(basePath, 'src', 'routes');
 	try {
-		if (existsSync(routesConfig)) {
+		if (existsSync(path.join(`${routesConfig}.ts`)) || existsSync(path.join(`${routesConfig}.tsx`))) {
 			const routes: any[] = require(slash(routesConfig)).default;
 			return routes.map((route) => route.id);
 		}
