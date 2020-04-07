@@ -1,6 +1,6 @@
 import WidgetBase from '@dojo/framework/core/WidgetBase';
 import { v, w } from '@dojo/framework/core/vdom';
-import Outlet from '@dojo/framework/routing/Outlet';
+import Route from '@dojo/framework/routing/Route';
 import LazyWidget from './LazyWidget';
 import StaticAssetWidget from './StaticAssetWidget';
 import RoutedWidget from './RoutedWidget';
@@ -13,7 +13,7 @@ export default class Projector extends WidgetBase<any> {
 			v('span', { id: 'vars', classes: [css.app, css.root] }),
 			w(LazyWidget, {}),
 			w(StaticAssetWidget, {}),
-			w(Outlet, {
+			w(Route, {
 				id: 'foo',
 				renderer() {
 					return w(RoutedWidget, {});

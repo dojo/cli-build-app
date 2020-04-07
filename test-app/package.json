@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@dojo/cli": "7.0.0-alpha.1",
-    "@dojo/framework": "7.0.0-alpha.9",
+    "@dojo/framework": "7.0.0-alpha.16",
     "@fortawesome/fontawesome-free": "5.3.1",
     "tslib": "~1.9.1",
     "cldr-data": "36.0.0",

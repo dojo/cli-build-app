@@ -155,16 +155,16 @@ function colorToColorMod(style: CssStyle) {
 	});
 }
 
-function loadRoutingOutlets() {
-	let outlets: string[] = [];
-	const routesConfig = path.join(basePath, 'src', 'routes.ts');
+function loadRoutes() {
+	let routes: string[] = [];
+	const routesConfig = path.join(basePath, 'src', 'routes');
 	try {
 		if (existsSync(routesConfig)) {
 			const routes: any[] = require(slash(routesConfig)).default;
-			return routes.map((route) => route.outlet);
+			return routes.map((route) => route.id);
 		}
 	} catch {}
-	return outlets;
+	return routes;
 }
 
 export interface InsertScriptPluginOptions {
@@ -250,13 +250,13 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 
 	const customTransformers: any[] = [];
 
-	const outlets = loadRoutingOutlets();
+	const routes = loadRoutes();
 
-	if ((lazyModules.length > 0 || outlets.length > 0) && !singleBundle) {
-		customTransformers.push(registryTransformer(basePath, lazyModules, false, outlets));
+	if ((lazyModules.length > 0 || routes.length > 0) && !singleBundle) {
+		customTransformers.push(registryTransformer(basePath, lazyModules, false, routes));
 	}
 
-	const chunkCount = lazyModules.length + outlets.length;
+	const chunkCount = lazyModules.length + routes.length;
 	let chunkPercentageThreshold = 0;
 	if (chunkCount >= 10) {
 		chunkPercentageThreshold = 25;
