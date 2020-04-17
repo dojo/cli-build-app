@@ -209,7 +209,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const extensions = isLegacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
 	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
-	features = { ...features, 'dojo-debug': false, 'cldr-elide': true };
+	features = {
+		...features,
+		'dojo-debug': false,
+		'cldr-elide': true,
+		'build-time-rendered': !!args['build-time-render']
+	};
 	const staticOnly = [];
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirPattern = new RegExp(assetsDir);

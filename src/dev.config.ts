@@ -127,7 +127,8 @@ window['${libraryName}'].base = '${base}'</script>`,
 				entries: Object.keys(config.entry!),
 				basePath,
 				baseUrl: base,
-				scope: libraryName
+				scope: libraryName,
+				onDemand: Boolean(args.serve && args.watch)
 			})
 		);
 	}
