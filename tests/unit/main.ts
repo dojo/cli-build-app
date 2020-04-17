@@ -66,7 +66,8 @@ describe('command', () => {
 			'webpack',
 			'webpack-dev-middleware',
 			'webpack-hot-middleware',
-			'webpack-mild-compile'
+			'webpack-mild-compile',
+			'@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware'
 		]);
 		invalidHookStub = stub().callsFake((name: string, callback: Function) => callback());
 		doneHookStub = stub().callsFake((name: string, callback: Function) => callback(stats));
