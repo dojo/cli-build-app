@@ -130,7 +130,8 @@ function webpackConfig(args: any): webpack.Configuration {
 				sync: args.singleBundle,
 				basePath,
 				baseUrl: base,
-				scope: libraryName
+				scope: libraryName,
+				onDemand: Boolean(args.serve && args.watch)
 			})
 		);
 	}

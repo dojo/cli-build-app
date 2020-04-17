@@ -11,6 +11,7 @@ import * as https from 'https';
 import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
+import OnDemandBtr from '@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware';
 
 const pkgDir = require('pkg-dir');
 const expressStaticGzip = require('express-static-gzip');
@@ -21,6 +22,20 @@ import distConfigFactory from './dist.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
 import { readFileSync } from 'fs';
+
+export const mainEntry = 'main';
+const packageJsonPath = path.join(process.cwd(), 'package.json');
+const packageJson = fs.existsSync(packageJsonPath) ? require(packageJsonPath) : {};
+export const packageName = packageJson.name || '';
+
+function getLibraryName(name: string) {
+	return name
+		.replace(/[^a-z0-9_]/g, ' ')
+		.trim()
+		.replace(/\s+/g, '_');
+}
+
+const libraryName = packageName ? getLibraryName(packageName) : 'main';
 
 const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
@@ -71,7 +86,7 @@ function serveStatic(
 function build(config: webpack.Configuration, args: any) {
 	const compiler = createCompiler(config);
 	const spinner = ora('building').start();
-	return new Promise<void>((resolve, reject) => {
+	return new Promise<webpack.Compiler>((resolve, reject) => {
 		compiler.run((err, stats) => {
 			spinner.stop();
 			if (err) {
@@ -90,7 +105,7 @@ function build(config: webpack.Configuration, args: any) {
 					'Using `--mode=test` is deprecated and has only built the unit test bundle. This mode will be removed in the next major release, please use `unit` or `functional` explicitly instead.'
 				);
 			}
-			resolve(args.serve);
+			resolve(compiler);
 		});
 	});
 }
@@ -110,19 +125,10 @@ function buildNpmDependencies(): any {
 	}
 }
 
-function fileWatch(config: webpack.Configuration, args: any, app?: express.Application): Promise<void> {
-	let compiler: webpack.Compiler;
-	const base = args.base || '/';
-	if (args.serve && app) {
-		const timeout = 20 * 1000;
-		compiler = createWatchCompiler(config);
-		app.use(base, hotMiddleware(compiler, { heartbeat: timeout / 2 }));
-	} else {
-		compiler = createWatchCompiler(config);
-	}
-
-	return new Promise<void>((resolve, reject) => {
+async function fileWatch(config: webpack.Configuration, args: any) {
+	return new Promise<webpack.Compiler>((resolve, reject) => {
 		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
+		const compiler = createWatchCompiler(config);
 		compiler.watch(watchOptions, (err, stats) => {
 			if (err) {
 				reject(err);
@@ -135,17 +141,18 @@ function fileWatch(config: webpack.Configuration, args: any, app?: express.Appli
 					: 'watching...';
 				logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
 			}
-			resolve();
+			resolve(compiler);
 		});
 	});
 }
 
-function serve(config: webpack.Configuration, args: any): Promise<void> {
+async function serve(config: webpack.Configuration, args: any) {
+	const compiler = args.watch ? await fileWatch(config, args) : await build(config, args);
 	let isHttps = false;
 	const base = args.base || '/';
 
 	const app = express();
-	app.use(base, function(req, res, next) {
+	app.use(base, function(req, _, next) {
 		const { pathname } = url.parse(req.url);
 		if (req.accepts('html') && pathname && !pathname.match(/\..*$/)) {
 			req.url = `${req.url}/`;
@@ -154,6 +161,21 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 	});
 
 	const outputDir = (config.output && config.output.path) || process.cwd();
+	const brtOptions = args['build-time-render'];
+	if (brtOptions) {
+		const jsonpName = (config.output && config.output.jsonpFunction) || 'unknown';
+		const onDemandBtr = new OnDemandBtr({
+			buildTimeRenderOptions: brtOptions,
+			scope: libraryName,
+			base,
+			compiler,
+			entries: config.entry ? Object.keys(config.entry) : [],
+			outputPath: outputDir,
+			jsonpName
+		});
+		app.use(base, (req, res, next) => onDemandBtr.middleware(req, res, next));
+	}
+
 	if (args.mode !== 'dist' || !Array.isArray(args.compression)) {
 		app.use(base, expressCompression());
 	}
@@ -222,43 +244,38 @@ function serve(config: webpack.Configuration, args: any): Promise<void> {
 		isHttps = true;
 	}
 
-	return Promise.resolve()
-		.then(() => {
-			if (args.watch) {
-				return fileWatch(config, args, app);
-			}
+	if (args.watch) {
+		const timeout = 20 * 1000;
+		app.use(base, hotMiddleware(compiler, { heartbeat: timeout / 2 }));
+	}
 
-			return build(config, args);
-		})
-		.then(() => {
-			return new Promise<void>((resolve, reject) => {
-				if (isHttps) {
-					https
-						.createServer(
-							{
-								key: fs.readFileSync(defaultKey),
-								cert: fs.readFileSync(defaultCrt)
-							},
-							app
-						)
-						.listen(args.port, (error: Error) => {
-							if (error) {
-								reject(error);
-							} else {
-								resolve();
-							}
-						});
+	return new Promise<void>((resolve, reject) => {
+		if (isHttps) {
+			https
+				.createServer(
+					{
+						key: fs.readFileSync(defaultKey),
+						cert: fs.readFileSync(defaultCrt)
+					},
+					app
+				)
+				.listen(args.port, (error: Error) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve();
+					}
+				});
+		} else {
+			app.listen(args.port, (error: Error) => {
+				if (error) {
+					reject(error);
 				} else {
-					app.listen(args.port, (error: Error) => {
-						if (error) {
-							reject(error);
-						} else {
-							resolve();
-						}
-					});
+					resolve();
 				}
 			});
-		});
+		}
+	});
 }
 
 function warningsFilter(warning: string) {
