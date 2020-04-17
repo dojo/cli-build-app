@@ -173,7 +173,7 @@ async function serve(config: webpack.Configuration, args: any) {
 			outputPath: outputDir,
 			jsonpName
 		});
-		app.use(base, onDemandBtr.middleware);
+		app.use(base, (req, res, next) => onDemandBtr.middleware(req, res, next));
 	}
 
 	if (args.mode !== 'dist' || !Array.isArray(args.compression)) {
