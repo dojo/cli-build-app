@@ -161,11 +161,14 @@ async function serve(config: webpack.Configuration, args: any) {
 	});
 
 	const outputDir = (config.output && config.output.path) || process.cwd();
-	const brtOptions = args['build-time-render'];
-	if (brtOptions) {
+	let btrOptions = args['build-time-render'];
+	if (btrOptions) {
+		if (args.singleBundle || (args.experimental && !!args.experimental.speed)) {
+			btrOptions = { ...btrOptions, sync: true };
+		}
 		const jsonpName = (config.output && config.output.jsonpFunction) || 'unknown';
 		const onDemandBtr = new OnDemandBtr({
-			buildTimeRenderOptions: brtOptions,
+			buildTimeRenderOptions: btrOptions,
 			scope: libraryName,
 			base,
 			compiler,
