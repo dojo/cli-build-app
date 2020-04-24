@@ -1,11 +1,11 @@
-import * as fs from 'fs';
 import * as path from 'path';
 import * as logUpdate from 'log-update';
 import * as logSymbols from 'log-symbols';
-import * as gzipSize from 'gzip-size';
 import * as typescript from 'typescript';
 import * as jsonFile from 'jsonfile';
+import BundleAnalyzer from './webpack-bundle-analyzer/BundleAnalyzer';
 import chalk from 'chalk';
+import { findLargestGroup } from './webpack-bundle-analyzer/parseUtils';
 
 const pkgDir = require('pkg-dir');
 const columns = require('cli-columns');
@@ -15,58 +15,64 @@ const version = jsonFile.readFileSync(path.join(pkgDir.sync(__dirname), 'package
 export default function logger(stats: any, config: any, runningMessage: string = '', args: any = {}): boolean {
 	const singleConfig = Array.isArray(config) ? config[0] : config;
 	const outputPath = singleConfig.output.path;
-	const manifestPath = path.join(outputPath, 'manifest.json');
-	let assets: undefined | string[];
+	const loggerStats = stats.toJson({ warningsFilter });
 	let chunks: undefined | string[];
-	if (fs.existsSync(manifestPath)) {
-		const manifestContent = JSON.parse(fs.readFileSync(path.join(outputPath, 'manifest.json'), 'utf8'));
-		assets = Object.keys(manifestContent).map((item) => {
-			const assetName = manifestContent[item];
-			const filePath = path.join(outputPath, assetName);
-			if (fs.existsSync(filePath)) {
-				if (args.mode === 'dev' || args.mode === 'test') {
-					return `${assetName}`;
-				} else {
-					const fileStats = fs.statSync(filePath);
-					const size = (fileStats.size / 1000).toFixed(2);
-					if (/\.(gz|br)$/.test(filePath)) {
-						return `${assetName} ${chalk.blue(`(${size}kb)`)}`;
-					}
-					// Calculate and report size when gzipped
-					const content = fs.readFileSync(filePath, 'utf8');
-					const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
-					const assetInfo = `${assetName} ${chalk.yellow(`(${size}kb)`)}`;
-					return `${assetInfo} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
+
+	let chunkMap: { [chunk: string]: any };
+	if (args.mode === 'dist') {
+		chunkMap = new BundleAnalyzer({
+			analyzerMode: 'static',
+			openAnalyzer: false,
+			generateStatsFile: true,
+			reportFilename: '../info/report.html',
+			statsFilename: '../info/stats.json'
+		}).analyze(stats, config);
+	}
+	chunks = (Array.isArray(config)
+		? loggerStats.children.reduce((chunks: any[], current: any) => [...chunks, ...current.chunks], [])
+		: loggerStats.chunks
+	).map((chunk: any) => {
+		const chunkName: string = chunk.names[0];
+		if (!chunkMap) {
+			return chunkName;
+		} else {
+			const chunkStats = chunkMap[chunkName];
+			const size = chunkStats && (chunkStats.parsedSize || chunkStats.statSize);
+			const gzipSize = chunkStats && chunkStats.gzipSize;
+
+			const chunkInfo = `${chunkName} ${chalk.yellow(`(${size}kb)`)}${
+				gzipSize ? `/ ${chalk.blue(`(${gzipSize}kb gz)`)}` : ''
+			}`;
+
+			if (size > 1000) {
+				const largestGroup = findLargestGroup(chunkStats, 'node_modules');
+				if (largestGroup) {
+					return `${chunkInfo}\nDependency: ${largestGroup.label} is ${largestGroup.statSize}kb`;
 				}
 			}
-			return '';
-		});
-
-		chunks = (Array.isArray(config)
-			? stats.children.reduce((chunks: any[], current: any) => [...chunks, ...current.chunks], [])
-			: stats.chunks
-		).map((chunk: any) => `${chunk.names[0]}`);
-	}
+			return chunkInfo;
+		}
+	});
 
 	let errors = '';
 	let warnings = '';
 	let chunkAndAssetLog = '';
 	let signOff = chalk.green('The build completed successfully.');
 
-	if (stats.warnings.length) {
+	if (loggerStats.warnings.length) {
 		signOff = chalk.yellow('The build completed with warnings.');
 		warnings = `
 ${chalk.yellow('warnings:')}${chalk.gray(
-			stats.warnings.reduce((warnings: string, warning: string) => `${warnings}\n${stripAnsi(warning)}`, '')
+			loggerStats.warnings.reduce((warnings: string, warning: string) => `${warnings}\n${stripAnsi(warning)}`, '')
 		)}
 `;
 	}
 
-	if (stats.errors.length) {
+	if (loggerStats.errors.length) {
 		signOff = chalk.red('The build completed with errors.');
 		errors = `
 ${chalk.yellow('errors:')}${chalk.red(
-			stats.errors.reduce((errors: string, error: string) => `${errors}\n${stripAnsi(error)}`, '')
+			loggerStats.errors.reduce((errors: string, error: string) => `${errors}\n${stripAnsi(error)}`, '')
 		)}
 `;
 	}
@@ -80,18 +86,12 @@ ${chalk.yellow('errors:')}${chalk.red(
 ${columns(chunks)}`;
 	}
 
-	if (assets) {
-		chunkAndAssetLog = `${chunkAndAssetLog}
-${chalk.yellow('assets:')}
-${columns(assets)}`;
-	}
-
 	logUpdate(`
 ${logSymbols.info} cli-build-app: ${version}
 ${logSymbols.info} typescript: ${typescript.version}
-${logSymbols.success} hash: ${stats.hash}
-${logSymbols.error} errors: ${stats.errors.length}
-${logSymbols.warning} warnings: ${stats.warnings.length}
+${logSymbols.success} hash: ${loggerStats.hash}
+${logSymbols.error} errors: ${loggerStats.errors.length}
+${logSymbols.warning} warnings: ${loggerStats.warnings.length}
 ${errors}${warnings}
 ${chunkAndAssetLog}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${outputPath}`))}`)}
@@ -99,4 +99,8 @@ ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${outputPath}`)
 ${signOff}
 	`);
 	return !!errors;
+}
+
+function warningsFilter(warning: string) {
+	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
 }

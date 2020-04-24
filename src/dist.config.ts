@@ -1,6 +1,5 @@
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
-import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/BundleAnalyzerPlugin';
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
@@ -84,13 +83,6 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.plugins = [
 		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
-		new BundleAnalyzerPlugin({
-			analyzerMode: 'static',
-			openAnalyzer: false,
-			generateStatsFile: true,
-			reportFilename: '../info/report.html',
-			statsFilename: '../info/stats.json'
-		}),
 		new HtmlWebpackPlugin({
 			base,
 			inject: true,

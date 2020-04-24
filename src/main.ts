@@ -93,7 +93,7 @@ function build(configs: webpack.Configuration[], args: any) {
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
-				const hasErrors = logger(stats.toJson({ warningsFilter }), configs, runningMessage, args);
+				const hasErrors = logger(stats, configs, runningMessage, args);
 				if (hasErrors) {
 					reject({});
 					return;
@@ -143,7 +143,7 @@ function fileWatch(configs: webpack.Configuration[], args: any, shouldResolve = 
 							args.port
 					  }\nPlease note the serve option is not intended to be used to serve applications in production.`
 					: 'watching...';
-				logger(stats.toJson({ warningsFilter }), configs, runningMessage, args);
+				logger(stats, configs, runningMessage, args);
 			}
 			if (shouldResolve) {
 				resolve(compiler);
@@ -284,10 +284,6 @@ async function serve(configs: webpack.Configuration[], args: any) {
 			});
 		}
 	});
-}
-
-function warningsFilter(warning: string) {
-	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
 }
 
 const command: Command = {

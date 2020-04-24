@@ -1,0 +1,1 @@
+export const sunburst: string;
