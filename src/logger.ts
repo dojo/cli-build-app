@@ -3,9 +3,9 @@ import * as logUpdate from 'log-update';
 import * as logSymbols from 'log-symbols';
 import * as typescript from 'typescript';
 import * as jsonFile from 'jsonfile';
-import BundleAnalyzer from './webpack-bundle-analyzer/BundleAnalyzer';
+import analyzeBundles from '@dojo/webpack-contrib/webpack-bundle-analyzer/AnalyzeBundles';
+import { findLargestPackage } from '@dojo/webpack-contrib/webpack-bundle-analyzer/parseUtils';
 import chalk from 'chalk';
-import { findLargestGroup } from './webpack-bundle-analyzer/parseUtils';
 
 const pkgDir = require('pkg-dir');
 const columns = require('cli-columns');
@@ -20,13 +20,14 @@ export default function logger(stats: any, config: any, runningMessage: string =
 
 	let chunkMap: { [chunk: string]: any };
 	if (args.mode === 'dist') {
-		chunkMap = new BundleAnalyzer({
+		chunkMap = analyzeBundles(stats, config, {
 			analyzerMode: 'static',
 			openAnalyzer: false,
 			generateStatsFile: true,
 			reportFilename: '../info/report.html',
-			statsFilename: '../info/stats.json'
-		}).analyze(stats, config);
+			statsFilename: '../info/stats.json',
+			excludeBundles: '(^bootstrap.)|(^runtime/)'
+		});
 	}
 	chunks = (Array.isArray(config)
 		? loggerStats.children.reduce((chunks: any[], current: any) => [...chunks, ...current.chunks], [])
@@ -37,17 +38,19 @@ export default function logger(stats: any, config: any, runningMessage: string =
 			return chunkName;
 		} else {
 			const chunkStats = chunkMap[chunkName];
-			const size = chunkStats && (chunkStats.parsedSize || chunkStats.statSize);
-			const gzipSize = chunkStats && chunkStats.gzipSize;
+			const size = ((chunkStats && (chunkStats.parsedSize || chunkStats.statSize)) || 0) / 1000;
+			const gzipSize = ((chunkStats && chunkStats.gzipSize) || 0) / 1000;
 
-			const chunkInfo = `${chunkName} ${chalk.yellow(`(${size}kb)`)}${
-				gzipSize ? `/ ${chalk.blue(`(${gzipSize}kb gz)`)}` : ''
+			const chunkInfo = `${chunkName} ${chalk.yellow(`(${size}kB)`)}${
+				gzipSize ? `/ ${chalk.blue(`(${gzipSize}kB gz)`)}` : ''
 			}`;
 
-			if (size > 1000) {
-				const largestGroup = findLargestGroup(chunkStats, 'node_modules');
-				if (largestGroup) {
-					return `${chunkInfo}\nDependency: ${largestGroup.label} is ${largestGroup.statSize}kb`;
+			if (size > 250) {
+				const largestPackage = findLargestPackage(chunkStats);
+				if (largestPackage) {
+					return `${chunkInfo}\nLargest dependency is ${largestPackage.name} (${chalk.yellow(
+						`${largestPackage.size / 1000}kB`
+					)})`;
 				}
 			}
 			return chunkInfo;
