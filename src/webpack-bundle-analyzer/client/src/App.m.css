@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+
+.root {
+	background-color: rgb(18, 21, 29);
+	color: #FFF;
+	font-family: 'Open Sans', sans-serif;
+	position: relative;
+	overflow: hidden;
+	font-size: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.stats {
+	margin-top: 10px;
+	margin-left: 10px;
+	flex: 30%;
+}
+
+.selectOverride {
+	color: black;
+	width: 380px;
+}
+
+.sunburst {
+	flex: 100%;
+}
+
+@media (max-width: 800px) {
+	.root {
+		flex-direction: column;
+	}
+}
+
+.filename {
+	width: auto;
+	overflow: hidden;
+	font-size: 30px;
+	margin-left: 10px;
+	vertical-align: top;
+	padding-bottom: 20px;
+	white-space: normal;
+	word-break: break-all;
+}
+
+.infoInner {
+	line-height: 1;
+	font-weight: lighter;
+	margin-top: 10px;
+	width: 100%;
+	white-space: nowrap;
+}
+
+.contents {
+	vertical-align: top;
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+.size {
+	font-size: 30px;
+}
+
+.type {
+	font-size: 15px;
+	color: #898989;
+	margin-bottom: 20px;
+}
+
+.type:last-child {
+	margin-bottom: 0;
+}
