@@ -19,6 +19,7 @@ export default function logger(stats: any, config: any, runningMessage: string =
 	let chunks: undefined | string[];
 
 	let chunkMap: { [chunk: string]: any };
+	const excludeChunks = /(^bootstrap$)|(^runtime\/)/;
 	if (args.mode === 'dist') {
 		chunkMap = analyzeBundles(stats, config, {
 			analyzerMode: 'static',
@@ -26,36 +27,38 @@ export default function logger(stats: any, config: any, runningMessage: string =
 			generateStatsFile: true,
 			reportFilename: '../info/report.html',
 			statsFilename: '../info/stats.json',
-			excludeBundles: '(^bootstrap.)|(^runtime/)'
+			excludeBundles: '(^bootstrap\\.)|(^runtime/)'
 		});
 	}
 	chunks = (Array.isArray(config)
 		? loggerStats.children.reduce((chunks: any[], current: any) => [...chunks, ...current.chunks], [])
 		: loggerStats.chunks
-	).map((chunk: any) => {
-		const chunkName: string = chunk.names[0];
-		if (!chunkMap) {
-			return chunkName;
-		} else {
-			const chunkStats = chunkMap[chunkName];
-			const size = ((chunkStats && (chunkStats.parsedSize || chunkStats.statSize)) || 0) / 1000;
-			const gzipSize = ((chunkStats && chunkStats.gzipSize) || 0) / 1000;
+	)
+		.filter((chunk: any) => !excludeChunks.test(chunk.names[0] || ''))
+		.map((chunk: any) => {
+			const chunkName: string = chunk.names[0];
+			if (!chunkMap) {
+				return chunkName;
+			} else {
+				const chunkStats = chunkMap[chunkName];
+				const size = ((chunkStats && (chunkStats.parsedSize || chunkStats.statSize)) || 0) / 1000;
+				const gzipSize = ((chunkStats && chunkStats.gzipSize) || 0) / 1000;
 
-			const chunkInfo = `${chunkName} ${chalk.yellow(`(${size}kB)`)}${
-				gzipSize ? `/ ${chalk.blue(`(${gzipSize}kB gz)`)}` : ''
-			}`;
+				const chunkInfo = `${chunkName} ${chalk.yellow(`(${size}kB)`)}${
+					gzipSize ? ` / ${chalk.blue(`(${gzipSize}kB gz)`)}` : ''
+				}`;
 
-			if (size > 250) {
-				const largestPackage = findLargestPackage(chunkStats);
-				if (largestPackage) {
-					return `${chunkInfo}\nLargest dependency is ${largestPackage.name} (${chalk.yellow(
-						`${largestPackage.size / 1000}kB`
-					)})`;
+				if (size > 250) {
+					const largestPackage = findLargestPackage(chunkStats);
+					if (largestPackage) {
+						return `${chunkInfo}\nLargest dependency is ${largestPackage.name} ${chalk.yellow(
+							`(${largestPackage.size / 1000}kB)`
+						)}`;
+					}
 				}
+				return chunkInfo;
 			}
-			return chunkInfo;
-		}
-	});
+		});
 
 	let errors = '';
 	let warnings = '';

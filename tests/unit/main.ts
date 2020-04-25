@@ -141,7 +141,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'dist' }).then(() => {
 			assert.isTrue(mockDistConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', ['dist config']));
+			assert.isTrue(mockLogger.calledWith(stats, ['dist config']));
 		});
 	});
 
@@ -149,7 +149,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'unit' }).then(() => {
 			assert.isTrue(mockUnitTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', ['unit config']));
+			assert.isTrue(mockLogger.calledWith(stats, ['unit config']));
 		});
 	});
 
@@ -157,7 +157,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'functional' }).then(() => {
 			assert.isTrue(mockFunctionalTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', ['functional config']));
+			assert.isTrue(mockLogger.calledWith(stats, ['functional config']));
 		});
 	});
 
@@ -174,7 +174,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'test' }).then(() => {
 			assert.isTrue(mockUnitTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', ['unit config']));
+			assert.isTrue(mockLogger.calledWith(stats, ['unit config']));
 			assert.isTrue(consoleWarnStub.calledOnce);
 			assert.isTrue(
 				consoleWarnStub.calledWith(
@@ -190,17 +190,6 @@ describe('command', () => {
 		return main.run(getMockHelper(), { mode: 'unit' }).then(() => {
 			assert.isTrue(mockUnitTestConfig.called);
 			assert.isTrue(mockLogger.notCalled);
-		});
-	});
-
-	it('filters CSS module order warnings from the logger', () => {
-		const main = mockModule.getModuleUnderTest().default;
-		return main.run(getMockHelper(), { mode: 'unit' }).then(() => {
-			const [{ warningsFilter }] = stats.toJson.firstCall.args;
-			assert.isTrue(warningsFilter('[mini-css-extract-plugin]\nConflicting order between'));
-			assert.isFalse(warningsFilter('[mini-css-extract-plugin]'));
-			assert.isFalse(warningsFilter(''));
-			assert.isFalse(warningsFilter('some other warning'));
 		});
 	});
 
