@@ -202,7 +202,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register({ transpileOnly: true });
 	const isLegacy = args.legacy;
 	const experimental = args.experimental || {};
-	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev' && !isLegacy;
+	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev';
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
 	const singleBundle = args.singleBundle || isTest || isExperimentalSpeed;
 	const watch = args.watch;
@@ -233,7 +233,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	if (singleBundle) {
 		entry = {
 			[mainEntry]: removeEmpty([
-				isLegacy && 'ie11-custom-properties',
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/sync',
 				existsSync(mainCssPath) ? mainCssPath : null,
@@ -245,7 +244,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		staticOnly.push('build-elide');
 		entry = {
 			[bootstrapEntry]: removeEmpty([
-				isLegacy && 'ie11-custom-properties',
 				existsSync(mainCssPath) ? mainCssPath : null,
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/async'
@@ -345,7 +343,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	];
 
-	if (!isExperimentalSpeed) {
+	if (!isExperimentalSpeed || isLegacy) {
 		postCssModuleLoader.push({
 			loader: 'postcss-loader?sourceMap',
 			options: {
