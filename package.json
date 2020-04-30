@@ -104,7 +104,7 @@
     "sinon": "~4.5.0"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "7.0.0-rc.1",
+    "@dojo/webpack-contrib": "7.0.0-rc.2",
     "brotli-webpack-plugin": "1.0.0",
     "caniuse-lite": "1.0.30000973",
     "chalk": "2.4.1",
