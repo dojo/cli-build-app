@@ -73,7 +73,7 @@
 					"type": "array",
 					"items": {
 						"type": ["object", "string"],
-						"required": ["path", "match"],
+						"required": ["path"],
 						"properties": {
 							"path" : {
 								"type": "string"
@@ -83,6 +83,9 @@
 								"items": {
 									"type": "string"
 								}
+							},
+							"static": {
+								"type": "boolean"
 							}
 						}
 					}
