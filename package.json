@@ -3,7 +3,7 @@
   "version": "7.0.0-pre",
   "description": "CLI command to build Dojo applications",
   "engines": {
-    "npm": ">=3.0.0"
+    "node": ">=12"
   },
   "private": true,
   "homepage": "http://dojo.io",
