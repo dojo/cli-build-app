@@ -1,3 +1,4 @@
+import global from '@dojo/framework/shim/global';
 import has from '@dojo/framework/core/has';
 import renderer, { w } from '@dojo/framework/core/vdom';
 import Registry from '@dojo/framework/core/Registry';
@@ -11,6 +12,8 @@ import routes from './routes';
 import test from './test.block';
 
 '!has("bar")';
+
+global['test_app'] = {};
 
 if (has('foo')) {
 	console.log('foo');
@@ -30,11 +33,13 @@ if (!div) {
 	div.id = 'div';
 }
 if (btr) {
+	global['test_app'].blocksPending = 1;
 	test('./src/foo.txt').then((result: string) => {
 		const nodeBtr = document.createElement('div');
 		nodeBtr.id = 'nodeBtr';
 		nodeBtr.innerHTML = result;
 		root!.appendChild(nodeBtr);
+		global['test_app'].blocksPending = 0;
 	});
 	div.setAttribute('hasBtr', 'true');
 } else {
