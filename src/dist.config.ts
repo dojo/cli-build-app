@@ -144,6 +144,21 @@ function webpackConfig(args: any): webpack.Configuration {
 		}
 		return plugin;
 	});
+	config.module = {
+		...config.module,
+		rules: ((config.module && config.module.rules) || []).map((rule) => {
+			if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader')) {
+				return {
+					...rule,
+					loader: args.omitHash
+						? rule.loader
+						: 'file-loader?hash=sha512&digest=hex&name=[path][name].[hash:base64:8].[ext]'
+				};
+			}
+
+			return rule;
+		})
+	};
 
 	if (Array.isArray(args.compression)) {
 		const compressionPlugins: any = {
