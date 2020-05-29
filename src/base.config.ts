@@ -560,7 +560,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
-					loader: 'file-loader?digest=hex&name=[path][name].[ext]'
+					loader: `file-loader?publicPath=${
+						args.base === undefined ? '/' : args.base
+					}&digest=hex&name=[path][name].[ext]`
 				},
 				tsLint && {
 					include: allPaths,
@@ -639,7 +641,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
-					loader: 'file-loader?digest=hex&name=[path][name].[ext]'
+					loader: `file-loader?publicPath=${
+						args.base === undefined ? '/' : args.base
+					}&digest=hex&name=[path][name].[ext]`
 				},
 				{
 					test: /\.m\.css\.js$/,
