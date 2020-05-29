@@ -174,7 +174,9 @@ function webpackConfig(args: any): webpack.Configuration {
 					...rule,
 					loader: args.omitHash
 						? rule.loader
-						: 'file-loader?hash=sha512&digest=hex&name=[path][name].[hash:base64:8].[ext]'
+						: `file-loader?publicPath=${
+								args.base === undefined ? '/' : args.base
+						  }&hash=sha512&digest=hex&name=[path][name].[hash:base64:8].[ext]`
 				};
 			}
 
