@@ -27,6 +27,7 @@
 		},
 		"externals": {
 			"dependencies": [ "foo" ]
-		}
+		},
+		"imageOptimization": {}
 	}
 }

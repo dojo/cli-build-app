@@ -59,6 +59,29 @@ function webpackConfig(args: any): webpack.Configuration {
 		flagIncludedChunks: false
 	};
 
+	if (args.imageOptimization) {
+		config.module = {
+			...config.module,
+			rules: ((config.module && config.module.rules) || []).map((rule) => {
+				if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader') && !rule.issuer) {
+					return {
+						...rule,
+						loader: undefined,
+						use: [
+							rule.loader,
+							{
+								loader: 'image-webpack-loader',
+								options: args.imageOptimization
+							}
+						]
+					};
+				}
+
+				return rule;
+			})
+		};
+	}
+
 	config.plugins = [
 		...plugins!,
 		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
