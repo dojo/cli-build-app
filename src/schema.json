@@ -120,7 +120,7 @@
 				]
 			}
 		},
-		"imageOptimization": {
+		"imageOptimizationOptions": {
 			"type": "object",
 			"additionalProperties": false,
 			"properties": {
@@ -149,6 +149,9 @@
 					"additionalProperties": true
 				}
 			}
+		},
+		"imageOptimizationFlag": {
+			"type": "boolean"
 		},
 		"externals" : {
 			"type": "object",
@@ -491,7 +494,10 @@
 			"$ref": "#/definitions/watchExtraFiles"
 		},
 		"imageOptimization": {
-			"$ref": "#/definitions/imageOptimization"
+			"anyOf": [
+				{ "$ref": "#/definitions/imageOptimizationOptions" },
+				{ "$ref": "#/definitions/imageOptimizationFlag" }
+			],
 		}
 	}
 }

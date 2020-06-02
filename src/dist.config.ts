@@ -71,7 +71,7 @@ function webpackConfig(args: any): webpack.Configuration {
 							rule.loader,
 							{
 								loader: 'image-webpack-loader',
-								options: args.imageOptimization
+								options: args.imageOptimization !== true ? args.imageOptimization : {}
 							}
 						]
 					};

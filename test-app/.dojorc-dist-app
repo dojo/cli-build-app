@@ -28,6 +28,6 @@
 		"externals": {
 			"dependencies": [ "foo" ]
 		},
-		"imageOptimization": {}
+		"imageOptimization": true
 	}
 }
