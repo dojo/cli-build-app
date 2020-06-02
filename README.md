@@ -281,6 +281,19 @@ An array of paths to [CLDR JSON](https://github.com/dojo/i18n#loading-cldr-data)
 
 Options for compression when running in `dist` mode. Each array value represents a different algorithm, allowing both gzip and brotli builds to be output side-by-side. When used in conjunction with the `--serve` flag (in `dist` mode _without_ memory watch), the compressed files will be served, with brotli preferred over gzip when available.
 
+#### `imageOptimization`: boolean | object
+
+If this is set to `true`, image optimization will be performed when running in `dist` mode using default settings. This uses several different libraries depending
+on the type of image being optimized. `imageOptimization` can be an object with individual configuration for these libraries in nested objects. They can also be individually disabled by passing `{ enabled: false }`. `Webp` optimization is disabled
+by default and can be enabled by passing `webp: { enabled true }`. The options available for each library can be found at the links below:
+
+* [mozjpeg](https://github.com/imagemin/imagemin-mozjpeg#options)
+* [optipng](https://github.com/imagemin/imagemin-optipng#api)
+* [pngquant](https://github.com/imagemin/imagemin-pngquant#options)
+* [svgo](https://github.com/imagemin/imagemin-svgo#options)
+* [gifsicle](https://github.com/imagemin/imagemin-gifsicle#options)
+* [webp](https://github.com/imagemin/imagemin-webp#options)
+
 ### `externals`: object
 
 Non-modular libraries or standalone applications that cannot be bundled normally can be included in a Dojo application by providing an implementation of `require` or `define` when needed, and some configuration in the project's `.dojorc` file.
