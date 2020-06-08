@@ -120,6 +120,57 @@
 				]
 			}
 		},
+		"imageOptimizationOptions": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"mozjpeg": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" }
+					},
+					"additionalProperties": true
+				},
+				"optipng": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" }
+					},
+					"additionalProperties": true
+				},
+				"pngquant": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" }
+					},
+					"additionalProperties": true
+				},
+				"svgo": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" }
+					},
+					"additionalProperties": true
+				},
+				"gifsicle": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" }
+					},
+					"additionalProperties": true
+				},
+				"webp": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" }
+					},
+					"additionalProperties": true
+				}
+			}
+		},
+		"imageOptimizationFlag": {
+			"type": "boolean"
+		},
 		"externals" : {
 			"type": "object",
 			"additionalProperties": false,
@@ -459,6 +510,12 @@
 		},
 		"watchExtraFiles": {
 			"$ref": "#/definitions/watchExtraFiles"
+		},
+		"imageOptimization": {
+			"anyOf": [
+				{ "$ref": "#/definitions/imageOptimizationOptions" },
+				{ "$ref": "#/definitions/imageOptimizationFlag" }
+			]
 		}
 	}
 }
