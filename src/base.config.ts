@@ -492,7 +492,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			(args.externals || isTest) &&
 				new WrapperPlugin({
 					test: singleBundle ? new RegExp(`${mainEntry}.*(\.js$)`) : new RegExp(`${bootstrapEntry}.*(\.js$)`),
-					footer: `\ntypeof define === 'function' && define.amd && require(['${libraryName}']);`
+					footer: `\ntypeof define === 'function' && define.amd && require(['lib_${libraryName}']);`
 				}),
 			args.locale && new CldrPlugin(),
 			new webpack.DefinePlugin({
