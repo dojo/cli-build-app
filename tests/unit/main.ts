@@ -222,12 +222,20 @@ describe('command', () => {
 	});
 
 	describe('watch option', () => {
-		it('automatically rebuilds after file changes', () => {
+		it('automatically rebuilds after file changes', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockHelper(), { watch: true }).then(() => {
-				assert.isFalse(runStub.called);
-				assert.isTrue(watchStub.calledOnce);
-			});
+			main.run(getMockHelper(), { watch: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isFalse(runStub.called);
+					assert.isTrue(watchStub.calledOnce);
+				}),
+				1000
+			);
 		});
 
 		it('rejects if an error occurs', () => {
@@ -243,28 +251,43 @@ describe('command', () => {
 			);
 		});
 
-		it('shows a building spinner', () => {
+		it('shows a building spinner', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockHelper(), { watch: true }).then(() => {
-				assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
-				assert.isTrue(mockSpinner.start.called);
-				assert.isTrue(mockSpinner.stop.called);
-			});
+			main.run(getMockHelper(), { watch: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
+					assert.isTrue(mockSpinner.start.called);
+					assert.isTrue(mockSpinner.stop.called);
+				}),
+				1000
+			);
 		});
 
-		it('provides custom logging', () => {
+		it('provides custom logging', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
 			const filename = '/changed/file.ts';
 
 			doneHookStub.callsFake((name: string, callback: Function) => callback(stats));
 			invalidHookStub.callsFake((name: string, callback: Function) => callback(filename));
 
-			return main.run(getMockHelper(), { watch: true }).then(() => {
-				assert.isTrue(mockLogger.calledWith('stats', 'dist config', 'watching...'));
-			});
+			main.run(getMockHelper(), { watch: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isTrue(mockLogger.calledWith('stats', 'dist config', 'watching...'));
+				}),
+				1000
+			);
 		});
 	});
-
 	describe('serve option', () => {
 		const entry = { main: [] };
 		const watchOptions = {};
@@ -333,31 +356,55 @@ describe('command', () => {
 				});
 		});
 
-		it('starts a webserver on the specified port', () => {
+		it('starts a webserver on the specified port', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
 			const port = 3000;
-			return main.run(getMockHelper(), { serve: true, port }).then(() => {
-				assert.isTrue(listenStub.calledWith(port));
-			});
+			main.run(getMockHelper(), { serve: true, port }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isTrue(listenStub.calledWith(port));
+				}),
+				1000
+			);
 		});
 
-		it('should not terminate the process when serving', () => {
+		it('should not terminate the process when serving', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
 			const port = 3000;
-			return main.run(getMockHelper(), { serve: true, port }).then(() => {
-				assert.isFalse(exitStub.called);
-			});
+			main.run(getMockHelper(), { serve: true, port }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isFalse(exitStub.called);
+				}),
+				1000
+			);
 		});
 
-		it('serves from the output directory', () => {
+		it('serves from the output directory', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
 			const express = mockModule.getMock('express').ctor;
 			const outputDir = '/output/dist';
 			output.path = outputDir;
-			return main.run(getMockHelper(), { serve: true, watch: true }).then(() => {
-				assert.isTrue(express.static.calledWith(outputDir));
-				assert.isTrue(watchStub.called);
-			});
+			main.run(getMockHelper(), { serve: true, watch: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isTrue(express.static.calledWith(outputDir));
+					assert.isTrue(watchStub.called);
+				}),
+				1000
+			);
 		});
 
 		it('fails on error', () => {
@@ -391,88 +438,119 @@ describe('command', () => {
 			);
 		});
 
-		it('rewrites nested routes', () => {
+		it('rewrites nested routes', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockHelper(), { serve: true }).then(() => {
-				const mockHistory = mockModule.getMock('connect-history-api-fallback');
-				const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
-				const urlRewrite = rewriter({
-					parsedUrl: {
-						pathname: '/nested/main.js'
-					},
-					request: {
-						url: '/nested/main.js',
-						headers: {
-							host: 'localhost:9999',
-							referer: 'http://localhost:9999/nested/route'
+			main.run(getMockHelper(), { serve: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					const mockHistory = mockModule.getMock('connect-history-api-fallback');
+					const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
+					const urlRewrite = rewriter({
+						parsedUrl: {
+							pathname: '/nested/main.js'
+						},
+						request: {
+							url: '/nested/main.js',
+							headers: {
+								host: 'localhost:9999',
+								referer: 'http://localhost:9999/nested/route'
+							}
 						}
-					}
-				});
-				assert.strictEqual(urlRewrite, '/main.js');
-			});
+					});
+					assert.strictEqual(urlRewrite, '/main.js');
+				}),
+				1000
+			);
 		});
 
-		it('does not rewrite routes when there is no referer', () => {
+		it('does not rewrite routes when there is no referer', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockHelper(), { serve: true }).then(() => {
-				const mockHistory = mockModule.getMock('connect-history-api-fallback');
-				const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
-				const urlRewrite = rewriter({
-					parsedUrl: {
-						pathname: '/main.js'
-					},
-					request: {
-						url: '/main.js',
-						headers: {
-							host: 'localhost:9999'
+			main.run(getMockHelper(), { serve: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					const mockHistory = mockModule.getMock('connect-history-api-fallback');
+					const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
+					const urlRewrite = rewriter({
+						parsedUrl: {
+							pathname: '/main.js'
+						},
+						request: {
+							url: '/main.js',
+							headers: {
+								host: 'localhost:9999'
+							}
 						}
-					}
-				});
-				assert.strictEqual(urlRewrite, '/main.js');
-			});
+					});
+					assert.strictEqual(urlRewrite, '/main.js');
+				}),
+				1000
+			);
 		});
 
-		it('does not rewrite self-referential routes like service worker files', () => {
+		it('does not rewrite self-referential routes like service worker files', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
-			return main.run(getMockHelper(), { serve: true }).then(() => {
-				const mockHistory = mockModule.getMock('connect-history-api-fallback');
-				const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
-				const urlRewrite = rewriter({
-					parsedUrl: {
-						pathname: '/service-worker.js'
-					},
-					request: {
-						url: '/service-worker.js',
-						headers: {
-							host: 'localhost:9999',
-							referer: 'http://localhost:9999/service-worker.js'
+			main.run(getMockHelper(), { serve: true }).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					const mockHistory = mockModule.getMock('connect-history-api-fallback');
+					const rewriter = mockHistory.ctor.firstCall.args[0].rewrites[0].to;
+					const urlRewrite = rewriter({
+						parsedUrl: {
+							pathname: '/service-worker.js'
+						},
+						request: {
+							url: '/service-worker.js',
+							headers: {
+								host: 'localhost:9999',
+								referer: 'http://localhost:9999/service-worker.js'
+							}
 						}
-					}
-				});
-				assert.strictEqual(urlRewrite, '/service-worker.js');
-			});
+					});
+					assert.strictEqual(urlRewrite, '/service-worker.js');
+				}),
+				1000
+			);
 		});
 
-		it('registers middleware', () => {
+		it('registers middleware', function() {
+			const dfd = this.async();
 			const main = mockModule.getModuleUnderTest().default;
 			const hotMiddleware = mockModule.getMock('webpack-hot-middleware').ctor;
-			return main
-				.run(getMockHelper(), {
-					mode: 'dev',
-					serve: true,
-					watch: true
-				})
-				.then(() => {
+			main.run(getMockHelper(), {
+				mode: 'dev',
+				serve: true,
+				watch: true
+			}).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
 					assert.strictEqual(useStub.callCount, 7);
 					assert.isTrue(
 						hotMiddleware.calledWith(compiler, {
 							heartbeat: 10000
 						})
 					);
-				});
+				}),
+				1000
+			);
 		});
 
-		it('serves compressed files in dist mode', () => {
+		it('serves compressed files in dist mode', function() {
+			const dfd = this.async();
 			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
 			const main = mockModule.getModuleUnderTest().default;
 			const outputDir = '/output/dist';
@@ -482,17 +560,25 @@ describe('command', () => {
 				serve: true
 			};
 			output.path = outputDir;
-			return main.run(getMockHelper(), rc).then(() => {
-				assert.isTrue(
-					expressStaticGzip.calledWith(outputDir, {
-						enableBrotli: false,
-						orderPreference: undefined
-					})
-				);
-			});
+			main.run(getMockHelper(), rc).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isTrue(
+						expressStaticGzip.calledWith(outputDir, {
+							enableBrotli: false,
+							orderPreference: undefined
+						})
+					);
+				}),
+				1000
+			);
 		});
 
-		it('does not serve compressed files in dev mode', () => {
+		it('does not serve compressed files in dev mode', function() {
+			const dfd = this.async();
 			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
 			const main = mockModule.getModuleUnderTest().default;
 			const rc = {
@@ -500,12 +586,20 @@ describe('command', () => {
 				compression: ['gzip'],
 				serve: true
 			};
-			return main.run(getMockHelper(), rc).then(() => {
-				assert.isFalse(expressStaticGzip.called);
-			});
+			main.run(getMockHelper(), rc).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isFalse(expressStaticGzip.called);
+				}),
+				1000
+			);
 		});
 
-		it('favors brotli over gzip', () => {
+		it('favors brotli over gzip', function() {
+			const dfd = this.async();
 			const expressStaticGzip = mockModule.getMock('express-static-gzip').ctor;
 			const main = mockModule.getModuleUnderTest().default;
 			const outputDir = '/output/dist';
@@ -515,14 +609,21 @@ describe('command', () => {
 				serve: true
 			};
 			output.path = outputDir;
-			return main.run(getMockHelper(), rc).then(() => {
-				assert.isTrue(
-					expressStaticGzip.calledWith(outputDir, {
-						enableBrotli: true,
-						orderPreference: ['br']
-					})
-				);
-			});
+			main.run(getMockHelper(), rc).then(
+				() => dfd.reject(new Error('Promise should not resolve or reject')),
+				() => dfd.reject(new Error('Promise should not resolve or reject'))
+			);
+			setTimeout(
+				dfd.callback(() => {
+					assert.isTrue(
+						expressStaticGzip.calledWith(outputDir, {
+							enableBrotli: true,
+							orderPreference: ['br']
+						})
+					);
+				}),
+				1000
+			);
 		});
 
 		describe('https', () => {
@@ -532,7 +633,8 @@ describe('command', () => {
 				mockModule.getMock('fs').readFileSync = stub().returns('data');
 			});
 
-			it('starts an https server if key and cert are available', () => {
+			it('starts an https server if key and cert are available', function() {
+				const dfd = this.async();
 				const main = mockModule.getModuleUnderTest().default;
 
 				const listenStub = stub().callsFake((port: string, callback: Function) => {
@@ -543,21 +645,24 @@ describe('command', () => {
 					listen: listenStub
 				});
 
-				return main
-					.run(getMockHelper(), {
-						serve: true
-					})
-					.then(() => {
+				main.run(getMockHelper(), {
+					serve: true
+				}).then(
+					() => dfd.reject(new Error('Promise should not resolve or reject')),
+					() => dfd.reject(new Error('Promise should not resolve or reject'))
+				);
+
+				setTimeout(
+					dfd.callback(() => {
 						assert.isTrue(
 							createServerStub.calledWith({
 								cert: 'data',
 								key: 'data'
 							})
 						);
-					})
-					.catch((e: any) => {
-						throw e;
-					});
+					}),
+					1000
+				);
 			});
 
 			it('throws https server errors', () => {
