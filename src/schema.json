@@ -34,10 +34,10 @@
 				}
 			}
 		},
-		"single-bundle": {
+		"singleBundle": {
 			"type": "boolean"
 		},
-		"omit-hash": {
+		"omitHash": {
 			"type": "boolean"
 		},
 		"bundles": {
@@ -469,11 +469,11 @@
 		"f": {
 			"$ref": "#/definitions/features"
 		},
-		"single-bundle": {
-			"$ref": "#/definitions/single-bundle"
+		"singleBundle": {
+			"$ref": "#/definitions/singleBundle"
 		},
-		"omit-hash": {
-			"$ref": "#/definitions/omit-hash"
+		"omitHash": {
+			"$ref": "#/definitions/omitHash"
 		},
 		"bundles": {
 			"$ref": "#/definitions/bundles"
