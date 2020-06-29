@@ -315,13 +315,13 @@ const command: Command = {
 			type: 'number'
 		});
 
-		options('singleBundle', {
+		options('single-bundle', {
 			describe: 'limits the built output to a single bundle',
 			default: false,
 			type: 'boolean'
 		});
 
-		options('omitHash', {
+		options('omit-hash', {
 			describe: 'omits hashes from output file names in dist mode',
 			defaultDescription: '(always false for dev builds)',
 			default: false,
