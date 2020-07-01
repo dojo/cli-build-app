@@ -31,7 +31,7 @@ Copyright [JS Foundation](https://js.foundation/) & contributors
 All rights reserved
 `;
 
-function webpackConfig(args: any): webpack.Configuration {
+function webpackConfig(args: any, spinner?: any): webpack.Configuration {
 	const basePath = process.cwd();
 	const base = args.target === 'electron' ? './' : args.base || '/';
 	const config = baseConfigFactory(args);
@@ -153,7 +153,8 @@ function webpackConfig(args: any): webpack.Configuration {
 				basePath,
 				baseUrl: base,
 				scope: libraryName,
-				onDemand: Boolean(args.serve && args.watch)
+				onDemand: Boolean(args.serve && args.watch),
+				spinner
 			})
 		);
 	}

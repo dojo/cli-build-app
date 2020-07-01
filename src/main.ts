@@ -84,7 +84,8 @@ function serveStatic(
 
 function build(configs: webpack.Configuration[], args: any) {
 	const compiler = webpack(configs);
-	const spinner = ora('building').start();
+	spinner = spinner || ora();
+	spinner.start('building');
 	return new Promise<webpack.MultiCompiler>((resolve, reject) => {
 		compiler.run((err, stats) => {
 			spinner.stop();
@@ -376,6 +377,7 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
+		const spinner = ora();
 		if (args.mode === 'dev') {
 			configs.push(devConfigFactory(args));
 		} else if (args.mode === 'unit' || args.mode === 'test') {
@@ -383,7 +385,7 @@ const command: Command = {
 		} else if (args.mode === 'functional') {
 			configs.push(functionalConfigFactory(args));
 		} else {
-			configs.push(distConfigFactory(args));
+			configs.push(distConfigFactory(args, spinner));
 		}
 
 		if (args.target === 'electron') {
@@ -401,7 +403,8 @@ const command: Command = {
 			return fileWatch(configs, args);
 		}
 
-		return build(configs, args);
+		spinner.text = 'building';
+		return build(configs, args, spinner);
 	},
 	eject(helper: Helper): EjectOutput {
 		return {
