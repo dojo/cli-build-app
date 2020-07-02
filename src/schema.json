@@ -86,6 +86,9 @@
 							},
 							"static": {
 								"type": "boolean"
+							},
+							"exclude": {
+								"type": "boolean"
 							}
 						}
 					}
