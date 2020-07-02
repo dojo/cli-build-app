@@ -378,6 +378,7 @@ const command: Command = {
 		}
 
 		const spinner = ora();
+		spinner.text = 'building';
 		if (args.mode === 'dev') {
 			configs.push(devConfigFactory(args));
 		} else if (args.mode === 'unit' || args.mode === 'test') {
@@ -403,7 +404,6 @@ const command: Command = {
 			return fileWatch(configs, args);
 		}
 
-		spinner.text = 'building';
 		return build(configs, args, spinner);
 	},
 	eject(helper: Helper): EjectOutput {
