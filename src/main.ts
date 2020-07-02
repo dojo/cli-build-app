@@ -82,13 +82,13 @@ function serveStatic(
 	}
 }
 
-function build(configs: webpack.Configuration[], args: any) {
+function build(configs: webpack.Configuration[], args: any, spinner?: ora.Ora) {
 	const compiler = webpack(configs);
 	spinner = spinner || ora();
 	spinner.start('building');
 	return new Promise<webpack.MultiCompiler>((resolve, reject) => {
 		compiler.run((err, stats) => {
-			spinner.stop();
+			spinner && spinner.stop();
 			if (err) {
 				reject(err);
 			}
@@ -377,8 +377,7 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
-		const spinner = ora();
-		spinner.text = 'building';
+		const spinner = ora('building');
 		if (args.mode === 'dev') {
 			configs.push(devConfigFactory(args));
 		} else if (args.mode === 'unit' || args.mode === 'test') {

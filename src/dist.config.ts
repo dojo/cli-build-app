@@ -19,6 +19,7 @@ import baseConfigFactory, {
 	libraryName
 } from './base.config';
 import { WebAppManifest } from './interfaces';
+import * as ora from 'ora';
 
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -31,7 +32,7 @@ Copyright [JS Foundation](https://js.foundation/) & contributors
 All rights reserved
 `;
 
-function webpackConfig(args: any, spinner?: any): webpack.Configuration {
+function webpackConfig(args: any, spinner?: ora.Ora): webpack.Configuration {
 	const basePath = process.cwd();
 	const base = args.target === 'electron' ? './' : args.base || '/';
 	const config = baseConfigFactory(args);
