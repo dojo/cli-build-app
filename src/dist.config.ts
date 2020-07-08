@@ -19,6 +19,7 @@ import baseConfigFactory, {
 	libraryName
 } from './base.config';
 import { WebAppManifest } from './interfaces';
+import { RuleSetUse } from 'webpack';
 
 const BrotliPlugin = require('brotli-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -59,28 +60,28 @@ function webpackConfig(args: any): webpack.Configuration {
 		flagIncludedChunks: false
 	};
 
-	if (args.imageOptimization) {
-		config.module = {
-			...config.module,
-			rules: ((config.module && config.module.rules) || []).map((rule) => {
-				if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader') && !rule.issuer) {
-					return {
-						...rule,
-						loader: undefined,
-						use: [
-							rule.loader,
-							{
-								loader: 'image-webpack-loader',
-								options: args.imageOptimization !== true ? args.imageOptimization : {}
-							}
-						]
-					};
+	config.module = {
+		...config.module,
+		rules: ((config.module && config.module.rules) || []).map((rule) => {
+			args.imageOptimization;
+			if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader')) {
+				const use: RuleSetUse = ['file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'];
+				if (!rule.issuer && args.imageOptimization) {
+					use.push({
+						loader: 'image-webpack-loader',
+						options: args.imageOptimization !== true ? args.imageOptimization : {}
+					});
 				}
+				return {
+					...rule,
+					loader: undefined,
+					use
+				};
+			}
 
-				return rule;
-			})
-		};
-	}
+			return rule;
+		})
+	};
 
 	config.plugins = [
 		...plugins!,

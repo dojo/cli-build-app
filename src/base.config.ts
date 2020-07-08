@@ -122,12 +122,11 @@ function importTransformer(basePath: string, bundles: { [key: string]: string[] 
 				let chunkName = '[request]';
 				if (moduleText) {
 					const { resolvedFileName } = resolvedModules.get(moduleText);
-					chunkName = slash(
-						resolvedFileName
-							.replace(basePath, '')
-							.replace(/.ts(x)?$/, '')
-							.replace(/^(\/|\\)/, '')
-					);
+					chunkName = resolvedFileName
+						.replace(basePath, '')
+						.replace(/.ts(x)?$/, '')
+						.replace(/^(\/|\\)/, '')
+						.replace(/(\/|\\)/g, '-');
 					const updateChunkName =
 						matchesBundle(bundles, chunkName) || matchesBundle(bundles, chunkName, true);
 					chunkName = updateChunkName || chunkName;
@@ -560,7 +559,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
-					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
+					loader: 'file-loader?digest=hex&name=[name].[ext]'
 				},
 				tsLint && {
 					include: allPaths,
@@ -639,7 +638,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
-					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
+					loader: 'file-loader?digest=hex&name=[name].[ext]'
 				},
 				{
 					test: /\.m\.css\.js$/,
