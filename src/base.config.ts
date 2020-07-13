@@ -13,6 +13,7 @@ import * as cssnano from 'cssnano';
 import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as globby from 'globby';
+import Chunk = webpack.compilation.Chunk;
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
@@ -122,11 +123,12 @@ function importTransformer(basePath: string, bundles: { [key: string]: string[] 
 				let chunkName = '[request]';
 				if (moduleText) {
 					const { resolvedFileName } = resolvedModules.get(moduleText);
-					chunkName = resolvedFileName
-						.replace(basePath, '')
-						.replace(/.ts(x)?$/, '')
-						.replace(/^(\/|\\)/, '')
-						.replace(/(\/|\\)/g, '-');
+					chunkName = slash(
+						resolvedFileName
+							.replace(basePath, '')
+							.replace(/.ts(x)?$/, '')
+							.replace(/^(\/|\\)/, '')
+					);
 					const updateChunkName =
 						matchesBundle(bundles, chunkName) || matchesBundle(bundles, chunkName, true);
 					chunkName = updateChunkName || chunkName;
@@ -193,6 +195,35 @@ export class InsertScriptPlugin {
 					cb(null, data);
 				}
 			);
+		});
+	}
+}
+
+export class FlattenChunkPlugin {
+	private _bundles: { [key: string]: string[] };
+
+	constructor(bundles: { [key: string]: string[] } = {}) {
+		this._bundles = bundles;
+	}
+	apply(compiler: any) {
+		compiler.hooks.compilation.tap('FlattenChunkPlugin', (compilation: any) => {
+			compilation.hooks.optimizeChunks.tap('fcp-flatten-chunks', (chunks: Chunk[]) => {
+				chunks.forEach((chunk) => {
+					if (
+						typeof chunk.name === 'string' &&
+						!chunk.name.startsWith('runtime/') &&
+						(chunk.name.indexOf('\\') > -1 || chunk.name.indexOf('/') > -1)
+					) {
+						const chunkName = slash(chunk.name);
+						if (
+							!matchesBundle(this._bundles, chunkName) &&
+							!matchesBundle(this._bundles, chunkName, true)
+						) {
+							chunk.name = chunk.name.replace(/[\\\/]/g, '-');
+						}
+					}
+				});
+			});
 		});
 	}
 }
@@ -541,7 +572,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				new ExtraWatchWebpackPlugin({
 					files: watchExtraFiles
 				}),
-			new ManifestPlugin()
+			new ManifestPlugin(),
+			new FlattenChunkPlugin(args.bundles)
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
