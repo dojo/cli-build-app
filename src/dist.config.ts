@@ -63,7 +63,6 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.module = {
 		...config.module,
 		rules: ((config.module && config.module.rules) || []).map((rule) => {
-			args.imageOptimization;
 			if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader')) {
 				const use: RuleSetUse = ['file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'];
 				if (!rule.issuer && args.imageOptimization) {

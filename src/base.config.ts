@@ -13,7 +13,6 @@ import * as cssnano from 'cssnano';
 import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as globby from 'globby';
-import Chunk = webpack.compilation.Chunk;
 
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
@@ -207,7 +206,7 @@ export class FlattenChunkPlugin {
 	}
 	apply(compiler: any) {
 		compiler.hooks.compilation.tap('FlattenChunkPlugin', (compilation: any) => {
-			compilation.hooks.optimizeChunks.tap('fcp-flatten-chunks', (chunks: Chunk[]) => {
+			compilation.hooks.optimizeChunks.tap('fcp-flatten-chunks', (chunks: webpack.compilation.Chunk[]) => {
 				chunks.forEach((chunk) => {
 					if (
 						typeof chunk.name === 'string' &&
