@@ -20,7 +20,6 @@ import baseConfigFactory, {
 } from './base.config';
 import { WebAppManifest } from './interfaces';
 
-const BrotliPlugin = require('brotli-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
@@ -146,14 +145,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	});
 
 	if (Array.isArray(args.compression)) {
-		const compressionPlugins: any = {
-			gzip: CompressionPlugin,
-			brotli: BrotliPlugin
-		};
 		args.compression.forEach((algorithm: 'brotli' | 'gzip') => {
-			const options = { algorithm, test: /\.(js|css|html|svg)$/ };
-			const Plugin = compressionPlugins[algorithm];
-			config.plugins!.push(new Plugin(options));
+			config.plugins!.push(
+				new CompressionPlugin({
+					algorithm: algorithm === 'brotli' ? 'brotliCompress' : 'gzip',
+					test: /\.(js|css|html|svg)$/
+				})
+			);
 		});
 	}
 
