@@ -29,9 +29,13 @@ export default function logger(stats: any, config: any, runningMessage: string =
 				} else {
 					const fileStats = fs.statSync(filePath);
 					const size = (fileStats.size / 1000).toFixed(2);
-					const assetInfo = `${assetName} ${chalk.yellow(`(${size}kb)`)}`;
+					if (/\.(gz|br)$/.test(filePath)) {
+						return `${assetName} ${chalk.blue(`(${size}kb)`)}`;
+					}
+					// Calculate and report size when gzipped
 					const content = fs.readFileSync(filePath, 'utf8');
 					const compressedSize = (gzipSize.sync(content) / 1000).toFixed(2);
+					const assetInfo = `${assetName} ${chalk.yellow(`(${size}kb)`)}`;
 					return `${assetInfo} / ${chalk.blue(`(${compressedSize}kb gz)`)}`;
 				}
 			}
