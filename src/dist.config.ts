@@ -147,10 +147,19 @@ function webpackConfig(args: any): webpack.Configuration {
 	if (Array.isArray(args.compression)) {
 		args.compression.forEach((algorithm: 'brotli' | 'gzip') => {
 			config.plugins!.push(
-				new CompressionPlugin({
-					algorithm: algorithm === 'brotli' ? 'brotliCompress' : 'gzip',
-					test: /\.(js|css|html|svg)$/
-				})
+				new CompressionPlugin(
+					algorithm === 'brotli'
+						? {
+								filename: '[path].br[query]',
+								algorithm: 'brotliCompress',
+								test: /\.(js|css|html|svg)$/,
+								cache: false
+						  }
+						: {
+								test: /\.(js|css|html|svg)$/,
+								cache: false
+						  }
+				)
 			);
 		});
 	}
