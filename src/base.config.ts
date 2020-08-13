@@ -44,7 +44,6 @@ const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
 export const packageName = packageJson.name || '';
 
 const esLintPath = path.join(basePath, '.eslintrc.json');
-// const esIgnore = path.join(basePath, '.eslint')
 const esLint = existsSync(esLintPath) ? require(esLintPath) : false;
 
 function getEsLintExclusions() {
