@@ -14,6 +14,7 @@ import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as globby from 'globby';
 
+const CssUrlRelativePlugin = require('css-url-relative-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
 const slash = require('slash');
@@ -542,7 +543,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				new ExtraWatchWebpackPlugin({
 					files: watchExtraFiles
 				}),
-			new ManifestPlugin()
+			new ManifestPlugin(),
+			new CssUrlRelativePlugin({ root: args.base || '/' })
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
@@ -560,9 +562,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
-					loader: `file-loader?publicPath=${
-						args.base === undefined ? '/' : args.base
-					}&digest=hex&name=[path][name].[ext]`
+					loader: `file-loader?digest=hex&name=[path][name].[ext]`
 				},
 				tsLint && {
 					include: allPaths,
@@ -641,9 +641,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
-					loader: `file-loader?publicPath=${
-						args.base === undefined ? '/' : args.base
-					}&digest=hex&name=[path][name].[ext]`
+					loader: `file-loader?digest=hex&name=[path][name].[ext]`
 				},
 				{
 					test: /\.m\.css\.js$/,
