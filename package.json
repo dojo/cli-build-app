@@ -114,6 +114,7 @@
     "connect-history-api-fallback": "1.5.0",
     "connect-inject": "0.4.0",
     "css-loader": "1.0.1",
+    "css-url-relative-plugin": "1.0.0",
     "cssnano": "4.1.7",
     "express": "4.16.2",
     "express-static-gzip": "1.1.3",
