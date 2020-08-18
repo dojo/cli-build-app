@@ -44,7 +44,8 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.plugins = [
 		...plugins!,
-		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
+		assetsDirExists &&
+			new CopyWebpackPlugin({ patterns: [{ from: assetsDir, to: path.join(outputPath, 'assets') }] }),
 		new HtmlWebpackPlugin({
 			base,
 			inject: true,
