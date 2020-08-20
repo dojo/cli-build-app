@@ -119,6 +119,7 @@
     "css-loader": "1.0.1",
     "css-url-relative-plugin": "1.0.0",
     "cssnano": "4.1.7",
+    "esbuild-loader": "^2.1.1",
     "electron": "10.1.1",
     "eslint": "7.0.0",
     "eslint-loader": "4.0.2",
