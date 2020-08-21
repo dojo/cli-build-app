@@ -125,7 +125,7 @@ function buildNpmDependencies(): any {
 	}
 }
 
-async function fileWatch(config: webpack.Configuration, args: any) {
+async function fileWatch(config: webpack.Configuration, args: any, shouldResolve = false) {
 	return new Promise<webpack.Compiler>((resolve, reject) => {
 		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
 		const compiler = createWatchCompiler(config);
@@ -141,13 +141,15 @@ async function fileWatch(config: webpack.Configuration, args: any) {
 					: 'watching...';
 				logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
 			}
-			resolve(compiler);
+			if (shouldResolve) {
+				resolve(compiler);
+			}
 		});
 	});
 }
 
 async function serve(config: webpack.Configuration, args: any) {
-	const compiler = args.watch ? await fileWatch(config, args) : await build(config, args);
+	const compiler = args.watch ? await fileWatch(config, args, true) : await build(config, args);
 	let isHttps = false;
 	const base = args.base || '/';
 
@@ -265,16 +267,12 @@ async function serve(config: webpack.Configuration, args: any) {
 				.listen(args.port, (error: Error) => {
 					if (error) {
 						reject(error);
-					} else {
-						resolve();
 					}
 				});
 		} else {
 			app.listen(args.port, (error: Error) => {
 				if (error) {
 					reject(error);
-				} else {
-					resolve();
 				}
 			});
 		}
