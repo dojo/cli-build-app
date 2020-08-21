@@ -1,0 +1,84 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "tsconfig.json",
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint", "jsdoc"],
+	"ignorePatterns": ["**/tslint*.ts"],
+	"rules": {
+		"@typescript-eslint/class-name-casing": "error",
+		"@typescript-eslint/dot-notation": "off",
+		"@typescript-eslint/explicit-member-accessibility": [
+			"off",
+			{
+				"accessibility": "explicit"
+			}
+		],
+		"@typescript-eslint/indent": "off",
+		"@typescript-eslint/interface-name-prefix": "error",
+		"@typescript-eslint/member-ordering": "off",
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-inferrable-types": "error",
+		"@typescript-eslint/no-unused-expressions": "off",
+		"@typescript-eslint/no-use-before-define": "off",
+		"@typescript-eslint/no-var-requires": "off",
+		"camelcase": "error",
+		"curly": "error",
+		"eqeqeq": [
+			"error",
+			"smart"
+		],
+		"guard-for-in": "off",
+		"id-blacklist": [
+			"error",
+			"any",
+			"Number",
+			"number",
+			"String",
+			"string",
+			"Boolean",
+			"boolean",
+			"Undefined",
+			"undefined"
+		],
+		"id-match": "error",
+		"jsdoc/check-alignment": "error",
+		"jsdoc/check-indentation": "error",
+		"jsdoc/newline-after-description": "error",
+		"no-bitwise": "off",
+		"no-caller": "error",
+		"no-console": "off",
+		"no-debugger": "error",
+		"no-empty": "off",
+		"no-eval": "error",
+		"no-fallthrough": "off",
+		"no-new-wrappers": "off",
+		"no-redeclare": "error",
+		"no-shadow": [
+			"off",
+			{
+				"hoist": "all"
+			}
+		],
+		"no-underscore-dangle": "error",
+		"no-unused-labels": "error",
+		"no-var": "error",
+		"radix": "error",
+		"spaced-comment": [
+			"error",
+			"always",
+			{
+				"markers": [
+					"/"
+				]
+			}
+		]
+	}
+}

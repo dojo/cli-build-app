@@ -44,12 +44,12 @@ const packageJsonPath = path.join(basePath, 'package.json');
 const packageJson = existsSync(packageJsonPath) ? require(packageJsonPath) : {};
 export const packageName = packageJson.name || '';
 
-const tsLintPath = path.join(basePath, 'tslint.json');
-const tsLint = existsSync(tsLintPath) ? require(tsLintPath) : false;
+const esLintPath = path.join(basePath, '.eslintrc.json');
+const esLint = existsSync(esLintPath) ? require(esLintPath) : false;
 
-function getTsLintExclusions() {
-	if (tsLint && tsLint.linterOptions && tsLint.linterOptions.exclude) {
-		return globby.sync(tsLint.linterOptions.exclude).map((file) => path.resolve(file));
+function getEsLintExclusions() {
+	if (esLint && esLint.ignorePatterns) {
+		return globby.sync(esLint.ignorePatterns).map((file) => path.resolve(file));
 	}
 	return [];
 }
@@ -564,13 +564,13 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					issuer: indexHtmlPattern,
 					loader: `file-loader?digest=hex&name=[path][name].[ext]`
 				},
-				tsLint && {
+				esLint && {
 					include: allPaths,
 					test: /\.(ts|tsx)$/,
 					enforce: 'pre',
-					loader: 'tslint-loader',
-					options: { configuration: tsLint, emitErrors: true, failOnHint: true },
-					exclude: getTsLintExclusions()
+					loader: 'eslint-loader',
+					options: { baseConfig: esLint, emitError: true, failOnError: true, failOnWarning: true },
+					exclude: getEsLintExclusions()
 				},
 				{
 					test: /@dojo(\/|\\).*\.(js|mjs)$/,
