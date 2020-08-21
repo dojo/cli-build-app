@@ -228,8 +228,8 @@ describe('command', () => {
 	it('shows a building spinner on start', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), {}).then(() => {
-			assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
-			assert.isTrue(mockSpinner.start.called);
+			assert.isTrue(mockModule.getMock('ora').ctor.called);
+			assert.isTrue(mockSpinner.start.calledWith('building'));
 			assert.isTrue(mockSpinner.stop.called);
 		});
 	});
@@ -273,8 +273,8 @@ describe('command', () => {
 			);
 			setTimeout(
 				dfd.callback(() => {
-					assert.isTrue(mockModule.getMock('ora').ctor.calledWith('building'));
-					assert.isTrue(mockSpinner.start.called);
+					assert.isTrue(mockModule.getMock('ora').ctor.called);
+					assert.isTrue(mockSpinner.start.calledWith('building'));
 					assert.isTrue(mockSpinner.stop.called);
 				}),
 				1000

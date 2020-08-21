@@ -1,4 +1,5 @@
 import * as webpack from 'webpack';
+import createLiveLogger from '@dojo/webpack-contrib/logger/logger';
 
 import devConfigFactory from './dev.config';
 import distConfigFactory from './dist.config';
@@ -20,7 +21,7 @@ function webpackConfig(env: EnvOptions = {}): webpack.Configuration {
 	} else if (mode === 'functional') {
 		config = functionalConfigFactory(rc);
 	} else {
-		config = distConfigFactory(rc);
+		config = distConfigFactory(rc, createLiveLogger('building'));
 	}
 	return config;
 }
