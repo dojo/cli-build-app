@@ -133,7 +133,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		main.run(getMockHelper(), { mode: 'dev' }).then(() => {
 			assert.isTrue(mockDevConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', ['dev config']));
+			assert.isTrue(mockLogger.calledWith(stats, ['dev config']));
 		});
 	});
 
@@ -284,7 +284,7 @@ describe('command', () => {
 			);
 			setTimeout(
 				dfd.callback(() => {
-					assert.isTrue(mockLogger.calledWith('stats', ['dist config'], 'watching...'));
+					assert.isTrue(mockLogger.calledWith(stats, ['dist config'], 'watching...'));
 				}),
 				1000
 			);
