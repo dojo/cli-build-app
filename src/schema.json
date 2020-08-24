@@ -62,14 +62,6 @@
 		"base" : {
 			"type": "string"
 		},
-		"experimental": {
-			"additionalProperties": false,
-			"properties": {
-				"speed": {
-					"type": "boolean"
-				}
-			}
-		},
 		"electron": {
 			"properties": {
 				"browser": {
@@ -530,9 +522,6 @@
 		},
 		"proxy": {
 			"$ref": "#/definitions/proxy"
-		},
-		"experimental": {
-			"$ref": "#/definitions/experimental"
 		},
 		"watchExtraFiles": {
 			"$ref": "#/definitions/watchExtraFiles"

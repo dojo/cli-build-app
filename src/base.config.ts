@@ -205,12 +205,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register({ transpileOnly: true });
 	const isLegacy = args.legacy;
 	const base = args.target === 'electron' ? './' : args.base || '/';
-	const experimental = args.experimental || {};
-	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev';
+	const isDev = args.mode === 'dev';
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
-	const singleBundle = args.singleBundle || isTest || isExperimentalSpeed;
+	const singleBundle = args.singleBundle || isTest || isDev;
 	const watch = args.watch;
 	const extensions = isLegacy ? ['.ts', '.tsx', '.js'] : ['.ts', '.tsx', '.mjs', '.js'];
+	const compilerOptions = isLegacy ? {} : { target: 'es2017', module: 'esnext', downlevelIteration: false };
 	let features = isLegacy ? args.features : { ...(args.features || {}), ...getFeatures('modern') };
 	features = {
 		...features,
@@ -276,15 +276,14 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		customTransformers.push(importTransformer(basePath, args.bundles));
 	}
 
-	// const tsLoaderOptions: any = {
-	// 	onlyCompileBundledFiles: true,
-	// 	instance: 'dojo',
-	// 	transpileOnly: isExperimentalSpeed,
-	// 	compilerOptions,
-	// 	getCustomTransformers() {
-	// 		return { before: customTransformers };
-	// 	}
-	// };
+	const tsLoaderOptions: any = {
+		onlyCompileBundledFiles: true,
+		instance: 'dojo',
+		compilerOptions,
+		getCustomTransformers() {
+			return { before: customTransformers };
+		}
+	};
 
 	const postcssImportConfig = {
 		filter: (path: string) => {
@@ -346,22 +345,22 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	];
 
-	if (!isExperimentalSpeed || isLegacy) {
-		postCssModuleLoader.push({
-			loader: 'postcss-loader?sourceMap',
-			options: {
-				ident: 'postcss',
-				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
-			}
-		});
-		cssLoader.push({
-			loader: 'postcss-loader?sourceMap',
-			options: {
-				ident: 'postcss',
-				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
-			}
-		});
-	}
+	postCssModuleLoader.push({
+		loader: 'postcss-loader',
+		options: {
+			sourceMap: !isDev,
+			ident: 'postcss',
+			plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
+		}
+	});
+	cssLoader.push({
+		loader: 'postcss-loader',
+		options: {
+			sourceMap: !isDev,
+			ident: 'postcss',
+			plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
+		}
+	});
 
 	const config: webpack.Configuration = {
 		mode: 'development',
@@ -460,24 +459,22 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		devtool: 'source-map',
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
-			new ESBuildPlugin(),
-			isExperimentalSpeed &&
-				new HardSourceWebpackPlugin({
-					info: {
-						level: 'warn'
-					}
-				}),
-			isExperimentalSpeed &&
-				new HardSourceWebpackPlugin.ExcludeModulePlugin([
-					{
-						// HardSource works with mini-css-extract-plugin but due to how
-						// mini-css emits assets, assets are not emitted on repeated builds with
-						// mini-css and hard-source together. Ignoring the mini-css loader
-						// modules, but not the other css loader modules, excludes the modules
-						// that mini-css needs rebuilt to output assets every time.
-						test: /mini-css-extract-plugin[\\/]dist[\\/]loader/
-					}
-				]),
+			isDev && new ESBuildPlugin(),
+			new HardSourceWebpackPlugin({
+				info: {
+					level: 'warn'
+				}
+			}),
+			new HardSourceWebpackPlugin.ExcludeModulePlugin([
+				{
+					// HardSource works with mini-css-extract-plugin but due to how
+					// mini-css emits assets, assets are not emitted on repeated builds with
+					// mini-css and hard-source together. Ignoring the mini-css loader
+					// modules, but not the other css loader modules, excludes the modules
+					// that mini-css needs rebuilt to output assets every time.
+					test: /mini-css-extract-plugin[\\/]dist[\\/]loader/
+				}
+			]),
 			new StyleLintPlugin({
 				config: {
 					rules: {
@@ -520,7 +517,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				__MAIN_ENTRY: JSON.stringify(mainEntryPath),
 				__DOJO_SCOPE: `'${libraryName}'`
 			}),
-			!isExperimentalSpeed &&
+			!isDev &&
 				new OptimizeCssAssetsPlugin({
 					cssProcessor: cssnano,
 					cssProcessorOptions: {
@@ -625,12 +622,17 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 							options: { features, staticOnly }
 						},
 						isLegacy && getUMDCompatLoader({ bundles: args.bundles }),
-						{
-							loader: 'esbuild-loader',
-							options: {
-								loader: 'tsx'
-							}
-						}
+						isDev
+							? {
+									loader: 'esbuild-loader',
+									options: {
+										loader: 'tsx'
+									}
+							  }
+							: {
+									loader: 'ts-loader',
+									options: tsLoaderOptions
+							  }
 					])
 				},
 				{

@@ -1,10 +1,4 @@
-import baseConfigFactory, {
-	bootstrapEntry,
-	mainEntry,
-	packageName,
-	InsertScriptPlugin,
-	libraryName
-} from './base.config';
+import baseConfigFactory, { mainEntry, packageName, InsertScriptPlugin, libraryName } from './base.config';
 import { WebAppManifest } from './interfaces';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import ServiceWorkerPlugin, {
@@ -21,9 +15,6 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 function webpackConfig(args: any): webpack.Configuration {
-	const experimental = args.experimental || {};
-	const isExperimentalSpeed = !!experimental.speed;
-	const singleBundle = args.singleBundle || isExperimentalSpeed;
 	const base = args.target === 'electron' ? './' : args.base || '/';
 
 	const basePath = process.cwd();
@@ -33,7 +24,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const outputPath = path.join(output!.path!, 'dev');
 	const assetsDir = path.join(process.cwd(), 'assets');
 	const assetsDirExists = fs.existsSync(assetsDir);
-	const entryName = singleBundle ? mainEntry : bootstrapEntry;
+	const entryName = mainEntry;
 	let serviceWorkerOptions: ServiceWorkerOptions | undefined;
 	if (args.pwa && args.pwa.serviceWorker) {
 		serviceWorkerOptions =
@@ -123,7 +114,7 @@ window['${libraryName}'].base = '${base}'</script>`,
 		config.plugins.push(
 			new BuildTimeRender({
 				...args['build-time-render'],
-				sync: singleBundle,
+				sync: true,
 				entries: Object.keys(config.entry!),
 				basePath,
 				baseUrl: base,
