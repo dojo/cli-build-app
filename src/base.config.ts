@@ -24,7 +24,6 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const createHash = require('webpack/lib/util/createHash');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const stylelint = require('stylelint');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -460,21 +459,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		watchOptions: { ignored: /node_modules/ },
 		plugins: removeEmpty([
 			isDev && new ESBuildPlugin(),
-			new HardSourceWebpackPlugin({
-				info: {
-					level: 'warn'
-				}
-			}),
-			new HardSourceWebpackPlugin.ExcludeModulePlugin([
-				{
-					// HardSource works with mini-css-extract-plugin but due to how
-					// mini-css emits assets, assets are not emitted on repeated builds with
-					// mini-css and hard-source together. Ignoring the mini-css loader
-					// modules, but not the other css loader modules, excludes the modules
-					// that mini-css needs rebuilt to output assets every time.
-					test: /mini-css-extract-plugin[\\/]dist[\\/]loader/
-				}
-			]),
 			new StyleLintPlugin({
 				config: {
 					rules: {
