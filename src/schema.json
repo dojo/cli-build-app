@@ -110,6 +110,9 @@
 				},
 				"writeHtml": {
 					"type": "boolean"
+				},
+				"writeCss": {
+					"type": "boolean"
 				}
 			}
 		},
