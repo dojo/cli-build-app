@@ -357,6 +357,7 @@ const command: Command = {
 		console.log = () => {};
 		let config: webpack.Configuration;
 		args.experimental = args.experimental || {};
+		args.base = url.resolve('/', `${args.base || ''}/`).replace(/\/{2,}$/, '/');
 
 		if (args.mode === 'dev') {
 			config = devConfigFactory(args);
