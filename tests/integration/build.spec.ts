@@ -9,10 +9,12 @@ Currently Rendered by BTR: false`
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');
 		cy.get('#vars').should('have.css', 'outline-color', 'rgba(255, 0, 0, 0.5)');
-		cy.get('script[src^="lazy"]').should('exist');
-		cy.get('script[src^="widgets"]').should('exist');
-		cy.get('script[src^="src/Foo"]').should('exist');
-		cy.get('script[src^="src/RoutedWidget"]').should('exist');
+		if (isDist) {
+			cy.get('script[src^="lazy"]').should('exist');
+			cy.get('script[src^="widgets"]').should('exist');
+			cy.get('script[src^="src/Foo"]').should('exist');
+			cy.get('script[src^="src/RoutedWidget"]').should('exist');
+		}
 		cy.get('script[src^="src/ChildRoutedWidget"]').should('not.exist');
 		cy.get('script[src^="ignored"]').should('not.exist');
 		cy.get('#div[nodeenv=production]').should(isDist ? 'exist' : 'not.exist');
@@ -64,26 +66,33 @@ Currently Rendered by BTR: false`
 		it('correctly inlines and resolves external variables for legacy builds', () => {
 			cy.request('/test-app/output/dev-app/main.css').then((response) => {
 				const css = response.body;
-				expect(css).to.contain('color:var(--foreground-color);');
+				expect(css).to.contain('color: var(--foreground-color);');
+				expect(css).to.contain('color: var(--primary);');
+				expect(css).to.contain('color: red;');
+			});
+
+			cy.request('/test-app/output/dev-app/index.html').then((response) => {
+				const css = response.body;
 				expect(css).to.contain('color:#00f;');
-				expect(css).to.contain('color:var(--primary);');
-				expect(css).to.contain('color:red;');
 			});
 		});
 		it('correctly inlines and resolves external variables for evergreen builds', () => {
 			cy.request('/test-app/output/dev-app-evergreen/main.css').then((response) => {
 				const css = response.body;
-				expect(css).to.contain('color:var(--foreground-color);');
+				expect(css).to.contain('color: var(--foreground-color);');
+				expect(css).to.contain('color: var(--primary);');
+				expect(css).to.contain('color: red;');
+			});
+			cy.request('/test-app/output/dev-app-evergreen/index.html').then((response) => {
+				const css = response.body;
 				expect(css).to.contain('color:#00f;');
-				expect(css).to.contain('color:var(--primary);');
-				expect(css).to.contain('color:red;');
 			});
 		});
 	});
 
 	describe('static only features', () => {
 		it('ignores add calls for static only features', () => {
-			cy.request('/test-app/output/dev-app-evergreen/bootstrap.js').then((response) => {
+			cy.request('/test-app/output/dev-app-evergreen/main.js').then((response) => {
 				const js = response.body;
 
 				expect(js).to.contain("add('build-elide', false);");

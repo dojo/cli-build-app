@@ -34,7 +34,7 @@ if (!div) {
 }
 if (btr) {
 	global['test_app'].blocksPending = 1;
-	test('./src/foo.txt').then((result: string) => {
+	Promise.resolve(test('./src/foo.txt')).then((result: string) => {
 		const nodeBtr = document.createElement('div');
 		nodeBtr.id = 'nodeBtr';
 		nodeBtr.innerHTML = result;
@@ -45,7 +45,7 @@ if (btr) {
 } else {
 	const nodeBtrCache = document.createElement('div');
 	nodeBtrCache.id = 'nodeBtrCache';
-	test('./src/foo.txt').then((result: string) => {
+	Promise.resolve(test('./src/foo.txt')).then((result: string) => {
 		nodeBtrCache.innerHTML = result;
 	});
 	root!.appendChild(nodeBtrCache);
