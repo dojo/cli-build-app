@@ -15,6 +15,7 @@ let mockDevConfig: any;
 let mockDistConfig: any;
 let mockUnitTestConfig: any;
 let mockFunctionalTestConfig: any;
+let mockElectronTestConfig: any;
 let compiler: any;
 let isError: boolean;
 let stats: any;
@@ -54,6 +55,7 @@ describe('command', () => {
 			'./dev.config',
 			'./dist.config',
 			'./functional.config',
+			'./electron.config',
 			'./logger',
 			'./unit.config',
 			'connect-history-api-fallback',
@@ -95,10 +97,12 @@ describe('command', () => {
 		mockDistConfig = mockModule.getMock('./dist.config').default;
 		mockUnitTestConfig = mockModule.getMock('./unit.config').default;
 		mockFunctionalTestConfig = mockModule.getMock('./functional.config').default;
+		mockElectronTestConfig = mockModule.getMock('./electron.config').default;
 		mockDevConfig.returns('dev config');
 		mockDistConfig.returns('dist config');
 		mockUnitTestConfig.returns('unit config');
 		mockFunctionalTestConfig.returns('functional config');
+		mockElectronTestConfig.returns('electron config');
 		mockLogger = mockModule.getMock('./logger').default;
 		consoleWarnStub = stub(console, 'warn');
 		consoleStub = stub(console, 'log');
@@ -129,7 +133,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		main.run(getMockHelper(), { mode: 'dev' }).then(() => {
 			assert.isTrue(mockDevConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', 'dev config'));
+			assert.isTrue(mockLogger.calledWith('stats', ['dev config']));
 		});
 	});
 
@@ -137,7 +141,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'dist' }).then(() => {
 			assert.isTrue(mockDistConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', 'dist config'));
+			assert.isTrue(mockLogger.calledWith('stats', ['dist config']));
 		});
 	});
 
@@ -145,7 +149,7 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'unit' }).then(() => {
 			assert.isTrue(mockUnitTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', 'unit config'));
+			assert.isTrue(mockLogger.calledWith('stats', ['unit config']));
 		});
 	});
 
@@ -153,15 +157,24 @@ describe('command', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'functional' }).then(() => {
 			assert.isTrue(mockFunctionalTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', 'functional config'));
+			assert.isTrue(mockLogger.calledWith('stats', ['functional config']));
 		});
 	});
 
-	it('falls back to unit mode and logs a warning when depracated test mode is used', () => {
+	it('can run electron target', () => {
+		const main = mockModule.getModuleUnderTest().default;
+		return main.run(getMockHelper(), { target: 'electron' }).then(() => {
+			assert.isTrue(mockDistConfig.called);
+			assert.isTrue(mockElectronTestConfig.called);
+			assert.isTrue(mockLogger.calledWith('stats', ['dist config', 'electron config']));
+		});
+	});
+
+	it('falls back to unit mode and logs a warning when deprecated test mode is used', () => {
 		const main = mockModule.getModuleUnderTest().default;
 		return main.run(getMockHelper(), { mode: 'test' }).then(() => {
 			assert.isTrue(mockUnitTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', 'unit config'));
+			assert.isTrue(mockLogger.calledWith('stats', ['unit config']));
 			assert.isTrue(consoleWarnStub.calledOnce);
 			assert.isTrue(
 				consoleWarnStub.calledWith(
@@ -282,7 +295,7 @@ describe('command', () => {
 			);
 			setTimeout(
 				dfd.callback(() => {
-					assert.isTrue(mockLogger.calledWith('stats', 'dist config', 'watching...'));
+					assert.isTrue(mockLogger.calledWith('stats', ['dist config'], 'watching...'));
 				}),
 				1000
 			);

@@ -24,7 +24,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const experimental = args.experimental || {};
 	const isExperimentalSpeed = !!experimental.speed;
 	const singleBundle = args.singleBundle || isExperimentalSpeed;
-	const base = args.base || '/';
+	const base = args.target === 'electron' ? './' : args.base || '/';
 
 	const basePath = process.cwd();
 	const config = baseConfigFactory(args);
