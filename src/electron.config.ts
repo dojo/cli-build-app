@@ -48,7 +48,7 @@ function webpackConfig(args: any): webpack.Configuration {
 				serve: !!args.serve,
 				port: args.port,
 				dist: args.mode !== 'dev'
-			} as any)
+			})
 		],
 		module: {
 			rules: [
