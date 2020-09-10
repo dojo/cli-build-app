@@ -38,7 +38,7 @@
     "serve": "serve -p 9999",
     "test:ci": "run-p --race serve test",
     "test:cypress": "cypress run",
-    "test": "run-s build artifact:package artifact:install build artifact:build:* test:cypress",
+    "test": "run-s build artifact:package artifact:install artifact:build:* test:cypress",
     "uploadCoverage": "codecov --file=coverage/coverage.json",
     "watch:ts": "dojo-tsc-watcher -p tsconfig.json -- dojo-package",
     "watch": "run-p watch:ts \"build:static:** -- --watch\""
@@ -152,7 +152,7 @@
     "stylelint": "9.10.1",
     "stylelint-webpack-plugin": "0.10.5",
     "terser-webpack-plugin": "1.1.0",
-    "ts-loader": "5.3.0",
+    "ts-loader": "8.0.3",
     "ts-node": "7.0.1",
     "tsconfig-paths-webpack-plugin": "3.2.0",
     "typed-css-modules": "0.3.1",

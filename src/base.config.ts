@@ -48,7 +48,7 @@ export const packageName = packageJson.name || '';
 
 const esLintPath = path.join(basePath, '.eslintrc.json');
 const esLint = existsSync(esLintPath) ? require(esLintPath) : false;
-(process as any).traceDeprecation = true;
+(process as any).noDeprecation = true;
 
 function getEsLintExclusions() {
 	if (esLint && esLint.ignorePatterns) {
@@ -350,15 +350,17 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 
 	if (!isExperimentalSpeed || isLegacy) {
 		postCssModuleLoader.push({
-			loader: 'postcss-loader?sourceMap',
+			loader: 'postcss-loader',
 			options: {
+				sourceMap: true,
 				ident: 'postcss',
 				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 			}
 		});
 		cssLoader.push({
-			loader: 'postcss-loader?sourceMap',
+			loader: 'postcss-loader',
 			options: {
+				sourceMap: true,
 				ident: 'postcss',
 				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 			}
@@ -417,7 +419,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				: {
 						cacheGroups: {
 							default: false,
-							vendors: false,
+							defaultVendors: false,
 							main: {
 								chunks: 'all',
 								minChunks: 1,
@@ -452,7 +454,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						}
 				  }
 		},
-		devtool: 'source-map',
+		devtool: false,
 		watchOptions: { ignored: 'node_modules' },
 		plugins: removeEmpty([
 			new StyleLintPlugin({

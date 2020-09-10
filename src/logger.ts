@@ -57,7 +57,11 @@ export default function logger(stats: any, config: any, runningMessage: string =
 		signOff = chalk.yellow('The build completed with warnings.');
 		warnings = `
 ${chalk.yellow('warnings:')}${chalk.gray(
-			stats.warnings.reduce((warnings: string, warning: string) => `${warnings}\n${stripAnsi(warning)}`, '')
+			stats.warnings.reduce(
+				(warnings: string, warning: string | { message?: string }) =>
+					`${warnings}\n${stripAnsi(typeof warning === 'string' ? warning : warning && warning.message)}`,
+				''
+			)
 		)}
 `;
 	}

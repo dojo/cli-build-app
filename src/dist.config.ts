@@ -66,9 +66,13 @@ function webpackConfig(args: any): webpack.Configuration {
 				if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader') && !rule.issuer) {
 					return {
 						...rule,
+						options: undefined,
 						loader: undefined,
 						use: [
-							rule.loader,
+							{
+								loader: rule.loader,
+								options: rule.options
+							},
 							{
 								loader: 'image-webpack-loader',
 								options: args.imageOptimization !== true ? args.imageOptimization : {}

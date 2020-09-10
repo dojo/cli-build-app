@@ -286,8 +286,9 @@ async function serve(configs: webpack.Configuration[], args: any) {
 	});
 }
 
-function warningsFilter(warning: string) {
-	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
+function warningsFilter(warning: string | { message?: string }) {
+	const message = (typeof warning === 'string' ? warning : warning && warning.message) || '';
+	return message.includes('[mini-css-extract-plugin]\nConflicting order between');
 }
 
 const command: Command = {
