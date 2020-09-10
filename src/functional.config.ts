@@ -1,4 +1,4 @@
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as globby from 'globby';
 import * as path from 'path';
 import * as webpack from 'webpack';
@@ -26,7 +26,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	};
 	config.plugins = [
 		...plugins!,
-		new CleanWebpackPlugin(['functional'], { root: path.join(outputPath, 'test'), verbose: false })
+		new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ['test/functional'], verbose: false })
 	];
 	config.output = {
 		...output,

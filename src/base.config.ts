@@ -13,6 +13,8 @@ import * as cssnano from 'cssnano';
 import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as globby from 'globby';
+import { RuleSetRule } from 'webpack';
+import HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const CssUrlRelativePlugin = require('css-url-relative-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
@@ -46,6 +48,7 @@ export const packageName = packageJson.name || '';
 
 const esLintPath = path.join(basePath, '.eslintrc.json');
 const esLint = existsSync(esLintPath) ? require(esLintPath) : false;
+(process as any).traceDeprecation = true;
 
 function getEsLintExclusions() {
 	if (esLint && esLint.ignorePatterns) {
@@ -182,7 +185,7 @@ export class InsertScriptPlugin {
 
 	apply(compiler: any) {
 		compiler.hooks.compilation.tap('InsertScriptPlugin', (compilation: any) => {
-			compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(
+			HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync(
 				'InsertScriptPlugin',
 				(data: any, cb: Function) => {
 					this._options.forEach(({ content, type }) => {
@@ -320,7 +323,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	const postCssModuleLoader = [
+	const postCssModuleLoader: RuleSetRule['use'] = [
 		MiniCssExtractPlugin.loader,
 		'@dojo/webpack-contrib/css-module-decorator-loader',
 		{
@@ -334,7 +337,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	];
 
-	const cssLoader = [
+	const cssLoader: RuleSetRule['use'] = [
 		MiniCssExtractPlugin.loader,
 		{
 			loader: 'css-loader',
@@ -365,9 +368,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const config: webpack.Configuration = {
 		mode: 'development',
 		externals: [
-			function(context, request, callback) {
+			function(data: { context: string; request: string }, callback: (err: Error | null, result: any) => void) {
+				const { request } = data;
 				const externals = (args.externals && args.externals.dependencies) || [];
-				function resolveExternal(externals: (string | { name?: string; type?: string })[]): string | void {
+				function resolveExternal(externals: (string | { name?: string; type?: string })[]) {
 					for (let external of externals) {
 						const name = external && (typeof external === 'string' ? external : external.name);
 						if (name && new RegExp(`^${name}[!(\/|\\)]?`).test(request)) {
@@ -389,21 +393,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			}
 		],
 		entry,
-		node: {
-			dgram: 'empty',
-			net: 'empty',
-			tls: 'empty',
-			fs: 'empty',
-			process: false,
-			Buffer: false,
-			setImmediate: false
-		},
 		output: {
 			chunkFilename: '[name].js',
 			library: `lib_${libraryName}`,
 			umdNamedDefine: true,
 			filename: '[name].js',
-			jsonpFunction: `dojoWebpackJsonp${libraryName}`,
+			// jsonpFunction: `dojoWebpackJsonp${libraryName}`,
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
@@ -416,7 +411,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			plugins: [new TsconfigPathsPlugin({ configFile: path.join(basePath, 'tsconfig.json') })]
 		},
 		optimization: {
-			noEmitOnErrors: false,
+			emitOnErrors: true,
 			splitChunks: singleBundle
 				? {}
 				: {
@@ -428,7 +423,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 								minChunks: 1,
 								name: exports.mainEntry,
 								reuseExistingChunk: true,
-								test: (module: any, chunks: any) => {
+								test: (module: any, chunkSet: any) => {
+									const chunks: any[] = Array.from(chunkSet);
 									if (chunks.length === 1 && chunks[0].name === 'main') {
 										return true;
 									}
@@ -457,7 +453,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				  }
 		},
 		devtool: 'source-map',
-		watchOptions: { ignored: /node_modules/ },
+		watchOptions: { ignored: 'node_modules' },
 		plugins: removeEmpty([
 			new StyleLintPlugin({
 				config: {
@@ -563,7 +559,11 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
-					loader: `file-loader?digest=hex&name=[path][name].[ext]`
+					loader: 'file-loader',
+					options: {
+						digest: 'hex',
+						name: '[path][name].[ext]'
+					}
 				},
 				esLint && {
 					include: allPaths,
@@ -595,7 +595,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					include: allPaths,
 					test: /\.ts(x)?$/,
 					enforce: 'pre',
-					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=ts&instanceName=0_dojo'
+					loader: '@dojo/webpack-contrib/css-module-dts-loader',
+					options: {
+						type: 'ts&instanceName=0_dojo'
+					}
 				},
 				{
 					include: allPaths,
@@ -638,11 +641,18 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					include: [/@dojo/, /globalize/],
 					test: new RegExp(`globalize(\\${path.sep}|$)`),
-					loader: 'imports-loader?define=>false'
+					loader: 'imports-loader',
+					options: {
+						additionalCode: 'var define = false;'
+					}
 				},
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
-					loader: `file-loader?digest=hex&name=[path][name].[ext]`
+					loader: 'file-loader',
+					options: {
+						digest: 'hex',
+						name: '[path][name].[ext]'
+					}
 				},
 				{
 					test: /\.m\.css\.js$/,

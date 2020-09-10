@@ -4,7 +4,7 @@ import BundleAnalyzerPlugin from '@dojo/webpack-contrib/webpack-bundle-analyzer/
 import ServiceWorkerPlugin, {
 	ServiceWorkerOptions
 } from '@dojo/webpack-contrib/service-worker-plugin/ServiceWorkerPlugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as fs from 'fs';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -19,6 +19,7 @@ import baseConfigFactory, {
 	libraryName
 } from './base.config';
 import { WebAppManifest } from './interfaces';
+import { RuleSetRule } from 'webpack';
 
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -53,7 +54,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.optimization = {
 		...config.optimization,
-		namedChunks: true,
+		chunkIds: 'named',
 		minimizer: [new TerserPlugin({ sourceMap: true, cache: true })],
 		flagIncludedChunks: false
 	};
@@ -61,7 +62,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	if (args.imageOptimization) {
 		config.module = {
 			...config.module,
-			rules: ((config.module && config.module.rules) || []).map((rule) => {
+			rules: ((config.module && config.module.rules) || []).map((rule: RuleSetRule) => {
 				if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader') && !rule.issuer) {
 					return {
 						...rule,
@@ -83,7 +84,8 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.plugins = [
 		...plugins!,
-		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
+		assetsDirExists &&
+			new CopyWebpackPlugin({ patterns: [{ from: assetsDir, to: path.join(outputPath, 'assets') }] }),
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
 			openAnalyzer: false,
@@ -141,7 +143,7 @@ function webpackConfig(args: any): webpack.Configuration {
 			banner,
 			test: /^.*\.js$/i
 		}),
-		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
+		new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ['dist', 'info'], verbose: false })
 	].filter((item) => item);
 
 	if (args['build-time-render']) {
@@ -158,7 +160,7 @@ function webpackConfig(args: any): webpack.Configuration {
 		);
 	}
 
-	config.plugins = config.plugins.map((plugin) => {
+	config.plugins = config.plugins.map((plugin: any) => {
 		if (plugin instanceof MiniCssExtractPlugin) {
 			return new MiniCssExtractPlugin({
 				filename: args.omitHash ? '[name].bundle.css' : '[name].[contenthash].bundle.css'
@@ -168,13 +170,17 @@ function webpackConfig(args: any): webpack.Configuration {
 	});
 	config.module = {
 		...config.module,
-		rules: ((config.module && config.module.rules) || []).map((rule) => {
+		rules: ((config.module && config.module.rules) || []).map((rule: RuleSetRule) => {
 			if (rule && typeof rule.loader === 'string' && rule.loader.startsWith('file-loader')) {
 				return {
 					...rule,
-					loader: args.omitHash
-						? rule.loader
-						: `file-loader?hash=sha512&digest=hex&name=[path][name].[hash:base64:8].[ext]`
+					options: args.omitHash
+						? rule.options
+						: {
+								hash: 'sha512',
+								digest: 'hex',
+								name: '[path][name].[hash:base64:8].[ext]'
+						  }
 				};
 			}
 
