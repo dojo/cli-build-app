@@ -9,6 +9,13 @@
 				"functional"
 			]
 		},
+		"target": {
+			"type": "string",
+			"enum": [
+				"web",
+				"electron"
+			]
+		},
 		"watch": {
 			"type": "boolean"
 		},
@@ -60,6 +67,13 @@
 			"properties": {
 				"speed": {
 					"type": "boolean"
+				}
+			}
+		},
+		"electron": {
+			"properties": {
+				"browser": {
+					"type": "object"
 				}
 			}
 		},
@@ -445,6 +459,12 @@
 		"m": {
 			"$ref": "#/definitions/mode"
 		},
+		"target": {
+			"$ref": "#/definitions/target"
+		},
+		"t": {
+			"$ref": "#/definitions/target"
+		},
 		"watch": {
 			"$ref": "#/definitions/watch"
 		},
@@ -522,6 +542,9 @@
 				{ "$ref": "#/definitions/imageOptimizationOptions" },
 				{ "$ref": "#/definitions/imageOptimizationFlag" }
 			]
+		},
+		"electron": {
+			"$ref": "#/definitions/electron"
 		}
 	}
 }

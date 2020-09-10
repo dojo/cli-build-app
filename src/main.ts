@@ -19,11 +19,11 @@ import devConfigFactory from './dev.config';
 import unitConfigFactory from './unit.config';
 import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
+import electronConfigFactory from './electron.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
 import { readFileSync } from 'fs';
 
-export const mainEntry = 'main';
 const packageJsonPath = path.join(process.cwd(), 'package.json');
 const packageJson = fs.existsSync(packageJsonPath) ? require(packageJsonPath) : {};
 export const packageName = packageJson.name || '';
@@ -37,20 +37,19 @@ function getLibraryName(name: string) {
 
 const libraryName = packageName ? getLibraryName(packageName) : 'main';
 
-const fixMultipleWatchTrigger = require('webpack-mild-compile');
 const hotMiddleware = require('webpack-hot-middleware');
 const connectInject = require('connect-inject');
 
 const testModes = ['test', 'unit', 'functional'];
 
-function createCompiler(config: webpack.Configuration) {
-	const compiler = webpack(config);
-	fixMultipleWatchTrigger(compiler);
-	return compiler;
+// for some reason the MultiCompiler type doesn't include hooks, even though they are clearly defined on the
+// object coming back.
+interface MultiCompilerWithHooks extends webpack.MultiCompiler {
+	hooks: webpack.compilation.CompilerHooks;
 }
 
-function createWatchCompiler(config: webpack.Configuration) {
-	const compiler = createCompiler(config);
+function createWatchCompiler(configs: webpack.Configuration[]) {
+	const compiler = webpack(configs) as MultiCompilerWithHooks;
 	const spinner = ora('building').start();
 	compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
 		logUpdate('');
@@ -83,10 +82,10 @@ function serveStatic(
 	}
 }
 
-function build(config: webpack.Configuration, args: any) {
-	const compiler = createCompiler(config);
+function build(configs: webpack.Configuration[], args: any) {
+	const compiler = webpack(configs);
 	const spinner = ora('building').start();
-	return new Promise<webpack.Compiler>((resolve, reject) => {
+	return new Promise<webpack.MultiCompiler>((resolve, reject) => {
 		compiler.run((err, stats) => {
 			spinner.stop();
 			if (err) {
@@ -94,7 +93,7 @@ function build(config: webpack.Configuration, args: any) {
 			}
 			if (stats) {
 				const runningMessage = args.serve ? `Listening on port ${args.port}...` : '';
-				const hasErrors = logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
+				const hasErrors = logger(stats.toJson({ warningsFilter }), configs, runningMessage, args);
 				if (hasErrors) {
 					reject({});
 					return;
@@ -125,10 +124,15 @@ function buildNpmDependencies(): any {
 	}
 }
 
-async function fileWatch(config: webpack.Configuration, args: any, shouldResolve = false) {
-	return new Promise<webpack.Compiler>((resolve, reject) => {
-		const watchOptions = config.watchOptions as webpack.Compiler.WatchOptions;
-		const compiler = createWatchCompiler(config);
+function fileWatch(configs: webpack.Configuration[], args: any, shouldResolve = false): Promise<webpack.MultiCompiler> {
+	const [mainConfig] = configs;
+	let compiler: webpack.MultiCompiler;
+
+	return new Promise<webpack.MultiCompiler>((resolve, reject) => {
+		const watchOptions = mainConfig.watchOptions as webpack.Compiler.WatchOptions;
+
+		compiler = createWatchCompiler(configs);
+
 		compiler.watch(watchOptions, (err, stats) => {
 			if (err) {
 				reject(err);
@@ -139,7 +143,7 @@ async function fileWatch(config: webpack.Configuration, args: any, shouldResolve
 							args.port
 					  }\nPlease note the serve option is not intended to be used to serve applications in production.`
 					: 'watching...';
-				logger(stats.toJson({ warningsFilter }), config, runningMessage, args);
+				logger(stats.toJson({ warningsFilter }), configs, runningMessage, args);
 			}
 			if (shouldResolve) {
 				resolve(compiler);
@@ -148,8 +152,9 @@ async function fileWatch(config: webpack.Configuration, args: any, shouldResolve
 	});
 }
 
-async function serve(config: webpack.Configuration, args: any) {
-	const compiler = args.watch ? await fileWatch(config, args, true) : await build(config, args);
+async function serve(configs: webpack.Configuration[], args: any) {
+	const [mainConfig] = configs;
+
 	let isHttps = false;
 	const base = args.base || '/';
 
@@ -162,19 +167,21 @@ async function serve(config: webpack.Configuration, args: any) {
 		next();
 	});
 
-	const outputDir = (config.output && config.output.path) || process.cwd();
+	const compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
+
+	const outputDir = (mainConfig.output && mainConfig.output.path) || process.cwd();
 	let btrOptions = args['build-time-render'];
 	if (btrOptions) {
 		if (args.singleBundle || (args.experimental && !!args.experimental.speed)) {
 			btrOptions = { ...btrOptions, sync: true };
 		}
-		const jsonpName = (config.output && config.output.jsonpFunction) || 'unknown';
+		const jsonpName = (mainConfig.output && mainConfig.output.jsonpFunction) || 'unknown';
 		const onDemandBtr = new OnDemandBtr({
 			buildTimeRenderOptions: btrOptions,
 			scope: libraryName,
 			base,
-			compiler,
-			entries: config.entry ? Object.keys(config.entry) : [],
+			compiler: compiler.compilers[0],
+			entries: mainConfig.entry ? Object.keys(mainConfig.entry) : [],
 			outputPath: outputDir,
 			jsonpName
 		});
@@ -295,6 +302,13 @@ const command: Command = {
 			choices: ['dist', 'dev', 'test', 'unit', 'functional']
 		});
 
+		options('target', {
+			describe: 'the target',
+			alias: 't',
+			default: 'web',
+			choices: ['web', 'electron']
+		});
+
 		options('watch', {
 			describe: 'watch for file changes',
 			alias: 'w'
@@ -355,7 +369,7 @@ const command: Command = {
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
-		let config: webpack.Configuration;
+		let configs: webpack.Configuration[] = [];
 		args.experimental = args.experimental || {};
 		args.base = url.resolve('/', args.base || '');
 		if (!args.base.endsWith('/')) {
@@ -363,27 +377,31 @@ const command: Command = {
 		}
 
 		if (args.mode === 'dev') {
-			config = devConfigFactory(args);
+			configs.push(devConfigFactory(args));
 		} else if (args.mode === 'unit' || args.mode === 'test') {
-			config = unitConfigFactory(args);
+			configs.push(unitConfigFactory(args));
 		} else if (args.mode === 'functional') {
-			config = functionalConfigFactory(args);
+			configs.push(functionalConfigFactory(args));
 		} else {
-			config = distConfigFactory(args);
+			configs.push(distConfigFactory(args));
+		}
+
+		if (args.target === 'electron') {
+			configs.push(electronConfigFactory(args));
 		}
 
 		if (args.serve) {
 			if (testModes.indexOf(args.mode) !== -1) {
 				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
 			}
-			return serve(config, args);
+			return serve(configs, args);
 		}
 
 		if (args.watch) {
-			return fileWatch(config, args);
+			return fileWatch(configs, args);
 		}
 
-		return build(config, args);
+		return build(configs, args);
 	},
 	eject(helper: Helper): EjectOutput {
 		return {
