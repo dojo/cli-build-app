@@ -9,12 +9,11 @@ Currently Rendered by BTR: false`
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');
 		cy.get('#vars').should('have.css', 'outline-color', 'rgba(255, 0, 0, 0.5)');
-		cy.get('script[src^="lazy"]').should('exist');
-		cy.get('script[src^="widgets"]').should('exist');
-		cy.get('script[src^="src/Foo"]').should('exist');
-		cy.get('script[src^="src/RoutedWidget"]').should('exist');
-		cy.get('script[src^="src/ChildRoutedWidget"]').should('not.exist');
-		cy.get('script[src^="ignored"]').should('not.exist');
+		cy.get('link[href^="lazy"]').should('exist');
+		cy.get('link[href^="widgets"]').should('exist');
+		cy.get('link[href^="src/Foo"]').should('exist');
+		cy.get('link[href^="src/RoutedWidget"]').should('exist');
+		cy.get('link[href^="ignored"]').should('not.exist');
 		cy.get('#div[nodeenv=production]').should(isDist ? 'exist' : 'not.exist');
 		cy.get('#div[has-prod=prod]').should(isDist ? 'exist' : 'not.exist');
 		cy.get('#div[dojo-debug=true]').should(isDist ? 'not.exist' : 'exist');
