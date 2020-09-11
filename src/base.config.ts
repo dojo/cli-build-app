@@ -400,7 +400,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			library: `lib_${libraryName}`,
 			umdNamedDefine: true,
 			filename: '[name].js',
-			// jsonpFunction: `dojoWebpackJsonp${libraryName}`,
+			uniqueName: `dojoWebpack${libraryName}`,
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
