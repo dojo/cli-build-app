@@ -166,7 +166,7 @@ describe('command', () => {
 		return main.run(getMockHelper(), { target: 'electron' }).then(() => {
 			assert.isTrue(mockDistConfig.called);
 			assert.isTrue(mockElectronTestConfig.called);
-			assert.isTrue(mockLogger.calledWith('stats', ['dist config', 'electron config']));
+			assert.isTrue(mockLogger.calledWith(stats, ['dist config', 'electron config']));
 		});
 	});
 
