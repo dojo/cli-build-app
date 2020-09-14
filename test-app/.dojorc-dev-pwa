@@ -35,8 +35,8 @@
 				"clientsClaim": true,
 				"excludeBundles": [ "src/LazyWidget" ],
 				"routes": [
-					{ "urlPattern": "\\.(jpg|png|gif|svg)$", "strategy": "cacheFirst", "expiration": { "maxEntries": 25 } },
-					{ "urlPattern": "/api", "strategy": "networkFirst" }
+					{ "urlPattern": "\\.(jpg|png|gif|svg)$", "strategy": "CacheFirst", "expiration": { "maxEntries": 25 } },
+					{ "urlPattern": "/api", "strategy": "NetworkFirst" }
 				]
 			}
 		},

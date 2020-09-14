@@ -51,7 +51,11 @@ function webpackConfig(args: any): webpack.Configuration {
 			base,
 			inject: true,
 			chunks: [entryName],
-			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
+			meta: manifest
+				? {
+						'mobile-web-app-capable': 'yes'
+				  }
+				: {},
 			template: 'src/index.html',
 			cache: false
 		}),

@@ -550,6 +550,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			noParse: (file: string) => assetsDirPattern.test(file),
 			rules: removeEmpty([
 				{
+					test: /\.m?js/,
+					resolve: {
+						fullySpecified: false
+					}
+				},
+				{
 					test: indexHtmlPattern,
 					use: {
 						loader: 'html-loader',

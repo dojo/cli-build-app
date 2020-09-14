@@ -1,11 +1,6 @@
 describe('build', () => {
 	function testUrl(dir: string, isDist: boolean, isPwa: boolean) {
 		cy.visit(`/test-app/output/${dir}/`);
-		cy.get('#div').should(
-			'contain',
-			`Built with Build Time Render: true
-Currently Rendered by BTR: false`
-		);
 		cy.get('#app-root').should('contain', 'Lazy Widget using dojorc configuration');
 		cy.get('#div').should('have.css', 'background-color', 'rgba(0, 0, 0, 0.5)');
 		cy.get('#vars').should('have.css', 'outline-color', 'rgba(255, 0, 0, 0.5)');
@@ -18,6 +13,11 @@ Currently Rendered by BTR: false`
 		cy.get('#div[has-prod=prod]').should(isDist ? 'exist' : 'not.exist');
 		cy.get('#div[dojo-debug=true]').should(isDist ? 'not.exist' : 'exist');
 		cy.get('#div[has-ci=ci]').should(isDist ? 'not.exist' : 'exist');
+		cy.get('#div').should(
+			'contain',
+			`Built with Build Time Render: true
+Currently Rendered by BTR: false`
+		);
 
 		cy.get('meta[name="mobile-web-app-capable"]').should(isPwa ? 'exist' : 'not.exist');
 		cy.get('meta[name="apple-mobile-web-app-capable"]').should(isPwa ? 'exist' : 'not.exist');
@@ -54,7 +54,7 @@ Currently Rendered by BTR: false`
 		it('dev-pwa', () => {
 			testUrl('dev-pwa', false, true);
 		});
-		it('dev-app', () => {
+		it('dev-pwa-evergreen', () => {
 			testUrl('dev-pwa-evergreen', false, true);
 		});
 	});

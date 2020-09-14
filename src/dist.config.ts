@@ -101,7 +101,11 @@ function webpackConfig(args: any): webpack.Configuration {
 			base,
 			inject: true,
 			chunks: [entryName],
-			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
+			meta: manifest
+				? {
+						'mobile-web-app-capable': 'yes'
+				  }
+				: {},
 			template: 'src/index.html',
 			cache: false
 		}),
@@ -167,7 +171,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.plugins = config.plugins.map((plugin: any) => {
 		if (plugin instanceof MiniCssExtractPlugin) {
 			return new MiniCssExtractPlugin({
-				filename: args.omitHash ? '[name].bundle.css' : '[name].[contenthash].bundle.css'
+				filename: args.omitHash ? '[name].bundle.css' : '[name].bundle.css'
 			});
 		}
 		return plugin;
@@ -215,8 +219,8 @@ function webpackConfig(args: any): webpack.Configuration {
 	config.output = {
 		...output,
 		path: outputPath,
-		chunkFilename: args.omitHash ? '[name].bundle.js' : '[name].[chunkhash].bundle.js',
-		filename: args.omitHash ? '[name].bundle.js' : '[name].[chunkhash].bundle.js'
+		chunkFilename: args.omitHash ? '[name].bundle.js' : '[name].bundle.js',
+		filename: args.omitHash ? '[name].bundle.js' : '[name].bundle.js'
 	};
 
 	return config;
