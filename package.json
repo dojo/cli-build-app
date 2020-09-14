@@ -100,7 +100,7 @@
     "tslint": "5.18.0"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "file:~/Projects/opensource/webpack-contrib/dist/release/dojo-webpack-contrib-7.0.6-pre.tgz",
+    "@dojo/webpack-contrib": "file:dojo-webpack-contrib.tgz",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "caniuse-lite": "1.0.30000973",
