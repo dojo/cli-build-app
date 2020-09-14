@@ -20,7 +20,6 @@ import unitConfigFactory from './unit.config';
 import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
 import electronConfigFactory from './electron.config';
-import logger from './logger';
 import { moveBuildOptions } from './util/eject';
 import logger from './logger';
 import { readFileSync } from 'fs';
@@ -83,7 +82,7 @@ function serveStatic(
 	}
 }
 
-function build(configs: webpack.Configuration[], args: any, spinner?: ora.Ora) {
+function build(configs: webpack.Configuration[], args: any) {
 	const compiler = webpack(configs);
 	const liveLogger = createLiveLogger('building').start();
 	return new Promise<webpack.MultiCompiler>((resolve, reject) => {
