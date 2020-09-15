@@ -454,7 +454,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						}
 				  }
 		},
-		devtool: false,
+		devtool: args.mode === 'dev' ? 'eval' : 'source-map',
 		watchOptions: { ignored: 'node_modules' },
 		plugins: removeEmpty([
 			new StyleLintPlugin({
