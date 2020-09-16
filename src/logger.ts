@@ -70,7 +70,11 @@ ${chalk.yellow('warnings:')}${chalk.gray(
 		signOff = chalk.red('The build completed with errors.');
 		errors = `
 ${chalk.yellow('errors:')}${chalk.red(
-			stats.errors.reduce((errors: string, error: string) => `${errors}\n${stripAnsi(error)}`, '')
+			stats.errors.reduce(
+				(errors: string, error: string | { message: string }) =>
+					`${errors}\n${stripAnsi(typeof error === 'string' ? error : error && error.message)}`,
+				''
+			)
 		)}
 `;
 	}
