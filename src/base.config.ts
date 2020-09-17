@@ -48,7 +48,6 @@ export const packageName = packageJson.name || '';
 
 const esLintPath = path.join(basePath, '.eslintrc.json');
 const esLint = existsSync(esLintPath) ? require(esLintPath) : false;
-(process as any).noDeprecation = true;
 
 function getEsLintExclusions() {
 	if (esLint && esLint.ignorePatterns) {
