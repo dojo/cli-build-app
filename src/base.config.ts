@@ -453,7 +453,8 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						}
 				  }
 		},
-		devtool: args.mode === 'dev' ? 'eval' : 'source-map',
+		// TODO - revisit source map issue. beta 31 broke 'eval' for dev build
+		devtool: args.mode === 'dev' ? false : 'source-map',
 		watchOptions: { ignored: 'node_modules' },
 		plugins: removeEmpty([
 			new StyleLintPlugin({

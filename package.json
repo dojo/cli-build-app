@@ -38,7 +38,7 @@
     "serve": "serve -p 9999",
     "test:ci": "run-p --race serve test",
     "test:cypress": "cypress run",
-    "test": "run-s build artifact:package artifact:install build intern artifact:build:* test:cypress",
+    "test": "run-s build artifact:package artifact:install artifact:build:* test:cypress",
     "uploadCoverage": "codecov --file=coverage/coverage.json",
     "watch:ts": "dojo-tsc-watcher -p tsconfig.json -- dojo-package",
     "watch": "run-p watch:ts \"build:static:** -- --watch\""
@@ -157,7 +157,7 @@
     "tsconfig-paths-webpack-plugin": "3.2.0",
     "typed-css-modules": "0.3.1",
     "umd-compat-loader": "2.1.1",
-    "webpack": "5.0.0-beta.30",
+    "webpack": "5.0.0-beta.31",
     "webpack-hot-middleware": "2.24.3",
     "webpack-manifest-plugin": "3.0.0-rc.0",
     "webpack-mild-compile": "3.3.1",
