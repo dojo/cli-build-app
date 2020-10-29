@@ -206,6 +206,19 @@ async function serve(configs: webpack.Configuration[], args: any) {
 			]
 		})
 	);
+
+	if (args.proxy) {
+		Object.keys(args.proxy).forEach((context) => {
+			const options = args.proxy[context];
+
+			if (typeof options === 'string') {
+				app.use(base, proxy(context, { target: options }));
+			} else {
+				app.use(base, proxy(context, options));
+			}
+		});
+	}
+
 	serveStatic(app, outputDir, args.mode, args.compression, base);
 
 	app.use(
@@ -236,18 +249,6 @@ async function serve(configs: webpack.Configuration[], args: any) {
 	);
 
 	serveStatic(app, outputDir, args.mode, args.compression, base);
-
-	if (args.proxy) {
-		Object.keys(args.proxy).forEach((context) => {
-			const options = args.proxy[context];
-
-			if (typeof options === 'string') {
-				app.use(base, proxy(context, { target: options }));
-			} else {
-				app.use(base, proxy(context, options));
-			}
-		});
-	}
 
 	const defaultKey = path.resolve('.cert', 'server.key');
 	const defaultCrt = path.resolve('.cert', 'server.crt');
