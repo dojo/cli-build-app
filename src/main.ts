@@ -296,19 +296,28 @@ const command: Command = {
 	name: 'app',
 	description: 'create a build of your application',
 	register(options: OptionsHelper) {
-		options('mode', {
-			describe: 'the output mode',
-			alias: 'm',
-			default: 'dist',
-			choices: ['dist', 'dev', 'test', 'unit', 'functional']
-		});
+		let dojoRc = { 'cli-build-app': { esbuild: false } };
+		try {
+			dojoRc = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), '.dojorc'), 'utf-8'));
+		} catch (e) {}
 
-		options('target', {
-			describe: 'the target',
-			alias: 't',
-			default: 'web',
-			choices: ['web', 'electron']
-		});
+		const esBuild = dojoRc['cli-build-app'].esbuild;
+
+		!esBuild &&
+			options('mode', {
+				describe: 'the output mode',
+				alias: 'm',
+				default: 'dist',
+				choices: ['dist', 'dev', 'test', 'unit', 'functional']
+			});
+
+		!esBuild &&
+			options('target', {
+				describe: 'the target',
+				alias: 't',
+				default: 'web',
+				choices: ['web', 'electron']
+			});
 
 		options('watch', {
 			describe: 'watch for file changes',
@@ -328,25 +337,28 @@ const command: Command = {
 			type: 'number'
 		});
 
-		options('single-bundle', {
-			describe: 'limits the built output to a single bundle',
-			default: false,
-			type: 'boolean'
-		});
+		!esBuild &&
+			options('single-bundle', {
+				describe: 'limits the built output to a single bundle',
+				default: false,
+				type: 'boolean'
+			});
 
-		options('omit-hash', {
-			describe: 'omits hashes from output file names in dist mode',
-			defaultDescription: '(always false for dev builds)',
-			default: false,
-			type: 'boolean'
-		});
+		!esBuild &&
+			options('omit-hash', {
+				describe: 'omits hashes from output file names in dist mode',
+				defaultDescription: '(always false for dev builds)',
+				default: false,
+				type: 'boolean'
+			});
 
-		options('legacy', {
-			describe: 'build app with legacy browser support',
-			alias: 'l',
-			default: false,
-			type: 'boolean'
-		});
+		!esBuild &&
+			options('legacy', {
+				describe: 'build app with legacy browser support',
+				alias: 'l',
+				default: false,
+				type: 'boolean'
+			});
 
 		options('features', {
 			describe: 'list of has() features to include',
@@ -369,6 +381,7 @@ const command: Command = {
 		});
 	},
 	run(helper: Helper, args: any) {
+		console.warn(args);
 		console.log = () => {};
 		let configs: webpack.Configuration[] = [];
 		args.experimental = args.experimental || {};

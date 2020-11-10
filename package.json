@@ -106,6 +106,7 @@
   },
   "dependencies": {
     "@dojo/webpack-contrib": "8.0.0-alpha.1",
+    "@parcel/watcher": "^2.0.0-alpha.9",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "caniuse-lite": "1.0.30000973",
@@ -120,6 +121,7 @@
     "css-url-relative-plugin": "1.0.0",
     "cssnano": "4.1.7",
     "electron": "10.1.1",
+    "esbuild": "^0.8.5",
     "eslint": "7.0.0",
     "eslint-loader": "4.0.2",
     "eslint-plugin-jsdoc": "25.4.2",
