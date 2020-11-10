@@ -11,7 +11,7 @@ const atImport = require('postcss-import');
 const hasLoader = require('@dojo/webpack-contrib/static-build-loader/loader');
 const features = require('@dojo/webpack-contrib/static-build-loader/features/modern.json');
 
-const output = 'dist';
+const output = 'output/dev';
 const src = 'src';
 const entry = 'main';
 const html = 'index';
@@ -92,7 +92,10 @@ export const build = async () => {
 			format: 'esm',
 			bundle: true,
 			sourcemap: true,
-			inject: [`./${src}/${entry}.css`],
+			inject: [`node_modules/@dojo/webpack-contrib/bootstrap-plugin/sync.js`, `./${src}/${entry}.css`],
+			define: {
+				__DOJO_SCOPE: '"dev"'
+			},
 			loader: {
 				'.png': 'file',
 				'.jpg': 'file',
@@ -124,7 +127,36 @@ export const build = async () => {
 };
 
 export const watch = async () => {
-	await watcher.subscribe(process.cwd(), (err: any, events: any) => {
+	await build();
+	await watcher.subscribe(`${process.cwd()}/src`, async (err: any, events: any) => {
 		build();
 	});
+};
+
+export const compiler = () => {
+	const dones: any[] = [];
+	const invalids: any[] = [];
+	invalids.forEach((invalid) => invalid());
+	build().then(() => {
+		dones.forEach((done) => done({ toJson: () => ({ modules: [] }) }));
+		watcher.subscribe(`${process.cwd()}/src`, async (err: any, events: any) => {
+			invalids.forEach((invalid) => invalid());
+			await build();
+			dones.forEach((done) => done({ toJson: () => ({ modules: [] }) }));
+		});
+	});
+	return {
+		hooks: {
+			done: {
+				tap(name: string, callback: Function) {
+					dones.push(callback);
+				}
+			},
+			invalid: {
+				tap(name: string, callback: Function) {
+					invalids.push(callback);
+				}
+			}
+		}
+	};
 };

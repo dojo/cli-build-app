@@ -23,6 +23,7 @@ import electronConfigFactory from './electron.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
 import { readFileSync } from 'fs';
+import { build as esbuild, compiler as escompiler } from './esbuild';
 
 const packageJsonPath = path.join(process.cwd(), 'package.json');
 const packageJson = fs.existsSync(packageJsonPath) ? require(packageJsonPath) : {};
@@ -152,7 +153,7 @@ function fileWatch(configs: webpack.Configuration[], args: any, shouldResolve = 
 	});
 }
 
-async function serve(configs: webpack.Configuration[], args: any) {
+async function serve(configs: webpack.Configuration[], args: any, esbuild = false) {
 	const [mainConfig] = configs;
 
 	let isHttps = false;
@@ -167,7 +168,20 @@ async function serve(configs: webpack.Configuration[], args: any) {
 		next();
 	});
 
-	const compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
+	let compiler;
+	if (esbuild) {
+		compiler = escompiler();
+		const spinner = ora('building').start();
+		compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
+			logUpdate('');
+			spinner.start();
+		});
+		compiler.hooks.done.tap('@dojo/cli-build-app', () => {
+			spinner.stop();
+		});
+	} else {
+		compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
+	}
 
 	const outputDir = (mainConfig.output && mainConfig.output.path) || process.cwd();
 	let btrOptions = args['build-time-render'];
@@ -180,7 +194,7 @@ async function serve(configs: webpack.Configuration[], args: any) {
 			buildTimeRenderOptions: btrOptions,
 			scope: libraryName,
 			base,
-			compiler: compiler.compilers[0],
+			compiler: (compiler as any).compilers ? (compiler as any).compilers[0] : compiler,
 			entries: mainConfig.entry ? Object.keys(mainConfig.entry) : [],
 			outputPath: outputDir,
 			jsonpName
@@ -291,17 +305,21 @@ function warningsFilter(warning: string) {
 	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
 }
 
+function isEsBuild() {
+	let dojoRc = { 'build-app': { esbuild: false } };
+	try {
+		dojoRc = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), '.dojorc'), 'utf-8'));
+	} catch (e) {}
+
+	return dojoRc['build-app'].esbuild;
+}
+
 const command: Command = {
 	group: 'build',
 	name: 'app',
 	description: 'create a build of your application',
 	register(options: OptionsHelper) {
-		let dojoRc = { 'cli-build-app': { esbuild: false } };
-		try {
-			dojoRc = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), '.dojorc'), 'utf-8'));
-		} catch (e) {}
-
-		const esBuild = dojoRc['cli-build-app'].esbuild;
+		const esBuild = isEsBuild();
 
 		!esBuild &&
 			options('mode', {
@@ -381,7 +399,6 @@ const command: Command = {
 		});
 	},
 	run(helper: Helper, args: any) {
-		console.warn(args);
 		console.log = () => {};
 		let configs: webpack.Configuration[] = [];
 		args.experimental = args.experimental || {};
@@ -390,32 +407,43 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
-		if (args.mode === 'dev') {
-			configs.push(devConfigFactory(args));
-		} else if (args.mode === 'unit' || args.mode === 'test') {
-			configs.push(unitConfigFactory(args));
-		} else if (args.mode === 'functional') {
-			configs.push(functionalConfigFactory(args));
-		} else {
-			configs.push(distConfigFactory(args));
-		}
-
-		if (args.target === 'electron') {
-			configs.push(electronConfigFactory(args));
-		}
-
-		if (args.serve) {
-			if (testModes.indexOf(args.mode) !== -1) {
-				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
+		if (args.esbuild) {
+			if (args.serve) {
+				return serve([{ output: { path: 'output/dev' } }], args, true);
 			}
-			return serve(configs, args);
-		}
+			if (args.watch) {
+				return new Promise(() => escompiler());
+			} else {
+				return esbuild();
+			}
+		} else {
+			if (args.mode === 'dev') {
+				configs.push(devConfigFactory(args));
+			} else if (args.mode === 'unit' || args.mode === 'test') {
+				configs.push(unitConfigFactory(args));
+			} else if (args.mode === 'functional') {
+				configs.push(functionalConfigFactory(args));
+			} else {
+				configs.push(distConfigFactory(args));
+			}
 
-		if (args.watch) {
-			return fileWatch(configs, args);
-		}
+			if (args.target === 'electron') {
+				configs.push(electronConfigFactory(args));
+			}
 
-		return build(configs, args);
+			if (args.serve) {
+				if (testModes.indexOf(args.mode) !== -1) {
+					return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
+				}
+				return serve(configs, args);
+			}
+
+			if (args.watch) {
+				return fileWatch(configs, args);
+			}
+
+			return build(configs, args);
+		}
 	},
 	eject(helper: Helper): EjectOutput {
 		return {
@@ -443,9 +471,14 @@ const command: Command = {
 		};
 	},
 	validate(helper: Helper) {
+		const esBuild = isEsBuild();
 		let schema;
 		try {
-			schema = JSON.parse(readFileSync(path.join(__dirname, 'schema.json')).toString());
+			if (esBuild) {
+				schema = JSON.parse(readFileSync(path.join(__dirname, 'schema-esbuild.json')).toString());
+			} else {
+				schema = JSON.parse(readFileSync(path.join(__dirname, 'schema.json')).toString());
+			}
 		} catch (error) {
 			return Promise.reject(Error('The dojorc schema for cli-build-app could not be read: ' + error));
 		}

@@ -1,0 +1,90 @@
+{
+	"definitions": {
+		"esbuild": {
+			"type": "boolean"
+		},
+		"watch": {
+			"type": "boolean"
+		},
+		"serve": {
+			"type": "boolean"
+		},
+		"port": {
+			"type": "number"
+		},
+		"features": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": ["boolean", "string", "number"]
+				}
+			}
+		},
+		"base" : {
+			"type": "string"
+		},
+		"proxy": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": ["object", "string"],
+					"properties": {
+						"target": {
+							"type": "string"
+						},
+						"changeOrigin": {
+							"type": "boolean"
+						},
+						"ws": {
+							"type": "boolean"
+						},
+						"pathRewrite": {
+							"patternProperties": {
+								"^.*$": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"esbuild": {
+			"$ref": "#/definitions/esbuild"
+		},
+		"watch": {
+			"$ref": "#/definitions/watch"
+		},
+		"w": {
+			"$ref": "#/definitions/watch"
+		},
+		"serve" : {
+			"$ref": "#/definitions/serve"
+		},
+		"s": {
+			"$ref": "#/definitions/serve"
+		},
+		"port" : {
+			"$ref": "#/definitions/port"
+		},
+		"p": {
+			"$ref": "#/definitions/port"
+		},
+		"features": {
+			"$ref": "#/definitions/features"
+		},
+		"f": {
+			"$ref": "#/definitions/features"
+		},
+		"base" : {
+			"$ref": "#/definitions/base"
+		},
+		"proxy": {
+			"$ref": "#/definitions/proxy"
+		}
+	}
+}

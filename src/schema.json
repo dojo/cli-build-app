@@ -1,5 +1,8 @@
 {
 	"definitions": {
+		"esbuild": {
+			"type": "boolean"
+		},
 		"mode": {
 			"type": "string",
 			"enum": [
@@ -453,6 +456,9 @@
 	"type": "object",
 	"additionalProperties": false,
 	"properties": {
+		"esbuild": {
+			"$ref": "#/definitions/esbuild"
+		},
 		"mode": {
 			"$ref": "#/definitions/mode"
 		},
