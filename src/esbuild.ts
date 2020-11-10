@@ -126,13 +126,6 @@ export const build = async () => {
 	fs.writeFileSync(`./${output}/${html}.html`, index);
 };
 
-export const watch = async () => {
-	await build();
-	await watcher.subscribe(`${process.cwd()}/src`, async (err: any, events: any) => {
-		build();
-	});
-};
-
 export const compiler = () => {
 	const dones: any[] = [];
 	const invalids: any[] = [];
