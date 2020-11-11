@@ -1,14 +1,15 @@
-const { build: esbuild } = require('esbuild');
-const fs = require('fs');
-const util = require('util');
-const path = require('path');
-const watcher = require('@parcel/watcher');
+import { build as esbuild } from 'esbuild';
+import * as fs from 'fs';
+import * as util from 'util';
+import * as path from 'path';
+import hasLoader from '@dojo/webpack-contrib/static-build-loader/loader';
+import postcss from 'postcss';
 
-const postcss = require('postcss');
 const cssModules = require('postcss-modules');
 const copyAssets = require('postcss-copy-assets');
 const atImport = require('postcss-import');
-const hasLoader = require('@dojo/webpack-contrib/static-build-loader/loader');
+
+const watcher = require('@parcel/watcher');
 const features = require('@dojo/webpack-contrib/static-build-loader/features/modern.json');
 
 const output = 'output/dev';
@@ -63,7 +64,7 @@ const has = () => {
 		setup(build: any) {
 			build.onLoad({ filter: /\.mjs/ }, async (args: any) => {
 				let source = await util.promisify(fs.readFile)(args.path, 'utf8');
-				source = hasLoader.default.bind({
+				source = hasLoader.bind({
 					query: {
 						features: {
 							...features,
@@ -74,7 +75,7 @@ const has = () => {
 							'build-elide': true
 						}
 					}
-				})(source);
+				} as any)(source) as string;
 				return { contents: source, loader: 'default' };
 			});
 		}
