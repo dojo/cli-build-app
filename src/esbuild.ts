@@ -89,7 +89,6 @@ const extension = fs.existsSync(`./${src}/${entry}.tsx`) ? 'tsx' : 'ts';
 const spinner = ora('building');
 
 export const build = async () => {
-	spinner.clear();
 	spinner.start();
 	const start = performance.now();
 	try {
