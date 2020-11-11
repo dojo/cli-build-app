@@ -306,12 +306,7 @@ function warningsFilter(warning: string) {
 }
 
 function isEsBuild() {
-	let dojoRc = { 'build-app': { esbuild: false } };
-	try {
-		dojoRc = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), '.dojorc'), 'utf-8'));
-	} catch (e) {}
-
-	return dojoRc['build-app'].esbuild;
+	return process.argv.indexOf('--esbuild') !== -1;
 }
 
 const command: Command = {

@@ -1,8 +1,5 @@
 {
 	"definitions": {
-		"esbuild": {
-			"type": "boolean"
-		},
 		"mode": {
 			"type": "string",
 			"enum": [
