@@ -2,14 +2,16 @@ import { build as esbuild } from 'esbuild';
 import * as fs from 'fs';
 import * as util from 'util';
 import * as path from 'path';
-import hasLoader from '@dojo/webpack-contrib/static-build-loader/loader';
-import postcss from 'postcss';
+import { performance } from 'perf_hooks';
+import * as ora from 'ora';
 
+const postcss = require('postcss');
 const cssModules = require('postcss-modules');
 const copyAssets = require('postcss-copy-assets');
 const atImport = require('postcss-import');
 
 const watcher = require('@parcel/watcher');
+const hasLoader = require('@dojo/webpack-contrib/static-build-loader/loader').default;
 const features = require('@dojo/webpack-contrib/static-build-loader/features/modern.json');
 
 const output = 'output/dev';
@@ -84,8 +86,12 @@ const has = () => {
 const cssPlugin = css();
 const hasPlugin = has();
 const extension = fs.existsSync(`./${src}/${entry}.tsx`) ? 'tsx' : 'ts';
+const spinner = ora('building');
 
 export const build = async () => {
+	spinner.clear();
+	spinner.start();
+	const start = performance.now();
 	try {
 		await esbuild({
 			entryPoints: [`./${src}/${entry}.${extension}`],
@@ -125,6 +131,9 @@ export const build = async () => {
 	);
 	fs.writeFileSync(`./${output}/${entry}.css`, cssPlugin.output());
 	fs.writeFileSync(`./${output}/${html}.html`, index);
+	const end = performance.now();
+	const duration = end - start;
+	spinner.succeed(`done in ${(duration / 1000).toFixed(2)} seconds.`);
 };
 
 export const compiler = () => {

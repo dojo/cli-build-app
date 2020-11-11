@@ -171,14 +171,6 @@ async function serve(configs: webpack.Configuration[], args: any, esbuild = fals
 	let compiler;
 	if (esbuild) {
 		compiler = escompiler();
-		const spinner = ora('building').start();
-		compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
-			logUpdate('');
-			spinner.start();
-		});
-		compiler.hooks.done.tap('@dojo/cli-build-app', () => {
-			spinner.stop();
-		});
 	} else {
 		compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
 	}
@@ -315,6 +307,12 @@ const command: Command = {
 	description: 'create a build of your application',
 	register(options: OptionsHelper) {
 		const esBuild = isEsBuild();
+
+		options('esbuild', {
+			describe: 'enable esbuild mode for dev',
+			type: 'boolean',
+			default: false
+		});
 
 		!esBuild &&
 			options('mode', {
