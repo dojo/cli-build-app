@@ -64,7 +64,7 @@ const has = (userFeatures = {}) => {
 	return {
 		name: 'has-plugin',
 		setup(build: any) {
-			build.onLoad({ filter: /\.mjs/ }, async (args: any) => {
+			build.onLoad({ filter: /\.(mjs|js)/ }, async (args: any) => {
 				let source = await util.promisify(fs.readFile)(args.path, 'utf8');
 				source = hasLoader.bind({
 					query: {
