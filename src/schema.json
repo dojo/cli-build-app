@@ -391,10 +391,10 @@
 									"strategy": {
 										"type": "string",
 										"enum": [
-											"networkFirst",
-											"cacheFirst",
-											"networkOnly",
-											"staleWhileRevalidate"
+											"NetworkFirst",
+											"CacheFirst",
+											"NetworkOnly",
+											"StaleWhileRevalidate"
 										]
 									},
 									"expiration": {

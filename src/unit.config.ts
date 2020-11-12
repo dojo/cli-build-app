@@ -1,4 +1,3 @@
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as globby from 'globby';
 import * as path from 'path';
 import * as webpack from 'webpack';
@@ -23,10 +22,7 @@ function webpackConfig(args: any): webpack.Configuration {
 
 		return tests;
 	};
-	config.plugins = [
-		...plugins!,
-		new CleanWebpackPlugin(['unit'], { root: path.join(outputPath, 'test'), verbose: false })
-	];
+	config.plugins = [...plugins!];
 	config.output = {
 		...output,
 		path: path.join(outputPath, 'test', 'unit')

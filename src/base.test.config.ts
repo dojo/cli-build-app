@@ -27,13 +27,13 @@ function webpackConfig(args: any): webpack.Configuration {
 	]);
 
 	if (module) {
-		module.rules = module.rules.map((rule) => {
+		module.rules = (module.rules || []).map((rule: webpack.RuleSetRule) => {
 			if (Array.isArray(rule.use)) {
-				rule.use = rule.use.map((loader) => {
+				rule.use = rule.use.map((loader: any) => {
 					if (typeof loader === 'string') {
 						return loader;
 					}
-					const { loader: loaderName } = loader as webpack.RuleSetLoader;
+					const { loader: loaderName } = loader;
 					if (loaderName === 'umd-compat-loader') {
 						return {
 							loader: loaderName,

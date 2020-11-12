@@ -45,7 +45,7 @@ const testModes = ['test', 'unit', 'functional'];
 // for some reason the MultiCompiler type doesn't include hooks, even though they are clearly defined on the
 // object coming back.
 interface MultiCompilerWithHooks extends webpack.MultiCompiler {
-	hooks: webpack.compilation.CompilerHooks;
+	hooks: webpack.Compilation.hooks;
 }
 
 function createWatchCompiler(configs: webpack.Configuration[]) {
@@ -133,7 +133,7 @@ function fileWatch(configs: webpack.Configuration[], args: any, shouldResolve = 
 
 		compiler = createWatchCompiler(configs);
 
-		compiler.watch(watchOptions, (err, stats) => {
+		compiler.watch(watchOptions, (err: any, stats: any) => {
 			if (err) {
 				reject(err);
 			}
@@ -287,8 +287,9 @@ async function serve(configs: webpack.Configuration[], args: any) {
 	});
 }
 
-function warningsFilter(warning: string) {
-	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
+function warningsFilter(warning: string | { message?: string }) {
+	const message = (typeof warning === 'string' ? warning : warning && warning.message) || '';
+	return message.includes('[mini-css-extract-plugin]\nConflicting order between');
 }
 
 const command: Command = {

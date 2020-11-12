@@ -13,6 +13,8 @@ import * as cssnano from 'cssnano';
 import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as globby from 'globby';
+import { RuleSetRule } from 'webpack';
+import HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const CssUrlRelativePlugin = require('css-url-relative-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
@@ -182,7 +184,7 @@ export class InsertScriptPlugin {
 
 	apply(compiler: any) {
 		compiler.hooks.compilation.tap('InsertScriptPlugin', (compilation: any) => {
-			compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(
+			HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync(
 				'InsertScriptPlugin',
 				(data: any, cb: Function) => {
 					this._options.forEach(({ content, type }) => {
@@ -320,7 +322,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	const postCssModuleLoader = [
+	const postCssModuleLoader: RuleSetRule['use'] = [
 		MiniCssExtractPlugin.loader,
 		'@dojo/webpack-contrib/css-module-decorator-loader',
 		{
@@ -334,7 +336,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	];
 
-	const cssLoader = [
+	const cssLoader: RuleSetRule['use'] = [
 		MiniCssExtractPlugin.loader,
 		{
 			loader: 'css-loader',
@@ -347,15 +349,17 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 
 	if (!isExperimentalSpeed || isLegacy) {
 		postCssModuleLoader.push({
-			loader: 'postcss-loader?sourceMap',
+			loader: 'postcss-loader',
 			options: {
+				sourceMap: true,
 				ident: 'postcss',
 				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 			}
 		});
 		cssLoader.push({
-			loader: 'postcss-loader?sourceMap',
+			loader: 'postcss-loader',
 			options: {
+				sourceMap: true,
 				ident: 'postcss',
 				plugins: [postcssImport(postcssImportConfig), postcssPresetEnv(postcssPresetConfig)]
 			}
@@ -365,9 +369,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 	const config: webpack.Configuration = {
 		mode: 'development',
 		externals: [
-			function(context, request, callback) {
+			function(data: { context: string; request: string }, callback: (err: Error | null, result: any) => void) {
+				const { request } = data;
 				const externals = (args.externals && args.externals.dependencies) || [];
-				function resolveExternal(externals: (string | { name?: string; type?: string })[]): string | void {
+				function resolveExternal(externals: (string | { name?: string; type?: string })[]) {
 					for (let external of externals) {
 						const name = external && (typeof external === 'string' ? external : external.name);
 						if (name && new RegExp(`^${name}[!(\/|\\)]?`).test(request)) {
@@ -389,21 +394,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			}
 		],
 		entry,
-		node: {
-			dgram: 'empty',
-			net: 'empty',
-			tls: 'empty',
-			fs: 'empty',
-			process: false,
-			Buffer: false,
-			setImmediate: false
-		},
 		output: {
 			chunkFilename: '[name].js',
 			library: `lib_${libraryName}`,
 			umdNamedDefine: true,
 			filename: '[name].js',
-			jsonpFunction: `dojoWebpackJsonp${libraryName}`,
+			uniqueName: `dojoWebpack${libraryName}`,
 			libraryTarget: 'umd',
 			path: path.resolve('./output')
 		},
@@ -416,19 +412,20 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			plugins: [new TsconfigPathsPlugin({ configFile: path.join(basePath, 'tsconfig.json') })]
 		},
 		optimization: {
-			noEmitOnErrors: false,
+			emitOnErrors: true,
 			splitChunks: singleBundle
 				? {}
 				: {
 						cacheGroups: {
 							default: false,
-							vendors: false,
+							defaultVendors: false,
 							main: {
 								chunks: 'all',
 								minChunks: 1,
 								name: exports.mainEntry,
 								reuseExistingChunk: true,
-								test: (module: any, chunks: any) => {
+								test: (module: any, chunkSet: any) => {
+									const chunks: any[] = Array.from(chunkSet);
 									if (chunks.length === 1 && chunks[0].name === 'main') {
 										return true;
 									}
@@ -456,8 +453,9 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 						}
 				  }
 		},
-		devtool: 'source-map',
-		watchOptions: { ignored: /node_modules/ },
+		// TODO - revisit source map issue. beta 31 broke 'eval' for dev build
+		devtool: args.mode === 'dev' ? false : 'source-map',
+		watchOptions: { ignored: 'node_modules' },
 		plugins: removeEmpty([
 			new StyleLintPlugin({
 				config: {
@@ -552,6 +550,12 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			noParse: (file: string) => assetsDirPattern.test(file),
 			rules: removeEmpty([
 				{
+					test: /\.m?js/,
+					resolve: {
+						fullySpecified: false
+					}
+				},
+				{
 					test: indexHtmlPattern,
 					use: {
 						loader: 'html-loader',
@@ -563,7 +567,11 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
-					loader: `file-loader?digest=hex&name=[path][name].[ext]`
+					loader: 'file-loader',
+					options: {
+						digest: 'hex',
+						name: '[path][name].[ext]'
+					}
 				},
 				esLint && {
 					include: allPaths,
@@ -595,7 +603,10 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 					include: allPaths,
 					test: /\.ts(x)?$/,
 					enforce: 'pre',
-					loader: '@dojo/webpack-contrib/css-module-dts-loader?type=ts&instanceName=0_dojo'
+					loader: '@dojo/webpack-contrib/css-module-dts-loader',
+					options: {
+						type: 'ts&instanceName=0_dojo'
+					}
 				},
 				{
 					include: allPaths,
@@ -638,11 +649,18 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					include: [/@dojo/, /globalize/],
 					test: new RegExp(`globalize(\\${path.sep}|$)`),
-					loader: 'imports-loader?define=>false'
+					loader: 'imports-loader',
+					options: {
+						additionalCode: 'var define = false;'
+					}
 				},
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
-					loader: `file-loader?digest=hex&name=[path][name].[ext]`
+					loader: 'file-loader',
+					options: {
+						digest: 'hex',
+						name: '[path][name].[ext]'
+					}
 				},
 				{
 					test: /\.m\.css\.js$/,

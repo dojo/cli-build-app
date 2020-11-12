@@ -15,8 +15,9 @@ import * as path from 'path';
 import webpack = require('webpack');
 import BuildTimeRender from '@dojo/webpack-contrib/build-time-render/BuildTimeRender';
 import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/ExternalLoaderPlugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import { RuleSetRule } from 'webpack';
 
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
@@ -44,12 +45,17 @@ function webpackConfig(args: any): webpack.Configuration {
 
 	config.plugins = [
 		...plugins!,
-		assetsDirExists && new CopyWebpackPlugin([{ from: assetsDir, to: path.join(outputPath, 'assets') }]),
+		assetsDirExists &&
+			new CopyWebpackPlugin({ patterns: [{ from: assetsDir, to: path.join(outputPath, 'assets') }] }),
 		new HtmlWebpackPlugin({
 			base,
 			inject: true,
 			chunks: [entryName],
-			meta: manifest ? { 'mobile-web-app-capable': 'yes' } : {},
+			meta: manifest
+				? {
+						'mobile-web-app-capable': 'yes'
+				  }
+				: {},
 			template: 'src/index.html',
 			cache: false
 		}),
@@ -91,17 +97,17 @@ window['${libraryName}'].base = '${base}'</script>`,
 </script>`,
 				type: 'append'
 			}),
-		new CleanWebpackPlugin(['dev', 'info'], { root: output!.path, verbose: false })
+		new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ['dev', 'info'], verbose: false })
 	].filter((item) => item);
 
 	if (module) {
-		module.rules = module.rules.map((rule) => {
+		module.rules = module.rules.map((rule: RuleSetRule) => {
 			if (Array.isArray(rule.use)) {
-				rule.use = rule.use.map((loader) => {
+				rule.use = rule.use.map((loader: any) => {
 					if (typeof loader === 'string') {
 						return loader;
 					}
-					const { loader: loaderName, options } = loader as webpack.RuleSetLoader;
+					const { loader: loaderName, options } = loader;
 					if (loaderName === '@dojo/webpack-contrib/static-build-loader') {
 						if (typeof options === 'object') {
 							options.features = { ...(options.features || {}), 'dojo-debug': true };
