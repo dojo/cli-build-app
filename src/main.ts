@@ -298,7 +298,7 @@ function warningsFilter(warning: string) {
 }
 
 function isEsBuild() {
-	return process.argv.indexOf('--esbuild') !== -1;
+	return process.argv.indexOf('--fast') !== -1;
 }
 
 const command: Command = {
@@ -308,8 +308,8 @@ const command: Command = {
 	register(options: OptionsHelper) {
 		const esBuild = isEsBuild();
 
-		options('esbuild', {
-			describe: 'enable esbuild mode for dev',
+		options('fast', {
+			describe: 'enable fast mode for dev',
 			type: 'boolean',
 			default: false
 		});
