@@ -9,14 +9,6 @@
 		"port": {
 			"type": "number"
 		},
-		"features": {
-			"type": "object",
-			"patternProperties": {
-				"^.*$": {
-					"type": ["boolean", "string", "number"]
-				}
-			}
-		},
 		"base" : {
 			"type": "string"
 		},

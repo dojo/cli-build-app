@@ -371,25 +371,26 @@ const command: Command = {
 				type: 'boolean'
 			});
 
-		options('features', {
-			describe: 'list of has() features to include',
-			alias: 'f',
-			array: true,
-			coerce: (args: string[]) => {
-				return args.reduce(
-					(newArgs, arg) => {
-						const parts = arg.split('=');
-						if (parts.length === 1) {
-							newArgs[arg] = true;
-						} else if (parts.length === 2) {
-							newArgs[parts[0]] = parts[1];
-						}
-						return newArgs;
-					},
-					{} as any
-				);
-			}
-		});
+		!esBuild &&
+			options('features', {
+				describe: 'list of has() features to include',
+				alias: 'f',
+				array: true,
+				coerce: (args: string[]) => {
+					return args.reduce(
+						(newArgs, arg) => {
+							const parts = arg.split('=');
+							if (parts.length === 1) {
+								newArgs[arg] = true;
+							} else if (parts.length === 2) {
+								newArgs[parts[0]] = parts[1];
+							}
+							return newArgs;
+						},
+						{} as any
+					);
+				}
+			});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
