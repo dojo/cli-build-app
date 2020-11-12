@@ -23,7 +23,6 @@ import electronConfigFactory from './electron.config';
 import logger from './logger';
 import { moveBuildOptions } from './util/eject';
 import { readFileSync } from 'fs';
-import { build as esbuild, compiler as escompiler } from './esbuild';
 
 const packageJsonPath = path.join(process.cwd(), 'package.json');
 const packageJson = fs.existsSync(packageJsonPath) ? require(packageJsonPath) : {};
@@ -170,6 +169,7 @@ async function serve(configs: webpack.Configuration[], args: any, esbuild = fals
 
 	let compiler;
 	if (esbuild) {
+		const { compiler: escompiler } = require('./esbuild');
 		compiler = escompiler();
 	} else {
 		compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
@@ -401,6 +401,7 @@ const command: Command = {
 		}
 
 		if (args.esbuild) {
+			const { build: esbuild, compiler: escompiler } = require('./esbuild');
 			if (args.serve) {
 				return serve([{ output: { path: 'output/dev' } }], args, true);
 			}
