@@ -65,11 +65,13 @@ const has = () => {
 		name: 'has-plugin',
 		setup(build: any) {
 			build.onLoad({ filter: /\.mjs/ }, async (args: any) => {
+				const userFeatures = args.features || {};
 				let source = await util.promisify(fs.readFile)(args.path, 'utf8');
 				source = hasLoader.bind({
 					query: {
 						features: {
 							...features,
+							...userFeatures,
 							'dojo-debug': false,
 							'cldr-elide': true,
 							'build-time-rendered': false,
