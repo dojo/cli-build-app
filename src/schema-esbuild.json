@@ -60,12 +60,6 @@
 		"p": {
 			"$ref": "#/definitions/port"
 		},
-		"features": {
-			"$ref": "#/definitions/features"
-		},
-		"f": {
-			"$ref": "#/definitions/features"
-		},
 		"base" : {
 			"$ref": "#/definitions/base"
 		},
