@@ -60,12 +60,11 @@ ${result.css}`;
 	};
 };
 
-const has = () => {
+const has = (userFeatures = {}) => {
 	return {
 		name: 'has-plugin',
 		setup(build: any) {
 			build.onLoad({ filter: /\.mjs/ }, async (args: any) => {
-				const userFeatures = args.features || {};
 				let source = await util.promisify(fs.readFile)(args.path, 'utf8');
 				source = hasLoader.bind({
 					query: {
@@ -86,12 +85,12 @@ const has = () => {
 	};
 };
 const cssPlugin = css();
-const hasPlugin = has();
 const extension = fs.existsSync(`./${src}/${entry}.tsx`) ? 'tsx' : 'ts';
 const spinner = ora('building');
 
-export const build = async () => {
+export const build = async (args: any) => {
 	spinner.start();
+	const hasPlugin = has(args.features);
 	const start = performance.now();
 	try {
 		await esbuild({
@@ -137,15 +136,15 @@ export const build = async () => {
 	spinner.succeed(`done in ${(duration / 1000).toFixed(2)} seconds.`);
 };
 
-export const compiler = () => {
+export const compiler = (args: any) => {
 	const dones: any[] = [];
 	const invalids: any[] = [];
 	invalids.forEach((invalid) => invalid());
-	build().then(() => {
+	build(args).then(() => {
 		dones.forEach((done) => done({ toJson: () => ({ modules: [] }) }));
 		watcher.subscribe(`${process.cwd()}/src`, async (err: any, events: any) => {
 			invalids.forEach((invalid) => invalid());
-			await build();
+			await build(args);
 			dones.forEach((done) => done({ toJson: () => ({ modules: [] }) }));
 		});
 	});

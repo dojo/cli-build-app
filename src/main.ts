@@ -170,7 +170,7 @@ async function serve(configs: webpack.Configuration[], args: any, esbuild = fals
 	let compiler;
 	if (esbuild) {
 		const { compiler: escompiler } = require('./esbuild');
-		compiler = escompiler();
+		compiler = escompiler({ features: args.features });
 	} else {
 		compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
 	}
@@ -406,9 +406,9 @@ const command: Command = {
 				return serve([{ output: { path: 'output/dev' } }], args, true);
 			}
 			if (args.watch) {
-				return new Promise(() => escompiler());
+				return new Promise(() => escompiler({ features: args.features }));
 			} else {
-				return esbuild();
+				return esbuild({ features: args.features });
 			}
 		} else {
 			if (args.mode === 'dev') {
