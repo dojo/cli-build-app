@@ -14,27 +14,29 @@ let mockModule: MockModule;
 function assertOutput(isServing = false, hasManifest = true) {
 	const logger = mockModule.getModuleUnderTest().default;
 	const runningMessage = isServing ? 'running...' : undefined;
+	const toJson = sinon.stub().returns({
+		hash: 'hash',
+		assets: [
+			{
+				name: 'assetOne.js',
+				size: 1000
+			},
+			{
+				name: 'assetOne.js',
+				size: 1000
+			}
+		],
+		chunks: [
+			{
+				names: ['chunkOne']
+			}
+		],
+		errors: [],
+		warnings: []
+	});
+
 	const hasErrors = logger(
-		{
-			hash: 'hash',
-			assets: [
-				{
-					name: 'assetOne.js',
-					size: 1000
-				},
-				{
-					name: 'assetOne.js',
-					size: 1000
-				}
-			],
-			chunks: [
-				{
-					names: ['chunkOne']
-				}
-			],
-			errors: [],
-			warnings: []
-		},
+		{ toJson },
 		{
 			output: {
 				path: path.join(__dirname, '..', 'fixtures')
@@ -43,18 +45,13 @@ function assertOutput(isServing = false, hasManifest = true) {
 		runningMessage
 	);
 
-	let assetOne = `assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`;
 	let signOff = chalk.green('The build completed successfully.');
 	if (runningMessage) {
 		signOff += `\n\n${runningMessage}`;
 	}
-	let chunksAndAssets = '';
-	if (hasManifest) {
-		chunksAndAssets = `${chalk.yellow('chunks:')}
-${columns(['chunkOne'])}
-${chalk.yellow('assets:')}
-${columns([assetOne, assetOne])}`;
-	}
+	let chunks = '';
+	chunks = `${chalk.yellow('chunks:')}
+${columns(['chunkOne'])}`;
 
 	const expectedLog = `
 ${logSymbols.info} cli-build-app: 9.9.9
@@ -63,7 +60,7 @@ ${logSymbols.success} hash: hash
 ${logSymbols.error} errors: 0
 ${logSymbols.warning} warnings: 0
 ${''}${''}
-${chunksAndAssets}
+${chunks}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
 ${signOff}
@@ -71,14 +68,40 @@ ${signOff}
 	const mockedLogUpdate = mockModule.getMock('log-update').ctor;
 	assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
 	assert.isFalse(hasErrors);
+
+	const [{ warningsFilter }] = toJson.firstCall.args;
+	assert.isTrue(warningsFilter('[mini-css-extract-plugin]\nConflicting order between'));
+	assert.isFalse(warningsFilter('[mini-css-extract-plugin]'));
+	assert.isFalse(warningsFilter(''));
+	assert.isFalse(warningsFilter('some other warning'));
 }
 
 describe('logger', () => {
 	beforeEach(() => {
 		mockModule = new MockModule('../../src/logger', require);
-		mockModule.dependencies(['typescript', 'jsonfile', 'log-update']);
+		mockModule.dependencies([
+			'typescript',
+			'jsonfile',
+			'log-update',
+			'@dojo/webpack-contrib/webpack-bundle-analyzer/AnalyzeBundles',
+			'@dojo/webpack-contrib/webpack-bundle-analyzer/parseUtils'
+		]);
 		mockModule.getMock('jsonfile').readFileSync = sinon.stub().returns({ version: '9.9.9' });
 		mockModule.getMock('typescript').version = '1.1.1';
+		mockModule.getMock(
+			'@dojo/webpack-contrib/webpack-bundle-analyzer/AnalyzeBundles'
+		).default = sinon.stub().returns({
+			chunkOne: {
+				parsedSize: 251 * 1000,
+				gzipSize: 800
+			}
+		});
+		mockModule.getMock(
+			'@dojo/webpack-contrib/webpack-bundle-analyzer/parseUtils'
+		).findLargestPackage = sinon.stub().returns({
+			size: 1000,
+			name: 'foo'
+		});
 	});
 
 	afterEach(() => {
@@ -98,35 +121,32 @@ describe('logger', () => {
 		assertOutput(true);
 	});
 
-	it('logging output without manifest', () => {
-		sinon.stub(fs, 'existsSync').returns(false);
-		assertOutput(false, false);
-	});
-
 	it('logging output with errors', () => {
 		const errors: any = ['error', 'otherError'];
 		const warnings: any = ['warning', 'otherWarning'];
 		const logger = mockModule.getModuleUnderTest().default;
 		const hasErrors = logger(
 			{
-				hash: 'hash',
-				assets: [
-					{
-						name: 'assetOne.js',
-						size: 1000
-					},
-					{
-						name: 'assetOne.js',
-						size: 1000
-					}
-				],
-				chunks: [
-					{
-						names: ['chunkOne']
-					}
-				],
-				errors,
-				warnings
+				toJson: () => ({
+					hash: 'hash',
+					assets: [
+						{
+							name: 'assetOne.js',
+							size: 1000
+						},
+						{
+							name: 'assetOne.js',
+							size: 1000
+						}
+					],
+					chunks: [
+						{
+							names: ['chunkOne']
+						}
+					],
+					errors,
+					warnings
+				})
 			},
 			{
 				output: {
@@ -152,11 +172,6 @@ ${logSymbols.warning} warnings: 2
 ${expectedErrors}${expectedWarnings}
 ${chalk.yellow('chunks:')}
 ${columns(['chunkOne'])}
-${chalk.yellow('assets:')}
-${columns([
-			`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`,
-			`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`
-		])}
 ${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
 ${chalk.red('The build completed with errors.')}
@@ -167,34 +182,38 @@ ${chalk.red('The build completed with errors.')}
 		assert.isTrue(hasErrors);
 	});
 
-	it('should skip assets that do not exist', () => {
+	it('logging output in dist mode with a large chunk', () => {
 		const logger = mockModule.getModuleUnderTest().default;
 		const hasErrors = logger(
 			{
-				hash: 'hash',
-				assets: [
-					{
-						name: 'assetOne.js',
-						size: 1000
-					},
-					{
-						name: 'assetTwo.js',
-						size: 1000
-					}
-				],
-				chunks: [
-					{
-						names: ['chunkOne']
-					}
-				],
-				errors: [],
-				warnings: []
+				toJson: () => ({
+					hash: 'hash',
+					assets: [
+						{
+							name: 'assetOne.js',
+							size: 1000
+						},
+						{
+							name: 'assetOne.js',
+							size: 1000
+						}
+					],
+					chunks: [
+						{
+							names: ['chunkOne']
+						}
+					],
+					errors: [],
+					warnings: []
+				})
 			},
 			{
 				output: {
-					path: path.join(__dirname, '..', 'fixtures', 'missing-assets')
+					path: path.join(__dirname, '..', 'fixtures')
 				}
-			}
+			},
+			'',
+			{ mode: 'dist' }
 		);
 
 		const expectedLog = `
@@ -205,14 +224,127 @@ ${logSymbols.error} errors: 0
 ${logSymbols.warning} warnings: 0
 ${''}${''}
 ${chalk.yellow('chunks:')}
-${columns(['chunkOne'])}
-${chalk.yellow('assets:')}
-${columns([`assetOne.js ${chalk.yellow('(0.03kb)')} / ${chalk.blue('(0.04kb gz)')}`])}
-${chalk.yellow(
-			`output at: ${chalk.cyan(
-				chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures', 'missing-assets')}`)
-			)}`
-		)}
+${columns([
+			`chunkOne ${chalk.yellow('(251kB)')} / ${chalk.blue(
+				'(0.8kB gz)'
+			)}\nLargest dependency is foo ${chalk.yellow('(1kB)')}`
+		])}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
+
+${chalk.green('The build completed successfully.')}
+	`;
+		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+		assert.strictEqual(mockedLogUpdate.firstCall.args[0], expectedLog);
+		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
+		assert.isFalse(hasErrors);
+	});
+
+	it('logging output in dist mode with a small chunk', () => {
+		mockModule.getMock('@dojo/webpack-contrib/webpack-bundle-analyzer/AnalyzeBundles').default.returns({
+			chunkOne: {
+				parsedSize: 249 * 1000,
+				gzipSize: 800
+			}
+		});
+		const logger = mockModule.getModuleUnderTest().default;
+		const hasErrors = logger(
+			{
+				toJson: () => ({
+					hash: 'hash',
+					assets: [
+						{
+							name: 'assetOne.js',
+							size: 1000
+						},
+						{
+							name: 'assetOne.js',
+							size: 1000
+						}
+					],
+					chunks: [
+						{
+							names: ['chunkOne']
+						}
+					],
+					errors: [],
+					warnings: []
+				})
+			},
+			{
+				output: {
+					path: path.join(__dirname, '..', 'fixtures')
+				}
+			},
+			'',
+			{ mode: 'dist' }
+		);
+
+		const expectedLog = `
+${logSymbols.info} cli-build-app: 9.9.9
+${logSymbols.info} typescript: 1.1.1
+${logSymbols.success} hash: hash
+${logSymbols.error} errors: 0
+${logSymbols.warning} warnings: 0
+${''}${''}
+${chalk.yellow('chunks:')}
+${columns([`chunkOne ${chalk.yellow('(249kB)')} / ${chalk.blue('(0.8kB gz)')}`])}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
+
+${chalk.green('The build completed successfully.')}
+	`;
+		const mockedLogUpdate = mockModule.getMock('log-update').ctor;
+		assert.strictEqual(mockedLogUpdate.firstCall.args[0], expectedLog);
+		assert.isTrue(mockedLogUpdate.calledWith(expectedLog));
+		assert.isFalse(hasErrors);
+	});
+
+	it('logging output in dist mode when unable to find packages', () => {
+		mockModule
+			.getMock('@dojo/webpack-contrib/webpack-bundle-analyzer/parseUtils')
+			.findLargestPackage.returns(undefined);
+		const logger = mockModule.getModuleUnderTest().default;
+		const hasErrors = logger(
+			{
+				toJson: () => ({
+					hash: 'hash',
+					assets: [
+						{
+							name: 'assetOne.js',
+							size: 1000
+						},
+						{
+							name: 'assetOne.js',
+							size: 1000
+						}
+					],
+					chunks: [
+						{
+							names: ['chunkOne']
+						}
+					],
+					errors: [],
+					warnings: []
+				})
+			},
+			{
+				output: {
+					path: path.join(__dirname, '..', 'fixtures')
+				}
+			},
+			'',
+			{ mode: 'dist' }
+		);
+
+		const expectedLog = `
+${logSymbols.info} cli-build-app: 9.9.9
+${logSymbols.info} typescript: 1.1.1
+${logSymbols.success} hash: hash
+${logSymbols.error} errors: 0
+${logSymbols.warning} warnings: 0
+${''}${''}
+${chalk.yellow('chunks:')}
+${columns([`chunkOne ${chalk.yellow('(251kB)')} / ${chalk.blue('(0.8kB gz)')}`])}
+${chalk.yellow(`output at: ${chalk.cyan(chalk.underline(`file:///${path.join(__dirname, '..', 'fixtures')}`))}`)}
 
 ${chalk.green('The build completed successfully.')}
 	`;
