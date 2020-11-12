@@ -18,6 +18,7 @@ import baseConfigFactory, {
 	packageName,
 	libraryName
 } from './base.config';
+import { LiveLogger } from '@dojo/webpack-contrib/logger/logger';
 import { WebAppManifest } from './interfaces';
 
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -31,7 +32,7 @@ Copyright [JS Foundation](https://js.foundation/) & contributors
 All rights reserved
 `;
 
-function webpackConfig(args: any): webpack.Configuration {
+function webpackConfig(args: any, logger: LiveLogger): webpack.Configuration {
 	const basePath = process.cwd();
 	const base = args.target === 'electron' ? './' : args.base || '/';
 	const config = baseConfigFactory(args);
@@ -153,7 +154,8 @@ function webpackConfig(args: any): webpack.Configuration {
 				basePath,
 				baseUrl: base,
 				scope: libraryName,
-				onDemand: Boolean(args.serve && args.watch)
+				onDemand: Boolean(args.serve && args.watch),
+				logger: logger('BTR')
 			})
 		);
 	}

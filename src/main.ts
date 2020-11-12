@@ -1,7 +1,6 @@
 import { Command, EjectOutput, Helper, OptionsHelper } from '@dojo/cli/interfaces';
 import * as express from 'express';
 import * as logUpdate from 'log-update';
-import * as ora from 'ora';
 import * as path from 'path';
 import * as url from 'url';
 import * as webpack from 'webpack';
@@ -12,6 +11,7 @@ import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 import OnDemandBtr from '@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware';
+import createLiveLogger from '@dojo/webpack-contrib/logger/logger';
 
 const pkgDir = require('pkg-dir');
 const expressStaticGzip = require('express-static-gzip');
@@ -20,8 +20,8 @@ import unitConfigFactory from './unit.config';
 import functionalConfigFactory from './functional.config';
 import distConfigFactory from './dist.config';
 import electronConfigFactory from './electron.config';
-import logger from './logger';
 import { moveBuildOptions } from './util/eject';
+import logger from './logger';
 import { readFileSync } from 'fs';
 
 const packageJsonPath = path.join(process.cwd(), 'package.json');
@@ -50,13 +50,13 @@ interface MultiCompilerWithHooks extends webpack.MultiCompiler {
 
 function createWatchCompiler(configs: webpack.Configuration[]) {
 	const compiler = webpack(configs) as MultiCompilerWithHooks;
-	const spinner = ora('building').start();
+	const liveLogger = createLiveLogger('building').start();
 	compiler.hooks.invalid.tap('@dojo/cli-build-app', () => {
 		logUpdate('');
-		spinner.start();
+		liveLogger.start();
 	});
 	compiler.hooks.done.tap('@dojo/cli-build-app', () => {
-		spinner.stop();
+		liveLogger.stop();
 	});
 	return compiler;
 }
@@ -84,10 +84,10 @@ function serveStatic(
 
 function build(configs: webpack.Configuration[], args: any) {
 	const compiler = webpack(configs);
-	const spinner = ora('building').start();
+	const liveLogger = createLiveLogger('building').start();
 	return new Promise<webpack.MultiCompiler>((resolve, reject) => {
 		compiler.run((err, stats) => {
-			spinner.stop();
+			liveLogger.stop();
 			if (err) {
 				reject(err);
 			}
@@ -377,6 +377,7 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
+		const baseLogger = createLiveLogger('building');
 		if (args.mode === 'dev') {
 			configs.push(devConfigFactory(args));
 		} else if (args.mode === 'unit' || args.mode === 'test') {
@@ -384,7 +385,7 @@ const command: Command = {
 		} else if (args.mode === 'functional') {
 			configs.push(functionalConfigFactory(args));
 		} else {
-			configs.push(distConfigFactory(args));
+			configs.push(distConfigFactory(args, baseLogger));
 		}
 
 		if (args.target === 'electron') {
