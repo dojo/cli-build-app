@@ -400,7 +400,7 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
-		if (args.esbuild) {
+		if (args.fast) {
 			const { build: esbuild, compiler: escompiler } = require('./esbuild');
 			if (args.serve) {
 				return serve([{ output: { path: 'output/dev' } }], args, true);
