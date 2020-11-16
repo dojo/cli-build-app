@@ -1,0 +1,70 @@
+{
+	"definitions": {
+		"watch": {
+			"type": "boolean"
+		},
+		"serve": {
+			"type": "boolean"
+		},
+		"port": {
+			"type": "number"
+		},
+		"base" : {
+			"type": "string"
+		},
+		"proxy": {
+			"type": "object",
+			"patternProperties": {
+				"^.*$": {
+					"type": ["object", "string"],
+					"properties": {
+						"target": {
+							"type": "string"
+						},
+						"changeOrigin": {
+							"type": "boolean"
+						},
+						"ws": {
+							"type": "boolean"
+						},
+						"pathRewrite": {
+							"patternProperties": {
+								"^.*$": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"watch": {
+			"$ref": "#/definitions/watch"
+		},
+		"w": {
+			"$ref": "#/definitions/watch"
+		},
+		"serve" : {
+			"$ref": "#/definitions/serve"
+		},
+		"s": {
+			"$ref": "#/definitions/serve"
+		},
+		"port" : {
+			"$ref": "#/definitions/port"
+		},
+		"p": {
+			"$ref": "#/definitions/port"
+		},
+		"base" : {
+			"$ref": "#/definitions/base"
+		},
+		"proxy": {
+			"$ref": "#/definitions/proxy"
+		}
+	}
+}

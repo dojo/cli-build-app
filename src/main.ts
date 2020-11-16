@@ -152,7 +152,7 @@ function fileWatch(configs: webpack.Configuration[], args: any, shouldResolve = 
 	});
 }
 
-async function serve(configs: webpack.Configuration[], args: any) {
+async function serve(configs: webpack.Configuration[], args: any, esbuild = false) {
 	const [mainConfig] = configs;
 
 	let isHttps = false;
@@ -167,7 +167,13 @@ async function serve(configs: webpack.Configuration[], args: any) {
 		next();
 	});
 
-	const compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
+	let compiler;
+	if (esbuild) {
+		const { compiler: escompiler } = require('./esbuild');
+		compiler = escompiler({ features: args.features });
+	} else {
+		compiler = args.watch ? await fileWatch(configs, args, true) : await build(configs, args);
+	}
 
 	const outputDir = (mainConfig.output && mainConfig.output.path) || process.cwd();
 	let btrOptions = args['build-time-render'];
@@ -180,7 +186,7 @@ async function serve(configs: webpack.Configuration[], args: any) {
 			buildTimeRenderOptions: btrOptions,
 			scope: libraryName,
 			base,
-			compiler: compiler.compilers[0],
+			compiler: (compiler as any).compilers ? (compiler as any).compilers[0] : compiler,
 			entries: mainConfig.entry ? Object.keys(mainConfig.entry) : [],
 			outputPath: outputDir,
 			jsonpName
@@ -291,24 +297,38 @@ function warningsFilter(warning: string) {
 	return warning.includes('[mini-css-extract-plugin]\nConflicting order between');
 }
 
+function isEsBuild() {
+	return process.argv.indexOf('--fast') !== -1;
+}
+
 const command: Command = {
 	group: 'build',
 	name: 'app',
 	description: 'create a build of your application',
 	register(options: OptionsHelper) {
-		options('mode', {
-			describe: 'the output mode',
-			alias: 'm',
-			default: 'dist',
-			choices: ['dist', 'dev', 'test', 'unit', 'functional']
+		const esBuild = isEsBuild();
+
+		options('fast', {
+			describe: 'enable fast mode for dev',
+			type: 'boolean',
+			default: false
 		});
 
-		options('target', {
-			describe: 'the target',
-			alias: 't',
-			default: 'web',
-			choices: ['web', 'electron']
-		});
+		!esBuild &&
+			options('mode', {
+				describe: 'the output mode',
+				alias: 'm',
+				default: 'dist',
+				choices: ['dist', 'dev', 'test', 'unit', 'functional']
+			});
+
+		!esBuild &&
+			options('target', {
+				describe: 'the target',
+				alias: 't',
+				default: 'web',
+				choices: ['web', 'electron']
+			});
 
 		options('watch', {
 			describe: 'watch for file changes',
@@ -328,45 +348,49 @@ const command: Command = {
 			type: 'number'
 		});
 
-		options('single-bundle', {
-			describe: 'limits the built output to a single bundle',
-			default: false,
-			type: 'boolean'
-		});
+		!esBuild &&
+			options('single-bundle', {
+				describe: 'limits the built output to a single bundle',
+				default: false,
+				type: 'boolean'
+			});
 
-		options('omit-hash', {
-			describe: 'omits hashes from output file names in dist mode',
-			defaultDescription: '(always false for dev builds)',
-			default: false,
-			type: 'boolean'
-		});
+		!esBuild &&
+			options('omit-hash', {
+				describe: 'omits hashes from output file names in dist mode',
+				defaultDescription: '(always false for dev builds)',
+				default: false,
+				type: 'boolean'
+			});
 
-		options('legacy', {
-			describe: 'build app with legacy browser support',
-			alias: 'l',
-			default: false,
-			type: 'boolean'
-		});
+		!esBuild &&
+			options('legacy', {
+				describe: 'build app with legacy browser support',
+				alias: 'l',
+				default: false,
+				type: 'boolean'
+			});
 
-		options('features', {
-			describe: 'list of has() features to include',
-			alias: 'f',
-			array: true,
-			coerce: (args: string[]) => {
-				return args.reduce(
-					(newArgs, arg) => {
-						const parts = arg.split('=');
-						if (parts.length === 1) {
-							newArgs[arg] = true;
-						} else if (parts.length === 2) {
-							newArgs[parts[0]] = parts[1];
-						}
-						return newArgs;
-					},
-					{} as any
-				);
-			}
-		});
+		!esBuild &&
+			options('features', {
+				describe: 'list of has() features to include',
+				alias: 'f',
+				array: true,
+				coerce: (args: string[]) => {
+					return args.reduce(
+						(newArgs, arg) => {
+							const parts = arg.split('=');
+							if (parts.length === 1) {
+								newArgs[arg] = true;
+							} else if (parts.length === 2) {
+								newArgs[parts[0]] = parts[1];
+							}
+							return newArgs;
+						},
+						{} as any
+					);
+				}
+			});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
@@ -377,32 +401,44 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
-		if (args.mode === 'dev') {
-			configs.push(devConfigFactory(args));
-		} else if (args.mode === 'unit' || args.mode === 'test') {
-			configs.push(unitConfigFactory(args));
-		} else if (args.mode === 'functional') {
-			configs.push(functionalConfigFactory(args));
-		} else {
-			configs.push(distConfigFactory(args));
-		}
-
-		if (args.target === 'electron') {
-			configs.push(electronConfigFactory(args));
-		}
-
-		if (args.serve) {
-			if (testModes.indexOf(args.mode) !== -1) {
-				return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
+		if (args.fast) {
+			const { build: esbuild, compiler: escompiler } = require('./esbuild');
+			if (args.serve) {
+				return serve([{ output: { path: 'output/dev' } }], args, true);
 			}
-			return serve(configs, args);
-		}
+			if (args.watch) {
+				return new Promise(() => escompiler({ features: args.features }));
+			} else {
+				return esbuild({ features: args.features });
+			}
+		} else {
+			if (args.mode === 'dev') {
+				configs.push(devConfigFactory(args));
+			} else if (args.mode === 'unit' || args.mode === 'test') {
+				configs.push(unitConfigFactory(args));
+			} else if (args.mode === 'functional') {
+				configs.push(functionalConfigFactory(args));
+			} else {
+				configs.push(distConfigFactory(args));
+			}
 
-		if (args.watch) {
-			return fileWatch(configs, args);
-		}
+			if (args.target === 'electron') {
+				configs.push(electronConfigFactory(args));
+			}
 
-		return build(configs, args);
+			if (args.serve) {
+				if (testModes.indexOf(args.mode) !== -1) {
+					return Promise.reject(new Error(`Cannot use \`--serve\` with \`--mode=${args.mode}\``));
+				}
+				return serve(configs, args);
+			}
+
+			if (args.watch) {
+				return fileWatch(configs, args);
+			}
+
+			return build(configs, args);
+		}
 	},
 	eject(helper: Helper): EjectOutput {
 		return {
@@ -430,9 +466,14 @@ const command: Command = {
 		};
 	},
 	validate(helper: Helper) {
+		const esBuild = isEsBuild();
 		let schema;
 		try {
-			schema = JSON.parse(readFileSync(path.join(__dirname, 'schema.json')).toString());
+			if (esBuild) {
+				schema = JSON.parse(readFileSync(path.join(__dirname, 'schema-esbuild.json')).toString());
+			} else {
+				schema = JSON.parse(readFileSync(path.join(__dirname, 'schema.json')).toString());
+			}
 		} catch (error) {
 			return Promise.reject(Error('The dojorc schema for cli-build-app could not be read: ' + error));
 		}
