@@ -200,13 +200,17 @@ async function serve(config: webpack.Configuration, args: any) {
 
 	if (args.proxy) {
 		Object.keys(args.proxy).forEach((context) => {
-			const options = args.proxy[context];
+			const options =
+				typeof args.proxy[context] === 'string' ? { target: args.proxy[context] } : args.proxy[context];
 
-			if (typeof options === 'string') {
-				app.use(base, proxy(context, { target: options }));
-			} else {
-				app.use(base, proxy(context, options));
+			const parsedTarget = url.parse(options.target);
+			if (parsedTarget.protocol === 'https:') {
+				options.agent = https.globalAgent;
+				options.headers = {
+					host: parsedTarget.host
+				};
 			}
+			app.use(base, proxy(context, options));
 		});
 	}
 
