@@ -144,16 +144,19 @@ function webpackConfig(args: any): webpack.Configuration {
 		new CleanWebpackPlugin(['dist', 'info'], { root: output!.path, verbose: false })
 	].filter((item) => item);
 
-	if (args['build-time-render']) {
+	const btr = args['build-time-render'];
+	if (btr) {
+		const cacheOptions = btr.cache || { enabled: false, excludes: [] };
 		config.plugins.push(
 			new BuildTimeRender({
-				...args['build-time-render'],
+				...btr,
 				entries: Object.keys(config.entry!),
 				sync: args.singleBundle,
 				basePath,
 				baseUrl: base,
 				scope: libraryName,
-				onDemand: Boolean(args.serve && args.watch)
+				onDemand: Boolean(args.serve && args.watch),
+				cacheOptions: { ...cacheOptions, invalidates: args['invalidate-btr-paths'] }
 			})
 		);
 	}

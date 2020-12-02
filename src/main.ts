@@ -395,6 +395,12 @@ const command: Command = {
 					);
 				}
 			});
+
+		!esBuild &&
+			options('invalidate-btr-paths', {
+				describe: 'invalidate paths in the Build Time Render cache',
+				array: true
+			});
 	},
 	run(helper: Helper, args: any) {
 		console.log = () => {};
