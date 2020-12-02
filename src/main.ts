@@ -13,6 +13,7 @@ import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 import OnDemandBtr from '@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware';
 import { read as readCache } from '@dojo/webpack-contrib/build-time-render/cache';
+const columns = require('cli-columns');
 
 const pkgDir = require('pkg-dir');
 const expressStaticGzip = require('express-static-gzip');
@@ -419,8 +420,9 @@ const command: Command = {
 		}
 
 		if (args['list-btr-cache-paths']) {
-			return readCache().then((cache) => {
-				console.log(cache);
+			return readCache().then(({ paths }) => {
+				const column = Object.keys(paths).map((path) => `${chalk.yellow(path)} (${paths[path].time})`);
+				logUpdate(columns(column));
 			});
 		}
 
