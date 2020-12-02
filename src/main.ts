@@ -12,6 +12,7 @@ import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 import OnDemandBtr from '@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware';
+import { read as readCache } from '@dojo/webpack-contrib/build-time-render/cache';
 
 const pkgDir = require('pkg-dir');
 const expressStaticGzip = require('express-static-gzip');
@@ -397,9 +398,15 @@ const command: Command = {
 			});
 
 		!esBuild &&
-			options('invalidate-btr-paths', {
+			options('invalidate-btr-cache-paths', {
 				describe: 'invalidate paths in the Build Time Render cache',
 				array: true
+			});
+
+		!esBuild &&
+			options('list-btr-cache-paths', {
+				describe: 'list the paths and times in the Build Time Render cache',
+				type: 'boolean'
 			});
 	},
 	run(helper: Helper, args: any) {
@@ -409,6 +416,12 @@ const command: Command = {
 		args.base = url.resolve('/', args.base || '');
 		if (!args.base.endsWith('/')) {
 			args.base = `${args.base}/`;
+		}
+
+		if (args['list-btr-cache-paths']) {
+			return readCache().then((cache) => {
+				console.log(cache);
+			});
 		}
 
 		if (args.fast) {
