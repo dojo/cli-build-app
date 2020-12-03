@@ -156,7 +156,7 @@ function webpackConfig(args: any): webpack.Configuration {
 				baseUrl: base,
 				scope: libraryName,
 				onDemand: Boolean(args.serve && args.watch),
-				cacheOptions: { ...cacheOptions, invalidates: args['invalidate-btr-cache-paths'] }
+				cacheOptions: { ...cacheOptions, invalidates: args['invalidate-btr-cache-paths'] || [] }
 			})
 		);
 	}
