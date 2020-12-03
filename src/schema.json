@@ -113,6 +113,19 @@
 				"puppeteerOptions": {
 					"type": "object"
 				},
+				"cache": {
+					"type": "object",
+					"properties": {
+						"enabled": { "type": "boolean" },
+						"excludes": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"additionalProperties": false
+				},
 				"renderer": {
 					"type": "string",
 					"enum": [
