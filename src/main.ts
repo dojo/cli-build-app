@@ -12,7 +12,11 @@ import * as expressCompression from 'compression';
 import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 import OnDemandBtr from '@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware';
-import { read as readCache } from '@dojo/webpack-contrib/build-time-render/cache';
+import {
+	read as readCache,
+	write as writeCache,
+	remove as removeFromCache
+} from '@dojo/webpack-contrib/build-time-render/cache';
 import { formatDistance } from 'date-fns';
 const columns = require('cli-columns');
 
@@ -400,14 +404,14 @@ const command: Command = {
 			});
 
 		!esBuild &&
-			options('invalidate-btr-cache-paths', {
-				describe: 'invalidate paths in the Build Time Render cache',
+			options('evict-cache-paths', {
+				describe: 'evict paths from the Build Time Render cache',
 				array: true
 			});
 
 		!esBuild &&
-			options('list-btr-cache-paths', {
-				describe: 'list the paths and times in the Build Time Render cache',
+			options('list-cache-paths', {
+				describe: 'list paths in the Build Time Render cache',
 				type: 'boolean'
 			});
 	},
@@ -420,7 +424,7 @@ const command: Command = {
 			args.base = `${args.base}/`;
 		}
 
-		if (args['list-btr-cache-paths']) {
+		if (args['list-cache-paths']) {
 			return readCache().then(({ pages }) => {
 				const column = Object.keys(pages).map((page) => {
 					const result = formatDistance(new Date(pages[page].time!), new Date(Date.now()), {
@@ -429,6 +433,16 @@ const command: Command = {
 					return `${page} ${chalk.blue('(' + result + ')')}`;
 				});
 				logUpdate(columns(column));
+			});
+		}
+
+		if (args['evict-cache-paths']) {
+			return readCache().then((cache) => {
+				const before = Object.keys(cache.pages).length;
+				cache = removeFromCache(cache, args['evict-cache-paths']);
+				const after = Object.keys(cache.pages).length;
+				logUpdate(`${before - after} entries removed from cache`);
+				return writeCache(cache);
 			});
 		}
 
