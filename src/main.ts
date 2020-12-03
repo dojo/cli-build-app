@@ -13,6 +13,7 @@ import * as proxy from 'http-proxy-middleware';
 import * as history from 'connect-history-api-fallback';
 import OnDemandBtr from '@dojo/webpack-contrib/build-time-render/BuildTimeRenderMiddleware';
 import { read as readCache } from '@dojo/webpack-contrib/build-time-render/cache';
+import { formatDistance } from 'date-fns';
 const columns = require('cli-columns');
 
 const pkgDir = require('pkg-dir');
@@ -420,8 +421,13 @@ const command: Command = {
 		}
 
 		if (args['list-btr-cache-paths']) {
-			return readCache().then(({ paths }) => {
-				const column = Object.keys(paths).map((path) => `${chalk.yellow(path)} (${paths[path].time})`);
+			return readCache().then(({ pages }) => {
+				const column = Object.keys(pages).map((page) => {
+					const result = formatDistance(new Date(pages[page].time!), new Date(Date.now()), {
+						addSuffix: true
+					});
+					return `${page} ${chalk.blue('(' + result + ')')}`;
+				});
 				logUpdate(columns(column));
 			});
 		}
