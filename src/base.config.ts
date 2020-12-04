@@ -201,7 +201,6 @@ export class InsertScriptPlugin {
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register({ transpileOnly: true });
 	const isLegacy = args.legacy;
-	const base = args.target === 'electron' ? './' : args.base || '/';
 	const experimental = args.experimental || {};
 	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev';
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
