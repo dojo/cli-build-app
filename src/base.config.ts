@@ -14,7 +14,6 @@ import * as minimatch from 'minimatch';
 import * as ManifestPlugin from 'webpack-manifest-plugin';
 import * as globby from 'globby';
 
-const CssUrlRelativePlugin = require('css-url-relative-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssImport = require('postcss-import');
 const slash = require('slash');
@@ -202,7 +201,6 @@ export class InsertScriptPlugin {
 export default function webpackConfigFactory(args: any): webpack.Configuration {
 	tsnode.register({ transpileOnly: true });
 	const isLegacy = args.legacy;
-	const base = args.target === 'electron' ? './' : args.base || '/';
 	const experimental = args.experimental || {};
 	const isExperimentalSpeed = !!experimental.speed && args.mode === 'dev';
 	const isTest = args.mode === 'unit' || args.mode === 'functional' || args.mode === 'test';
@@ -544,8 +542,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				new ExtraWatchWebpackPlugin({
 					files: watchExtraFiles
 				}),
-			new ManifestPlugin(),
-			new CssUrlRelativePlugin({ root: base || '/' })
+			new ManifestPlugin()
 		]),
 		module: {
 			// `file` uses the pattern `loaderPath!filePath`, hence the regex test
@@ -563,7 +560,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /\.(css|js)$/,
 					issuer: indexHtmlPattern,
-					loader: `file-loader?digest=hex&name=[path][name].[ext]`
+					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
 				esLint && {
 					include: allPaths,
@@ -642,7 +639,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				},
 				{
 					test: /\.(gif|png|jpe?g|svg|eot|ttf|woff|woff2|ico)$/i,
-					loader: `file-loader?digest=hex&name=[path][name].[ext]`
+					loader: 'file-loader?hash=sha512&digest=hex&name=[name].[hash:base64:8].[ext]'
 				},
 				{
 					test: /\.m\.css\.js$/,
