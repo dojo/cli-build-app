@@ -181,19 +181,20 @@ export class InsertScriptPlugin {
 
 	apply(compiler: any) {
 		compiler.hooks.compilation.tap('InsertScriptPlugin', (compilation: any) => {
-			compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(
-				'InsertScriptPlugin',
-				(data: any, cb: Function) => {
-					this._options.forEach(({ content, type }) => {
-						if (type === 'append') {
-							data.html = data.html.replace('</head>', `${content}</head>`);
-						} else if (type === 'prepend') {
-							data.html = data.html.replace('<head>', `<head>${content}`);
-						}
-					});
-					cb(null, data);
-				}
+			const [HtmlWebpackPlugin] = compiler.options.plugins.filter(
+				(plugin: any) => plugin.constructor.name === 'HtmlWebpackPlugin'
 			);
+			const hook = HtmlWebpackPlugin.constructor.getHooks(compilation).beforeEmit;
+			hook.tapAsync('InsertScriptPlugin', (data: any, cb: (error: Error | null, data: any) => void) => {
+				this._options.forEach(({ content, type }) => {
+					if (type === 'append') {
+						data.html = data.html.replace('</head>', `${content}</head>`);
+					} else if (type === 'prepend') {
+						data.html = data.html.replace('<head>', `<head>${content}`);
+					}
+				});
+				cb(null, data);
+			});
 		});
 	}
 }
