@@ -25,6 +25,7 @@ The official CLI command for building optimized Dojo applications.
 
 To use `@dojo/cli-build-app` in a single project, install the package:
 
+
 ```bash
 npm install @dojo/cli-build-app
 ```
