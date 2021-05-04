@@ -103,6 +103,9 @@
 							},
 							"exclude": {
 								"type": "boolean"
+							},
+							"output" : {
+								"type": "string"
 							}
 						}
 					}
