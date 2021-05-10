@@ -551,7 +551,7 @@ describe('command', () => {
 			);
 			setTimeout(
 				dfd.callback(() => {
-					assert.strictEqual(useStub.callCount, 7);
+					assert.strictEqual(useStub.callCount, 8);
 					assert.isTrue(
 						hotMiddleware.calledWith(compiler, {
 							heartbeat: 10000
