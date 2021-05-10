@@ -265,6 +265,13 @@ async function serve(configs: webpack.Configuration[], args: any, esbuild = fals
 		})
 	);
 
+	app.use(
+		base,
+		history({
+			disableDotRule: true
+		})
+	);
+
 	serveStatic(app, outputDir, args.mode, args.compression, base);
 
 	const defaultKey = path.resolve('.cert', 'server.key');
