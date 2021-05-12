@@ -5,7 +5,7 @@ import ExternalLoaderPlugin from '@dojo/webpack-contrib/external-loader-plugin/E
 const WrapperPlugin = require('wrapper-webpack-plugin');
 
 function webpackConfig(args: any): webpack.Configuration {
-	const config = baseConfigFactory(args);
+	const { config } = baseConfigFactory(args);
 	const { plugins, module } = config;
 	const externals: any[] = (config.externals as any[]) || [];
 

@@ -199,7 +199,7 @@ export class InsertScriptPlugin {
 	}
 }
 
-export default function webpackConfigFactory(args: any): webpack.Configuration {
+export default function webpackConfigFactory(args: any): { config: webpack.Configuration; features: any } {
 	tsnode.register({ transpileOnly: true });
 	const isLegacy = args.legacy;
 	const experimental = args.experimental || {};
@@ -676,5 +676,5 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	return config as webpack.Configuration;
+	return { config, features };
 }
