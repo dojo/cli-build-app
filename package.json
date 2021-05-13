@@ -105,7 +105,7 @@
     "tslint": "5.18.0"
   },
   "dependencies": {
-    "@dojo/webpack-contrib": "8.0.0-beta.4",
+    "@dojo/webpack-contrib": "8.0.0-beta.5",
     "@parcel/watcher": "2.0.0-alpha.9",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
