@@ -34,7 +34,7 @@ All rights reserved
 function webpackConfig(args: any): webpack.Configuration {
 	const basePath = process.cwd();
 	const base = args.target === 'electron' ? './' : args.base || '/';
-	const { config, features } = baseConfigFactory(args);
+	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const { plugins, output } = config;
 	const outputPath = path.join(output!.path!, 'dist');
@@ -157,7 +157,7 @@ function webpackConfig(args: any): webpack.Configuration {
 				scope: libraryName,
 				onDemand: Boolean(args.serve && args.watch),
 				cacheOptions: { ...cacheOptions, invalidates: [] },
-				features
+				features: args.features
 			})
 		);
 	}

@@ -27,7 +27,7 @@ function webpackConfig(args: any): webpack.Configuration {
 	const base = args.target === 'electron' ? './' : args.base || '/';
 
 	const basePath = process.cwd();
-	const { config, features } = baseConfigFactory(args);
+	const config = baseConfigFactory(args);
 	const manifest: WebAppManifest = args.pwa && args.pwa.manifest;
 	const { plugins, output, module } = config;
 	const outputPath = path.join(output!.path!, 'dev');
@@ -132,7 +132,7 @@ window['${libraryName}'].base = '${base}'</script>`,
 				scope: libraryName,
 				onDemand: Boolean(args.serve && args.watch),
 				cacheOptions: { ...cacheOptions, invalidates: [] },
-				features
+				features: args.features
 			})
 		);
 	}
