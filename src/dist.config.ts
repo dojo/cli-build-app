@@ -157,7 +157,10 @@ function webpackConfig(args: any): webpack.Configuration {
 				scope: libraryName,
 				onDemand: Boolean(args.serve && args.watch),
 				cacheOptions: { ...cacheOptions, invalidates: [] },
-				features: args.features
+				features: {
+					...args.features,
+					NODE_ENV: config.mode
+				}
 			})
 		);
 	}
