@@ -131,7 +131,7 @@ describe('command', () => {
 
 	it('can run dev mode', () => {
 		const main = mockModule.getModuleUnderTest().default;
-		main.run(getMockHelper(), { mode: 'dev' }).then(() => {
+		return main.run(getMockHelper(), { mode: 'dev' }).then(() => {
 			assert.isTrue(mockDevConfig.called);
 			assert.isTrue(mockLogger.calledWith('stats', ['dev config']));
 		});
