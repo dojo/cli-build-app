@@ -245,7 +245,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		staticOnly.push('build-elide');
 		entry = {
 			[bootstrapEntry]: removeEmpty([
-				existsSync(mainCssPath) ? mainCssPath : null,
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/async'
 			])
@@ -498,6 +497,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			args.locale && new CldrPlugin(),
 			new webpack.DefinePlugin({
 				__MAIN_ENTRY: JSON.stringify(mainEntryPath),
+				__MAIN_CSS_PATH: JSON.stringify(existsSync(mainCssPath) ? mainCssPath : null),
 				__DOJO_SCOPE: `'${libraryName}'`
 			}),
 			!isExperimentalSpeed &&
@@ -515,6 +515,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 			!singleBundle &&
 				new BootstrapPlugin({
 					entryPath: mainEntryPath,
+					cssPath: existsSync(mainCssPath) ? mainCssPath : null,
 					shimModules: [
 						{
 							module: '@dojo/framework/shim/IntersectionObserver',
