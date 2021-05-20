@@ -245,7 +245,6 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		staticOnly.push('build-elide');
 		entry = {
 			[bootstrapEntry]: removeEmpty([
-				existsSync(mainCssPath) ? mainCssPath : null,
 				'@dojo/framework/shim/Promise',
 				'@dojo/webpack-contrib/bootstrap-plugin/async'
 			])
