@@ -574,8 +574,7 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 				{
 					test: /@dojo(\/|\\).*\.(js|mjs)$/,
 					enforce: 'pre',
-					loader: 'source-map-loader-cli',
-					options: { includeModulePaths: true }
+					use: ['source-map-loader']
 				},
 				args.locale &&
 					singleBundle && {
