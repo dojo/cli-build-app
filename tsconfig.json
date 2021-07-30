@@ -4,6 +4,7 @@
 		"declaration": false,
 		"target": "es2015",
 		"types": [ "intern", "cypress" ],
+		"skipLibCheck": true,
 		"lib": [
 			"dom",
 			"es5",
