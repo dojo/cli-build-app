@@ -120,7 +120,7 @@
     "css-loader": "1.0.1",
     "cssnano": "4.1.7",
     "date-fns": "2.16.1",
-    "electron": "10.1.1",
+    "electron": "11.5.0",
     "esbuild": "0.8.5",
     "eslint": "7.0.0",
     "eslint-loader": "4.0.2",
