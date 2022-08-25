@@ -675,5 +675,5 @@ export default function webpackConfigFactory(args: any): webpack.Configuration {
 		}
 	};
 
-	return config as webpack.Configuration;
+	return config;
 }

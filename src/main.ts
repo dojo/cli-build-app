@@ -196,7 +196,8 @@ async function serve(configs: webpack.Configuration[], args: any, esbuild = fals
 			compiler: (compiler as any).compilers ? (compiler as any).compilers[0] : compiler,
 			entries: mainConfig.entry ? Object.keys(mainConfig.entry) : [],
 			outputPath: outputDir,
-			jsonpName
+			jsonpName,
+			features: args['features']
 		});
 		app.use(base, (req, res, next) => onDemandBtr.middleware(req, res, next));
 	}

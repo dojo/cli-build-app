@@ -131,7 +131,11 @@ window['${libraryName}'].base = '${base}'</script>`,
 				baseUrl: base,
 				scope: libraryName,
 				onDemand: Boolean(args.serve && args.watch),
-				cacheOptions: { ...cacheOptions, invalidates: [] }
+				cacheOptions: { ...cacheOptions, invalidates: [] },
+				features: {
+					...args.features,
+					NODE_ENV: config.mode
+				}
 			})
 		);
 	}
